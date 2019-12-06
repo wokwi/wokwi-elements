@@ -15,5 +15,6 @@
     "outDir": "dist/cjs",
     "lib": ["es2017", "dom"]
   },
+  "exclude": ["src/**/*.stories.ts"],
   "include": ["src/**/*.ts"]
 }
