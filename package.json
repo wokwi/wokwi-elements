@@ -34,7 +34,7 @@
     "lit-element": "^2.2.1"
   },
   "scripts": {
-    "build": "rimraf dist && tsc && tsc -m esnext --outDir dist/esm",
+    "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false",
     "lint": "eslint src/**/*.ts",
     "prepare": "npm run build",
     "storybook": "start-storybook -p 6006",
