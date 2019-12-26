@@ -4,6 +4,7 @@
   "main": "dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
+  "repository": "https://github.com/wokwi/wokwi-elements",
   "author": "Uri Shaked <uri@urishaked.com>",
   "license": "MIT",
   "files": [
