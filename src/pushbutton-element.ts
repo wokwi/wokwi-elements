@@ -48,15 +48,7 @@ export class PushbuttonElement extends LitElement {
           xmlns:xlink="http://www.w3.org/1999/xlink"
         >
           <defs>
-            <linearGradient
-              id="grad-up"
-              x1="61.904"
-              x2="133.7"
-              y1="70.549"
-              y2="142.84"
-              gradientTransform="matrix(.10523 0 0 .10523 -4.3122 -5.2194)"
-              gradientUnits="userSpaceOnUse"
-            >
+            <linearGradient id="grad-up" x1="0" x2="1" y1="0" y2="1">
               <stop stop-color="#ffffff" offset="0" />
               <stop stop-color="${color}" offset="0.3" />
               <stop stop-color="${color}" offset="0.5" />
@@ -64,18 +56,9 @@ export class PushbuttonElement extends LitElement {
             </linearGradient>
             <linearGradient
               id="grad-down"
-              x1="61.904"
-              x2="133.7"
-              y1="70.549"
-              y2="142.84"
-              gradientTransform="matrix(.10523 0 0 .10523 -4.3122 -5.2194)"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0" />
-              <stop stop-color="${color}" offset="0.5" />
-              <stop stop-color="${color}" offset="0.7" />
-              <stop stop-color="#ffffff" offset="1" />
-            </linearGradient>
+              xlink:href="#grad-up"
+              gradientTransform="rotate(180,0.5,0.5)"
+            ></linearGradient>
           </defs>
           <rect x="0" y="0" width="12" height="12" rx=".44" ry=".44" fill="#464646" />
           <rect x=".75" y=".75" width="10.5" height="10.5" rx=".211" ry=".211" fill="#eaeaea" />
