@@ -77,29 +77,13 @@ export class PushbuttonElement extends LitElement {
               <stop stop-color="#ffffff" offset="1" />
             </linearGradient>
           </defs>
-          <rect
-            x=".0034237"
-            y=".001709"
-            width="11.997"
-            height="11.997"
-            rx=".42093"
-            ry=".42093"
-            fill="#464646"
-          />
-          <rect
-            x=".69687"
-            y=".73682"
-            width="10.523"
-            height="10.523"
-            rx=".21047"
-            ry=".21047"
-            fill="#eaeaea"
-          />
+          <rect x="0" y="0" width="12" height="12" rx=".44" ry=".44" fill="#464646" />
+          <rect x=".75" y=".75" width="10.5" height="10.5" rx=".211" ry=".211" fill="#eaeaea" />
           <g fill="#1b1b1">
-            <circle cx="1.767" cy="1.7916" r=".35301" />
-            <circle cx="10.161" cy="1.7916" r=".35301" />
-            <circle cx="10.161" cy="10.197" r=".35301" />
-            <circle cx="1.767" cy="10.197" r=".35301" />
+            <circle cx="1.767" cy="1.7916" r=".37" />
+            <circle cx="10.161" cy="1.7916" r=".37" />
+            <circle cx="10.161" cy="10.197" r=".37" />
+            <circle cx="1.767" cy="10.197" r=".37" />
           </g>
           <g fill="#eaeaea">
             <path
@@ -116,15 +100,15 @@ export class PushbuttonElement extends LitElement {
             />
           </g>
           <g class="clickable-element">
-            <circle class="button-circle" cx="5.9725" cy="6.0016" r="3.8267" fill="url(#grad-up)" />
+            <circle class="button-circle" cx="6" cy="6" r="3.822" fill="url(#grad-up)" />
             <circle
-              cx="5.9825"
-              cy="6.0116"
-              r="2.9019"
+              cx="6"
+              cy="6"
+              r="2.9"
               fill="${color}"
               stroke="#2f2f2f"
-              stroke-opacity=".47321"
-              stroke-width=".076779"
+              stroke-opacity=".47"
+              stroke-width=".08"
             />
           </g>
         </svg>
