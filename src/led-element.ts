@@ -12,6 +12,7 @@ const lightColors: { [key: string]: string } = {
 @customElement('wokwi-led')
 export class LEDElement extends LitElement {
   @property() value = false;
+  @property() brightness = 1.0;
   @property() color = 'red';
   @property() lightColor: string | null = null;
   @property() label = '';
@@ -42,6 +43,7 @@ export class LEDElement extends LitElement {
   render() {
     const { color, lightColor } = this;
     const lightColorActual = lightColor || lightColors[color] || '#ff8080';
+    const opacity = this.brightness ? 0.3 + this.brightness / 0.7 : 0;
     return html`
       <div class="led-container">
         <svg
@@ -117,7 +119,7 @@ export class LEDElement extends LitElement {
           <g
             class="light"
             xmlns="http://www.w3.org/2000/svg"
-            style="display: ${this.value ? '' : 'none'}"
+            style="display: ${this.value ? '' : 'none'}; opacity: ${opacity}"
           >
             <ellipse
               cx="8"
