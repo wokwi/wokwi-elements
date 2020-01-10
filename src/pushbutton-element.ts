@@ -9,13 +9,7 @@ export class PushbuttonElement extends LitElement {
 
   static get styles() {
     return css`
-      :host {
-        display: inline-block;
-      }
-
-      .pushbutton-container {
-        display: flex;
-        flex-direction: column;
+      button {
         border: none;
         background: none;
         padding: 0;
@@ -25,7 +19,7 @@ export class PushbuttonElement extends LitElement {
         -moz-appearance: none;
       }
 
-      .pushbutton-container:active .button-circle {
+      button:active .button-circle {
         fill: url(#grad-down);
       }
 
@@ -38,7 +32,15 @@ export class PushbuttonElement extends LitElement {
   render() {
     const { color } = this;
     return html`
-      <button class="pushbutton-container">
+      <button
+        aria-label="${color} pushbutton"
+        @mousedown=${this.down}
+        @mouseup=${this.up}
+        @touchstart=${this.down}
+        @touchend=${this.up}
+        @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down()}
+        @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up()}
+      >
         <svg
           width="18mm"
           height="12mm"
@@ -97,15 +99,6 @@ export class PushbuttonElement extends LitElement {
         </svg>
       </button>
     `;
-  }
-
-  firstUpdated() {
-    this.addEventListener('mousedown', this.down);
-    this.addEventListener('touchstart', this.down);
-    this.addEventListener('mouseup', this.up);
-    this.addEventListener('touchend', this.up);
-    this.addEventListener('keydown', (e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down());
-    this.addEventListener('keyup', (e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up());
   }
 
   private down() {
