@@ -1,4 +1,4 @@
-import { storiesOf } from '@storybook/polymer';
+import { storiesOf } from '@storybook/web-components';
 import { withKnobs, boolean, text, number } from '@storybook/addon-knobs';
 import { html } from 'lit-html';
 import './led-element';

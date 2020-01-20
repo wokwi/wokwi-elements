@@ -1,0 +1,13 @@
+diff --git a/node_modules/@storybook/web-components/dist/client/preview/types.d.ts b/node_modules/@storybook/web-components/dist/client/preview/types.d.ts
+index 030d480..48a9e00 100644
+--- a/node_modules/@storybook/web-components/dist/client/preview/types.d.ts
++++ b/node_modules/@storybook/web-components/dist/client/preview/types.d.ts
+@@ -1,5 +1,7 @@
+ import { StoryFn } from '@storybook/addons';
+-export declare type StoryFnHtmlReturnType = string | Node;
++import { TemplateResult, SVGTemplateResult } from 'lit-element';
++
++export declare type StoryFnHtmlReturnType = string | Node | TemplateResult | SVGTemplateResult;
+ export interface IStorybookStory {
+     name: string;
+     render: () => any;

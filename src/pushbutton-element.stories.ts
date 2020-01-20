@@ -1,4 +1,4 @@
-import { storiesOf } from '@storybook/polymer';
+import { storiesOf } from '@storybook/web-components';
 import { action } from '@storybook/addon-actions';
 import { html } from 'lit-html';
 import './pushbutton-element';

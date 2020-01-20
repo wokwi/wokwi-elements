@@ -1,4 +1,4 @@
-import { storiesOf } from '@storybook/polymer';
+import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
 import { withKnobs, number } from '@storybook/addon-knobs';
 

@@ -1,5 +1,5 @@
 import { withKnobs } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/polymer';
+import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
 import './7segment-element';
 import { LitElement, customElement, property } from 'lit-element';
