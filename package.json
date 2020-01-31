@@ -36,8 +36,7 @@
   "scripts": {
     "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false",
     "lint": "eslint src/**/*.ts",
-    "prepare": "npm run build",
-    "postinstall": "patch-package",
+    "prepare": "npm run build && patch-package",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
