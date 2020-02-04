@@ -16,9 +16,7 @@ storiesOf('LCD1602', module)
   .add(
     'White on blue',
     () => html`
-      <wokwi-lcd1602 color="white" background="blue" .characters="${new Uint8Array(
-        helloWorld
-      )}"></wokwi-7segment>
+      <wokwi-lcd1602 color="white" background="blue" .characters="${helloWorld}"></wokwi-7segment>
     `
   )
   .add(
