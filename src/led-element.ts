@@ -43,7 +43,7 @@ export class LEDElement extends LitElement {
   render() {
     const { color, lightColor } = this;
     const lightColorActual = lightColor || lightColors[color] || '#ff8080';
-    const opacity = this.brightness ? 0.3 + this.brightness / 0.7 : 0;
+    const opacity = this.brightness ? 0.3 + this.brightness * 0.7 : 0;
     return html`
       <div class="led-container">
         <svg
