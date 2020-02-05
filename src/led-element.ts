@@ -44,6 +44,7 @@ export class LEDElement extends LitElement {
     const { color, lightColor } = this;
     const lightColorActual = lightColor || lightColors[color] || '#ff8080';
     const opacity = this.brightness ? 0.3 + this.brightness * 0.7 : 0;
+    const lightOn = this.value && this.brightness > Number.EPSILON;
     return html`
       <div class="led-container">
         <svg
@@ -54,7 +55,7 @@ export class LEDElement extends LitElement {
           xmlns="http://www.w3.org/2000/svg"
         >
           <filter id="light1" x="-0.8" y="-0.8" height="2.2" width="2.8">
-            <feGaussianBlur stdDeviation="2.6" />
+            <feGaussianBlur stdDeviation="2" />
           </filter>
           <filter id="light2" x="-0.8" y="-0.8" height="2.2" width="2.8">
             <feGaussianBlur stdDeviation="4" />
@@ -116,11 +117,7 @@ export class LEDElement extends LitElement {
               opacity=".5"
             />
           </g>
-          <g
-            class="light"
-            xmlns="http://www.w3.org/2000/svg"
-            style="display: ${this.value ? '' : 'none'}; opacity: ${opacity}"
-          >
+          <g class="light" style="display: ${lightOn ? '' : 'none'}">
             <ellipse
               cx="8"
               cy="10"
@@ -128,8 +125,18 @@ export class LEDElement extends LitElement {
               ry="10"
               fill="${lightColorActual}"
               filter="url(#light2)"
+              style="opacity: ${opacity}"
             ></ellipse>
-            <ellipse cx="8" cy="10" rx="3" ry="3" fill="white" filter="url(#light1)"></ellipse>
+            <ellipse cx="8" cy="10" rx="2" ry="2" fill="white" filter="url(#light1)"></ellipse>
+            <ellipse
+              cx="8"
+              cy="10"
+              rx="3"
+              ry="3"
+              fill="white"
+              filter="url(#light1)"
+              style="opacity: ${opacity}"
+            ></ellipse>
           </g>
         </svg>
         <span class="led-label">${this.label}</span>

@@ -95,6 +95,7 @@ storiesOf('LED', module)
     () =>
       html`
         <wokwi-led color="red" label="0" .value=${true} brightness="0"></wokwi-led>
+        <wokwi-led color="red" label="1%" .value=${true} brightness="0.01"></wokwi-led>
         <wokwi-led color="red" label="10%" .value=${true} brightness="0.1"></wokwi-led>
         <wokwi-led color="red" label="25%" .value=${true} brightness="0.25"></wokwi-led>
         <wokwi-led color="red" label="50%" .value=${true} brightness="0.5"></wokwi-led>
