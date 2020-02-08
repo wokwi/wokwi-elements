@@ -1,10 +1,12 @@
 import { withKnobs, text, select, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
+import { fontA02 } from './lcd1602-font-a02';
 import './lcd1602-element';
 
 const encode = (s: string) => new Uint8Array(s.split('').map(c => c.charCodeAt(0)));
 const helloWorld = 'Hello,           World!';
+const symbols = '\x10 I \x9d Symbols! \x11\xab \x14\x18\x17\x1e \x91\x98\x96 \x93\x97\xa9 \xbb';
 
 storiesOf('LCD1602', module)
   .addDecorator(withKnobs)
@@ -49,6 +51,18 @@ storiesOf('LCD1602', module)
         cursor="underline"
         cursorX="7"
         cursorY="1"
+      ></wokwi-lcd1602>
+    `
+  )
+  .add(
+    'Font A02',
+    () => html`
+      <wokwi-lcd1602
+        .characters="${encode(text('value', symbols))}"
+        .font=${fontA02}
+        cursor=${select('cursor', ['off', 'blink', 'underline'], 'off')}
+        cursorX=${number('cursorX', 0, { min: 0, max: 15 })}
+        cursorY=${number('cursorY', 0, { min: 0, max: 1 })}
       ></wokwi-lcd1602>
     `
   );

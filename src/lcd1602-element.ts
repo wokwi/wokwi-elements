@@ -1,5 +1,5 @@
 import { customElement, html, LitElement, property, css, svg } from 'lit-element';
-import { font8x5 } from './font8x5';
+import { fontA00 } from './lcd1602-font-a00';
 
 export type ICursorType = 'off' | 'blink' | 'underline';
 
@@ -16,7 +16,7 @@ export class LCD1602Element extends LitElement {
   @property() color = 'black';
   @property() background = 'green';
   @property({ type: Array }) characters: number[] | Uint8Array = new Uint8Array(32);
-  @property() font = font8x5;
+  @property() font = fontA00;
   @property() cursor: ICursorType = 'off';
   @property() cursorX = 0;
   @property() cursorY = 0;
@@ -55,7 +55,7 @@ export class LCD1602Element extends LitElement {
       for (let py = 0; py < 8; py++) {
         const row = this.font[characters[i] * 8 + py];
         for (let px = 0; px < 5; px++) {
-          if (row & (1 << (7 - px))) {
+          if (row & (1 << px)) {
             const x = (charX + px * xSpacing).toFixed(2);
             const y = (charY + py * ySpacing).toFixed(2);
             result.push(`M ${x} ${y}h0.55v0.65h-0.55Z`);
