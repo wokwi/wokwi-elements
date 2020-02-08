@@ -1,4 +1,4 @@
-import { withKnobs, text, select, number } from '@storybook/addon-knobs';
+import { withKnobs, text, select, number, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
 import { fontA02 } from './lcd1602-font-a02';
@@ -18,6 +18,7 @@ storiesOf('LCD1602', module)
         cursor=${select('cursor', ['off', 'blink', 'underline'], 'off')}
         cursorX=${number('cursorX', 0, { min: 0, max: 15 })}
         cursorY=${number('cursorY', 0, { min: 0, max: 1 })}
+        .backlight=${boolean('backlight', true)}
       ></wokwi-lcd1602>
     `
   )
@@ -52,6 +53,18 @@ storiesOf('LCD1602', module)
         cursorX="7"
         cursorY="1"
       ></wokwi-lcd1602>
+    `
+  )
+  .add(
+    'Display off (green)',
+    () => html`
+      <wokwi-lcd1602 .backlight=${false}></wokwi-lcd1602>
+    `
+  )
+  .add(
+    'Display off (blue)',
+    () => html`
+      <wokwi-lcd1602 .backlight=${false} color="white" background="blue"></wokwi-lcd1602>
     `
   )
   .add(

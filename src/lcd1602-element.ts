@@ -20,6 +20,7 @@ export class LCD1602Element extends LitElement {
   @property() cursor: ICursorType = 'off';
   @property() cursorX = 0;
   @property() cursorY = 0;
+  @property() backlight = true;
 
   static get styles() {
     return css`
@@ -96,6 +97,7 @@ export class LCD1602Element extends LitElement {
   render() {
     const { color, characters, background } = this;
 
+    const darken = this.backlight ? 0 : 0.5;
     const actualBgColor =
       background in backgroundColors ? backgroundColors[background] : backgroundColors;
 
@@ -124,6 +126,7 @@ export class LCD1602Element extends LitElement {
         <rect width="80" height="36" fill="#087f45" />
         <rect x="4.95" y="5.7" width="71.2" height="25.2" />
         <rect x="7.55" y="10.3" width="66" height="16" rx="1.5" ry="1.5" fill="${actualBgColor}" />
+        <rect x="7.55" y="10.3" width="66" height="16" rx="1.5" ry="1.5" opacity="${darken}" />
         <rect x="12.45" y="12.55" width="56.2" height="11.5" fill="url(#characters)" />
         <path d="${this.path(characters)}" transform="translate(12.45, 12.55)" fill="${color}" />
         ${this.renderCursor()}
