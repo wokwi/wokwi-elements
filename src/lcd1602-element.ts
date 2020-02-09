@@ -3,6 +3,9 @@ import { fontA00 } from './lcd1602-font-a00';
 
 export type ICursorType = 'off' | 'blink' | 'underline';
 
+const ROWS = 2;
+const COLS = 16;
+
 const charXSpacing = 3.55;
 const charYSpacing = 5.95;
 
@@ -50,8 +53,8 @@ export class LCD1602Element extends LitElement {
     const ySpacing = 0.7;
     const result = [];
     for (let i = 0; i < characters.length; i++) {
-      const charX = (i % 16) * charXSpacing;
-      const charY = Math.floor(i / 16) * charYSpacing;
+      const charX = (i % COLS) * charXSpacing;
+      const charY = Math.floor(i / COLS) * charYSpacing;
 
       for (let py = 0; py < 8; py++) {
         const row = this.font[characters[i] * 8 + py];
@@ -70,6 +73,10 @@ export class LCD1602Element extends LitElement {
   renderCursor() {
     const xOffset = 12.45 + this.cursorX * charXSpacing;
     const yOffset = 12.55 + this.cursorY * charYSpacing;
+    if (this.cursorX < 0 || this.cursorX >= COLS || this.cursorY < 0 || this.cursorY >= ROWS) {
+      return null;
+    }
+
     switch (this.cursor) {
       case 'blink':
         return svg`
