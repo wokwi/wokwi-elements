@@ -1,4 +1,4 @@
-import { withKnobs, text, select, number, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, number, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
 import { fontA02 } from './lcd1602-font-a02';
@@ -15,7 +15,8 @@ storiesOf('LCD1602', module)
     () => html`
       <wokwi-lcd1602
         .characters="${encode(text('value', helloWorld))}"
-        cursor=${select('cursor', ['off', 'blink', 'underline'], 'off')}
+        .cursor=${boolean('cursor', false)}
+        .blink=${boolean('blink', false)}
         cursorX=${number('cursorX', 0, { min: 0, max: 15 })}
         cursorY=${number('cursorY', 0, { min: 0, max: 1 })}
         .backlight=${boolean('backlight', true)}
@@ -28,8 +29,8 @@ storiesOf('LCD1602', module)
       <wokwi-lcd1602
         color="white"
         background="blue"
+        blink="true"
         .characters="${encode(helloWorld)}"
-        cursor="blink"
       ></wokwi-lcd1602>
     `
   )
@@ -38,18 +39,18 @@ storiesOf('LCD1602', module)
     () => html`
       <wokwi-lcd1602
         .characters="${encode(helloWorld)}"
-        cursor="blink"
+        blink="true"
         cursorX="7"
         cursorY="1"
       ></wokwi-lcd1602>
     `
   )
   .add(
-    'Underline cursor',
+    'Cursor',
     () => html`
       <wokwi-lcd1602
         .characters="${encode(helloWorld)}"
-        cursor="underline"
+        cursor="true"
         cursorX="7"
         cursorY="1"
       ></wokwi-lcd1602>
@@ -73,7 +74,8 @@ storiesOf('LCD1602', module)
       <wokwi-lcd1602
         .characters="${encode(text('value', symbols))}"
         .font=${fontA02}
-        cursor=${select('cursor', ['off', 'blink', 'underline'], 'off')}
+        .cursor=${boolean('cursor', false)}
+        .blink=${boolean('blink', false)}
         cursorX=${number('cursorX', 0, { min: 0, max: 15 })}
         cursorY=${number('cursorY', 0, { min: 0, max: 1 })}
       ></wokwi-lcd1602>

@@ -1,8 +1,6 @@
 import { customElement, html, LitElement, property, css, svg } from 'lit-element';
 import { fontA00 } from './lcd1602-font-a00';
 
-export type ICursorType = 'off' | 'blink' | 'underline';
-
 const ROWS = 2;
 const COLS = 16;
 
@@ -20,7 +18,8 @@ export class LCD1602Element extends LitElement {
   @property() background = 'green';
   @property({ type: Array }) characters: number[] | Uint8Array = new Uint8Array(32);
   @property() font = fontA00;
-  @property() cursor: ICursorType = 'off';
+  @property() cursor = false;
+  @property() blink = false;
   @property() cursorX = 0;
   @property() cursorY = 0;
   @property() backlight = true;
@@ -77,9 +76,10 @@ export class LCD1602Element extends LitElement {
       return null;
     }
 
-    switch (this.cursor) {
-      case 'blink':
-        return svg`
+    const result = [];
+
+    if (this.blink) {
+      result.push(svg`
         <rect x="${xOffset}" y="${yOffset}" width="2.95" height="5.55" fill="${this.color}">
           <animate
             attributeName="opacity"
@@ -89,16 +89,17 @@ export class LCD1602Element extends LitElement {
             repeatCount="indefinite"
           />
         </rect>
-      `;
-
-      case 'underline': {
-        const y = yOffset + 0.7 * 7;
-        return svg`<rect x="${xOffset}" y="${y}" width="2.95" height="0.65" fill="${this.color}" />`;
-      }
-
-      default:
-        return null;
+      `);
     }
+
+    if (this.cursor) {
+      const y = yOffset + 0.7 * 7;
+      result.push(
+        svg`<rect x="${xOffset}" y="${y}" width="2.95" height="0.65" fill="${this.color}" />`
+      );
+    }
+
+    return result;
   }
 
   render() {
