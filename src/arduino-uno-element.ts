@@ -1,10 +1,14 @@
-import { customElement, html, LitElement, property } from 'lit-element';
+import { customElement, html, LitElement, property, svg } from 'lit-element';
 
 @customElement('wokwi-arduino-uno')
 export class ArduinoUnoElement extends LitElement {
-  @property() led = false;
+  @property() led13 = false;
+  @property() ledRX = false;
+  @property() ledTX = false;
+  @property() ledPower = false;
 
   render() {
+    const { ledPower, led13, ledRX, ledTX } = this;
     return html`
       <svg
         width="72.58mm"
@@ -18,6 +22,16 @@ export class ArduinoUnoElement extends LitElement {
         viewBox="-4 0 72.58 53.34"
         xmlns="http://www.w3.org/2000/svg"
       >
+        <defs>
+          <g id="led-body" fill="#eee">
+            <path
+              d="m1.995 0.024v0.289a0.217 0.239 0 0 0-0.178 0.235 0.217 0.239 0 0 0 0.178 0.235v0.282h-1.995v-0.29a0.217 0.239 0 0 0 0.198-0.238 0.217 0.239 0 0 0-0.198-0.238v-0.275z"
+              fill="#c6c6c6"
+            />
+            <rect x="0.3" y="-0.15" width="1.35" height="1.4" stroke="#aaa" stroke-width="0.05" />
+          </g>
+        </defs>
+
         <filter id="ledFilter" x="-0.8" y="-0.8" height="2.2" width="2.8">
           <feGaussianBlur stdDeviation="0.5" />
         </filter>
@@ -106,16 +120,16 @@ export class ArduinoUnoElement extends LitElement {
         </g>
 
         <!-- Pin Headers -->
-        <g transform="translate(17.497, 1.27)">
+        <g transform="translate(17.497 1.27)">
           <rect width="${0.38 + 2.54 * 10}" height="2.54" fill="url(#pins)"></rect>
         </g>
-        <g transform="translate(44.421, 1.27)">
+        <g transform="translate(44.421 1.27)">
           <rect width="${0.38 + 2.54 * 8}" height="2.54" fill="url(#pins)"></rect>
         </g>
-        <g transform="translate(26.641, 49.53)">
+        <g transform="translate(26.641 49.53)">
           <rect width="${0.38 + 2.54 * 8}" height="2.54" fill="url(#pins)"></rect>
         </g>
-        <g transform="translate(49.501, 49.53)">
+        <g transform="translate(49.501 49.53)">
           <rect width="${0.38 + 2.54 * 6}" height="2.54" fill="url(#pins)"></rect>
         </g>
 
@@ -148,6 +162,79 @@ export class ArduinoUnoElement extends LitElement {
           <circle cx="33.269" cy="36.847" r="1.016" fill="#252728" />
           <circle cx="59.939" cy="36.847" r="1.016" fill="#252728" />
         </g>
+
+        <!-- LEDs -->
+        <g transform="translate(57.3, 16.21)">
+          <use xlink:href="#led-body" />
+          ${ledPower &&
+            svg`<circle cx="0.975" cy="0.55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
+        </g>
+
+        <g transform="translate(26.9, 10.62)">
+          <use xlink:href="#led-body" />
+          ${led13 &&
+            svg`<circle cx="0.975" cy="0.55" r="1.3" fill="#ff8080" filter="url(#ledFilter)" />`}
+        </g>
+
+        <g transform="translate(26.9, 16.2)">
+          <use xlink:href="#led-body" />
+          ${ledRX &&
+            svg`<circle cx="0.975" cy="0.55" r="1.3" fill="yellow" filter="url(#ledFilter)" />`}
+        </g>
+
+        <g transform="translate(26.9, 18.5)">
+          <use xlink:href="#led-body" />
+          ${ledTX &&
+            svg`<circle cx="0.975" cy="0.55" r="1.3" fill="yellow" filter="url(#ledFilter)" />`}
+        </g>
+
+        <!-- Labels -->
+        <text
+          transform="translate(22.6 4) rotate(270 0 0)"
+          fill="#fff"
+          style="font-size: 2px; text-anchor: end; font-family: sans-serif; font-weight: 800"
+        >
+          <tspan x="0" dy="2.54">AREF</tspan>
+          <tspan x="0" dy="2.54">GND</tspan>
+          <tspan x="0" dy="2.54">13</tspan>
+          <tspan x="0" dy="2.54">12</tspan>
+          <tspan x="0" dy="2.54">~11</tspan>
+          <tspan x="0" dy="2.54">~10</tspan>
+          <tspan x="0" dy="2.54">~9</tspan>
+          <tspan x="0" dy="2.54">8</tspan>
+          <tspan x="0" dy="4.08">~7</tspan>
+          <tspan x="0" dy="2.54">~6</tspan>
+          <tspan x="0" dy="2.54">~5</tspan>
+          <tspan x="0" dy="2.54">4</tspan>
+          <tspan x="0" dy="2.54">~3</tspan>
+          <tspan x="0" dy="2.54">2</tspan>
+          <tspan x="0" dy="2.54">TX→</tspan>
+          <tspan dx="0.2">1</tspan>
+          <tspan x="0" dy="2.54">RX←</tspan>
+          <tspan dx="0.2">0</tspan>
+          <tspan x="0" dy="2.54">&nbsp;</tspan>
+        </text>
+
+        <text
+          transform="translate(29.19 49) rotate(270 0 0)"
+          fill="#fff"
+          style="font-size: 2px; font-family: sans-serif; font-weight: 800"
+        >
+          <tspan x="0" dy="2.54">IOREF</tspan>
+          <tspan x="0" dy="2.54">RESET</tspan>
+          <tspan x="0" dy="2.54">3.3V</tspan>
+          <tspan x="0" dy="2.54">5V</tspan>
+          <tspan x="0" dy="2.54">GND</tspan>
+          <tspan x="0" dy="2.54">GND</tspan>
+          <tspan x="0" dy="2.54">Vin</tspan>
+          <tspan x="0" dy="4.54">A0</tspan>
+          <tspan x="0" dy="2.54">A1</tspan>
+          <tspan x="0" dy="2.54">A2</tspan>
+          <tspan x="0" dy="2.54">A3</tspan>
+          <tspan x="0" dy="2.54">A4</tspan>
+          <tspan x="0" dy="2.54">A5</tspan>
+          <tspan x="0" dy="2.54">&nbsp;</tspan>
+        </text>
       </svg>
     `;
   }

@@ -8,6 +8,11 @@ storiesOf('Arduino Uno', module)
   .add(
     'Uno R3',
     () => html`
-      <wokwi-arduino-uno led=${boolean('LED', false)}></wokwi-7segment>
+      <wokwi-arduino-uno 
+        .led13=${boolean('LED 13', false)}
+        .ledPower=${boolean('Power LED', true)}
+        .ledRX=${boolean('RX LED', false)}
+        .ledTX=${boolean('TX LED', false)}
+      ></wokwi-7segment>
     `
   );
