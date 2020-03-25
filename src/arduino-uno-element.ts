@@ -13,22 +13,15 @@ export class ArduinoUnoElement extends LitElement {
       <svg
         width="72.58mm"
         height="53.34mm"
-        clip-rule="evenodd"
-        fill-rule="evenodd"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="0"
         version="1.1"
         viewBox="-4 0 72.58 53.34"
+        style="font-size: 2px; font-family: sans-serif"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
           <g id="led-body" fill="#eee">
-            <path
-              d="m1.995 0.024v0.289a0.217 0.239 0 0 0-0.178 0.235 0.217 0.239 0 0 0 0.178 0.235v0.282h-1.995v-0.29a0.217 0.239 0 0 0 0.198-0.238 0.217 0.239 0 0 0-0.198-0.238v-0.275z"
-              fill="#c6c6c6"
-            />
-            <rect x="0.3" y="-0.15" width="1.35" height="1.4" stroke="#aaa" stroke-width="0.05" />
+            <rect x="0" y="0" height="1.2" width="2.6" fill="#c6c6c6" />
+            <rect x="0.6" y="-0.1" width="1.35" height="1.4" stroke="#aaa" stroke-width="0.05" />
           </g>
         </defs>
 
@@ -59,6 +52,12 @@ export class ArduinoUnoElement extends LitElement {
             d="m 0 0 v 0.762 l 0.433,0.433 c 0.046,-0.046 0.074,-0.109 0.074,-0.179 v -1.27 c 0,-0.070 -0.028,-0.133 -0.074,-0.179 z"
             style="opacity: 0.35"
           ></path>
+        </pattern>
+
+        <pattern id="pin-male" width="2.54" height="4.80" patternUnits="userSpaceOnUse">
+          <rect ry="0.3" rx="0.3" width="2.12" height="4.80" fill="#565656" />
+          <ellipse cx="1" cy="1.13" rx="0.5" ry="0.5" fill="#aaa"></ellipse>
+          <ellipse cx="1" cy="3.67" rx="0.5" ry="0.5" fill="#aaa"></ellipse>
         </pattern>
 
         <pattern id="mcu-leads" width="2.54" height="0.508" patternUnits="userSpaceOnUse">
@@ -163,17 +162,30 @@ export class ArduinoUnoElement extends LitElement {
           <circle cx="59.939" cy="36.847" r="1.016" fill="#252728" />
         </g>
 
+        <!-- Programming Headers -->
+        <g transform="translate(14.1 4.4)">
+          <rect width="7" height="4.80" fill="url(#pin-male)" />
+        </g>
+
+        <g transform="translate(63 27.2) rotate(270 0 0)">
+          <rect width="7" height="4.80" fill="url(#pin-male)" />
+        </g>
+
         <!-- LEDs -->
         <g transform="translate(57.3, 16.21)">
           <use xlink:href="#led-body" />
           ${ledPower &&
-            svg`<circle cx="0.975" cy="0.55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
+            svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
         </g>
 
-        <g transform="translate(26.9, 10.62)">
+        <text fill="#fff">
+          <tspan x="60.88" y="17.5">ON</tspan>
+        </text>
+
+        <g transform="translate(26.87,11.69)">
           <use xlink:href="#led-body" />
           ${led13 &&
-            svg`<circle cx="0.975" cy="0.55" r="1.3" fill="#ff8080" filter="url(#ledFilter)" />`}
+            svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#ff8080" filter="url(#ledFilter)" />`}
         </g>
 
         <g transform="translate(26.9, 16.2)">
@@ -188,7 +200,18 @@ export class ArduinoUnoElement extends LitElement {
             svg`<circle cx="0.975" cy="0.55" r="1.3" fill="yellow" filter="url(#ledFilter)" />`}
         </g>
 
-        <!-- Labels -->
+        <text fill="#fff" style="text-anchor: end;">
+          <tspan x="26.5" y="13">L</tspan>
+          <tspan x="26.5" y="17.5">TX</tspan>
+          <tspan x="26.5" y="19.8">RX</tspan>
+          <tspan x="26.5" y="20">&nbsp;</tspan>
+        </text>
+
+        <!-- Pin Labels -->
+        <rect x="28.27" y="10.34" width="36.5" height="0.16" fill="#fff"></rect>
+        <text fill="#fff" style="font-weight: 900">
+          <tspan x="40.84" y="9.48">DIGITAL (PWM ~)</tspan>
+        </text>
         <text
           transform="translate(22.6 4) rotate(270 0 0)"
           fill="#fff"
@@ -215,11 +238,13 @@ export class ArduinoUnoElement extends LitElement {
           <tspan x="0" dy="2.54">&nbsp;</tspan>
         </text>
 
-        <text
-          transform="translate(29.19 49) rotate(270 0 0)"
-          fill="#fff"
-          style="font-size: 2px; font-family: sans-serif; font-weight: 800"
-        >
+        <rect x="33.90" y="42.76" width="12.84" height="0.16" fill="#fff"></rect>
+        <rect x="49.48" y="42.76" width="14.37" height="0.16" fill="#fff"></rect>
+        <text fill="#fff" style="font-weight: 900">
+          <tspan x="39.28" y="44.96">POWER</tspan>
+          <tspan x="52.74" y="44.96">ANALOG IN</tspan>
+        </text>
+        <text transform="translate(29.19 49) rotate(270 0 0)" fill="#fff" style="font-weight: 700">
           <tspan x="0" dy="2.54">IOREF</tspan>
           <tspan x="0" dy="2.54">RESET</tspan>
           <tspan x="0" dy="2.54">3.3V</tspan>
