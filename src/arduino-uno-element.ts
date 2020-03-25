@@ -15,7 +15,7 @@ export class ArduinoUnoElement extends LitElement {
         height="53.34mm"
         version="1.1"
         viewBox="-4 0 72.58 53.34"
-        style="font-size: 2px; font-family: sans-serif"
+        style="font-size: 2px; font-family: monospace"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
@@ -74,10 +74,12 @@ export class ArduinoUnoElement extends LitElement {
         />
 
         <!-- USB Connector -->
-        <rect width="11" height="11.93" x="-0.05" y="9.72" rx="0.2" ry="0.2" opacity="0.235" />
         <g style="fill:#b3b2b2;stroke:#b3b2b2;stroke-width:0.010">
           <ellipse cx="3.84" cy="9.56" rx="1.12" ry="1.03" />
           <ellipse cx="3.84" cy="21.04" rx="1.12" ry="1.03" />
+          <g fill="#000">
+            <rect width="11" height="11.93" x="-0.05" y="9.72" rx="0.2" ry="0.2" opacity="0.24" />
+          </g>
           <rect x="-4" y="9.37" height="11.85" width="14.46" />
           <rect x="-4" y="9.61" height="11.37" width="14.05" fill="#706f6f" />
           <rect x="-4" y="9.71" height="11.17" width="13.95" fill="#9d9d9c" />
@@ -200,7 +202,7 @@ export class ArduinoUnoElement extends LitElement {
             svg`<circle cx="0.975" cy="0.55" r="1.3" fill="yellow" filter="url(#ledFilter)" />`}
         </g>
 
-        <text fill="#fff" style="text-anchor: end;">
+        <text fill="#fff" style="text-anchor: end">
           <tspan x="26.5" y="13">L</tspan>
           <tspan x="26.5" y="17.5">TX</tspan>
           <tspan x="26.5" y="19.8">RX</tspan>
@@ -215,7 +217,7 @@ export class ArduinoUnoElement extends LitElement {
         <text
           transform="translate(22.6 4) rotate(270 0 0)"
           fill="#fff"
-          style="font-size: 2px; text-anchor: end; font-family: sans-serif; font-weight: 800"
+          style="font-size: 2px; text-anchor: end; font-family: monospace"
         >
           <tspan x="0" dy="2.54">AREF</tspan>
           <tspan x="0" dy="2.54">GND</tspan>
@@ -231,18 +233,16 @@ export class ArduinoUnoElement extends LitElement {
           <tspan x="0" dy="2.54">4</tspan>
           <tspan x="0" dy="2.54">~3</tspan>
           <tspan x="0" dy="2.54">2</tspan>
-          <tspan x="0" dy="2.54">TX→</tspan>
-          <tspan dx="0.2">1</tspan>
-          <tspan x="0" dy="2.54">RX←</tspan>
-          <tspan dx="0.2">0</tspan>
+          <tspan x="0" dy="2.54">TX→1</tspan>
+          <tspan x="0" dy="2.54">RX←0</tspan>
           <tspan x="0" dy="2.54">&nbsp;</tspan>
         </text>
 
         <rect x="33.90" y="42.76" width="12.84" height="0.16" fill="#fff"></rect>
         <rect x="49.48" y="42.76" width="14.37" height="0.16" fill="#fff"></rect>
         <text fill="#fff" style="font-weight: 900">
-          <tspan x="39.28" y="44.96">POWER</tspan>
-          <tspan x="52.74" y="44.96">ANALOG IN</tspan>
+          <tspan x="41" y="44.96">POWER</tspan>
+          <tspan x="53.5" y="44.96">ANALOG IN</tspan>
         </text>
         <text transform="translate(29.19 49) rotate(270 0 0)" fill="#fff" style="font-weight: 700">
           <tspan x="0" dy="2.54">IOREF</tspan>
@@ -259,6 +259,33 @@ export class ArduinoUnoElement extends LitElement {
           <tspan x="0" dy="2.54">A4</tspan>
           <tspan x="0" dy="2.54">A5</tspan>
           <tspan x="0" dy="2.54">&nbsp;</tspan>
+        </text>
+
+        <!-- Logo -->
+        <path
+          style="fill:none;stroke:#fff;stroke-width:1.03"
+          d="m 34.21393,12.01079 c -1.66494,-0.13263 -3.06393,1.83547 -2.37559,3.36182 0.66469,1.65332 3.16984,2.10396 4.36378,0.77797 1.15382,-1.13053 1.59956,-2.86476 3.00399,-3.75901 1.43669,-0.9801 3.75169,-0.0547 4.02384,1.68886 0.27358,1.66961 -1.52477,3.29596 -3.15725,2.80101 -1.20337,-0.27199 -2.06928,-1.29866 -2.56193,-2.37788 -0.6046,-1.0328 -1.39499,-2.13327 -2.62797,-2.42367 -0.2191,-0.0497 -0.44434,-0.0693 -0.66887,-0.0691 z"
+        />
+        <path
+          style="fill:none;stroke:#fff;stroke-width:0.56"
+          d="m 39.67829,14.37519 h 1.75141 m -0.89321,-0.8757 v 1.7514 m -7.30334,-0.8757 h 2.10166"
+        />
+        <text x="31" y="20.2" style="font-size:2.8px;font-weight:bold;line-height:1.25;fill:#fff">
+          ARDUINO
+        </text>
+
+        <rect
+          style="fill:none;stroke:#fff;stroke-width:0.1;stroke-dasharray:0.1, 0.1"
+          width="11"
+          height="5.45"
+          x="45.19"
+          y="11.83"
+          rx="1"
+          ry="1"
+        />
+
+        <text x="46.5" y="16" style="font-size:5px; line-height:1.25" fill="#fff">
+          UNO
         </text>
       </svg>
     `;

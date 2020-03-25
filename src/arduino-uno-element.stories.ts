@@ -15,4 +15,15 @@ storiesOf('Arduino Uno', module)
         .ledTX=${boolean('TX LED', false)}
       ></wokwi-7segment>
     `
+  )
+  .add(
+    'Uno R3 (Large)',
+    () => html`
+          <wokwi-arduino-uno style="zoom: 2"
+            .led13=${boolean('LED 13', false)}
+            .ledPower=${boolean('Power LED', true)}
+            .ledRX=${boolean('RX LED', false)}
+            .ledTX=${boolean('TX LED', false)}
+          ></wokwi-7segment>
+        `
   );
