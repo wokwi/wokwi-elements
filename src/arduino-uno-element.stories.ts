@@ -10,9 +10,9 @@ storiesOf('Arduino Uno', module)
     () => html`
       <wokwi-arduino-uno 
         .led13=${boolean('LED 13', false)}
-        .ledPower=${boolean('Power LED', true)}
-        .ledRX=${boolean('RX LED', false)}
         .ledTX=${boolean('TX LED', false)}
+        .ledRX=${boolean('RX LED', false)}
+        .ledPower=${boolean('Power LED', true)}
       ></wokwi-7segment>
     `
   )
@@ -21,9 +21,9 @@ storiesOf('Arduino Uno', module)
     () => html`
           <wokwi-arduino-uno style="zoom: 2"
             .led13=${boolean('LED 13', false)}
-            .ledPower=${boolean('Power LED', true)}
-            .ledRX=${boolean('RX LED', false)}
             .ledTX=${boolean('TX LED', false)}
+            .ledRX=${boolean('RX LED', false)}
+            .ledPower=${boolean('Power LED', true)}
           ></wokwi-7segment>
         `
   );
