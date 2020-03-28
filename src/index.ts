@@ -7,3 +7,4 @@ export { LEDElement } from './led-element';
 export { NeoPixelElement } from './neopixel-element';
 export { PushbuttonElement } from './pushbutton-element';
 export { ResistorElement } from './resistor-element';
+export { MembraneKeypadElement } from './membrane-keypad-element';
