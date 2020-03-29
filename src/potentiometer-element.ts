@@ -1,11 +1,9 @@
-import { customElement, html, LitElement, property } from 'lit-element';
+import { css, customElement, html, LitElement, property } from 'lit-element';
 
 interface Point {
   x: number;
   y: number;
 }
-
-let id = 1;
 
 /** The potentiometer SVG is taken from https://freesvg.org/potentiometer and some of the
     functions are taken from https://github.com/vitaliy-bobrov/js-rocks knob component */
@@ -19,7 +17,18 @@ export class PotentiometerElement extends LitElement {
   @property() endDegree = 135;
   private center: Point = { x: 0, y: 0 };
   pressed = false;
-  id = `rotating-${id++}`;
+
+  static get styles() {
+    return css`
+      svg text {
+        font-size: 6.5px;
+        line-height: 1.25;
+        letter-spacing: 0px;
+        word-spacing: 0px;
+        fill: #ffffff;
+      }
+    `;
+  }
 
   clamp(min: number, max: number, value: number): number {
     return Math.min(Math.max(value, min), max);
@@ -36,16 +45,17 @@ export class PotentiometerElement extends LitElement {
   render() {
     return html`
       <style>
-        #${this.id} {
+        #rotating {
           transform-origin: -120.168198px -140.5804px;
           transform: rotate(var(--knob-angle, 0deg));
         }
       </style>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
         width="20mm"
         height="20mm"
+        version="1.1"
         viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
         @mousedown=${this.down}
         @mousemove=${this.move}
         @mouseup=${this.up}
@@ -53,143 +63,44 @@ export class PotentiometerElement extends LitElement {
         @touchmove=${this.move}
         @touchend=${this.up}
       >
-        <g transform="translate(-6.7420057,-6.6693388)">
-          <g transform="matrix(0.15090139,0,0,0.15090139,34.862601,35.84314)">
-            <rect
-              ry="8.1522207"
-              y="-192.35448"
-              x="-185.37505"
-              height="128.89323"
-              width="129.11356"
-              style="opacity:1;fill:#045881;fill-opacity:1;stroke:#045881;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <rect
-              y="-188.67798"
-              x="-150.76115"
-              height="12.407617"
-              width="60.234947"
-              style="opacity:1;fill:#ccdae3;fill-opacity:1;stroke:none;stroke-width:2.26042461;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <ellipse
-              ry="49.255947"
-              rx="48.154297"
-              cy="-139.14471"
-              cx="-120.70818"
-              style="opacity:1;fill:#e4e8eb;fill-opacity:1;stroke:none;stroke-width:1.97907138;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <rect
-              y="-80.647011"
-              x="-142.63103"
-              height="13.660479"
-              width="42.74408"
-              style="opacity:1;fill:#000000;fill-opacity:0;stroke:#ffffff;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <text
-              y="-83.291"
-              x="-145.16521"
-              style="font-style:normal;font-weight:normal;font-size:6.4255476px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.34422573"
-              xml:space="preserve"
-            >
-              <tspan
-                style="font-size:6.4255476px;fill:#ffffff;stroke-width:0.34422573"
-                y="-83.291"
-                x="-174.16521"
-              >
-                GND
-              </tspan>
-            </text>
-            <text
-              y="-83.155312"
-              x="-128.39781"
-              style="font-style:normal;font-weight:normal;font-size:6.42554712px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.34422573"
-              xml:space="preserve"
-            >
-              <tspan
-                style="font-size:6.42554712px;fill:#ffffff;stroke-width:0.34422573"
-                y="-83.155312"
-                x="-158.39781"
-              >
-                VCC
-              </tspan>
-            </text>
-            <text
-              y="-83.375633"
-              x="-111.76274"
-              style="font-style:normal;font-weight:normal;font-size:6.42554712px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.34422573"
-              xml:space="preserve"
-            >
-              <tspan
-                style="font-size:6.42554712px;fill:#ffffff;stroke-width:0.34422573"
-                y="-83.375633"
-                x="-142.76274"
-              >
-                SIG
-              </tspan>
-            </text>
-            <ellipse
-              ry="6.3895783"
-              rx="6.6099091"
-              cy="-181.33797"
-              cx="-175.23991"
-              style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <ellipse
-              ry="6.3895783"
-              rx="6.6099091"
-              cy="-71.613472"
-              cx="-176.56194"
-              style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <ellipse
-              ry="6.3895783"
-              rx="6.6099091"
-              cy="-70.952477"
-              cx="-67.278061"
-              style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <ellipse
-              ry="6.3895783"
-              rx="6.6099091"
-              cy="-180.67697"
-              cx="-66.617111"
-              style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <ellipse
-              ry="4.2065206"
-              rx="4.0507231"
-              cy="-73.640999"
-              cx="-135.42528"
-              style="opacity:1;fill:#b3b1b0;fill-opacity:1;stroke:none;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <ellipse
-              ry="4.2065206"
-              rx="4.0507231"
-              cy="-73.796799"
-              cx="-121.71519"
-              style="opacity:1;fill:#b3b1b0;fill-opacity:1;stroke:none;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <ellipse
-              ry="4.2065206"
-              rx="4.0507231"
-              cy="-73.796799"
-              cx="-107.69341"
-              style="opacity:1;fill:#b3b1b0;fill-opacity:1;stroke:none;stroke-width:1.95151615;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <ellipse
-              ry="43.629311"
-              rx="43.739475"
-              cy="-139.91585"
-              cx="-120.38097"
-              style="opacity:1;fill:#c3c2c3;fill-opacity:1;stroke:none;stroke-width:1.77517259;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            />
-            <rect
-              id="${this.id}"
-              y="-180.5804"
-              x="-120.168198"
-              height="20.26368"
-              width="2.7833986"
-            />
+        <g transform="matrix(.1509 0 0 .1509 28.121 29.174)">
+          <rect
+            x="-185.38"
+            y="-192.35"
+            width="129.11"
+            height="128.89"
+            ry="8.1522"
+            fill="#045881"
+            stroke="#045881"
+            stroke-width="2"
+          />
+          <rect x="-150.76" y="-188.68" width="60.235" height="12.408" fill="#ccdae3" />
+          <ellipse cx="-120.71" cy="-139.14" rx="48.154" ry="49.256" fill="#e4e8eb" />
+          <rect
+            x="-142.63"
+            y="-80.647"
+            width="42.744"
+            height="13.66"
+            fill-opacity="0"
+            stroke="#fff"
+            stroke-width="2"
+          />
+          <text x="-145.16521" y="-83.291">GND</text>
+          <text x="-128.39781" y="-83.155312">VCC</text>
+          <text x="-111.76274" y="-83.375633">SIG</text>
+          <g fill="#fff">
+            <ellipse cx="-175.24" cy="-181.34" rx="6.6099" ry="6.3896" />
+            <ellipse cx="-176.56" cy="-71.613" rx="6.6099" ry="6.3896" />
+            <ellipse cx="-67.278" cy="-70.952" rx="6.6099" ry="6.3896" />
+            <ellipse cx="-66.617" cy="-180.68" rx="6.6099" ry="6.3896" />
           </g>
+          <g fill="#b3b1b0">
+            <ellipse cx="-135.43" cy="-73.641" rx="4.0507" ry="4.2065" />
+            <ellipse cx="-121.72" cy="-73.797" rx="4.0507" ry="4.2065" />
+            <ellipse cx="-107.69" cy="-73.797" rx="4.0507" ry="4.2065" />
+          </g>
+          <ellipse cx="-120.38" cy="-139.92" rx="43.739" ry="43.629" fill="#c3c2c3" />
+          <rect id="rotating" x="-120.17" y="-180.58" width="2.7834" height="20.264" />
         </g>
       </svg>
     `;
@@ -264,6 +175,6 @@ export class PotentiometerElement extends LitElement {
     const updated = Math.round(clamped / this.step) * this.step;
     const rounded = Math.round(updated * 100) / 100;
     this.updatePotentiometerPointer(rounded);
-    this.dispatchEvent(new CustomEvent('potentiometer-value-changed', { detail: rounded }));
+    this.dispatchEvent(new InputEvent('potentiometer-value-changed', { data: `${rounded}` }));
   }
 }
