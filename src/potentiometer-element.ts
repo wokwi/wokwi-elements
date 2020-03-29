@@ -175,6 +175,6 @@ export class PotentiometerElement extends LitElement {
     const updated = Math.round(clamped / this.step) * this.step;
     const rounded = Math.round(updated * 100) / 100;
     this.updatePotentiometerPointer(rounded);
-    this.dispatchEvent(new InputEvent('potentiometer-value-changed', { data: `${rounded}` }));
+    this.dispatchEvent(new InputEvent('input', { data: `${rounded}` }));
   }
 }

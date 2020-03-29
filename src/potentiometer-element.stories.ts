@@ -10,7 +10,7 @@ storiesOf('potentiometer', module).add(
       <wokwi-potentiometer
         min="0"
         max="200"
-        @potentiometer-value-changed=${action('potentiometer-value-changed')}
+        @input=${action('potentiometer-value-changed')}
       ></wokwi-potentiometer>
     `
 );
