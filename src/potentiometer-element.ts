@@ -21,7 +21,7 @@ export class PotentiometerElement extends LitElement {
   static get styles() {
     return css`
       svg text {
-        font-size: 6.5px;
+        font-size: 1px;
         line-height: 1.25;
         letter-spacing: 0px;
         word-spacing: 0px;
@@ -46,7 +46,7 @@ export class PotentiometerElement extends LitElement {
     return html`
       <style>
         #rotating {
-          transform-origin: -120.168198px -140.5804px;
+          transform-origin: 10px 8px;
           transform: rotate(var(--knob-angle, 0deg));
         }
       </style>
@@ -63,45 +63,66 @@ export class PotentiometerElement extends LitElement {
         @touchmove=${this.move}
         @touchend=${this.up}
       >
-        <g transform="matrix(.1509 0 0 .1509 28.121 29.174)">
-          <rect
-            x="-185.38"
-            y="-192.35"
-            width="129.11"
-            height="128.89"
-            ry="8.1522"
-            fill="#045881"
-            stroke="#045881"
-            stroke-width="2"
-          />
-          <rect x="-150.76" y="-188.68" width="60.235" height="12.408" fill="#ccdae3" />
-          <ellipse cx="-120.71" cy="-139.14" rx="48.154" ry="49.256" fill="#e4e8eb" />
-          <rect
-            x="-142.63"
-            y="-80.647"
-            width="42.744"
-            height="13.66"
-            fill-opacity="0"
-            stroke="#fff"
-            stroke-width="2"
-          />
-          <text x="-145.16521" y="-83.291">GND</text>
-          <text x="-128.39781" y="-83.155312">VCC</text>
-          <text x="-111.76274" y="-83.375633">SIG</text>
-          <g fill="#fff">
-            <ellipse cx="-175.24" cy="-181.34" rx="6.6099" ry="6.3896" />
-            <ellipse cx="-176.56" cy="-71.613" rx="6.6099" ry="6.3896" />
-            <ellipse cx="-67.278" cy="-70.952" rx="6.6099" ry="6.3896" />
-            <ellipse cx="-66.617" cy="-180.68" rx="6.6099" ry="6.3896" />
-          </g>
-          <g fill="#b3b1b0">
-            <ellipse cx="-135.43" cy="-73.641" rx="4.0507" ry="4.2065" />
-            <ellipse cx="-121.72" cy="-73.797" rx="4.0507" ry="4.2065" />
-            <ellipse cx="-107.69" cy="-73.797" rx="4.0507" ry="4.2065" />
-          </g>
-          <ellipse cx="-120.38" cy="-139.92" rx="43.739" ry="43.629" fill="#c3c2c3" />
-          <rect id="rotating" x="-120.17" y="-180.58" width="2.7834" height="20.264" />
+        <rect
+          x=".14716"
+          y=".14838"
+          width="19.483"
+          height="19.45"
+          ry="1.2302"
+          fill="#045881"
+          stroke="#045881"
+          stroke-width=".3018"
+        />
+        <rect
+          x="5.3713"
+          y=".70219"
+          width="9.0895"
+          height="1.8724"
+          fill="#ccdae3"
+          stroke-width=".1509"
+        />
+        <ellipse
+          cx="9.9059"
+          cy="8.1778"
+          rx="7.2664"
+          ry="7.4327"
+          fill="#e4e8eb"
+          stroke-width=".1509"
+        />
+        <rect
+          x="6.5981"
+          y="17.004"
+          width="6.4501"
+          height="2.0613"
+          fill-opacity="0"
+          stroke="#fff"
+          stroke-width=".3018"
+        />
+        <g stroke-width=".1509">
+          <text x="6.2155704" y="16.605389">GND</text>
+          <text x="8.7457705" y="16.625864">VCC</text>
+          <text x="11.256002" y="16.592617">SIG</text>
         </g>
+        <g fill="#fff" stroke-width=".1509">
+          <ellipse cx="1.6773" cy="1.8098" rx=".99743" ry=".96419" />
+          <ellipse cx="1.4781" cy="18.368" rx=".99743" ry=".96419" />
+          <ellipse cx="17.969" cy="18.467" rx=".99743" ry=".96419" />
+          <ellipse cx="18.068" cy="1.9094" rx=".99743" ry=".96419" />
+        </g>
+        <g fill="#b3b1b0" stroke-width=".1509">
+          <ellipse cx="7.6846" cy="18.062" rx=".61125" ry=".63476" />
+          <ellipse cx="9.7535" cy="18.038" rx=".61125" ry=".63476" />
+          <ellipse cx="11.871" cy="18.038" rx=".61125" ry=".63476" />
+        </g>
+        <ellipse
+          cx="9.9557"
+          cy="8.0601"
+          rx="6.6002"
+          ry="6.5836"
+          fill="#c3c2c3"
+          stroke-width=".1509"
+        />
+        <rect id="rotating" x="10" y="2" width=".42002" height="3.0578" stroke-width=".1509" />
       </svg>
     `;
   }
