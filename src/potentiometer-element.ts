@@ -16,10 +16,15 @@ export class PotentiometerElement extends LitElement {
   @property() startDegree = -135;
   @property() endDegree = 135;
   private center: Point = { x: 0, y: 0 };
-  pressed = false;
+  private pressed = false;
 
   static get styles() {
     return css`
+      #rotating {
+        transform-origin: 10px 8px;
+        transform: rotate(var(--knob-angle, 0deg));
+      }
+
       svg text {
         font-size: 1px;
         line-height: 1.25;
@@ -44,12 +49,6 @@ export class PotentiometerElement extends LitElement {
 
   render() {
     return html`
-      <style>
-        #rotating {
-          transform-origin: 10px 8px;
-          transform: rotate(var(--knob-angle, 0deg));
-        }
-      </style>
       <svg
         width="20mm"
         height="20mm"
@@ -64,65 +63,44 @@ export class PotentiometerElement extends LitElement {
         @touchend=${this.up}
       >
         <rect
-          x=".14716"
-          y=".14838"
-          width="19.483"
-          height="19.45"
-          ry="1.2302"
+          x=".15"
+          y=".15"
+          width="19.5"
+          height="19.5"
+          ry="1.23"
           fill="#045881"
           stroke="#045881"
-          stroke-width=".3018"
+          stroke-width=".30"
         />
+        <rect x="5.4" y=".70" width="9.1" height="1.9" fill="#ccdae3" stroke-width=".15" />
+        <ellipse cx="9.91" cy="8.18" rx="7.27" ry="7.43" fill="#e4e8eb" stroke-width=".15" />
         <rect
-          x="5.3713"
-          y=".70219"
-          width="9.0895"
-          height="1.8724"
-          fill="#ccdae3"
-          stroke-width=".1509"
-        />
-        <ellipse
-          cx="9.9059"
-          cy="8.1778"
-          rx="7.2664"
-          ry="7.4327"
-          fill="#e4e8eb"
-          stroke-width=".1509"
-        />
-        <rect
-          x="6.5981"
-          y="17.004"
-          width="6.4501"
-          height="2.0613"
+          x="6.6"
+          y="17"
+          width="6.5"
+          height="2"
           fill-opacity="0"
           stroke="#fff"
-          stroke-width=".3018"
+          stroke-width=".30"
         />
-        <g stroke-width=".1509">
-          <text x="6.2155704" y="16.605389">GND</text>
-          <text x="8.7457705" y="16.625864">VCC</text>
-          <text x="11.256002" y="16.592617">SIG</text>
+        <g stroke-width=".15">
+          <text x="6.21" y="16.6">GND</text>
+          <text x="8.75" y="16.63">VCC</text>
+          <text x="11.25" y="16.59">SIG</text>
         </g>
-        <g fill="#fff" stroke-width=".1509">
-          <ellipse cx="1.6773" cy="1.8098" rx=".99743" ry=".96419" />
-          <ellipse cx="1.4781" cy="18.368" rx=".99743" ry=".96419" />
-          <ellipse cx="17.969" cy="18.467" rx=".99743" ry=".96419" />
-          <ellipse cx="18.068" cy="1.9094" rx=".99743" ry=".96419" />
+        <g fill="#fff" stroke-width=".15">
+          <ellipse cx="1.68" cy="1.81" rx=".99" ry=".96" />
+          <ellipse cx="1.48" cy="18.37" rx=".99" ry=".96" />
+          <ellipse cx="17.97" cy="18.47" rx=".99" ry=".96" />
+          <ellipse cx="18.07" cy="1.91" rx=".99" ry=".96" />
         </g>
-        <g fill="#b3b1b0" stroke-width=".1509">
-          <ellipse cx="7.6846" cy="18.062" rx=".61125" ry=".63476" />
-          <ellipse cx="9.7535" cy="18.038" rx=".61125" ry=".63476" />
-          <ellipse cx="11.871" cy="18.038" rx=".61125" ry=".63476" />
+        <g fill="#b3b1b0" stroke-width=".15">
+          <ellipse cx="7.68" cy="18" rx=".61" ry=".63" />
+          <ellipse cx="9.75" cy="18" rx=".61" ry=".63" />
+          <ellipse cx="11.87" cy="18" rx=".61" ry=".63" />
         </g>
-        <ellipse
-          cx="9.9557"
-          cy="8.0601"
-          rx="6.6002"
-          ry="6.5836"
-          fill="#c3c2c3"
-          stroke-width=".1509"
-        />
-        <rect id="rotating" x="10" y="2" width=".42002" height="3.0578" stroke-width=".1509" />
+        <ellipse cx="9.95" cy="8.06" rx="6.60" ry="6.58" fill="#c3c2c3" stroke-width=".15" />
+        <rect id="rotating" x="10" y="2" width=".42" height="3.1" stroke-width=".15" />
       </svg>
     `;
   }
