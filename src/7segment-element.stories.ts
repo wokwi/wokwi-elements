@@ -8,21 +8,15 @@ storiesOf('7 Segment', module)
   .addDecorator(withKnobs)
   .add(
     'Red 4.',
-    () => html`
-      <wokwi-7segment color="red" values="[0,1,1,0,0,1,1,1]"></wokwi-7segment>
-    `
+    () => html`<wokwi-7segment color="red" values="[0,1,1,0,0,1,1,1]"></wokwi-7segment>`
   )
   .add(
     'Green 5',
-    () => html`
-      <wokwi-7segment color="green" values="[1,0,1,1,0,1,1,0]"></wokwi-7segment>
-    `
+    () => html`<wokwi-7segment color="green" values="[1,0,1,1,0,1,1,0]"></wokwi-7segment>`
   )
   .add(
-    'Blue spinner',
-    () => html`
-      <wokwi-blue-spinner></wokwi-blue-spinner>
-    `
+    'Blue spinner', //
+    () => html`<wokwi-blue-spinner></wokwi-blue-spinner>`
   );
 
 @customElement('wokwi-blue-spinner')
@@ -48,8 +42,6 @@ export class BlueSpinnerElement extends LitElement {
   }
 
   render() {
-    return html`
-      <wokwi-7segment color="blue" .values="${this.values}"></wokwi-7segment>
-    `;
+    return html` <wokwi-7segment color="blue" .values="${this.values}"></wokwi-7segment> `;
   }
 }

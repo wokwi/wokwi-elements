@@ -107,7 +107,7 @@ export class MembraneKeypadElement extends LitElement {
           <g>${this.renderKey('*', 7, 53.6)}</g>
           <g>${this.renderKey('#', 37, 53.6)}</g>
           ${fourColumns &&
-            svg`
+          svg`
               <g>${this.renderKey('A', 52, 10.7)}</g>
               <g>${this.renderKey('B', 52, 25)}</g>
               <g>${this.renderKey('C', 52, 39.3)}</g>
@@ -123,7 +123,7 @@ export class MembraneKeypadElement extends LitElement {
       this.pressedKeys.add(key);
       this.dispatchEvent(
         new CustomEvent('button-press', {
-          detail: { key }
+          detail: { key },
         })
       );
     }
@@ -134,7 +134,7 @@ export class MembraneKeypadElement extends LitElement {
       this.pressedKeys.delete(key);
       this.dispatchEvent(
         new CustomEvent('button-release', {
-          detail: { key }
+          detail: { key },
         })
       );
     }

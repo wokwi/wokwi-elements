@@ -177,7 +177,7 @@ export class ArduinoUnoElement extends LitElement {
         <g transform="translate(57.3, 16.21)">
           <use xlink:href="#led-body" />
           ${ledPower &&
-            svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
+          svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
         </g>
 
         <text fill="#fff">
@@ -187,19 +187,19 @@ export class ArduinoUnoElement extends LitElement {
         <g transform="translate(26.87,11.69)">
           <use xlink:href="#led-body" />
           ${led13 &&
-            svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#ff8080" filter="url(#ledFilter)" />`}
+          svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#ff8080" filter="url(#ledFilter)" />`}
         </g>
 
         <g transform="translate(26.9, 16.2)">
           <use xlink:href="#led-body" />
           ${ledTX &&
-            svg`<circle cx="0.975" cy="0.55" r="1.3" fill="yellow" filter="url(#ledFilter)" />`}
+          svg`<circle cx="0.975" cy="0.55" r="1.3" fill="yellow" filter="url(#ledFilter)" />`}
         </g>
 
         <g transform="translate(26.9, 18.5)">
           <use xlink:href="#led-body" />
           ${ledRX &&
-            svg`<circle cx="0.975" cy="0.55" r="1.3" fill="yellow" filter="url(#ledFilter)" />`}
+          svg`<circle cx="0.975" cy="0.55" r="1.3" fill="yellow" filter="url(#ledFilter)" />`}
         </g>
 
         <text fill="#fff" style="text-anchor: end">

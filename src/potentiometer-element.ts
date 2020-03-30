@@ -131,7 +131,7 @@ export class PotentiometerElement extends LitElement {
 
     this.center = {
       x: window.scrollX + potentiometerRect.left + potentiometerRect.width / 2,
-      y: window.scrollY + potentiometerRect.top + potentiometerRect.height / 2
+      y: window.scrollY + potentiometerRect.top + potentiometerRect.height / 2,
     };
   }
 

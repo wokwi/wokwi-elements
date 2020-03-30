@@ -6,7 +6,7 @@ const lightColors: { [key: string]: string } = {
   blue: '#8080ff',
   yellow: '#ffff80',
   orange: '#ffcf80',
-  white: '#ffffff'
+  white: '#ffffff',
 };
 
 @customElement('wokwi-led')

@@ -12,7 +12,7 @@ const bandColors: { [key: number]: string } = {
   6: 'blue',
   7: 'violet',
   8: 'gray',
-  9: 'white'
+  9: 'white',
 };
 
 @customElement('wokwi-resistor')

@@ -4,7 +4,7 @@ import { html } from 'lit-html';
 import { fontA02 } from './lcd1602-font-a02';
 import './lcd1602-element';
 
-const encode = (s: string) => new Uint8Array(s.split('').map(c => c.charCodeAt(0)));
+const encode = (s: string) => new Uint8Array(s.split('').map((c) => c.charCodeAt(0)));
 const helloWorld = 'Hello,           World!';
 const symbols = '\x10 I \x9d Symbols! \x11\xab \x14\x18\x17\x1e \x91\x98\x96 \x93\x97\xa9 \xbb';
 
@@ -57,10 +57,8 @@ storiesOf('LCD1602', module)
     `
   )
   .add(
-    'Display off (green)',
-    () => html`
-      <wokwi-lcd1602 .backlight=${false}></wokwi-lcd1602>
-    `
+    'Display off (green)', //
+    () => html`<wokwi-lcd1602 .backlight=${false}></wokwi-lcd1602>`
   )
   .add(
     'Display off (blue)',

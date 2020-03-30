@@ -9,7 +9,7 @@ const charYSpacing = 5.95;
 
 const backgroundColors: { [key: string]: string } = {
   green: '#6cb201',
-  blue: '#000eff'
+  blue: '#000eff',
 };
 
 @customElement('wokwi-lcd1602')

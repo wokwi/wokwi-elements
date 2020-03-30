@@ -7,7 +7,7 @@ const brightnessOptions = {
   range: true,
   min: 0,
   max: 1.0,
-  step: 0.05
+  step: 0.05,
 };
 
 storiesOf('LED', module)
