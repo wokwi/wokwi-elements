@@ -26,7 +26,7 @@
     "husky": "^4.2.3",
     "hygen": "^5.0.3",
     "lint-staged": "^10.0.10",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.2",
     "rimraf": "^3.0.0",
     "typescript": "^3.7.3"
   },
