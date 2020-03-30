@@ -4,6 +4,7 @@ import { html } from 'lit-html';
 import './pushbutton-element';
 
 storiesOf('pushbutton', module)
+  .addParameters({ component: 'wokwi-pushbutton' })
   .add(
     'Red',
     () =>

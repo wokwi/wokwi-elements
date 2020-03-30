@@ -5,3 +5,4 @@ dist
 build
 *.log
 storybook-static
+custom-elements.json

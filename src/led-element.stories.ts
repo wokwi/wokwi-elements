@@ -11,6 +11,7 @@ const brightnessOptions = {
 };
 
 storiesOf('LED', module)
+  .addParameters({ component: 'wokwi-led' })
   .addDecorator(withKnobs)
   .add(
     'Red',

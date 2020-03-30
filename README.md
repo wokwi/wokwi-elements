@@ -30,10 +30,10 @@ can interact with the elements and see your changes live, similar to
 The easiest way to create a new element is to run the generator:
 
 ```
-npm run new-element --name my-element
+npm run new-element --name demo
 ```
 
-This will generate a new element called `my-element`. It will also
+This will generate a new element called `demo`. It will also
 create a storybook file, so you will be able to see the new element
 in storybook (see the "Local development" section above).
 

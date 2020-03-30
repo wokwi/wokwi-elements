@@ -9,6 +9,7 @@ const helloWorld = 'Hello,           World!';
 const symbols = '\x10 I \x9d Symbols! \x11\xab \x14\x18\x17\x1e \x91\x98\x96 \x93\x97\xa9 \xbb';
 
 storiesOf('LCD1602', module)
+  .addParameters({ component: 'wokwi-lcd1602' })
   .addDecorator(withKnobs)
   .add(
     'Hello, World!',

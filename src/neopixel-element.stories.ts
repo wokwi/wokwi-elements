@@ -4,6 +4,7 @@ import { html } from 'lit-html';
 import './neopixel-element';
 
 storiesOf('Neopixel', module)
+  .addParameters({ component: 'wokwi-neopixel' })
   .addDecorator(withKnobs)
   .add(
     'Neopixel: Red',

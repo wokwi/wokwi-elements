@@ -1,4 +1,6 @@
 import { configure } from '@storybook/web-components';
+import { setCustomElements } from '@storybook/web-components';
+import customElements from '../custom-elements.json';
 
 // automatically import all files ending in *.stories.ts
 const req = require.context('../src', true, /\.stories\.ts$/);
@@ -10,3 +12,6 @@ if (module.hot) {
     window.location.reload();
   });
 }
+
+// Configure Storybook Docs Addon for Web Components
+setCustomElements(customElements);

@@ -7,6 +7,7 @@ import { html } from 'lit-html';
 import './<%= name %>-element';
 
 storiesOf('<%= h.changeCase.title(h.className(name)) %>', module)
+  .addParameters({ component: 'wokwi-<%= name %>' })
   .addDecorator(withKnobs)
   .add(
     'Default',

@@ -4,6 +4,7 @@ import { html } from 'lit-html';
 import './membrane-keypad-element';
 
 storiesOf('Membrane Keypad', module)
+  .addParameters({ component: 'wokwi-membrane-keypad' })
   .addDecorator(withActions())
   .add(
     'Default',

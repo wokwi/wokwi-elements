@@ -5,6 +5,7 @@ import './7segment-element';
 import { LitElement, customElement, property } from 'lit-element';
 
 storiesOf('7 Segment', module)
+  .addParameters({ component: 'wokwi-7segment' })
   .addDecorator(withKnobs)
   .add(
     'Red 4.',
