@@ -1,4 +1,5 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
+import { styleMap } from 'lit-html/directives/style-map';
 
 interface Point {
   x: number;
@@ -48,6 +49,9 @@ export class PotentiometerElement extends LitElement {
   }
 
   render() {
+    const percent = this.clamp(0, 1, this.percentFromMinMax(this.value, this.min, this.max));
+    const knobDeg = (this.endDegree - this.startDegree) * percent + this.startDegree;
+
     return html`
       <svg
         width="20mm"
@@ -61,6 +65,9 @@ export class PotentiometerElement extends LitElement {
         @touchstart=${this.down}
         @touchmove=${this.move}
         @touchend=${this.up}
+        style=${styleMap({
+          '--knob-angle': knobDeg + 'deg',
+        })}
       >
         <rect
           x=".15"
@@ -163,17 +170,10 @@ export class PotentiometerElement extends LitElement {
     this.updateValue(value);
   }
 
-  private updatePotentiometerPointer(value: number) {
-    const percent = this.percentFromMinMax(value, this.min, this.max);
-    const deg = Math.round((this.endDegree - this.startDegree) * percent + this.startDegree);
-    this.style.setProperty('--knob-angle', `${deg}deg`);
-  }
-
   private updateValue(value: number) {
     const clamped = this.clamp(this.min, this.max, value);
     const updated = Math.round(clamped / this.step) * this.step;
-    const rounded = Math.round(updated * 100) / 100;
-    this.updatePotentiometerPointer(rounded);
-    this.dispatchEvent(new InputEvent('input', { data: `${rounded}` }));
+    this.value = Math.round(updated * 100) / 100;
+    this.dispatchEvent(new InputEvent('input', { data: `${this.value}` }));
   }
 }
