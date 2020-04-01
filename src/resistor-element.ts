@@ -15,8 +15,15 @@ const bandColors: { [key: number]: string } = {
   9: 'white',
 };
 
+/**
+ * Renders an axial-lead resistor with 4 color bands.
+ */
 @customElement('wokwi-resistor')
 export class ResistorElement extends LitElement {
+  /**
+   * Resitance value, in ohms. The value is reflected in the color of the bands, according to
+   * standard [electronic color code](https://en.wikipedia.org/wiki/Electronic_color_code#Resistors).
+   */
   @property() value = '1000';
 
   private breakValue(value: number) {
