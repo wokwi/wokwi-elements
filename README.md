@@ -23,7 +23,7 @@ npm run storybook
 
 This will open a local dev server at http://localhost:6006, where you
 can interact with the elements and see your changes live, similar to
-[https://elements.wokwi.com].
+https://elements.wokwi.com.
 
 ## Creating a new element
 
