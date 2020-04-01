@@ -37,6 +37,14 @@ This will generate a new element called `demo`. It will also
 create a storybook file, so you will be able to see the new element
 in storybook (see the "Local development" section above).
 
+Note: updates the docstrings in the code will not be reflected
+in Storybook's Docs tab unless you restart Storybook, or run the
+following command manually and refresh the page:
+
+```
+npm run analyze-components
+```
+
 ## License
 
 Wokwi Elements are released under the [MIT license](LICENSE).
