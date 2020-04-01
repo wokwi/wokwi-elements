@@ -21,7 +21,7 @@ Then start storybook:
 npm run storybook
 ```
 
-This will open a local dev server at http://localhost:6006, where you 
+This will open a local dev server at http://localhost:6006, where you
 can interact with the elements and see your changes live, similar to
 [https://elements.wokwi.com].
 
@@ -44,6 +44,18 @@ following command manually and refresh the page:
 ```
 npm run analyze-components
 ```
+
+## Learn how to create elements
+
+### Video tutorial
+
+The [Membrane keypad element live-coding tutorial](https://www.youtube.com/watch?v=gh27icNatwA) walks
+through the complete process behind creating an element: research, drawing, and writing the code /
+stories.
+
+### Blog post
+
+[Recreating The Arduino Pushbutton Using SVG And &lt;lit-element&gt;](https://www.smashingmagazine.com/2020/01/recreating-arduino-pushbutton-svg/) 
 
 ## License
 
