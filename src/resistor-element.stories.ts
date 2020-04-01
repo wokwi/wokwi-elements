@@ -4,7 +4,7 @@ import { withKnobs, number } from '@storybook/addon-knobs';
 
 import './resistor-element';
 
-storiesOf('resistor', module)
+storiesOf('Resistor', module)
   .addParameters({ component: 'wokwi-resistor' })
   .addDecorator(withKnobs())
   .add('1Ω', () => html`<wokwi-resistor value="${number('R', 1)}"></wokwi-resistor>`)

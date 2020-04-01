@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { html } from 'lit-html';
 import './pushbutton-element';
 
-storiesOf('pushbutton', module)
+storiesOf('Pushbutton', module)
   .addParameters({ component: 'wokwi-pushbutton' })
   .add(
     'Red',

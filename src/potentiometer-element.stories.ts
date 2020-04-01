@@ -3,10 +3,10 @@ import { action } from '@storybook/addon-actions';
 import { html } from 'lit-html';
 import './potentiometer-element';
 
-storiesOf('potentiometer', module)
+storiesOf('Potentiometer', module)
   .addParameters({ component: 'wokwi-potentiometer' })
   .add(
-    'potentiometer',
+    'Potentiometer',
     () =>
       html`
         <wokwi-potentiometer
