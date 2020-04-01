@@ -9,3 +9,4 @@ export { PushbuttonElement } from './pushbutton-element';
 export { ResistorElement } from './resistor-element';
 export { MembraneKeypadElement } from './membrane-keypad-element';
 export { PotentiometerElement } from './potentiometer-element';
+export { NeopixelMatrixElement } from './neopixel-matrix-element';
