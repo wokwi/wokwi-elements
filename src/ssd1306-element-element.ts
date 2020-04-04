@@ -6,6 +6,7 @@ type NumTuple = [number, number];
 @customElement('wokwi-ssd1306-element')
 export class Ssd1306ElementElement extends LitElement {
   @property() dimensions: NumTuple = [141, 108];
+  @property() bitmap: any; // size should be 128 x 64
 
   render(): SVGTemplateResult {
     const { dimensions } = this;
@@ -20,11 +21,13 @@ export class Ssd1306ElementElement extends LitElement {
           <circle cx="6" cy="6" r="5.5" />
         </g>
 
+        <!-- 128 x 64 screen -->
+        <path fill="#1A1A1A" d="M21 26h100v54H21z" />
+
         <path
           d="M21 80h100v8.411C99.405 93.471 82.739 96 71 96c-11.739 0-28.405-2.53-50-7.589V80z"
           fill="#070707"
         />
-        <path fill="#1A1A1A" d="M21 26h100v54H21z" />
 
         <!-- All texts -->
         <g
