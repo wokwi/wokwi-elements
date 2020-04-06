@@ -1,12 +1,44 @@
 // Reference: https://cdn-learn.adafruit.com/assets/assets/000/036/494/original/lcds___displays_fabprint.png?1476374574
 import { customElement, html, LitElement, property, SVGTemplateResult } from 'lit-element';
 
-type NumTuple = [number, number];
+type Dimensions = [number, number];
 
 @customElement('wokwi-ssd1306-element')
 export class Ssd1306ElementElement extends LitElement {
-  @property() dimensions: NumTuple = [141, 108];
-  @property() bitmap: any; // size should be 128 x 64
+  @property() dimensions: Dimensions = [141, 108];
+  @property() imageData: ImageData = new ImageData(128, 64);
+
+  putGivenImageData() {
+    const canvas: HTMLCanvasElement | null = document.querySelector('canvas');
+    const ctx = canvas?.getContext('2d');
+    if (!ctx) return;
+    ctx.putImageData(this.imageData, 0, 0);
+  }
+
+  // will be removed!! just for testing
+  testImageData() {
+    const canvas: HTMLCanvasElement | null = document.querySelector('canvas');
+    const ctx = canvas?.getContext('2d');
+    if (!ctx) return;
+    const arr = new Uint8ClampedArray(40000);
+
+    for (let i = 0; i < arr.length; i += 4) {
+      arr[i + 0] = 0; // R value
+      arr[i + 1] = 190; // G value
+      arr[i + 2] = 0; // B value
+      arr[i + 3] = 255; // A value
+    }
+
+    const imageData = new ImageData(arr, 200);
+
+    ctx.putImageData(imageData, 0, 0);
+  }
+
+  firstUpdated() {
+    /// this.putGivenImageData();
+    // Getting null for canvas, there's an issue here
+    this.testImageData();
+  }
 
   render(): SVGTemplateResult {
     const { dimensions } = this;
@@ -23,6 +55,10 @@ export class Ssd1306ElementElement extends LitElement {
 
         <!-- 128 x 64 screen -->
         <path fill="#1A1A1A" d="M21 26h100v54H21z" />
+
+        <foreignObject transform="translate(4 6)" x="20" y="20" width="128" height="64">
+          <canvas width="128" height="64"></canvas>
+        </foreignObject>
 
         <path
           d="M21 80h100v8.411C99.405 93.471 82.739 96 71 96c-11.739 0-28.405-2.53-50-7.589V80z"
