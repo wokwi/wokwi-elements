@@ -1,11 +1,10 @@
 // Reference: https://cdn-learn.adafruit.com/assets/assets/000/036/494/original/lcds___displays_fabprint.png?1476374574
 import { customElement, html, LitElement, property, SVGTemplateResult } from 'lit-element';
 
-type Dimensions = [number, number];
-
 @customElement('wokwi-ssd1306-element')
 export class Ssd1306ElementElement extends LitElement {
-  @property() dimensions: Dimensions = [141, 108];
+  @property() width = 141;
+  @property() height = 108;
   @property() imageData: ImageData = new ImageData(128, 64);
 
   putGivenImageData() {
@@ -41,8 +40,7 @@ export class Ssd1306ElementElement extends LitElement {
   }
 
   render(): SVGTemplateResult {
-    const { dimensions } = this;
-    const [width, height] = dimensions;
+    const { width, height } = this;
     return html`<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
       <g>
         <rect stroke="#BE9B72" fill="#025CAF" x=".5" y=".5" width="140" height="106.5" rx="13" />
