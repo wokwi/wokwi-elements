@@ -8,35 +8,18 @@ export class Ssd1306ElementElement extends LitElement {
   @property() imageData: ImageData = new ImageData(128, 64);
 
   putGivenImageData() {
-    const canvas: HTMLCanvasElement | null = document.querySelector('canvas');
+    const canvas: HTMLCanvasElement | null | undefined = this.shadowRoot?.querySelector('canvas');
     const ctx = canvas?.getContext('2d');
     if (!ctx) return;
     ctx.putImageData(this.imageData, 0, 0);
   }
 
-  // will be removed!! just for testing
-  testImageData() {
-    const canvas: HTMLCanvasElement | null = document.querySelector('canvas');
-    const ctx = canvas?.getContext('2d');
-    if (!ctx) return;
-    const arr = new Uint8ClampedArray(40000);
-
-    for (let i = 0; i < arr.length; i += 4) {
-      arr[i + 0] = 0; // R value
-      arr[i + 1] = 190; // G value
-      arr[i + 2] = 0; // B value
-      arr[i + 3] = 255; // A value
-    }
-
-    const imageData = new ImageData(arr, 200);
-
-    ctx.putImageData(imageData, 0, 0);
+  constructor() {
+    super();
   }
 
   firstUpdated() {
-    /// this.putGivenImageData();
-    // Getting null for canvas, there's an issue here
-    this.testImageData();
+    this.putGivenImageData();
   }
 
   render(): SVGTemplateResult {
@@ -54,8 +37,8 @@ export class Ssd1306ElementElement extends LitElement {
         <!-- 128 x 64 screen -->
         <path fill="#1A1A1A" d="M21 26h100v54H21z" />
 
-        <foreignObject transform="translate(4 6)" x="20" y="20" width="128" height="64">
-          <canvas width="128" height="64"></canvas>
+        <foreignObject transform="translate(21 26)" width="100" height="64">
+          <canvas width="100" height="54"></canvas>
         </foreignObject>
 
         <path
