@@ -174,6 +174,6 @@ export class PotentiometerElement extends LitElement {
     const clamped = this.clamp(this.min, this.max, value);
     const updated = Math.round(clamped / this.step) * this.step;
     this.value = Math.round(updated * 100) / 100;
-    this.dispatchEvent(new InputEvent('input', { data: `${this.value}` }));
+    this.dispatchEvent(new InputEvent('input', { detail: this.value }));
   }
 }
