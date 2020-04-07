@@ -80,7 +80,15 @@ export class PotentiometerElement extends LitElement {
           stroke-width=".30"
         />
         <rect x="5.4" y=".70" width="9.1" height="1.9" fill="#ccdae3" stroke-width=".15" />
-        <ellipse cx="9.91" cy="8.18" rx="7.27" ry="7.43" fill="#e4e8eb" stroke-width=".15" />
+        <ellipse
+          id="knob"
+          cx="9.91"
+          cy="8.18"
+          rx="7.27"
+          ry="7.43"
+          fill="#e4e8eb"
+          stroke-width=".15"
+        />
         <rect
           x="6.6"
           y="17"
@@ -134,12 +142,14 @@ export class PotentiometerElement extends LitElement {
     event.stopPropagation();
     event.preventDefault();
 
-    const potentiometerRect = this.getBoundingClientRect();
+    const potentiometerRect = this.shadowRoot?.querySelector('#knob')?.getBoundingClientRect();
 
-    this.center = {
-      x: window.scrollX + potentiometerRect.left + potentiometerRect.width / 2,
-      y: window.scrollY + potentiometerRect.top + potentiometerRect.height / 2,
-    };
+    if (potentiometerRect) {
+      this.center = {
+        x: window.scrollX + potentiometerRect.left + potentiometerRect.width / 2,
+        y: window.scrollY + potentiometerRect.top + potentiometerRect.height / 2,
+      };
+    }
   }
 
   private rotateHandler(event: MouseEvent | TouchEvent) {
