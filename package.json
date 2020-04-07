@@ -30,6 +30,7 @@
     "lint-staged": "^10.0.10",
     "prettier": "^2.0.2",
     "rimraf": "^3.0.0",
+    "storybook-events-logger": "^2.0.5",
     "typescript": "^3.7.3",
     "web-component-analyzer": "^1.0.3"
   },

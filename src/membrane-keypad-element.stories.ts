@@ -1,17 +1,16 @@
-import { withActions, action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
+import { logEvent } from 'storybook-events-logger';
 import './membrane-keypad-element';
 
 storiesOf('Membrane Keypad', module)
   .addParameters({ component: 'wokwi-membrane-keypad' })
-  .addDecorator(withActions())
   .add(
     'Default',
     () => html`
       <wokwi-membrane-keypad
-        @button-press=${action('button-press')}
-        @button-release=${action('button-release')}
+        @button-press=${logEvent}
+        @button-release=${logEvent}
       ></wokwi-membrane-keypad>
     `
   )
@@ -20,8 +19,8 @@ storiesOf('Membrane Keypad', module)
     () => html`
       <wokwi-membrane-keypad
         .threeColumns="${true}"
-        @button-press=${action('button-press')}
-        @button-release=${action('button-release')}
+        @button-press=${logEvent}
+        @button-release=${logEvent}
       ></wokwi-membrane-keypad>
     `
   );
