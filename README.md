@@ -45,6 +45,8 @@ following command manually and refresh the page:
 npm run analyze-components
 ```
 
+Check out the [Contributing Guide](CONTRIBUTING.md) for more details.
+
 ## Learn how to create elements
 
 ### Video tutorial
