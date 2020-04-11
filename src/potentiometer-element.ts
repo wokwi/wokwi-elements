@@ -33,6 +33,13 @@ export class PotentiometerElement extends LitElement {
         word-spacing: 0px;
         fill: #ffffff;
       }
+      .hide-input {
+        position: absolute;
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+      }
     `;
   }
 
@@ -53,7 +60,20 @@ export class PotentiometerElement extends LitElement {
     const knobDeg = (this.endDegree - this.startDegree) * percent + this.startDegree;
 
     return html`
+      <input
+        tabindex="0"
+        type="range"
+        class="hide-input"
+        max="${this.max}"
+        min="${this.min}"
+        value="${this.value}"
+        step="${this.step}"
+        aria-valuemin="${this.min}"
+        aria-valuenow="${this.value}"
+        @input="${this.onValueChange}"
+      />
       <svg
+        role="slider"
         width="20mm"
         height="20mm"
         version="1.1"
@@ -118,6 +138,11 @@ export class PotentiometerElement extends LitElement {
         <rect id="rotating" x="10" y="2" width=".42" height="3.1" stroke-width=".15" />
       </svg>
     `;
+  }
+
+  private onValueChange(event: KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
+    this.updateValue(parseFloat(target.value));
   }
 
   private down(event: MouseEvent) {
