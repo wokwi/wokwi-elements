@@ -4,17 +4,17 @@ import { customElement, html, LitElement, property, SVGTemplateResult } from 'li
 type CanvasContext = CanvasRenderingContext2D | null | undefined;
 @customElement('wokwi-ssd1306-element')
 export class Ssd1306Element extends LitElement {
+  /** ImageData is the underlying pixel data of an area of a <canvas> element.
+   imageData can also be used to set a part of the canvas by using putImageData().*/
+  @property() imageData: ImageData;
+  @property() updateImage = true; // In case the user will want to new image instead of updating existing
+
   readonly width = 150;
   readonly height = 116;
   private screenWidth = 128;
   private screenHeight = 64;
   private canvas: HTMLCanvasElement | null | undefined = void 0;
   private ctx: CanvasContext = null;
-
-  /** ImageData is the underlying pixel data of an area of a <canvas> element.
-   imageData can also be used to set a part of the canvas by using putImageData().*/
-  @property() imageData: ImageData;
-  @property() updateImage = true; // In case the user will want to new image instead of updating existing
 
   constructor() {
     super();
