@@ -1,28 +1,49 @@
 // Reference: https://cdn-learn.adafruit.com/assets/assets/000/036/494/original/lcds___displays_fabprint.png?1476374574
 import { customElement, html, LitElement, property, SVGTemplateResult } from 'lit-element';
 
-@customElement('wokwi-ssd1306-128x64-element')
-export class Ssd1306128x64Element extends LitElement {
+type CanvasContext = CanvasRenderingContext2D | null | undefined;
+@customElement('wokwi-ssd1306-element')
+export class Ssd1306Element extends LitElement {
   readonly width = 150;
   readonly height = 116;
   private screenWidth = 128;
   private screenHeight = 64;
+  private canvas: HTMLCanvasElement | null | undefined = void 0;
+  private ctx: CanvasContext = null;
+
+  /** ImageData is the underlying pixel data of an area of a <canvas> element.
+   imageData can also be used to set a part of the canvas by using putImageData().*/
   @property() imageData: ImageData;
+  @property() updateImage = true; // In case the user will want to new image instead of updating existing
 
   constructor() {
     super();
     this.imageData = new ImageData(this.screenWidth, this.screenHeight);
   }
 
-  putGivenImageData() {
-    const canvas: HTMLCanvasElement | null | undefined = this.shadowRoot?.querySelector('canvas');
-    const ctx = canvas?.getContext('2d');
-    if (!ctx) return;
-    ctx.putImageData(this.imageData, 0, 0);
+  private resetDrawArea(ctx: CanvasContext) {
+    ctx?.clearRect(0, 0, this.screenWidth, this.screenHeight);
+  }
+
+  private initContext(): CanvasContext {
+    this.canvas = this.shadowRoot?.querySelector('canvas');
+    return this.canvas?.getContext('2d');
   }
 
   firstUpdated() {
-    this.putGivenImageData();
+    this.ctx = this.initContext();
+    this.ctx?.putImageData(this.imageData, 0, 0);
+  }
+
+  updated() {
+    if (this.imageData && !this.updateImage) {
+      // If updateImage ===  false reset canvas context and put new image data
+      this.resetDrawArea(this.ctx);
+      this.ctx = this.initContext();
+      this.ctx?.putImageData(this.imageData, 0, 0);
+    } else if (this.imageData && this.updateImage) {
+      this.ctx?.putImageData(this.imageData, 0, 0);
+    }
   }
 
   render(): SVGTemplateResult {
@@ -38,7 +59,7 @@ export class Ssd1306128x64Element extends LitElement {
           <circle cx="6" cy="96" r="5.5" />
         </g>
 
-        <g transform="translate(8 26)">
+        <g transform="translate(11.4 26)">
           <!-- 128 x 64 screen -->
           <rect fill="#1A1A1A" width="${screenWidth}" height="${screenHeight}" />
           <!-- image holder -->
@@ -74,13 +95,6 @@ export class Ssd1306128x64Element extends LitElement {
             d="M115.5 10.06l-1.59 2.974-3.453.464 2.495 2.245-.6 3.229 3.148-1.528 3.148 1.528-.6-3.23 2.495-2.244-3.453-.464-1.59-2.974z"
             stroke="#FFF"
           />
-
-          <text transform="translate(25 3)" x="0" y="102">v2.1</text>
-
-          <text transform="translate(40 3)">
-            <tspan font-size="5" x="102" y="75">V5</tspan>
-            <tspan font-size="3" x="102" y="81" font-weight="300">READY</tspan>
-          </text>
         </g>
 
         <!-- PINS -->
