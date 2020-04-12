@@ -3,11 +3,12 @@ import { customElement, html, LitElement, property, SVGTemplateResult } from 'li
 
 type CanvasContext = CanvasRenderingContext2D | null | undefined;
 @customElement('wokwi-ssd1306-element')
-export class Ssd1306Element extends LitElement {
-  /** ImageData is the underlying pixel data of an area of a <canvas> element.
-   imageData can also be used to set a part of the canvas by using putImageData().
-   You may use the the redraw() method for initiating an update of the imageData data
-   which its reference wasn't changed.
+export class SSD1306Element extends LitElement {
+  /**
+   * The pixel data to draw on the element's internal &lt;canvas&gt;.
+   * If you change the underlaying pixel data without updating the
+   * `imageData` reference, call the `redraw()` method to update the
+   * screen with your changes.
    */
   @property() imageData: ImageData;
 
@@ -96,7 +97,7 @@ export class Ssd1306Element extends LitElement {
             <text x="39" y="6">3v3</text>
             <text x="58" y="6">Gnd</text>
           </g>
-          <!--Star -->
+          <!-- Star -->
           <path
             d="M115.5 10.06l-1.59 2.974-3.453.464 2.495 2.245-.6 3.229 3.148-1.528 3.148 1.528-.6-3.23 2.495-2.244-3.453-.464-1.59-2.974z"
             stroke="#FFF"

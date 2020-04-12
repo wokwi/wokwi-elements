@@ -10,4 +10,4 @@ export { ResistorElement } from './resistor-element';
 export { MembraneKeypadElement } from './membrane-keypad-element';
 export { PotentiometerElement } from './potentiometer-element';
 export { NeopixelMatrixElement } from './neopixel-matrix-element';
-export { Ssd1306Element } from './ssd1306-element';
+export { SSD1306Element } from './ssd1306-element';
