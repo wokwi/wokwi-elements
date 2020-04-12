@@ -33,7 +33,7 @@ export class Ssd1306Element extends LitElement {
     this.ctx?.putImageData(this.imageData, 0, 0);
   }
 
-  updated(changedProperties: PropertyValues) {
+  updated() {
     if (this.imageData && !this.updateImage) {
       // Create new image
       this.imageData = new ImageData(this.screenWidth, this.screenHeight);
