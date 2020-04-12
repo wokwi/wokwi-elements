@@ -20,6 +20,9 @@ export class Ssd1306Element extends LitElement {
     this.imageData = new ImageData(this.screenWidth, this.screenHeight);
   }
 
+  /**
+   * Used for initiating update of an imageData data which its reference wasn't changed
+   */
   public redraw() {
     this.ctx?.putImageData(this.imageData, 0, 0);
   }
