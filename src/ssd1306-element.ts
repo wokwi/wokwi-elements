@@ -1,5 +1,6 @@
 // Reference: https://cdn-learn.adafruit.com/assets/assets/000/036/494/original/lcds___displays_fabprint.png?1476374574
 import { customElement, html, LitElement, property, SVGTemplateResult } from 'lit-element';
+import { PropertyValues } from 'lit-element/lib/updating-element';
 
 type CanvasContext = CanvasRenderingContext2D | null | undefined;
 @customElement('wokwi-ssd1306-element')
@@ -21,28 +22,24 @@ export class Ssd1306Element extends LitElement {
     this.imageData = new ImageData(this.screenWidth, this.screenHeight);
   }
 
-  private resetDrawArea(ctx: CanvasContext) {
-    ctx?.clearRect(0, 0, this.screenWidth, this.screenHeight);
-  }
-
-  private initContext(): CanvasContext {
+  private initContext() {
     this.canvas = this.shadowRoot?.querySelector('canvas');
-    return this.canvas?.getContext('2d');
+    // No need to clear canvas rect - all images will have full opacity
+    this.ctx = this.canvas?.getContext('2d');
   }
 
   firstUpdated() {
-    this.ctx = this.initContext();
+    this.initContext();
     this.ctx?.putImageData(this.imageData, 0, 0);
   }
 
-  updated() {
+  updated(changedProperties: PropertyValues) {
     if (this.imageData && !this.updateImage) {
-      // If updateImage ===  false reset canvas context and put new image data
-      this.resetDrawArea(this.ctx);
-      this.ctx = this.initContext();
+      // Create new image
+      this.imageData = new ImageData(this.screenWidth, this.screenHeight);
       this.ctx?.putImageData(this.imageData, 0, 0);
     } else if (this.imageData && this.updateImage) {
-      this.ctx?.putImageData(this.imageData, 0, 0);
+      this.ctx?.putImageData(this.imageData, 0, 0); // Update existing
     }
   }
 
