@@ -1,6 +1,5 @@
 // Reference: https://cdn-learn.adafruit.com/assets/assets/000/036/494/original/lcds___displays_fabprint.png?1476374574
 import { customElement, html, LitElement, property, SVGTemplateResult } from 'lit-element';
-import { PropertyValues } from 'lit-element/lib/updating-element';
 
 type CanvasContext = CanvasRenderingContext2D | null | undefined;
 @customElement('wokwi-ssd1306-element')
@@ -87,7 +86,7 @@ export class Ssd1306Element extends LitElement {
             <text x="39" y="6">3v3</text>
             <text x="58" y="6">Gnd</text>
           </g>
-          <!--Start -->
+          <!--Star -->
           <path
             d="M115.5 10.06l-1.59 2.974-3.453.464 2.495 2.245-.6 3.229 3.148-1.528 3.148 1.528-.6-3.23 2.495-2.244-3.453-.464-1.59-2.974z"
             stroke="#FFF"
