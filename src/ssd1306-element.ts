@@ -5,7 +5,10 @@ type CanvasContext = CanvasRenderingContext2D | null | undefined;
 @customElement('wokwi-ssd1306-element')
 export class Ssd1306Element extends LitElement {
   /** ImageData is the underlying pixel data of an area of a <canvas> element.
-   imageData can also be used to set a part of the canvas by using putImageData().*/
+   imageData can also be used to set a part of the canvas by using putImageData().
+   You may use the the redraw() method for initiating an update of the imageData data
+   which its reference wasn't changed.
+   */
   @property() imageData: ImageData;
 
   readonly width = 150;
