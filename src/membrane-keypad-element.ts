@@ -8,16 +8,23 @@ export class MembraneKeypadElement extends LitElement {
 
   private pressedKeys = new Set<string>();
 
+  isNumeric(text: string) {
+    return !isNaN(parseFloat(text));
+  }
+
   renderKey(text: string, x: number, y: number) {
+    const keyStyle = this.isNumeric(text) ? 'blueKey' : 'redKey';
+
     return svg`<g
       transform="translate(${x} ${y})"
       tabindex="0"
-      @mousedown=${() => this.down(text)}
-      @mouseup=${() => this.up(text)}
-      @touchstart=${() => this.down(text)}
-      @touchend=${() => this.up(text)}
-      @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down(text)}
-      @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up(text)}
+      class=${keyStyle}
+      @mousedown=${(e: MouseEvent) => this.down(text, e)}
+      @mouseup=${(e: MouseEvent) => this.up(text, e)}
+      @touchstart=${(e: TouchEvent) => this.down(text, e)}
+      @touchend=${(e: TouchEvent) => this.up(text, e)}
+      @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down(text, e)}
+      @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up(text, e)}
     >
       <use xlink:href="#key" />
       <text x="5.6" y="8.1">${text}</text>
@@ -26,13 +33,13 @@ export class MembraneKeypadElement extends LitElement {
 
   render() {
     const fourColumns = !this.threeColumns;
-    const columnWidth = 14.647;
+    const columnWidth = 15;
     const width = fourColumns ? 70.336 : 70.336 - columnWidth;
 
     return html`
       <style>
         text {
-          fill: #c2e4fd;
+          fill: #dfe2e5;
           user-select: none;
         }
 
@@ -40,13 +47,32 @@ export class MembraneKeypadElement extends LitElement {
           cursor: pointer;
         }
 
-        g[tabindex]:focus {
-          fill: #4e50d7;
+        g[tabindex]:focus,
+        g[tabindex]:active {
           stroke: white;
           outline: none;
         }
 
+        .blueKey:focus,
+        .redKey:focus {
+          filter: url(#shadow);
+        }
+
+        .blueKey:active,
+        .blueKey.pressed {
+          fill: #4e50d7;
+        }
+
+        .redKey:active,
+        .redKey.pressed {
+          fill: #ab040b;
+        }
+
         g[tabindex]:focus text {
+          stroke: none;
+        }
+
+        g[tabindex]:active text {
           fill: white;
           stroke: none;
         }
@@ -69,9 +95,13 @@ export class MembraneKeypadElement extends LitElement {
             height="11"
             rx="1.4"
             ry="1.4"
-            stroke="#b3c7db"
+            stroke="#b1b5b9"
             stroke-width=".75"
           />
+
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="0" stdDeviation="0.5" flood-color="#ffff99" />
+          </filter>
         </defs>
 
         <!-- Keypad outline -->
@@ -84,7 +114,7 @@ export class MembraneKeypadElement extends LitElement {
           rx="3.5"
           ry="3.5"
           fill="none"
-          stroke="#b3c7db"
+          stroke="#b1b5b9"
           stroke-width="1"
         />
 
@@ -118,8 +148,9 @@ export class MembraneKeypadElement extends LitElement {
     `;
   }
 
-  private down(key: string) {
+  private down(key: string, event: any) {
     if (!this.pressedKeys.has(key)) {
+      event.currentTarget.classList.add('pressed');
       this.pressedKeys.add(key);
       this.dispatchEvent(
         new CustomEvent('button-press', {
@@ -129,8 +160,9 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
-  private up(key: string) {
+  private up(key: string, event: any) {
     if (this.pressedKeys.has(key)) {
+      event.currentTarget.classList.remove('pressed');
       this.pressedKeys.delete(key);
       this.dispatchEvent(
         new CustomEvent('button-release', {
