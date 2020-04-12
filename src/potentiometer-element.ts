@@ -83,7 +83,7 @@ export class PotentiometerElement extends LitElement {
         version="1.1"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
-        @click="${() => this.inputEl?.focus()}"
+        @click="${this.focusInput}"
         @mousedown=${this.down}
         @mousemove=${this.move}
         @mouseup=${this.up}
@@ -143,6 +143,11 @@ export class PotentiometerElement extends LitElement {
         <rect id="rotating" x="10" y="2" width=".42" height="3.1" stroke-width=".15" />
       </svg>
     `;
+  }
+
+  private focusInput() {
+    this.inputEl = this.shadowRoot?.querySelector('.hide-input');
+    this.inputEl?.focus();
   }
 
   private onValueChange(event: KeyboardEvent) {
