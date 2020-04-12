@@ -18,7 +18,6 @@ export class PotentiometerElement extends LitElement {
   @property() endDegree = 135;
   private center: Point = { x: 0, y: 0 };
   private pressed = false;
-  private inputEl: HTMLInputElement | null | undefined = null;
 
   static get styles() {
     return css`
@@ -146,8 +145,10 @@ export class PotentiometerElement extends LitElement {
   }
 
   private focusInput() {
-    this.inputEl = this.shadowRoot?.querySelector('.hide-input');
-    this.inputEl?.focus();
+    const inputEl: HTMLInputElement | null | undefined = this.shadowRoot?.querySelector(
+      '.hide-input'
+    );
+    inputEl?.focus();
   }
 
   private onValueChange(event: KeyboardEvent) {
