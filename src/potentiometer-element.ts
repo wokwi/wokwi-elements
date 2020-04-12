@@ -41,6 +41,9 @@ export class PotentiometerElement extends LitElement {
         height: 1px;
         margin: -1px;
       }
+      input:focus + svg #rotating {
+        stroke: #ccdae3;
+      }
     `;
   }
 
@@ -54,11 +57,6 @@ export class PotentiometerElement extends LitElement {
 
   percentFromMinMax(value: number, min: number, max: number): number {
     return (value - min) / (max - min);
-  }
-
-  protected updated(): void {
-    // When we have access to the view - register listeners
-    this.observeInputInteractions();
   }
 
   render() {
@@ -145,21 +143,6 @@ export class PotentiometerElement extends LitElement {
         <rect id="rotating" x="10" y="2" width=".42" height="3.1" stroke-width=".15" />
       </svg>
     `;
-  }
-
-  observeInputInteractions() {
-    this.inputEl = this.shadowRoot?.querySelector('.hide-input');
-    const potentiometerKnob: SVGRectElement | null | undefined = this.shadowRoot?.querySelector(
-      '#rotating'
-    );
-
-    this.inputEl?.addEventListener('focus', () => {
-      potentiometerKnob?.setAttribute('stroke', '#CCDAE3');
-    });
-
-    this.inputEl?.addEventListener('blur', () => {
-      potentiometerKnob?.removeAttribute('stroke');
-    });
   }
 
   private onValueChange(event: KeyboardEvent) {
