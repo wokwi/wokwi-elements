@@ -7,7 +7,6 @@ export class Ssd1306Element extends LitElement {
   /** ImageData is the underlying pixel data of an area of a <canvas> element.
    imageData can also be used to set a part of the canvas by using putImageData().*/
   @property() imageData: ImageData;
-  @property() updateImage = true; // In case the user will want to new image instead of updating existing
 
   readonly width = 150;
   readonly height = 116;
@@ -19,6 +18,10 @@ export class Ssd1306Element extends LitElement {
   constructor() {
     super();
     this.imageData = new ImageData(this.screenWidth, this.screenHeight);
+  }
+
+  public redraw() {
+    this.ctx?.putImageData(this.imageData, 0, 0);
   }
 
   private initContext() {
@@ -33,17 +36,14 @@ export class Ssd1306Element extends LitElement {
   }
 
   updated() {
-    if (this.imageData && !this.updateImage) {
-      // Create new image
-      this.imageData = new ImageData(this.screenWidth, this.screenHeight);
-      this.ctx?.putImageData(this.imageData, 0, 0);
-    } else if (this.imageData && this.updateImage) {
-      this.ctx?.putImageData(this.imageData, 0, 0); // Update existing
+    if (this.imageData) {
+      this.redraw();
     }
   }
 
   render(): SVGTemplateResult {
-    const { width, height, screenWidth, screenHeight } = this;
+    const { width, height, screenWidth, screenHeight, imageData } = this;
+    const visibility = imageData ? 'visible' : 'hidden';
     return html`<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
       <g>
         <rect stroke="#BE9B72" fill="#025CAF" x=".5" y=".5" width="148" height="114" rx="13" />
@@ -59,7 +59,11 @@ export class Ssd1306Element extends LitElement {
           <!-- 128 x 64 screen -->
           <rect fill="#1A1A1A" width="${screenWidth}" height="${screenHeight}" />
           <!-- image holder -->
-          <foreignObject width="${screenWidth}" height="${screenHeight}">
+          <foreignObject
+            ?visibility="${visibility}"
+            width="${screenWidth}"
+            height="${screenHeight}"
+          >
             <canvas width="${screenWidth}" height="${screenHeight}"></canvas>
           </foreignObject>
         </g>
