@@ -18,6 +18,7 @@ export class PotentiometerElement extends LitElement {
   @property() endDegree = 135;
   private center: Point = { x: 0, y: 0 };
   private pressed = false;
+  private inputEl: HTMLInputElement | null | undefined = null;
 
   static get styles() {
     return css`
@@ -55,6 +56,11 @@ export class PotentiometerElement extends LitElement {
     return (value - min) / (max - min);
   }
 
+  protected updated(): void {
+    // When we have access to the view - register listeners
+    this.observeInputInteractions();
+  }
+
   render() {
     const percent = this.clamp(0, 1, this.percentFromMinMax(this.value, this.min, this.max));
     const knobDeg = (this.endDegree - this.startDegree) * percent + this.startDegree;
@@ -79,6 +85,7 @@ export class PotentiometerElement extends LitElement {
         version="1.1"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
+        @click="${() => this.inputEl?.focus()}"
         @mousedown=${this.down}
         @mousemove=${this.move}
         @mouseup=${this.up}
@@ -138,6 +145,21 @@ export class PotentiometerElement extends LitElement {
         <rect id="rotating" x="10" y="2" width=".42" height="3.1" stroke-width=".15" />
       </svg>
     `;
+  }
+
+  observeInputInteractions() {
+    this.inputEl = this.shadowRoot?.querySelector('.hide-input');
+    const potentiometerKnob: SVGRectElement | null | undefined = this.shadowRoot?.querySelector(
+      '#rotating'
+    );
+
+    this.inputEl?.addEventListener('focus', () => {
+      potentiometerKnob?.setAttribute('stroke', '#CCDAE3');
+    });
+
+    this.inputEl?.addEventListener('blur', () => {
+      potentiometerKnob?.removeAttribute('stroke');
+    });
   }
 
   private onValueChange(event: KeyboardEvent) {
