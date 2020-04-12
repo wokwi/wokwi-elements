@@ -2,23 +2,23 @@ import { customElement, html, LitElement, property, svg } from 'lit-element';
 
 const SPACE_KEY = 32;
 
+function isNumeric(text: string) {
+  return !isNaN(parseFloat(text));
+}
+
 @customElement('wokwi-membrane-keypad')
 export class MembraneKeypadElement extends LitElement {
   @property() threeColumns = false;
 
   private pressedKeys = new Set<string>();
 
-  isNumeric(text: string) {
-    return !isNaN(parseFloat(text));
-  }
-
   renderKey(text: string, x: number, y: number) {
-    const keyStyle = this.isNumeric(text) ? 'blueKey' : 'redKey';
+    const keyClass = isNumeric(text) ? 'blue-key' : 'red-key';
 
     return svg`<g
       transform="translate(${x} ${y})"
       tabindex="0"
-      class=${keyStyle}
+      class=${keyClass}
       @mousedown=${(e: MouseEvent) => this.down(text, e)}
       @mouseup=${(e: MouseEvent) => this.up(text, e)}
       @touchstart=${(e: TouchEvent) => this.down(text, e)}
@@ -53,18 +53,18 @@ export class MembraneKeypadElement extends LitElement {
           outline: none;
         }
 
-        .blueKey:focus,
-        .redKey:focus {
+        .blue-key:focus,
+        .red-key:focus {
           filter: url(#shadow);
         }
 
-        .blueKey:active,
-        .blueKey.pressed {
+        .blue-key:active,
+        .blue-key.pressed {
           fill: #4e50d7;
         }
 
-        .redKey:active,
-        .redKey.pressed {
+        .red-key:active,
+        .red-key.pressed {
           fill: #ab040b;
         }
 
@@ -148,9 +148,10 @@ export class MembraneKeypadElement extends LitElement {
     `;
   }
 
-  private down(key: string, event: any) {
+  private down(key: string, event: UIEvent) {
     if (!this.pressedKeys.has(key)) {
-      event.currentTarget.classList.add('pressed');
+      const currTarget = event.currentTarget as SVGElement;
+      currTarget.classList.add('pressed');
       this.pressedKeys.add(key);
       this.dispatchEvent(
         new CustomEvent('button-press', {
@@ -160,9 +161,10 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
-  private up(key: string, event: any) {
+  private up(key: string, event: UIEvent) {
     if (this.pressedKeys.has(key)) {
-      event.currentTarget.classList.remove('pressed');
+      const currTarget = event.currentTarget as SVGElement;
+      currTarget.classList.remove('pressed');
       this.pressedKeys.delete(key);
       this.dispatchEvent(
         new CustomEvent('button-release', {
