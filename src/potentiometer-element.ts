@@ -33,6 +33,17 @@ export class PotentiometerElement extends LitElement {
         word-spacing: 0px;
         fill: #ffffff;
       }
+      .hide-input {
+        position: absolute;
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+      }
+      input:focus + svg #knob {
+        stroke: #ccdae3;
+        filter: url(#outline);
+      }
     `;
   }
 
@@ -53,12 +64,26 @@ export class PotentiometerElement extends LitElement {
     const knobDeg = (this.endDegree - this.startDegree) * percent + this.startDegree;
 
     return html`
+      <input
+        tabindex="0"
+        type="range"
+        class="hide-input"
+        max="${this.max}"
+        min="${this.min}"
+        value="${this.value}"
+        step="${this.step}"
+        aria-valuemin="${this.min}"
+        aria-valuenow="${this.value}"
+        @input="${this.onValueChange}"
+      />
       <svg
+        role="slider"
         width="20mm"
         height="20mm"
         version="1.1"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
+        @click="${this.focusInput}"
         @mousedown=${this.down}
         @mousemove=${this.move}
         @mouseup=${this.up}
@@ -69,6 +94,11 @@ export class PotentiometerElement extends LitElement {
           '--knob-angle': knobDeg + 'deg',
         })}
       >
+        <defs>
+          <filter id="outline">
+            <feDropShadow id="glow" dx="0" dy="0" stdDeviation="0.5" flood-color="cyan" />
+          </filter>
+        </defs>
         <rect
           x=".15"
           y=".15"
@@ -118,6 +148,18 @@ export class PotentiometerElement extends LitElement {
         <rect id="rotating" x="10" y="2" width=".42" height="3.1" stroke-width=".15" />
       </svg>
     `;
+  }
+
+  private focusInput() {
+    const inputEl: HTMLInputElement | null | undefined = this.shadowRoot?.querySelector(
+      '.hide-input'
+    );
+    inputEl?.focus();
+  }
+
+  private onValueChange(event: KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
+    this.updateValue(parseFloat(target.value));
   }
 
   private down(event: MouseEvent) {
