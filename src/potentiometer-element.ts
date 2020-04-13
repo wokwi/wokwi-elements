@@ -42,6 +42,7 @@ export class PotentiometerElement extends LitElement {
       }
       input:focus + svg #knob {
         stroke: #ccdae3;
+        filter: url(#outline);
       }
     `;
   }
@@ -73,8 +74,6 @@ export class PotentiometerElement extends LitElement {
         step="${this.step}"
         aria-valuemin="${this.min}"
         aria-valuenow="${this.value}"
-        @focus="${() => this.setFilter('0.3')}"
-        @blur="${() => this.setFilter('0')}"
         @input="${this.onValueChange}"
       />
       <svg
@@ -97,7 +96,7 @@ export class PotentiometerElement extends LitElement {
       >
         <defs>
           <filter id="outline">
-            <feDropShadow id="glow" dx="0" dy="0" stdDeviation="0" flood-color="cyan" />
+            <feDropShadow id="glow" dx="0" dy="0" stdDeviation="0.5" flood-color="cyan" />
           </filter>
         </defs>
         <rect
@@ -112,7 +111,6 @@ export class PotentiometerElement extends LitElement {
         />
         <rect x="5.4" y=".70" width="9.1" height="1.9" fill="#ccdae3" stroke-width=".15" />
         <ellipse
-          filter="url(#outline)"
           id="knob"
           cx="9.91"
           cy="8.18"
@@ -157,11 +155,6 @@ export class PotentiometerElement extends LitElement {
       '.hide-input'
     );
     inputEl?.focus();
-  }
-
-  setFilter(value: string) {
-    const glowFilter = this.shadowRoot?.querySelector('#glow');
-    glowFilter?.setAttribute('stdDeviation', value);
   }
 
   private onValueChange(event: KeyboardEvent) {
