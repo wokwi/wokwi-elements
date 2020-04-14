@@ -19,10 +19,13 @@ export class MembraneKeypadElement extends LitElement {
       transform="translate(${x} ${y})"
       tabindex="0"
       class=${keyClass}
-      @mousedown=${(e: MouseEvent) => this.down(text, e)}
-      @mouseup=${(e: MouseEvent) => this.up(text, e)}
-      @touchstart=${(e: TouchEvent) => this.down(text, e)}
-      @touchend=${(e: TouchEvent) => this.up(text, e)}
+      @blur=${(e: FocusEvent) => {
+        this.up(text, e);
+      }}
+      @mousedown=${() => this.down(text)}
+      @mouseup=${() => this.up(text)}
+      @touchstart=${() => this.down(text)}
+      @touchend=${() => this.up(text)}
       @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down(text, e)}
       @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up(text, e)}
     >
@@ -72,7 +75,9 @@ export class MembraneKeypadElement extends LitElement {
           stroke: none;
         }
 
-        g[tabindex]:active text {
+        g[tabindex]:active text,
+        .blue-key.pressed text,
+        .red-key.pressed text {
           fill: white;
           stroke: none;
         }
@@ -148,10 +153,12 @@ export class MembraneKeypadElement extends LitElement {
     `;
   }
 
-  private down(key: string, event: UIEvent) {
+  private down(key: string, event?: UIEvent) {
     if (!this.pressedKeys.has(key)) {
-      const currTarget = event.currentTarget as SVGElement;
-      currTarget.classList.add('pressed');
+      if (event) {
+        const currTarget = event.currentTarget as SVGElement;
+        currTarget.classList.add('pressed');
+      }
       this.pressedKeys.add(key);
       this.dispatchEvent(
         new CustomEvent('button-press', {
@@ -161,10 +168,12 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
-  private up(key: string, event: UIEvent) {
+  private up(key: string, event?: UIEvent) {
     if (this.pressedKeys.has(key)) {
-      const currTarget = event.currentTarget as SVGElement;
-      currTarget.classList.remove('pressed');
+      if (event) {
+        const currTarget = event.currentTarget as SVGElement;
+        currTarget.classList.remove('pressed');
+      }
       this.pressedKeys.delete(key);
       this.dispatchEvent(
         new CustomEvent('button-release', {
