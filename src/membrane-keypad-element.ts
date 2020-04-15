@@ -2,6 +2,10 @@ import { customElement, html, LitElement, property, svg } from 'lit-element';
 
 const SPACE_KEY = 32;
 
+function isNumeric(text: string) {
+  return !isNaN(parseFloat(text));
+}
+
 @customElement('wokwi-membrane-keypad')
 export class MembraneKeypadElement extends LitElement {
   @property() threeColumns = false;
@@ -9,15 +13,21 @@ export class MembraneKeypadElement extends LitElement {
   private pressedKeys = new Set<string>();
 
   renderKey(text: string, x: number, y: number) {
+    const keyClass = isNumeric(text) ? 'blue-key' : 'red-key';
+
     return svg`<g
       transform="translate(${x} ${y})"
       tabindex="0"
+      class=${keyClass}
+      @blur=${(e: FocusEvent) => {
+        this.up(text, e);
+      }}
       @mousedown=${() => this.down(text)}
       @mouseup=${() => this.up(text)}
       @touchstart=${() => this.down(text)}
       @touchend=${() => this.up(text)}
-      @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down(text)}
-      @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up(text)}
+      @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down(text, e)}
+      @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up(text, e)}
     >
       <use xlink:href="#key" />
       <text x="5.6" y="8.1">${text}</text>
@@ -26,13 +36,13 @@ export class MembraneKeypadElement extends LitElement {
 
   render() {
     const fourColumns = !this.threeColumns;
-    const columnWidth = 14.647;
+    const columnWidth = 15;
     const width = fourColumns ? 70.336 : 70.336 - columnWidth;
 
     return html`
       <style>
         text {
-          fill: #c2e4fd;
+          fill: #dfe2e5;
           user-select: none;
         }
 
@@ -40,13 +50,34 @@ export class MembraneKeypadElement extends LitElement {
           cursor: pointer;
         }
 
-        g[tabindex]:focus {
-          fill: #4e50d7;
+        g[tabindex]:focus,
+        g[tabindex]:active {
           stroke: white;
           outline: none;
         }
 
+        .blue-key:focus,
+        .red-key:focus {
+          filter: url(#shadow);
+        }
+
+        .blue-key:active,
+        .blue-key.pressed {
+          fill: #4e50d7;
+        }
+
+        .red-key:active,
+        .red-key.pressed {
+          fill: #ab040b;
+        }
+
         g[tabindex]:focus text {
+          stroke: none;
+        }
+
+        g[tabindex]:active text,
+        .blue-key.pressed text,
+        .red-key.pressed text {
           fill: white;
           stroke: none;
         }
@@ -69,9 +100,13 @@ export class MembraneKeypadElement extends LitElement {
             height="11"
             rx="1.4"
             ry="1.4"
-            stroke="#b3c7db"
+            stroke="#b1b5b9"
             stroke-width=".75"
           />
+
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="0" stdDeviation="0.5" flood-color="#ffff99" />
+          </filter>
         </defs>
 
         <!-- Keypad outline -->
@@ -84,7 +119,7 @@ export class MembraneKeypadElement extends LitElement {
           rx="3.5"
           ry="3.5"
           fill="none"
-          stroke="#b3c7db"
+          stroke="#b1b5b9"
           stroke-width="1"
         />
 
@@ -118,8 +153,12 @@ export class MembraneKeypadElement extends LitElement {
     `;
   }
 
-  private down(key: string) {
+  private down(key: string, event?: UIEvent) {
     if (!this.pressedKeys.has(key)) {
+      if (event) {
+        const currTarget = event.currentTarget as SVGElement;
+        currTarget.classList.add('pressed');
+      }
       this.pressedKeys.add(key);
       this.dispatchEvent(
         new CustomEvent('button-press', {
@@ -129,8 +168,12 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
-  private up(key: string) {
+  private up(key: string, event?: UIEvent) {
     if (this.pressedKeys.has(key)) {
+      if (event) {
+        const currTarget = event.currentTarget as SVGElement;
+        currTarget.classList.remove('pressed');
+      }
       this.pressedKeys.delete(key);
       this.dispatchEvent(
         new CustomEvent('button-release', {
