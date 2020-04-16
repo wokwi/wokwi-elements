@@ -1,6 +1,15 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 
 const SPACE_KEY = 32;
+const SHIFT_KEY = 16;
+
+const customKeydownEvent = new KeyboardEvent('keydown', {
+  code: 'Space',
+});
+
+const customKeyupEvent = new KeyboardEvent('keyup', {
+  code: 'Space',
+});
 
 function isNumeric(text: string) {
   return !isNaN(parseFloat(text));
@@ -11,14 +20,22 @@ export class MembraneKeypadElement extends LitElement {
   @property() threeColumns = false;
 
   private pressedKeys = new Set<string>();
+  private shiftPressed = false;
 
   renderKey(text: string, x: number, y: number) {
     const keyClass = isNumeric(text) ? 'blue-key' : 'red-key';
+    let keyId = `key${text}`;
+    if (text === '*') {
+      keyId = 'keyAsterisk';
+    } else if (text === '#') {
+      keyId = 'keyHash';
+    }
 
     return svg`<g
       transform="translate(${x} ${y})"
       tabindex="0"
       class=${keyClass}
+      id=${keyId}
       @blur=${(e: FocusEvent) => {
         this.up(text, e);
       }}
@@ -26,8 +43,10 @@ export class MembraneKeypadElement extends LitElement {
       @mouseup=${() => this.up(text)}
       @touchstart=${() => this.down(text)}
       @touchend=${() => this.up(text)}
-      @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down(text, e)}
-      @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up(text, e)}
+      @keydown=${(e: KeyboardEvent) =>
+        (e.keyCode === SPACE_KEY || e.code === 'Space') && this.down(text, e)}
+      @keyup=${(e: KeyboardEvent) =>
+        (e.keyCode === SPACE_KEY || e.code === 'Space') && this.up(text, e)}
     >
       <use xlink:href="#key" />
       <text x="5.6" y="8.1">${text}</text>
@@ -92,6 +111,8 @@ export class MembraneKeypadElement extends LitElement {
         font-size="8.2px"
         text-anchor="middle"
         xmlns="http://www.w3.org/2000/svg"
+        @keydown=${(e: KeyboardEvent) => this.keyStrokeDown(e.keyCode)}
+        @keyup=${(e: KeyboardEvent) => this.keyStrokeUp(e.keyCode)}
       >
         <defs>
           <rect
@@ -180,6 +201,83 @@ export class MembraneKeypadElement extends LitElement {
           detail: { key },
         })
       );
+    }
+  }
+
+  private defineKey(key: number) {
+    let keyName;
+    const numKey = key - 48;
+
+    switch (key) {
+      case SHIFT_KEY:
+        if (!this.shiftPressed) {
+          this.shiftPressed = true;
+        }
+        break;
+      case 48: // falls through
+      case 49: // falls through
+      case 50: // falls through
+      case 51:
+        if (this.shiftPressed) {
+          keyName = '#keyHash';
+          break;
+        }
+      // falls through
+      case 52: // falls through
+      case 53: // falls through
+      case 54: // falls through
+      case 55: // falls through
+      case 56:
+        if (this.shiftPressed) {
+          keyName = '#keyAsterisk';
+          break;
+        }
+      // falls through
+      case 57:
+        keyName = `#key${numKey}`;
+        break;
+      case 65:
+        keyName = '#keyA';
+        break;
+      case 66:
+        keyName = '#keyB';
+        break;
+      case 67:
+        keyName = '#keyC';
+        break;
+      case 68:
+        keyName = '#keyD';
+        break;
+      default:
+        console.log('Not a key');
+        break;
+    }
+    return keyName;
+  }
+
+  private keyStrokeDown(key: number) {
+    let selectedKey;
+    const keyName = this.defineKey(key);
+
+    if (keyName) {
+      selectedKey = this.shadowRoot?.querySelector(keyName);
+      selectedKey?.dispatchEvent(customKeydownEvent);
+    }
+  }
+
+  private keyStrokeUp(key: number) {
+    let selectedKey = this.shadowRoot?.querySelector('.pressed');
+    const keyName = this.defineKey(key);
+
+    if (key === SHIFT_KEY) {
+      this.shiftPressed = false;
+      selectedKey?.classList.remove('pressed');
+      return;
+    }
+
+    if (keyName) {
+      selectedKey = this.shadowRoot?.querySelector(keyName);
+      selectedKey?.dispatchEvent(customKeyupEvent);
     }
   }
 }
