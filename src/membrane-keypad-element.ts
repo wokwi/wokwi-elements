@@ -1,15 +1,6 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 
 const SPACE_KEY = 32;
-const SHIFT_KEY = 16;
-
-const customKeydownEvent = new KeyboardEvent('keydown', {
-  code: 'Space',
-});
-
-const customKeyupEvent = new KeyboardEvent('keyup', {
-  code: 'Space',
-});
 
 function isNumeric(text: string) {
   return !isNaN(parseFloat(text));
@@ -24,29 +15,24 @@ export class MembraneKeypadElement extends LitElement {
 
   renderKey(text: string, x: number, y: number) {
     const keyClass = isNumeric(text) ? 'blue-key' : 'red-key';
-    let keyId = `key${text}`;
-    if (text === '*') {
-      keyId = 'keyAsterisk';
-    } else if (text === '#') {
-      keyId = 'keyHash';
-    }
+    const keyName = `key-${text.toLowerCase()}`;
 
     return svg`<g
       transform="translate(${x} ${y})"
       tabindex="0"
       class=${keyClass}
-      id=${keyId}
+      data-key-name=${keyName}
       @blur=${(e: FocusEvent) => {
-        this.up(text, e);
+        this.up(text, e.currentTarget as SVGElement);
       }}
       @mousedown=${() => this.down(text)}
       @mouseup=${() => this.up(text)}
       @touchstart=${() => this.down(text)}
       @touchend=${() => this.up(text)}
       @keydown=${(e: KeyboardEvent) =>
-        (e.keyCode === SPACE_KEY || e.code === 'Space') && this.down(text, e)}
+        e.keyCode === SPACE_KEY && this.down(text, e.currentTarget as SVGElement)}
       @keyup=${(e: KeyboardEvent) =>
-        (e.keyCode === SPACE_KEY || e.code === 'Space') && this.up(text, e)}
+        e.keyCode === SPACE_KEY && this.up(text, e.currentTarget as SVGElement)}
     >
       <use xlink:href="#key" />
       <text x="5.6" y="8.1">${text}</text>
@@ -111,8 +97,8 @@ export class MembraneKeypadElement extends LitElement {
         font-size="8.2px"
         text-anchor="middle"
         xmlns="http://www.w3.org/2000/svg"
-        @keydown=${(e: KeyboardEvent) => this.keyStrokeDown(e.keyCode)}
-        @keyup=${(e: KeyboardEvent) => this.keyStrokeUp(e.keyCode)}
+        @keydown=${(e: KeyboardEvent) => this.keyStrokeDown(e.key)}
+        @keyup=${(e: KeyboardEvent) => this.keyStrokeUp(e.key)}
       >
         <defs>
           <rect
@@ -174,11 +160,10 @@ export class MembraneKeypadElement extends LitElement {
     `;
   }
 
-  private down(key: string, event?: UIEvent) {
+  private down(key: string, element?: Element) {
     if (!this.pressedKeys.has(key)) {
-      if (event) {
-        const currTarget = event.currentTarget as SVGElement;
-        currTarget.classList.add('pressed');
+      if (element) {
+        element.classList.add('pressed');
       }
       this.pressedKeys.add(key);
       this.dispatchEvent(
@@ -189,11 +174,10 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
-  private up(key: string, event?: UIEvent) {
+  private up(key: string, element?: Element) {
     if (this.pressedKeys.has(key)) {
-      if (event) {
-        const currTarget = event.currentTarget as SVGElement;
-        currTarget.classList.remove('pressed');
+      if (element) {
+        element.classList.remove('pressed');
       }
       this.pressedKeys.delete(key);
       this.dispatchEvent(
@@ -204,80 +188,25 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
-  private defineKey(key: number) {
-    let keyName;
-    const numKey = key - 48;
-
-    switch (key) {
-      case SHIFT_KEY:
-        if (!this.shiftPressed) {
-          this.shiftPressed = true;
-        }
-        break;
-      case 48: // falls through
-      case 49: // falls through
-      case 50: // falls through
-      case 51:
-        if (this.shiftPressed) {
-          keyName = '#keyHash';
-          break;
-        }
-      // falls through
-      case 52: // falls through
-      case 53: // falls through
-      case 54: // falls through
-      case 55: // falls through
-      case 56:
-        if (this.shiftPressed) {
-          keyName = '#keyAsterisk';
-          break;
-        }
-      // falls through
-      case 57:
-        keyName = `#key${numKey}`;
-        break;
-      case 65:
-        keyName = '#keyA';
-        break;
-      case 66:
-        keyName = '#keyB';
-        break;
-      case 67:
-        keyName = '#keyC';
-        break;
-      case 68:
-        keyName = '#keyD';
-        break;
-      default:
-        console.log('Not a key');
-        break;
-    }
-    return keyName;
+  private keyStrokeDown(key: string) {
+    const keyName = `key-${key.toLowerCase()}`;
+    const text = keyName[keyName.length - 1];
+    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${keyName}"]`);
+    this.down(text, selectedKey as SVGElement);
   }
 
-  private keyStrokeDown(key: number) {
-    let selectedKey;
-    const keyName = this.defineKey(key);
-
-    if (keyName) {
-      selectedKey = this.shadowRoot?.querySelector(keyName);
-      selectedKey?.dispatchEvent(customKeydownEvent);
-    }
-  }
-
-  private keyStrokeUp(key: number) {
+  private keyStrokeUp(key: string) {
     let selectedKey = this.shadowRoot?.querySelector('.pressed');
-    const keyName = this.defineKey(key);
+    const keyName = `key-${key.toLowerCase()}`;
 
-    if (key === SHIFT_KEY) {
+    if (key === 'Shift') {
       this.shiftPressed = false;
       selectedKey?.classList.remove('pressed');
       return;
     }
 
-    if (keyName) {
-      selectedKey = this.shadowRoot?.querySelector(keyName);
-      selectedKey?.dispatchEvent(customKeyupEvent);
-    }
+    const text = keyName[keyName.length - 1];
+    selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${keyName}"]`);
+    this.up(text, selectedKey as SVGElement);
   }
 }
