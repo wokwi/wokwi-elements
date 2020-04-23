@@ -4,6 +4,6 @@ import { html } from 'lit-html';
 import './ssd1306-element';
 
 storiesOf('SSD1306', module)
-  .addParameters({ component: 'wokwi-ssd1306-element' })
+  .addParameters({ component: 'wokwi-ssd1306' })
   .addDecorator(withKnobs)
-  .add('Default', () => html`<wokwi-ssd1306-element></wokwi-ssd1306-element>`);
+  .add('Default', () => html`<wokwi-ssd1306></wokwi-ssd1306>`);

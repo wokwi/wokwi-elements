@@ -2,7 +2,7 @@
 import { customElement, html, LitElement, property, SVGTemplateResult } from 'lit-element';
 
 type CanvasContext = CanvasRenderingContext2D | null | undefined;
-@customElement('wokwi-ssd1306-element')
+@customElement('wokwi-ssd1306')
 export class SSD1306Element extends LitElement {
   /**
    * The pixel data to draw on the element's internal &lt;canvas&gt;.
