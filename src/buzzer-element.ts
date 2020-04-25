@@ -78,41 +78,34 @@ export class BuzzerElement extends LitElement {
 
         <svg
           width="17mm"
-          height="19.975mm"
+          height="20mm"
           version="1.1"
-          viewBox="0 0 17 19.975"
+          viewBox="0 0 17 20"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="m7.925 16.975v3" fill="none" stroke="#000" stroke-width=".5" />
-          <path d="m8.925 16.975v3" fill="#f00" stroke="#f00" stroke-width=".5" />
+          <path d="m8 16.5v3.5" fill="none" stroke="#000" stroke-width=".5" />
+          <path d="m9 16.5v3.5" fill="#f00" stroke="#f00" stroke-width=".5" />
           <g stroke="#000">
             <g>
-              <ellipse
+              <ellipse cx="8.5" cy="8.5" rx="8.15" ry="8.15" fill="#1a1a1a" stroke-width=".7" />
+              <circle
                 cx="8.5"
                 cy="8.5"
-                rx="8.1469"
-                ry="8.1469"
-                fill="#1a1a1a"
-                stroke-width=".70623"
-              />
-              <circle
-                cx="8.425"
-                cy="8.575"
-                r="6.2309"
+                r="6.3472"
                 fill="none"
                 stroke-width=".3"
                 style="paint-order:normal"
               />
               <circle
-                cx="8.425"
-                cy="8.575"
-                r="4.3137"
+                cx="8.5"
+                cy="8.5"
+                r="4.3488"
                 fill="none"
                 stroke-width=".3"
                 style="paint-order:normal"
               />
             </g>
-            <circle cx="8.425" cy="8.575" r="1.3744" fill="#ccc" stroke-width=".25129" />
+            <circle cx="8.5" cy="8.5" r="1.3744" fill="#ccc" stroke-width=".25" />
           </g>
         </svg>
       </div>
