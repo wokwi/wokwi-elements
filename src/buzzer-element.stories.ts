@@ -10,5 +10,5 @@ storiesOf('Buzzer', module)
     'Buzzer',
     () =>
       html`<div style="height: 20px"></div>
-        <wokwi-buzzer .value=${boolean('value', false)}></wokwi-buzzer>`
+        <wokwi-buzzer .hasSignal=${boolean('hasSignal', false)}></wokwi-buzzer>`
   );
