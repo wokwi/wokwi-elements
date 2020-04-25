@@ -1,82 +1,93 @@
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { css, customElement, html, LitElement } from 'lit-element';
 
 @customElement('wokwi-rotary-dialer')
 export class RotaryDialerElement extends LitElement {
-  @property() value = 0;
+  static get styles() {
+    return css`
+      .text {
+        cursor: grab;
+      }
+      @keyframes rotateDialer {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(55deg);
+        }
+      }
+
+      .dialer-anim {
+        transform-origin: center;
+        animation: rotateDialer 3s 1 linear;
+      }
+    `;
+  }
+
+  addDialerAnim() {
+    const slots = this.shadowRoot?.querySelector('#slots');
+    const rAF = requestAnimationFrame(() => {
+      slots?.classList.add('dialer-anim');
+      cancelAnimationFrame(rAF);
+    });
+  }
+
+  removeDialerAnim() {
+    const dialerAnimClass = 'dialer-anim';
+    const slots = this.shadowRoot?.querySelector('#slots');
+    if (slots?.classList.contains(dialerAnimClass)) {
+      slots?.classList.remove(dialerAnimClass);
+    }
+  }
+
+  down(num: number) {
+    this.removeDialerAnim();
+    this.addDialerAnim();
+    this.dispatchEvent(
+      new CustomEvent('dialer-grab', {
+        detail: { num },
+      })
+    );
+  }
+
+  up() {
+    this.removeDialerAnim();
+  }
 
   render() {
-    const { value } = this;
     return html`
-      <svg
-        width="266px"
-        height="266px"
-        viewBox="0 0 266 266"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <title>rotary-dialer</title>
-        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <g id="rotary-dialer">
-            <g id="rotate-layer" transform="translate(1.000000, 1.000000)">
-              <circle
-                id="Oval"
-                stroke="#979797"
-                stroke-width="3"
-                fill="#1F1F1F"
-                cx="132.5"
-                cy="132.5"
-                r="131"
-              ></circle>
-              <circle
-                id="Oval"
-                stroke="#979797"
-                stroke-width="2"
-                fill="#D8D8D8"
-                cx="134.5"
-                cy="131.5"
-                r="72.5"
-              ></circle>
-              <path
-                d="M133.5,210 C146.478692,210 157,220.521308 157,233.5 C157,246.478692 146.478692,257 133.5,257 C120.521308,257 110,246.478692 110,233.5 C110,220.521308 120.521308,210 133.5,210 Z M83.5,196 C96.4786916,196 107,206.521308 107,219.5 C107,232.478692 96.4786916,243 83.5,243 C70.5213084,243 60,232.478692 60,219.5 C60,206.521308 70.5213084,196 83.5,196 Z M45.5,163 C58.4786916,163 69,173.521308 69,186.5 C69,199.478692 58.4786916,210 45.5,210 C32.5213084,210 22,199.478692 22,186.5 C22,173.521308 32.5213084,163 45.5,163 Z M33.5,115 C46.4786916,115 57,125.521308 57,138.5 C57,151.478692 46.4786916,162 33.5,162 C20.5213084,162 10,151.478692 10,138.5 C10,125.521308 20.5213084,115 33.5,115 Z M236.5,98 C249.478692,98 260,108.521308 260,121.5 C260,134.478692 249.478692,145 236.5,145 C223.521308,145 213,134.478692 213,121.5 C213,108.521308 223.521308,98 236.5,98 Z M41.5,65 C54.4786916,65 65,75.5213084 65,88.5 C65,101.478692 54.4786916,112 41.5,112 C28.5213084,112 18,101.478692 18,88.5 C18,75.5213084 28.5213084,65 41.5,65 Z M216.5,50 C229.478692,50 240,60.5213084 240,73.5 C240,86.4786916 229.478692,97 216.5,97 C203.521308,97 193,86.4786916 193,73.5 C193,60.5213084 203.521308,50 216.5,50 Z M74.5,27 C87.4786916,27 98,37.5213084 98,50.5 C98,63.4786916 87.4786916,74 74.5,74 C61.5213084,74 51,63.4786916 51,50.5 C51,37.5213084 61.5213084,27 74.5,27 Z M174.5,16 C187.478692,16 198,26.5213084 198,39.5 C198,52.4786916 187.478692,63 174.5,63 C161.521308,63 151,52.4786916 151,39.5 C151,26.5213084 161.521308,16 174.5,16 Z M122.5,7 C135.478692,7 146,17.5213084 146,30.5 C146,43.4786916 135.478692,54 122.5,54 C109.521308,54 99,43.4786916 99,30.5 C99,17.5213084 109.521308,7 122.5,7 Z"
-                id="slots"
-                fill-opacity="0.5"
-                fill="#D8D8D8"
-              ></path>
-            </g>
-            <g id="static-back">
-                <circle id="Oval" fill-opacity="0.5" fill="#070707" cx="132.5" cy="132.5" r="132.5"></circle>
-                <text id="1" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="232" y="130">1</tspan>
-                </text>
-                <text id="0" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="129" y="243">0</tspan>
-                </text>
-                <text id="9" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                <tspan x="78" y="227">9</tspan>
-                </text>
-                <text id="8" opacity="0.699999988" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="40" y="194">8</tspan>
-              </text>
-                <text id="7" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="28" y="145">7</tspan>
-              </text>
-                <text id="6" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="35" y="97">6</tspan>
-              </text>
-                <text id="5" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="68" y="58">5</tspan>
-              </text>
-              <text id="4" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="117" y="41">4</tspan>
-              </text>
-                <text id="3" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="168" y="47">3</tspan>
-                </text>
-                <text id="2" font-family="Monaco" font-size="21" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="210" y="79">2</tspan>
-                </text>
-                <path d="M226.05174,157.374131 L219.146498,196.964187 L232.956982,196.964187 L226.05174,157.374131 Z" id="Triangle" stroke="#979797" fill="#D8D8D8" transform="translate(226.051740, 175.964187) rotate(-92.000000) translate(-226.051740, -175.964187) "></path>
-            </g>
+      <svg width="266" height="266" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fill-rule="evenodd">
+          <g transform="translate(1 1)">
+            <circle stroke="#979797" stroke-width="3" fill="#1F1F1F" cx="133" cy="133" r="131" />
+            <circle stroke="#fff" stroke-width="2" fill="#D8D8D8" cx="133" cy="133" r="72" />
+            <path
+              d="M133.5,210 C146.478692,210 157,220.521308 157,233.5 C157,246.478692 146.478692,257 133.5,257 C120.521308,257 110,246.478692 110,233.5 C110,220.521308 120.521308,210 133.5,210 Z M83.5,197 C96.4786916,197 107,207.521308 107,220.5 C107,233.478692 96.4786916,244 83.5,244 C70.5213084,244 60,233.478692 60,220.5 C60,207.521308 70.5213084,197 83.5,197 Z M45.5,163 C58.4786916,163 69,173.521308 69,186.5 C69,199.478692 58.4786916,210 45.5,210 C32.5213084,210 22,199.478692 22,186.5 C22,173.521308 32.5213084,163 45.5,163 Z M32.5,114 C45.4786916,114 56,124.521308 56,137.5 C56,150.478692 45.4786916,161 32.5,161 C19.5213084,161 9,150.478692 9,137.5 C9,124.521308 19.5213084,114 32.5,114 Z M234.5,93 C247.478692,93 258,103.521308 258,116.5 C258,129.478692 247.478692,140 234.5,140 C221.521308,140 211,129.478692 211,116.5 C211,103.521308 221.521308,93 234.5,93 Z M41.5,64 C54.4786916,64 65,74.5213084 65,87.5 C65,100.478692 54.4786916,111 41.5,111 C28.5213084,111 18,100.478692 18,87.5 C18,74.5213084 28.5213084,64 41.5,64 Z M214.5,46 C227.478692,46 238,56.5213084 238,69.5 C238,82.4786916 227.478692,93 214.5,93 C201.521308,93 191,82.4786916 191,69.5 C191,56.5213084 201.521308,46 214.5,46 Z M76.5,26 C89.4786916,26 100,36.5213084 100,49.5 C100,62.4786916 89.4786916,73 76.5,73 C63.5213084,73 53,62.4786916 53,49.5 C53,36.5213084 63.5213084,26 76.5,26 Z M173.5,15 C186.478692,15 197,25.5213084 197,38.5 C197,51.4786916 186.478692,62 173.5,62 C160.521308,62 150,51.4786916 150,38.5 C150,25.5213084 160.521308,15 173.5,15 Z M123.5,7 C136.478692,7 147,17.5213084 147,30.5 C147,43.4786916 136.478692,54 123.5,54 C110.521308,54 100,43.4786916 100,30.5 C100,17.5213084 110.521308,7 123.5,7 Z"
+              id="slots"
+              stroke="#fff"
+              fill-opacity="0.5"
+              fill="#D8D8D8"
+            ></path>
+          </g>
+          <circle fill-opacity=".5" fill="#070707" cx="132.5" cy="132.5" r="132.5" />
+          <g class="text" font-family="Monaco" font-size="21" fill="#FFF">
+            <text @mousedown=${() => this.down(0)} @mouseup=${this.up} x="129" y="243">0</text>
+            <text @mousedown=${() => this.down(9)} @mouseup=${this.up} x="78" y="230">9</text>
+            <text @mousedown=${() => this.down(8)} @mouseup=${this.up} x="40" y="194">8</text>
+            <text @mousedown=${() => this.down(7)} @mouseup=${this.up} x="28" y="145">7</text>
+            <text @mousedown=${() => this.down(6)} @mouseup=${this.up} x="35" y="97">6</text>
+            <text @mousedown=${() => this.down(5)} @mouseup=${this.up} x="72" y="58">5</text>
+            <text @mousedown=${() => this.down(4)} @mouseup=${this.up} x="117" y="41">4</text>
+            <text @mousedown=${() => this.down(3)} @mouseup=${this.up} x="168" y="47">3</text>
+            <text @mousedown=${() => this.down(2)} @mouseup=${this.up} x="210" y="79">2</text>
+            <text @mousedown=${() => this.down(1)} @mouseup=${this.up} x="230" y="126">1</text>
+          </g>
+          <path
+            d="M182.738529,211.096297 L177.320119,238.659185 L174.670528,252.137377 L188.487742,252.137377 L182.738529,211.096297 Z"
+            id="Triangle"
+            stroke="#979797"
+            fill="#D8D8D8"
+            transform="translate(181.562666, 230.360231) rotate(-22.000000) translate(-181.562666, -230.360231) "
+          ></path>
         </g>
       </svg>
     `;
