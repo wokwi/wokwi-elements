@@ -11,11 +11,10 @@ export class MembraneKeypadElement extends LitElement {
   @property() threeColumns = false;
 
   private pressedKeys = new Set<string>();
-  private shiftPressed = false;
 
   renderKey(text: string, x: number, y: number) {
     const keyClass = isNumeric(text) ? 'blue-key' : 'red-key';
-    const keyName = `key-${text.toLowerCase()}`;
+    const keyName = `key-${text.toUpperCase()}`;
 
     return svg`<g
       transform="translate(${x} ${y})"
@@ -189,24 +188,22 @@ export class MembraneKeypadElement extends LitElement {
   }
 
   private keyStrokeDown(key: string) {
-    const keyName = `key-${key.toLowerCase()}`;
-    const text = keyName[keyName.length - 1];
-    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${keyName}"]`);
+    const text = key.toUpperCase();
+    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="key-${text}"]`);
     this.down(text, selectedKey as SVGElement);
   }
 
   private keyStrokeUp(key: string) {
-    let selectedKey = this.shadowRoot?.querySelector('.pressed');
-    const keyName = `key-${key.toLowerCase()}`;
+    const text = key.toUpperCase();
+    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="key-${text}"]`);
+    const pressedKeys = this.shadowRoot?.querySelectorAll('.pressed');
 
     if (key === 'Shift') {
-      this.shiftPressed = false;
-      selectedKey?.classList.remove('pressed');
-      return;
+      pressedKeys?.forEach((pressedKey) => {
+        pressedKey.classList.remove('pressed');
+      });
     }
 
-    const text = keyName[keyName.length - 1];
-    selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${keyName}"]`);
     this.up(text, selectedKey as SVGElement);
   }
 }
