@@ -13,3 +13,4 @@ export { NeopixelMatrixElement } from './neopixel-matrix-element';
 export { SSD1306Element } from './ssd1306-element';
 export { BuzzerElement } from './buzzer-element';
 export { RotaryDialerElement } from './rotary-dialer-element';
+export { BuzzerElement } from './buzzer-element';
