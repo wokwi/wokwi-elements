@@ -1,56 +1,193 @@
 import { css, customElement, html, LitElement } from 'lit-element';
 
+enum Digit {
+  zero,
+  one,
+  two,
+  three,
+  four,
+  five,
+  six,
+  seven,
+  eight,
+  nine,
+}
+
+enum Direction {
+  normal = 'normal',
+  reverse = 'reverse',
+}
 @customElement('wokwi-rotary-dialer')
 export class RotaryDialerElement extends LitElement {
+  // todo: the degrees increases in ~40 when counting up the digits, would do that reusable if I could tweak the @keyframe from js
   static get styles() {
     return css`
       .text {
         cursor: grab;
+        user-select: none;
       }
-      @keyframes rotateDialer {
-        0% {
+
+      @keyframes dialOne {
+        from {
           transform: rotate(0);
         }
-        100% {
-          transform: rotate(55deg);
+        to {
+          transform: rotate(60deg);
+        }
+      }
+      @keyframes dialTwo {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(100deg);
+        }
+      }
+      @keyframes dialThree {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(130deg);
+        }
+      }
+      @keyframes dialFour {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(150deg);
+        }
+      }
+      @keyframes dialFive {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(190deg);
+        }
+      }
+      @keyframes dialSix {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(220deg);
+        }
+      }
+      @keyframes dialSeven {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(245deg);
+        }
+      }
+      @keyframes dialEight {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(275deg);
+        }
+      }
+      @keyframes dialNine {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(300deg);
         }
       }
 
+      @keyframes dialZero {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(330deg);
+        }
+      }
       .dialer-anim {
         transform-origin: center;
-        animation: rotateDialer 3s 1 linear;
       }
     `;
   }
 
-  addDialerAnim() {
-    const slots = this.shadowRoot?.querySelector('#slots');
+  private static matchDigit(
+    slots: SVGAElement,
+    digit: Digit,
+    direction: Direction = Direction.normal,
+    duration = '1000ms'
+  ) {
+    switch (digit) {
+      case Digit.zero:
+        slots?.setAttribute('style', `animation: dialZero ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.one:
+        slots?.setAttribute('style', `animation: dialOne ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.two:
+        slots?.setAttribute('style', `animation: dialTwo ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.three:
+        slots?.setAttribute('style', `animation: dialThree ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.four:
+        slots?.setAttribute('style', `animation: dialFour ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.five:
+        slots?.setAttribute('style', `animation: dialFive ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.six:
+        slots?.setAttribute('style', `animation: dialSix ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.seven:
+        slots?.setAttribute('style', `animation: dialSeven ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.eight:
+        slots?.setAttribute('style', `animation: dialEight ${duration} 1 ${direction} ease-out;`);
+        break;
+      case Digit.nine:
+        slots?.setAttribute('style', `animation: dialNine ${duration} 1 ${direction} ease-out;`);
+        break;
+      default:
+        slots?.removeAttribute('style');
+    }
+  }
+
+  private static addReverseDialerAnim(slots: SVGAElement, digit: number) {
+    // When the user leaves the mouse (eq of lifting the finger) it goes back
+    slots?.removeAttribute('style');
+    RotaryDialerElement.matchDigit(slots, digit, Direction.reverse, '2000ms');
+  }
+
+  private addDialerAnim(num: number) {
+    const slots = this.shadowRoot?.querySelector('#slots') as SVGAElement;
+    slots.onanimationend = () => RotaryDialerElement.addReverseDialerAnim(slots, num);
     const rAF = requestAnimationFrame(() => {
       slots?.classList.add('dialer-anim');
+      RotaryDialerElement.matchDigit(slots, num);
       cancelAnimationFrame(rAF);
     });
   }
 
-  removeDialerAnim() {
-    const dialerAnimClass = 'dialer-anim';
+  private removeDialerAnim() {
     const slots = this.shadowRoot?.querySelector('#slots');
-    if (slots?.classList.contains(dialerAnimClass)) {
-      slots?.classList.remove(dialerAnimClass);
-    }
+    slots?.classList.remove('dialer-anim');
+    slots?.removeAttribute('style');
   }
 
-  down(num: number) {
+  private down(num: number) {
+    // When you click on a digit, the circle-hole of that digit
+    // should go all the way until the finger stop.
     this.removeDialerAnim();
-    this.addDialerAnim();
+    this.addDialerAnim(num);
     this.dispatchEvent(
       new CustomEvent('dialer-grab', {
         detail: { num },
       })
     );
-  }
-
-  up() {
-    this.removeDialerAnim();
   }
 
   render() {
@@ -70,16 +207,16 @@ export class RotaryDialerElement extends LitElement {
           </g>
           <circle fill-opacity=".5" fill="#070707" cx="132.5" cy="132.5" r="132.5" />
           <g class="text" font-family="Monaco" font-size="21" fill="#FFF">
-            <text @mousedown=${() => this.down(0)} @mouseup=${this.up} x="129" y="243">0</text>
-            <text @mousedown=${() => this.down(9)} @mouseup=${this.up} x="78" y="230">9</text>
-            <text @mousedown=${() => this.down(8)} @mouseup=${this.up} x="40" y="194">8</text>
-            <text @mousedown=${() => this.down(7)} @mouseup=${this.up} x="28" y="145">7</text>
-            <text @mousedown=${() => this.down(6)} @mouseup=${this.up} x="35" y="97">6</text>
-            <text @mousedown=${() => this.down(5)} @mouseup=${this.up} x="72" y="58">5</text>
-            <text @mousedown=${() => this.down(4)} @mouseup=${this.up} x="117" y="41">4</text>
-            <text @mousedown=${() => this.down(3)} @mouseup=${this.up} x="168" y="47">3</text>
-            <text @mousedown=${() => this.down(2)} @mouseup=${this.up} x="210" y="79">2</text>
-            <text @mousedown=${() => this.down(1)} @mouseup=${this.up} x="230" y="126">1</text>
+            <text @mousedown=${() => this.down(0)} x="129" y="243">0</text>
+            <text @mousedown=${() => this.down(9)} x="78" y="230">9</text>
+            <text @mousedown=${() => this.down(8)} x="40" y="194">8</text>
+            <text @mousedown=${() => this.down(7)} x="28" y="145">7</text>
+            <text @mousedown=${() => this.down(6)} x="35" y="97">6</text>
+            <text @mousedown=${() => this.down(5)} x="72" y="58">5</text>
+            <text @mousedown=${() => this.down(4)} x="117" y="41">4</text>
+            <text @mousedown=${() => this.down(3)} x="168" y="47">3</text>
+            <text @mousedown=${() => this.down(2)} x="210" y="79">2</text>
+            <text @mousedown=${() => this.down(1)} x="230" y="126">1</text>
           </g>
           <path
             d="M182.738529,211.096297 L177.320119,238.659185 L174.670528,252.137377 L188.487742,252.137377 L182.738529,211.096297 Z"
