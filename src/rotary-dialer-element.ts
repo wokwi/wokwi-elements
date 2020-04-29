@@ -26,7 +26,6 @@ export class RotaryDialerElement extends LitElement {
         cursor: grab;
         user-select: none;
       }
-
       @keyframes dialOne {
         from {
           transform: rotate(0);
@@ -206,7 +205,7 @@ export class RotaryDialerElement extends LitElement {
             ></path>
           </g>
           <circle fill-opacity=".5" fill="#070707" cx="132.5" cy="132.5" r="132.5" />
-          <g class="text" font-family="Monaco" font-size="21" fill="#FFF">
+          <g tabindex="0" class="text" font-family="Monaco" font-size="21" fill="#FFF">
             <text @mousedown=${() => this.down(0)} x="129" y="243">0</text>
             <text @mousedown=${() => this.down(9)} x="78" y="230">9</text>
             <text @mousedown=${() => this.down(8)} x="40" y="194">8</text>
