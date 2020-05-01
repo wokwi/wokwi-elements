@@ -27,89 +27,119 @@ export class RotaryDialerElement extends LitElement {
         height: 1px;
         margin: -1px;
       }
+      .dialer-anim {
+        transform-origin: center;
+      }
       @keyframes dialOne {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(56deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
       @keyframes dialTwo {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(87deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
       @keyframes dialThree {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(115deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
       @keyframes dialFour {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(143deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
       @keyframes dialFive {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(173deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
       @keyframes dialSix {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(204deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
       @keyframes dialSeven {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(232deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
       @keyframes dialEight {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(260deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
       @keyframes dialNine {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(290deg);
+        }
+        100% {
+          transform: rotate(0);
         }
       }
 
       @keyframes dialZero {
-        from {
+        0% {
           transform: rotate(0);
         }
-        to {
+        50% {
           transform: rotate(320deg);
         }
-      }
-      .dialer-anim {
-        transform-origin: center;
+        100% {
+          transform: rotate(0);
+        }
       }
     `;
   }
@@ -119,7 +149,7 @@ export class RotaryDialerElement extends LitElement {
     digit: Digit,
     direction: Direction = Direction.normal,
     duration = '1000ms',
-    timingFn = 'ease'
+    timingFn = 'ease-out'
   ) {
     switch (digit) {
       case 0:
@@ -166,11 +196,6 @@ export class RotaryDialerElement extends LitElement {
     }
   }
 
-  private static addReverseDialerAnim(slots: SVGPathElement, digit: Digit) {
-    // When the user leaves the mouse (eq of lifting the finger) it goes back
-    RotaryDialerElement.matchDigit(slots, digit, Direction.reverse, '2000ms');
-  }
-
   private addDialerAnim(digit: Digit) {
     this.handleRotation(digit);
   }
@@ -208,7 +233,6 @@ export class RotaryDialerElement extends LitElement {
 
   private handleRotation(digit: Digit) {
     const slots = this.shadowRoot?.querySelector('#slots') as SVGPathElement;
-    slots.onanimationend = () => RotaryDialerElement.addReverseDialerAnim(slots, digit);
     const rAF = requestAnimationFrame(() => {
       slots?.classList.add('dialer-anim');
       // When you click on a digit, the circle-hole of that digit
