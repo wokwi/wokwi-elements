@@ -130,38 +130,48 @@ export class RotaryDialerElement extends LitElement {
     slots: SVGAElement,
     digit: Digit,
     direction: Direction = Direction.normal,
-    duration = '1000ms'
+    duration = '1000ms',
+    timingFn = 'ease'
   ) {
     switch (digit) {
       case Digit.zero:
-        slots?.setAttribute('style', `animation: dialZero ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute('style', `animation: dialZero ${duration} 1 ${direction} ${timingFn};`);
         break;
       case Digit.one:
-        slots?.setAttribute('style', `animation: dialOne ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute('style', `animation: dialOne ${duration} 1 ${direction} ${timingFn};`);
         break;
       case Digit.two:
-        slots?.setAttribute('style', `animation: dialTwo ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute('style', `animation: dialTwo ${duration} 1 ${direction} ${timingFn};`);
         break;
       case Digit.three:
-        slots?.setAttribute('style', `animation: dialThree ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute(
+          'style',
+          `animation: dialThree ${duration} 1 ${direction} ${timingFn};`
+        );
         break;
       case Digit.four:
-        slots?.setAttribute('style', `animation: dialFour ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute('style', `animation: dialFour ${duration} 1 ${direction} ${timingFn};`);
         break;
       case Digit.five:
-        slots?.setAttribute('style', `animation: dialFive ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute('style', `animation: dialFive ${duration} 1 ${direction} ${timingFn};`);
         break;
       case Digit.six:
-        slots?.setAttribute('style', `animation: dialSix ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute('style', `animation: dialSix ${duration} 1 ${direction} ${timingFn};`);
         break;
       case Digit.seven:
-        slots?.setAttribute('style', `animation: dialSeven ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute(
+          'style',
+          `animation: dialSeven ${duration} 1 ${direction} ${timingFn};`
+        );
         break;
       case Digit.eight:
-        slots?.setAttribute('style', `animation: dialEight ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute(
+          'style',
+          `animation: dialEight ${duration} 1 ${direction} ${timingFn};`
+        );
         break;
       case Digit.nine:
-        slots?.setAttribute('style', `animation: dialNine ${duration} 1 ${direction} ease-out;`);
+        slots?.setAttribute('style', `animation: dialNine ${duration} 1 ${direction} ${timingFn};`);
         break;
       default:
         slots?.removeAttribute('style');
@@ -170,7 +180,6 @@ export class RotaryDialerElement extends LitElement {
 
   private static addReverseDialerAnim(slots: SVGAElement, digit: number) {
     // When the user leaves the mouse (eq of lifting the finger) it goes back
-    slots?.removeAttribute('style');
     RotaryDialerElement.matchDigit(slots, digit, Direction.reverse, '2000ms');
   }
 
