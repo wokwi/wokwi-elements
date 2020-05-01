@@ -213,10 +213,9 @@ export class RotaryDialerElement extends LitElement {
 
   private onValueChange(event: KeyboardEvent) {
     const target = event.target as HTMLInputElement;
-    const lastValue = target.value;
-    target.value = '';
-    const digit = parseInt(lastValue);
+    const digit = parseInt(target.value);
     this.dial(digit);
+    target.value = '';
   }
 
   private handleRotation(digit: number) {
