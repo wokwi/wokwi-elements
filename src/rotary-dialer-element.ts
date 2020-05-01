@@ -210,7 +210,8 @@ export class RotaryDialerElement extends LitElement {
     const lastValue = target.value;
     target.value = '';
     const digit = parseInt(lastValue);
-    this.handleRotation(digit);
+    this.removeDialerAnim();
+    this.addDialerAnim(digit);
   }
 
   private handleRotation(digit: number) {
