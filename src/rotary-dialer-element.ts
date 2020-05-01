@@ -193,14 +193,20 @@ export class RotaryDialerElement extends LitElement {
     slots?.removeAttribute('style');
   }
 
-  private down(num: number) {
-    // When you click on a digit, the circle-hole of that digit
-    // should go all the way until the finger stop.
+  private down(digit: number) {
+    this.dial(digit);
+  }
+
+  /**
+   * Exposed lazy dial by applying dial fn with a given arg of num from 0-9
+   * @param digit
+   */
+  public dial(digit: Digit) {
     this.removeDialerAnim();
-    this.addDialerAnim(num);
+    this.addDialerAnim(digit);
     this.dispatchEvent(
       new CustomEvent('dialer-grab', {
-        detail: { num },
+        detail: { digit },
       })
     );
   }
@@ -210,17 +216,16 @@ export class RotaryDialerElement extends LitElement {
     const lastValue = target.value;
     target.value = '';
     const digit = parseInt(lastValue);
-    this.removeDialerAnim();
-    this.addDialerAnim(digit);
+    this.dial(digit);
   }
 
   private handleRotation(digit: number) {
     const slots = this.shadowRoot?.querySelector('#slots') as SVGAElement;
-    // Need to resolve an issue when typing the sam num twice in a row the onanimationend won't
-    // get triggered
     slots.onanimationend = () => RotaryDialerElement.addReverseDialerAnim(slots, digit);
     const rAF = requestAnimationFrame(() => {
       slots?.classList.add('dialer-anim');
+      // When you click on a digit, the circle-hole of that digit
+      // should go all the way until the finger stop.
       RotaryDialerElement.matchDigit(slots, digit);
       cancelAnimationFrame(rAF);
     });
