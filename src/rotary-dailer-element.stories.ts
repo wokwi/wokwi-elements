@@ -7,7 +7,4 @@ import { logEvent } from 'storybook-events-logger';
 storiesOf('Rotary Dialer', module)
   .addParameters({ component: 'wokwi-rotary-dialer' })
   .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => html` <wokwi-rotary-dialer @dialer-grab=${logEvent}></wokwi-rotary-dialer> `
-  );
+  .add('Default', () => html` <wokwi-rotary-dialer @dial=${logEvent}></wokwi-rotary-dialer> `);

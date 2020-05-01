@@ -205,7 +205,7 @@ export class RotaryDialerElement extends LitElement {
     this.removeDialerAnim();
     this.addDialerAnim(digit);
     this.dispatchEvent(
-      new CustomEvent('dialer-grab', {
+      new CustomEvent('dial', {
         detail: { digit },
       })
     );
