@@ -206,7 +206,7 @@ export class RotaryDialerElement extends LitElement {
     slots?.removeAttribute('style');
   }
 
-  private down(digit: Digit) {
+  private up(digit: Digit) {
     this.dial(digit);
   }
 
@@ -273,16 +273,16 @@ export class RotaryDialerElement extends LitElement {
         </g>
         <circle id="container" fill-opacity=".5" fill="#070707" cx="132.5" cy="132.5" r="132.5" />
         <g class="text" font-family="Monaco" font-size="21" fill="#FFF">
-          <text @mousedown=${() => this.down(0)} x="129" y="243">0</text>
-          <text @mousedown=${() => this.down(9)} x="78" y="230">9</text>
-          <text @mousedown=${() => this.down(8)} x="40" y="194">8</text>
-          <text @mousedown=${() => this.down(7)} x="28" y="145">7</text>
-          <text @mousedown=${() => this.down(6)} x="35" y="97">6</text>
-          <text @mousedown=${() => this.down(5)} x="72" y="58">5</text>
-          <text @mousedown=${() => this.down(4)} x="117" y="41">4</text>
-          <text @mousedown=${() => this.down(3)} x="168" y="47">3</text>
-          <text @mousedown=${() => this.down(2)} x="210" y="79">2</text>
-          <text @mousedown=${() => this.down(1)} x="230" y="126">1</text>
+          <text @mouseup=${() => this.up(0)} x="129" y="243">0</text>
+          <text @mouseup=${() => this.up(9)} x="78" y="230">9</text>
+          <text @mouseup=${() => this.up(8)} x="40" y="194">8</text>
+          <text @mouseup=${() => this.up(7)} x="28" y="145">7</text>
+          <text @mouseup=${() => this.up(6)} x="35" y="97">6</text>
+          <text @mouseup=${() => this.up(5)} x="72" y="58">5</text>
+          <text @mouseup=${() => this.up(4)} x="117" y="41">4</text>
+          <text @mouseup=${() => this.up(3)} x="168" y="47">3</text>
+          <text @mouseup=${() => this.up(2)} x="210" y="79">2</text>
+          <text @mouseup=${() => this.up(1)} x="230" y="126">1</text>
         </g>
         <path
           d="M182.738529,211.096297 L177.320119,238.659185 L174.670528,252.137377 L188.487742,252.137377 L182.738529,211.096297 Z"
