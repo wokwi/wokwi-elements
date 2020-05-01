@@ -217,11 +217,6 @@ export class RotaryDialerElement extends LitElement {
   public dial(digit: Digit) {
     this.removeDialerAnim();
     this.addDialerAnim(digit);
-    this.dispatchEvent(
-      new CustomEvent('dial', {
-        detail: { digit },
-      })
-    );
   }
 
   private onValueChange(event: KeyboardEvent) {
@@ -233,6 +228,13 @@ export class RotaryDialerElement extends LitElement {
 
   private handleRotation(digit: Digit) {
     const slots = this.shadowRoot?.querySelector('#slots') as SVGPathElement;
+    slots.onanimationend = () => {
+      this.dispatchEvent(
+        new CustomEvent('dial', {
+          detail: { digit },
+        })
+      );
+    };
     const rAF = requestAnimationFrame(() => {
       slots?.classList.add('dialer-anim');
       // When you click on a digit, the circle-hole of that digit
@@ -245,6 +247,7 @@ export class RotaryDialerElement extends LitElement {
   private focusInput() {
     const inputEl = this.shadowRoot?.querySelector('.hide-input') as HTMLInputElement;
     inputEl?.focus();
+    inputEl.value = '';
   }
 
   render() {
