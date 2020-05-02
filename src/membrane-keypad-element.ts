@@ -14,7 +14,7 @@ export class MembraneKeypadElement extends LitElement {
 
   renderKey(text: string, x: number, y: number) {
     const keyClass = isNumeric(text) ? 'blue-key' : 'red-key';
-    const keyName = `key-${text.toUpperCase()}`;
+    const keyName = text.toUpperCase();
 
     return svg`<g
       transform="translate(${x} ${y})"
@@ -189,21 +189,28 @@ export class MembraneKeypadElement extends LitElement {
 
   private keyStrokeDown(key: string) {
     const text = key.toUpperCase();
-    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="key-${text}"]`);
-    this.down(text, selectedKey as SVGElement);
+    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${text}"]`);
+    if (selectedKey) {
+      this.down(text, selectedKey as SVGElement);
+    }
   }
 
   private keyStrokeUp(key: string) {
     const text = key.toUpperCase();
-    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="key-${text}"]`);
-    const pressedKeys = this.shadowRoot?.querySelectorAll('.pressed');
+    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${text}"]`);
+    const pressedKeys: NodeListOf<SVGElement> | undefined = this.shadowRoot?.querySelectorAll(
+      '.pressed'
+    );
 
     if (key === 'Shift') {
       pressedKeys?.forEach((pressedKey) => {
-        pressedKey.classList.remove('pressed');
+        const pressedText = pressedKey.dataset.keyName!;
+        this.up(pressedText, pressedKey);
       });
     }
 
-    this.up(text, selectedKey as SVGElement);
+    if (selectedKey) {
+      this.up(text, selectedKey as SVGElement);
+    }
   }
 }
