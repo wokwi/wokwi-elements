@@ -31,7 +31,7 @@ export class RotaryDialerElement extends LitElement {
       .dialer-anim {
         transform-origin: center;
       }
-      @keyframes dialOne {
+      @keyframes dial1 {
         0% {
           transform: rotate(0);
         }
@@ -42,7 +42,7 @@ export class RotaryDialerElement extends LitElement {
           transform: rotate(0);
         }
       }
-      @keyframes dialTwo {
+      @keyframes dial2 {
         0% {
           transform: rotate(0);
         }
@@ -53,7 +53,7 @@ export class RotaryDialerElement extends LitElement {
           transform: rotate(0);
         }
       }
-      @keyframes dialThree {
+      @keyframes dial3 {
         0% {
           transform: rotate(0);
         }
@@ -64,7 +64,7 @@ export class RotaryDialerElement extends LitElement {
           transform: rotate(0);
         }
       }
-      @keyframes dialFour {
+      @keyframes dial4 {
         0% {
           transform: rotate(0);
         }
@@ -75,7 +75,7 @@ export class RotaryDialerElement extends LitElement {
           transform: rotate(0);
         }
       }
-      @keyframes dialFive {
+      @keyframes dial5 {
         0% {
           transform: rotate(0);
         }
@@ -86,7 +86,7 @@ export class RotaryDialerElement extends LitElement {
           transform: rotate(0);
         }
       }
-      @keyframes dialSix {
+      @keyframes dial6 {
         0% {
           transform: rotate(0);
         }
@@ -97,7 +97,7 @@ export class RotaryDialerElement extends LitElement {
           transform: rotate(0);
         }
       }
-      @keyframes dialSeven {
+      @keyframes dial7 {
         0% {
           transform: rotate(0);
         }
@@ -108,7 +108,7 @@ export class RotaryDialerElement extends LitElement {
           transform: rotate(0);
         }
       }
-      @keyframes dialEight {
+      @keyframes dial8 {
         0% {
           transform: rotate(0);
         }
@@ -119,7 +119,7 @@ export class RotaryDialerElement extends LitElement {
           transform: rotate(0);
         }
       }
-      @keyframes dialNine {
+      @keyframes dial9 {
         0% {
           transform: rotate(0);
         }
@@ -131,7 +131,7 @@ export class RotaryDialerElement extends LitElement {
         }
       }
 
-      @keyframes dialZero {
+      @keyframes dial0 {
         0% {
           transform: rotate(0);
         }
@@ -143,58 +143,6 @@ export class RotaryDialerElement extends LitElement {
         }
       }
     `;
-  }
-
-  private static matchDigit(
-    slots: SVGPathElement,
-    digit: Digit,
-    direction: Direction = Direction.normal,
-    duration = '1000ms',
-    timingFn = 'ease-out'
-  ) {
-    switch (digit) {
-      case 0:
-        slots?.setAttribute('style', `animation: dialZero ${duration} 1 ${direction} ${timingFn};`);
-        break;
-      case 1:
-        slots?.setAttribute('style', `animation: dialOne ${duration} 1 ${direction} ${timingFn};`);
-        break;
-      case 2:
-        slots?.setAttribute('style', `animation: dialTwo ${duration} 1 ${direction} ${timingFn};`);
-        break;
-      case 3:
-        slots?.setAttribute(
-          'style',
-          `animation: dialThree ${duration} 1 ${direction} ${timingFn};`
-        );
-        break;
-      case 4:
-        slots?.setAttribute('style', `animation: dialFour ${duration} 1 ${direction} ${timingFn};`);
-        break;
-      case 5:
-        slots?.setAttribute('style', `animation: dialFive ${duration} 1 ${direction} ${timingFn};`);
-        break;
-      case 6:
-        slots?.setAttribute('style', `animation: dialSix ${duration} 1 ${direction} ${timingFn};`);
-        break;
-      case 7:
-        slots?.setAttribute(
-          'style',
-          `animation: dialSeven ${duration} 1 ${direction} ${timingFn};`
-        );
-        break;
-      case 8:
-        slots?.setAttribute(
-          'style',
-          `animation: dialEight ${duration} 1 ${direction} ${timingFn};`
-        );
-        break;
-      case 9:
-        slots?.setAttribute('style', `animation: dialNine ${duration} 1 ${direction} ${timingFn};`);
-        break;
-      default:
-        slots?.removeAttribute('style');
-    }
   }
 
   private addDialerAnim(digit: Digit) {
@@ -234,7 +182,7 @@ export class RotaryDialerElement extends LitElement {
       slots?.classList.add('dialer-anim');
       // When you click on a digit, the circle-hole of that digit
       // should go all the way until the finger stop.
-      RotaryDialerElement.matchDigit(slots, digit);
+      slots?.setAttribute('style', `animation: dial${digit} 1000ms 1 normal ease-out;`);
       cancelAnimationFrame(rAF);
     });
   }
