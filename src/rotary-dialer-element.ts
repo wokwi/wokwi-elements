@@ -2,10 +2,6 @@ import { css, customElement, html, LitElement } from 'lit-element';
 
 type InitialValue = '';
 type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-enum Direction {
-  normal = 'normal',
-  reverse = 'reverse',
-}
 
 @customElement('wokwi-rotary-dialer')
 export class RotaryDialerElement extends LitElement {
