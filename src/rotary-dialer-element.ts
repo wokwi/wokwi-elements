@@ -174,12 +174,11 @@ export class RotaryDialerElement extends LitElement {
 
   private handleRotation(digit: Digit) {
     const slots = this.shadowRoot?.querySelector('#slots') as SVGPathElement;
-    const rAF = requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       slots?.classList.add('dialer-anim');
       // When you click on a digit, the circle-hole of that digit
       // should go all the way until the finger stop.
       slots?.setAttribute('style', `animation: dial${digit} 1000ms 1 normal ease-out;`);
-      cancelAnimationFrame(rAF);
     });
   }
 
