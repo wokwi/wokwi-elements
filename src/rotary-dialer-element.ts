@@ -1,4 +1,5 @@
 import { css, customElement, html, LitElement } from 'lit-element';
+import { styleMap } from 'lit-html/directives/style-map';
 
 type InitialValue = '';
 type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
@@ -6,7 +7,7 @@ type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 @customElement('wokwi-rotary-dialer')
 export class RotaryDialerElement extends LitElement {
   private digit: Digit | InitialValue = '';
-
+  private stylesMapping = {};
   static get styles() {
     return css`
       .text {
@@ -141,18 +142,11 @@ export class RotaryDialerElement extends LitElement {
     `;
   }
 
-  private addDialerAnim(digit: Digit) {
-    this.handleRotation(digit);
-  }
-
   private removeDialerAnim() {
     const slots = this.shadowRoot?.querySelector('#slots');
     slots?.classList.remove('dialer-anim');
-    slots?.removeAttribute('style');
-  }
-
-  private up(digit: Digit) {
-    this.dial(digit);
+    this.stylesMapping = { animation: '' };
+    return this.requestUpdate();
   }
 
   /**
@@ -161,8 +155,7 @@ export class RotaryDialerElement extends LitElement {
    */
   public dial(digit: Digit) {
     this.digit = digit;
-    this.removeDialerAnim();
-    this.addDialerAnim(this.digit);
+    this.removeDialerAnim().then(() => this.addDialerAnim(digit));
   }
 
   private onValueChange(event: KeyboardEvent) {
@@ -172,13 +165,17 @@ export class RotaryDialerElement extends LitElement {
     target.value = '';
   }
 
-  private handleRotation(digit: Digit) {
+  private addDialerAnim(digit: Digit) {
     const slots = this.shadowRoot?.querySelector('#slots') as SVGPathElement;
-    requestAnimationFrame(() => {
-      slots?.classList.add('dialer-anim');
+    slots?.classList.add('dialer-anim');
+
+    return requestAnimationFrame(() => {
       // When you click on a digit, the circle-hole of that digit
       // should go all the way until the finger stop.
-      slots?.setAttribute('style', `animation: dial${digit} 1000ms 1 normal ease-out;`);
+      this.stylesMapping = {
+        animation: `dial${digit} 1000ms 1 normal ease-out`,
+      };
+      return this.requestUpdate();
     });
   }
 
@@ -208,20 +205,21 @@ export class RotaryDialerElement extends LitElement {
             stroke="#fff"
             fill-opacity="0.5"
             fill="#D8D8D8"
+            style=${styleMap(this.stylesMapping)}
           ></path>
         </g>
         <circle id="container" fill-opacity=".5" fill="#070707" cx="132.5" cy="132.5" r="132.5" />
         <g class="text" font-family="Marker Felt, monospace" font-size="21" fill="#FFF">
-          <text @mouseup=${() => this.up(0)} x="129" y="243">0</text>
-          <text @mouseup=${() => this.up(9)} x="78" y="230">9</text>
-          <text @mouseup=${() => this.up(8)} x="40" y="194">8</text>
-          <text @mouseup=${() => this.up(7)} x="28" y="145">7</text>
-          <text @mouseup=${() => this.up(6)} x="35" y="97">6</text>
-          <text @mouseup=${() => this.up(5)} x="72" y="58">5</text>
-          <text @mouseup=${() => this.up(4)} x="117" y="41">4</text>
-          <text @mouseup=${() => this.up(3)} x="168" y="47">3</text>
-          <text @mouseup=${() => this.up(2)} x="210" y="79">2</text>
-          <text @mouseup=${() => this.up(1)} x="230" y="126">1</text>
+          <text @mouseup=${() => this.dial(0)} x="129" y="243">0</text>
+          <text @mouseup=${() => this.dial(9)} x="78" y="230">9</text>
+          <text @mouseup=${() => this.dial(8)} x="40" y="194">8</text>
+          <text @mouseup=${() => this.dial(7)} x="28" y="145">7</text>
+          <text @mouseup=${() => this.dial(6)} x="35" y="97">6</text>
+          <text @mouseup=${() => this.dial(5)} x="72" y="58">5</text>
+          <text @mouseup=${() => this.dial(4)} x="117" y="41">4</text>
+          <text @mouseup=${() => this.dial(3)} x="168" y="47">3</text>
+          <text @mouseup=${() => this.dial(2)} x="210" y="79">2</text>
+          <text @mouseup=${() => this.dial(1)} x="230" y="126">1</text>
         </g>
         <path
           d="M182.738529,211.096297 L177.320119,238.659185 L174.670528,252.137377 L188.487742,252.137377 L182.738529,211.096297 Z"
