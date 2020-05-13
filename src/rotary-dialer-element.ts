@@ -169,13 +169,13 @@ export class RotaryDialerElement extends LitElement {
     const slots = this.shadowRoot?.querySelector('#slots') as SVGPathElement;
     slots?.classList.add('dialer-anim');
 
-    return requestAnimationFrame(() => {
+    requestAnimationFrame(async () => {
       // When you click on a digit, the circle-hole of that digit
       // should go all the way until the finger stop.
       this.stylesMapping = {
         animation: `dial${digit} 1000ms 1 normal ease-out`,
       };
-      return this.requestUpdate();
+      await this.requestUpdate();
     });
   }
 
