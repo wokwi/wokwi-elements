@@ -9,7 +9,8 @@ type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export class RotaryDialerElement extends LitElement {
   private digit: Digit | InitialValue = '';
   private stylesMapping = {};
-  private classes = {};
+  private classes: Record<string, boolean> = { 'rotate-path': true };
+  private degrees = [320, 56, 87, 115, 143, 173, 204, 232, 260, 290];
   static get styles() {
     return css`
       .text {
@@ -27,127 +28,20 @@ export class RotaryDialerElement extends LitElement {
         height: 1px;
         margin: -1px;
       }
-      .dialer-anim {
+      .rotate-path {
         transform-origin: center;
+        transition: transform 1000ms ease-in;
       }
-      @keyframes dial1 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(56deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-      @keyframes dial2 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(87deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-      @keyframes dial3 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(115deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-      @keyframes dial4 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(143deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-      @keyframes dial5 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(173deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-      @keyframes dial6 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(204deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-      @keyframes dial7 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(232deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-      @keyframes dial8 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(260deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-      @keyframes dial9 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(290deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
-      }
-
-      @keyframes dial0 {
-        0% {
-          transform: rotate(0);
-        }
-        50% {
-          transform: rotate(320deg);
-        }
-        100% {
-          transform: rotate(0);
-        }
+      .dialer-anim {
+        transform: rotate(var(--angle));
       }
     `;
   }
 
   private removeDialerAnim() {
-    this.classes = { 'dialer-anim': false };
-    this.stylesMapping = { animation: '' };
-    return this.requestUpdate();
+    this.classes = { ...this.classes, 'dialer-anim': false };
+    this.stylesMapping = { '--angle': 0 };
+    this.requestUpdate();
   }
 
   /**
@@ -156,7 +50,7 @@ export class RotaryDialerElement extends LitElement {
    */
   public dial(digit: Digit) {
     this.digit = digit;
-    this.removeDialerAnim().then(() => this.addDialerAnim(digit));
+    this.addDialerAnim(digit);
   }
 
   private onValueChange(event: KeyboardEvent) {
@@ -170,10 +64,9 @@ export class RotaryDialerElement extends LitElement {
     requestAnimationFrame(() => {
       // When you click on a digit, the circle-hole of that digit
       // should go all the way until the finger stop.
-      this.classes = { 'dialer-anim': true };
-      this.stylesMapping = {
-        animation: `dial${digit} 1000ms 1 normal ease-out`,
-      };
+      this.classes = { ...this.classes, 'dialer-anim': true };
+      const deg = this.degrees[digit as number];
+      this.stylesMapping = { '--angle': deg + 'deg' };
       this.requestUpdate();
     });
   }
@@ -198,8 +91,10 @@ export class RotaryDialerElement extends LitElement {
           <circle stroke="#fff" stroke-width="2" fill="#D8D8D8" cx="133" cy="133" r="72" />
           <path
             class=${classMap(this.classes)}
-            @animationend="${() =>
-              this.dispatchEvent(new CustomEvent('dial', { detail: { digit: this.digit } }))}"
+            @transitionend="${() => {
+              this.removeDialerAnim();
+              this.dispatchEvent(new CustomEvent('dial', { detail: { digit: this.digit } }));
+            }}"
             d="M133.5,210 C146.478692,210 157,220.521308 157,233.5 C157,246.478692 146.478692,257 133.5,257 C120.521308,257 110,246.478692 110,233.5 C110,220.521308 120.521308,210 133.5,210 Z M83.5,197 C96.4786916,197 107,207.521308 107,220.5 C107,233.478692 96.4786916,244 83.5,244 C70.5213084,244 60,233.478692 60,220.5 C60,207.521308 70.5213084,197 83.5,197 Z M45.5,163 C58.4786916,163 69,173.521308 69,186.5 C69,199.478692 58.4786916,210 45.5,210 C32.5213084,210 22,199.478692 22,186.5 C22,173.521308 32.5213084,163 45.5,163 Z M32.5,114 C45.4786916,114 56,124.521308 56,137.5 C56,150.478692 45.4786916,161 32.5,161 C19.5213084,161 9,150.478692 9,137.5 C9,124.521308 19.5213084,114 32.5,114 Z M234.5,93 C247.478692,93 258,103.521308 258,116.5 C258,129.478692 247.478692,140 234.5,140 C221.521308,140 211,129.478692 211,116.5 C211,103.521308 221.521308,93 234.5,93 Z M41.5,64 C54.4786916,64 65,74.5213084 65,87.5 C65,100.478692 54.4786916,111 41.5,111 C28.5213084,111 18,100.478692 18,87.5 C18,74.5213084 28.5213084,64 41.5,64 Z M214.5,46 C227.478692,46 238,56.5213084 238,69.5 C238,82.4786916 227.478692,93 214.5,93 C201.521308,93 191,82.4786916 191,69.5 C191,56.5213084 201.521308,46 214.5,46 Z M76.5,26 C89.4786916,26 100,36.5213084 100,49.5 C100,62.4786916 89.4786916,73 76.5,73 C63.5213084,73 53,62.4786916 53,49.5 C53,36.5213084 63.5213084,26 76.5,26 Z M173.5,15 C186.478692,15 197,25.5213084 197,38.5 C197,51.4786916 186.478692,62 173.5,62 C160.521308,62 150,51.4786916 150,38.5 C150,25.5213084 160.521308,15 173.5,15 Z M123.5,7 C136.478692,7 147,17.5213084 147,30.5 C147,43.4786916 136.478692,54 123.5,54 C110.521308,54 100,43.4786916 100,30.5 C100,17.5213084 110.521308,7 123.5,7 Z"
             id="slots"
             stroke="#fff"
