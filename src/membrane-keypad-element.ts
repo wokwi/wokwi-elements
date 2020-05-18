@@ -14,20 +14,24 @@ export class MembraneKeypadElement extends LitElement {
 
   renderKey(text: string, x: number, y: number) {
     const keyClass = isNumeric(text) ? 'blue-key' : 'red-key';
+    const keyName = text.toUpperCase();
 
     return svg`<g
       transform="translate(${x} ${y})"
       tabindex="0"
       class=${keyClass}
+      data-key-name=${keyName}
       @blur=${(e: FocusEvent) => {
-        this.up(text, e);
+        this.up(text, e.currentTarget as SVGElement);
       }}
       @mousedown=${() => this.down(text)}
       @mouseup=${() => this.up(text)}
       @touchstart=${() => this.down(text)}
       @touchend=${() => this.up(text)}
-      @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down(text, e)}
-      @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up(text, e)}
+      @keydown=${(e: KeyboardEvent) =>
+        e.keyCode === SPACE_KEY && this.down(text, e.currentTarget as SVGElement)}
+      @keyup=${(e: KeyboardEvent) =>
+        e.keyCode === SPACE_KEY && this.up(text, e.currentTarget as SVGElement)}
     >
       <use xlink:href="#key" />
       <text x="5.6" y="8.1">${text}</text>
@@ -92,6 +96,8 @@ export class MembraneKeypadElement extends LitElement {
         font-size="8.2px"
         text-anchor="middle"
         xmlns="http://www.w3.org/2000/svg"
+        @keydown=${(e: KeyboardEvent) => this.keyStrokeDown(e.key)}
+        @keyup=${(e: KeyboardEvent) => this.keyStrokeUp(e.key)}
       >
         <defs>
           <rect
@@ -153,11 +159,10 @@ export class MembraneKeypadElement extends LitElement {
     `;
   }
 
-  private down(key: string, event?: UIEvent) {
+  private down(key: string, element?: Element) {
     if (!this.pressedKeys.has(key)) {
-      if (event) {
-        const currTarget = event.currentTarget as SVGElement;
-        currTarget.classList.add('pressed');
+      if (element) {
+        element.classList.add('pressed');
       }
       this.pressedKeys.add(key);
       this.dispatchEvent(
@@ -168,11 +173,10 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
-  private up(key: string, event?: UIEvent) {
+  private up(key: string, element?: Element) {
     if (this.pressedKeys.has(key)) {
-      if (event) {
-        const currTarget = event.currentTarget as SVGElement;
-        currTarget.classList.remove('pressed');
+      if (element) {
+        element.classList.remove('pressed');
       }
       this.pressedKeys.delete(key);
       this.dispatchEvent(
@@ -180,6 +184,33 @@ export class MembraneKeypadElement extends LitElement {
           detail: { key },
         })
       );
+    }
+  }
+
+  private keyStrokeDown(key: string) {
+    const text = key.toUpperCase();
+    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${text}"]`);
+    if (selectedKey) {
+      this.down(text, selectedKey as SVGElement);
+    }
+  }
+
+  private keyStrokeUp(key: string) {
+    const text = key.toUpperCase();
+    const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${text}"]`);
+    const pressedKeys: NodeListOf<SVGElement> | undefined = this.shadowRoot?.querySelectorAll(
+      '.pressed'
+    );
+
+    if (key === 'Shift') {
+      pressedKeys?.forEach((pressedKey) => {
+        const pressedText = pressedKey.dataset.keyName!;
+        this.up(pressedText, pressedKey);
+      });
+    }
+
+    if (selectedKey) {
+      this.up(text, selectedKey as SVGElement);
     }
   }
 }
