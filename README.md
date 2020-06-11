@@ -55,9 +55,10 @@ The [Membrane keypad element live-coding tutorial](https://www.youtube.com/watch
 through the complete process behind creating an element: research, drawing, and writing the code /
 stories.
 
-### Blog post
+### Blog posts
 
-[Recreating The Arduino Pushbutton Using SVG And &lt;lit-element&gt;](https://www.smashingmagazine.com/2020/01/recreating-arduino-pushbutton-svg/) 
+* [Recreating The Arduino Pushbutton Using SVG And &lt;lit-element&gt;](https://www.smashingmagazine.com/2020/01/recreating-arduino-pushbutton-svg/) 
+* [Turning Arduino OLED Display into a Web Component](https://blog.wokwi.com/making-an-arduino-ssd1306-lit-element/)
 
 ## License
 
