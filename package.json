@@ -30,7 +30,11 @@
     "lint-staged": "^10.0.10",
     "prettier": "^2.0.2",
     "rimraf": "^3.0.0",
+    "rollup": "^2.18.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "storybook-events-logger": "^2.0.5",
+    "terser": "^4.8.0",
     "typescript": "^3.7.3",
     "web-component-analyzer": "^1.0.3"
   },
@@ -38,7 +42,7 @@
     "lit-element": "^2.3.1"
   },
   "scripts": {
-    "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false",
+    "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.js && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",
     "lint": "eslint src/**/*.ts",
     "prepare": "npm run build",
     "analyze-components": "web-component-analyzer analyze src/**/*-element.ts --outFile custom-elements.json",
