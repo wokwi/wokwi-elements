@@ -3,6 +3,7 @@
 Web Components for Arduino and various electronic parts.
 
 [![NPM Version](https://img.shields.io/npm/v/@wokwi/elements)](https://www.npmjs.com/package/@wokwi/elements)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/wokwi/wokwi-elements)
 
 Check out [the component catalog](https://elements.wokwi.com).
 
