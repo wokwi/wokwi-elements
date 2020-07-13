@@ -1,4 +1,31 @@
-export type PinFunction = 'power' | 'i2c' | 'spi' | 'gpio' | 'pwm' | 'analog' | 'dac' | 'usart';
+export type PinSignalInfo =
+  | {
+      type: 'i2c';
+      signal: 'SDA' | 'SCL';
+      bus?: number;
+    }
+  | {
+      type: 'spi';
+      signal: 'SCK' | 'MOSI' | 'MISO' | 'SS';
+      bus?: number;
+    }
+  | {
+      type: 'usart';
+      signal: 'RX' | 'TX';
+      bus?: number;
+    }
+  | {
+      type: 'power';
+      signal: 'GND' | 'VCC';
+      voltage?: number;
+    }
+  | {
+      type: 'pwm';
+    }
+  | {
+      type: 'analog';
+      channel?: number;
+    };
 
 export interface ElementPin {
   /**
@@ -14,18 +41,14 @@ export interface ElementPin {
   /** The y-coordinate of the pin, relative to the element's origin */
   y: number;
 
-  /** The functions of this pin. Leave empty for generic pins without a designated function. **/
-  functions: PinFunction[];
-
-  /**
-   * List of signals carried by this pin. This is useful for pins such as I²C or SPI pins, where there are designated
-   * signal names (e.g. for I²C we have `SCL` and `SDA`). Set to an empty array if the pin isn't tied to specific
-   * protocol signals.
-   */
-  signals: string[];
+  /** The signals for this pin. Leave empty for generic pins without a designated signals. **/
+  signals: PinSignalInfo[];
 
   /**
    * Optional pin description
    */
   description?: string;
 }
+
+/** Helper function for creating analog PinSignalInfo objects */
+export const analog = (channel: number) => ({ type: 'analog', channel } as PinSignalInfo);

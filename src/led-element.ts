@@ -19,8 +19,8 @@ export class LEDElement extends LitElement {
   @property() label = '';
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'A', x: 24, y: 42, functions: [], signals: [], description: 'Anode' },
-    { name: 'C', x: 16, y: 42, functions: [], signals: [], description: 'Cathode' },
+    { name: 'A', x: 24, y: 42, signals: [], description: 'Anode' },
+    { name: 'C', x: 16, y: 42, signals: [], description: 'Cathode' },
   ];
 
   static get styles() {

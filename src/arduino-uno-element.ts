@@ -1,6 +1,6 @@
-import { ElementPin } from './pin';
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { pinsFemalePattern } from './patterns/pins-female';
+import { analog, ElementPin } from './pin';
 
 @customElement('wokwi-arduino-uno')
 export class ArduinoUnoElement extends LitElement {
@@ -10,37 +10,37 @@ export class ArduinoUnoElement extends LitElement {
   @property() ledPower = false;
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'A5.2', x: 87, y: 9, functions: ['analog', 'i2c'], signals: ['SCL'] },
-    { name: 'A4.2', x: 97, y: 9, functions: ['analog', 'i2c'], signals: ['SDA'] },
-    { name: 'AREF', x: 106, y: 9, functions: [], signals: [] },
-    { name: 'GND.1', x: 115.5, y: 9, functions: ['power'], signals: ['GND'] },
-    { name: '13', x: 125, y: 9, functions: ['gpio', 'spi'], signals: ['SCK'] },
-    { name: '12', x: 134.5, y: 9, functions: ['gpio', 'spi'], signals: ['MISO'] },
-    { name: '11', x: 144, y: 9, functions: ['gpio', 'pwm', 'spi'], signals: ['MOSI'] },
-    { name: '10', x: 153.5, y: 9, functions: ['gpio', 'pwm', 'spi'], signals: ['SS'] },
-    { name: '9', x: 163, y: 9, functions: ['gpio', 'pwm'], signals: [] },
-    { name: '8', x: 173, y: 9, functions: ['gpio'], signals: [] },
-    { name: '7', x: 189, y: 9, functions: ['gpio'], signals: [] },
-    { name: '6', x: 198.5, y: 9, functions: ['gpio', 'pwm'], signals: [] },
-    { name: '5', x: 208, y: 9, functions: ['gpio', 'pwm'], signals: [] },
-    { name: '4', x: 217.5, y: 9, functions: ['gpio'], signals: [] },
-    { name: '3', x: 227, y: 9, functions: ['gpio', 'pwm'], signals: [] },
-    { name: '2', x: 236.5, y: 9, functions: ['gpio'], signals: [] },
-    { name: '1', x: 246, y: 9, functions: ['gpio', 'usart'], signals: ['TX'] },
-    { name: '0', x: 255.5, y: 9, functions: ['gpio', 'usart'], signals: ['RX'] },
-    { name: 'IOREF', x: 131, y: 191.5, functions: [], signals: [] },
-    { name: 'RESET', x: 140.5, y: 191.5, functions: [], signals: [] },
-    { name: '3.3V', x: 150, y: 191.5, functions: ['power'], signals: [] },
-    { name: '5V', x: 160, y: 191.5, functions: ['power'], signals: [] },
-    { name: 'GND.2', x: 169.5, y: 191.5, functions: ['power'], signals: ['GND'] },
-    { name: 'GND.3', x: 179, y: 191.5, functions: ['power'], signals: ['GND'] },
-    { name: 'VIN', x: 188.5, y: 191.5, functions: ['power'], signals: [] },
-    { name: 'A0', x: 208, y: 191.5, functions: ['gpio', 'analog'], signals: [] },
-    { name: 'A1', x: 217.5, y: 191.5, functions: ['gpio', 'analog'], signals: [] },
-    { name: 'A2', x: 227, y: 191.5, functions: ['gpio', 'analog'], signals: [] },
-    { name: 'A3', x: 236.5, y: 191.5, functions: ['gpio', 'analog'], signals: [] },
-    { name: 'A4', x: 246, y: 191.5, functions: ['gpio', 'analog', 'i2c'], signals: ['SDA'] },
-    { name: 'A5', x: 255.5, y: 191.5, functions: ['gpio', 'analog', 'i2c'], signals: ['SCL'] },
+    { name: 'A5.2', x: 87, y: 9, signals: [analog(5), { type: 'i2c', signal: 'SCL' }] },
+    { name: 'A4.2', x: 97, y: 9, signals: [analog(4), { type: 'i2c', signal: 'SDA' }] },
+    { name: 'AREF', x: 106, y: 9, signals: [] },
+    { name: 'GND.1', x: 115.5, y: 9, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: '13', x: 125, y: 9, signals: [{ type: 'spi', signal: 'SCK' }] },
+    { name: '12', x: 134.5, y: 9, signals: [{ type: 'spi', signal: 'MISO' }] },
+    { name: '11', x: 144, y: 9, signals: [{ type: 'spi', signal: 'MOSI' }, { type: 'pwm' }] },
+    { name: '10', x: 153.5, y: 9, signals: [{ type: 'spi', signal: 'SS' }, { type: 'pwm' }] },
+    { name: '9', x: 163, y: 9, signals: [{ type: 'pwm' }] },
+    { name: '8', x: 173, y: 9, signals: [] },
+    { name: '7', x: 189, y: 9, signals: [] },
+    { name: '6', x: 198.5, y: 9, signals: [{ type: 'pwm' }] },
+    { name: '5', x: 208, y: 9, signals: [{ type: 'pwm' }] },
+    { name: '4', x: 217.5, y: 9, signals: [] },
+    { name: '3', x: 227, y: 9, signals: [{ type: 'pwm' }] },
+    { name: '2', x: 236.5, y: 9, signals: [] },
+    { name: '1', x: 246, y: 9, signals: [{ type: 'usart', signal: 'TX' }] },
+    { name: '0', x: 255.5, y: 9, signals: [{ type: 'usart', signal: 'RX' }] },
+    { name: 'IOREF', x: 131, y: 191.5, signals: [] },
+    { name: 'RESET', x: 140.5, y: 191.5, signals: [] },
+    { name: '3.3V', x: 150, y: 191.5, signals: [{ type: 'power', signal: 'VCC', voltage: 3.3 }] },
+    { name: '5V', x: 160, y: 191.5, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
+    { name: 'GND.2', x: 169.5, y: 191.5, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'GND.3', x: 179, y: 191.5, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'VIN', x: 188.5, y: 191.5, signals: [{ type: 'power', signal: 'VCC' }] },
+    { name: 'A0', x: 208, y: 191.5, signals: [analog(0)] },
+    { name: 'A1', x: 217.5, y: 191.5, signals: [analog(1)] },
+    { name: 'A2', x: 227, y: 191.5, signals: [analog(2)] },
+    { name: 'A3', x: 236.5, y: 191.5, signals: [analog(3)] },
+    { name: 'A4', x: 246, y: 191.5, signals: [analog(4), { type: 'i2c', signal: 'SCL' }] },
+    { name: 'A5', x: 255.5, y: 191.5, signals: [analog(5), { type: 'i2c', signal: 'SDA' }] },
   ];
 
   render() {
