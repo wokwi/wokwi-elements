@@ -2,17 +2,17 @@ export type PinSignalInfo =
   | {
       type: 'i2c';
       signal: 'SDA' | 'SCL';
-      bus?: number;
+      bus: number;
     }
   | {
       type: 'spi';
       signal: 'SCK' | 'MOSI' | 'MISO' | 'SS';
-      bus?: number;
+      bus: number;
     }
   | {
       type: 'usart';
       signal: 'RX' | 'TX';
-      bus?: number;
+      bus: number;
     }
   | {
       type: 'power';
@@ -50,5 +50,23 @@ export interface ElementPin {
   description?: string;
 }
 
-/** Helper function for creating analog PinSignalInfo objects */
-export const analog = (channel: number) => ({ type: 'analog', channel } as PinSignalInfo);
+/** Helper function for creating PinSignalInfo objects */
+export const analog = (channel: number): PinSignalInfo => ({ type: 'analog', channel });
+
+export const i2c = (signal: 'SCL' | 'SDA', bus = 0): PinSignalInfo => ({
+  type: 'i2c',
+  signal,
+  bus,
+});
+
+export const spi = (signal: 'SCK' | 'MOSI' | 'MISO' | 'SS', bus = 0): PinSignalInfo => ({
+  type: 'spi',
+  signal,
+  bus,
+});
+
+export const usart = (signal: 'RX' | 'TX', bus = 0): PinSignalInfo => ({
+  type: 'usart',
+  signal,
+  bus,
+});

@@ -1,6 +1,6 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { pinsFemalePattern } from './patterns/pins-female';
-import { analog, ElementPin } from './pin';
+import { analog, ElementPin, i2c, spi, usart } from './pin';
 
 @customElement('wokwi-arduino-uno')
 export class ArduinoUnoElement extends LitElement {
@@ -10,14 +10,14 @@ export class ArduinoUnoElement extends LitElement {
   @property() ledPower = false;
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'A5.2', x: 87, y: 9, signals: [analog(5), { type: 'i2c', signal: 'SCL' }] },
-    { name: 'A4.2', x: 97, y: 9, signals: [analog(4), { type: 'i2c', signal: 'SDA' }] },
+    { name: 'A5.2', x: 87, y: 9, signals: [analog(5), i2c('SCL')] },
+    { name: 'A4.2', x: 97, y: 9, signals: [analog(4), i2c('SDA')] },
     { name: 'AREF', x: 106, y: 9, signals: [] },
     { name: 'GND.1', x: 115.5, y: 9, signals: [{ type: 'power', signal: 'GND' }] },
-    { name: '13', x: 125, y: 9, signals: [{ type: 'spi', signal: 'SCK' }] },
-    { name: '12', x: 134.5, y: 9, signals: [{ type: 'spi', signal: 'MISO' }] },
-    { name: '11', x: 144, y: 9, signals: [{ type: 'spi', signal: 'MOSI' }, { type: 'pwm' }] },
-    { name: '10', x: 153.5, y: 9, signals: [{ type: 'spi', signal: 'SS' }, { type: 'pwm' }] },
+    { name: '13', x: 125, y: 9, signals: [spi('SCK')] },
+    { name: '12', x: 134.5, y: 9, signals: [spi('MISO')] },
+    { name: '11', x: 144, y: 9, signals: [spi('MOSI'), { type: 'pwm' }] },
+    { name: '10', x: 153.5, y: 9, signals: [spi('SS'), { type: 'pwm' }] },
     { name: '9', x: 163, y: 9, signals: [{ type: 'pwm' }] },
     { name: '8', x: 173, y: 9, signals: [] },
     { name: '7', x: 189, y: 9, signals: [] },
@@ -26,8 +26,8 @@ export class ArduinoUnoElement extends LitElement {
     { name: '4', x: 217.5, y: 9, signals: [] },
     { name: '3', x: 227, y: 9, signals: [{ type: 'pwm' }] },
     { name: '2', x: 236.5, y: 9, signals: [] },
-    { name: '1', x: 246, y: 9, signals: [{ type: 'usart', signal: 'TX' }] },
-    { name: '0', x: 255.5, y: 9, signals: [{ type: 'usart', signal: 'RX' }] },
+    { name: '1', x: 246, y: 9, signals: [usart('TX')] },
+    { name: '0', x: 255.5, y: 9, signals: [usart('RX')] },
     { name: 'IOREF', x: 131, y: 191.5, signals: [] },
     { name: 'RESET', x: 140.5, y: 191.5, signals: [] },
     { name: '3.3V', x: 150, y: 191.5, signals: [{ type: 'power', signal: 'VCC', voltage: 3.3 }] },
@@ -39,8 +39,8 @@ export class ArduinoUnoElement extends LitElement {
     { name: 'A1', x: 217.5, y: 191.5, signals: [analog(1)] },
     { name: 'A2', x: 227, y: 191.5, signals: [analog(2)] },
     { name: 'A3', x: 236.5, y: 191.5, signals: [analog(3)] },
-    { name: 'A4', x: 246, y: 191.5, signals: [analog(4), { type: 'i2c', signal: 'SCL' }] },
-    { name: 'A5', x: 255.5, y: 191.5, signals: [analog(5), { type: 'i2c', signal: 'SDA' }] },
+    { name: 'A4', x: 246, y: 191.5, signals: [analog(4), i2c('SCL')] },
+    { name: 'A5', x: 255.5, y: 191.5, signals: [analog(5), i2c('SDA')] },
   ];
 
   render() {
