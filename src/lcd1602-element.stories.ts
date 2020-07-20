@@ -69,14 +69,35 @@ storiesOf('LCD1602', module)
   )
   .add(
     'Font A02',
-    () => html`
-      <wokwi-lcd1602
-        .characters="${encode(text('value', symbols))}"
-        .font=${fontA02}
-        .cursor=${boolean('cursor', false)}
-        .blink=${boolean('blink', false)}
-        cursorX=${number('cursorX', 0, { min: 0, max: 15 })}
-        cursorY=${number('cursorY', 0, { min: 0, max: 1 })}
-      ></wokwi-lcd1602>
-    `
+    () =>
+      html`
+        <wokwi-lcd1602
+          .characters="${encode(text('value', symbols))}"
+          .font=${fontA02}
+          .cursor=${boolean('cursor', false)}
+          .blink=${boolean('blink', false)}
+          cursorX=${number('cursorX', 0, { min: 0, max: 15 })}
+          cursorY=${number('cursorY', 0, { min: 0, max: 1 })}
+        ></wokwi-lcd1602>
+      `
+  )
+  .add(
+    'I²C pins',
+    () =>
+      html`
+        <wokwi-lcd1602
+          .characters="${encode('I only need        4 pins!')}"
+          pins="i2c"
+        ></wokwi-lcd1602>
+      `
+  )
+  .add(
+    'No pins',
+    () =>
+      html`
+        <wokwi-lcd1602
+          .characters="${encode('Look ma!           I got no pins')}"
+          pins="none"
+        ></wokwi-lcd1602>
+      `
   );

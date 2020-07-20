@@ -23,6 +23,7 @@ export class LCD1602Element extends LitElement {
   @property() cursorX = 0;
   @property() cursorY = 0;
   @property() backlight = true;
+  @property() pins: 'full' | 'i2c' | 'none' = 'full';
 
   static get styles() {
     return css`
@@ -102,6 +103,41 @@ export class LCD1602Element extends LitElement {
     return result;
   }
 
+  renderI2CPins() {
+    return svg`
+      <rect x="7.55" y="-2.5" height="2.5" width="10.16" fill="url(#pins)" transform="rotate(90)" />
+      <text y="6.8" x="0.7" fill="white">1</text>
+      <text y="8.9" x="2.3" fill="white">GND</text>
+      <text y="11.4" x="2.3" fill="white">VCC</text>
+      <text y="14" x="2.3" fill="white">SDA</text>
+      <text y="16.6" x="2.3" fill="white">SCL</text>
+    `;
+  }
+
+  renderPins() {
+    return svg`
+      <rect x="7.55" y="33.5" height="2.5" width="40.64" fill="url(#pins)" />
+      <text x="6" y="35.3" fill="white">1</text>
+      <text x="7.2" y="33.3" fill="white">VSS</text>
+      <text x="9.9" y="33.3" fill="white">VDD</text>
+      <text x="12.7" y="33.3" fill="white">V0</text>
+      <text x="15.2" y="33.3" fill="white">RS</text>
+      <text x="17.8" y="33.3" fill="white">RW</text>
+      <text x="20.8" y="33.3" fill="white">E</text>
+      <text x="22.7" y="33.3" fill="white">D0</text>
+      <text x="25.3" y="33.3" fill="white">D1</text>
+      <text x="27.9" y="33.3" fill="white">D2</text>
+      <text x="30.4" y="33.3" fill="white">D3</text>
+      <text x="33" y="33.3" fill="white">D4</text>
+      <text x="35.6" y="33.3" fill="white">D5</text>
+      <text x="38.2" y="33.3" fill="white">D6</text>
+      <text x="40.8" y="33.3" fill="white">D7</text>
+      <text x="43.6" y="33.3" fill="white">A</text>
+      <text x="46.2" y="33.3" fill="white">K</text>
+      <text x="48" y="35.3" fill="white">16</text>
+    `;
+  }
+
   render() {
     const { color, characters, background } = this;
 
@@ -117,6 +153,7 @@ export class LCD1602Element extends LitElement {
         height="36mm"
         version="1.1"
         viewBox="0 0 80 36"
+        style="font-size: 1.5px; font-family: monospace"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
@@ -130,11 +167,20 @@ export class LCD1602Element extends LitElement {
           >
             <rect width="2.95" height="5.55" fill-opacity="0.05" />
           </pattern>
+          <pattern id="pins" width="2.54" height="3.255" patternUnits="userSpaceOnUse" y="1.1">
+            <path
+              fill="#92926d"
+              d="M0,0.55c0,0 0.21,-0.52 0.87,-0.52 0.67,0 0.81,0.51 0.81,0.51v1.81h-1.869z"
+            />
+            <circle r="0.45" cx="0.827" cy="0.9" color="black" />
+          </pattern>
         </defs>
         <rect width="80" height="36" fill="#087f45" />
         <rect x="4.95" y="5.7" width="71.2" height="25.2" />
         <rect x="7.55" y="10.3" width="66" height="16" rx="1.5" ry="1.5" fill="${actualBgColor}" />
         <rect x="7.55" y="10.3" width="66" height="16" rx="1.5" ry="1.5" opacity="${darken}" />
+        ${this.pins === 'i2c' ? this.renderI2CPins() : null}
+        ${this.pins === 'full' ? this.renderPins() : null}
         <rect x="12.45" y="12.55" width="56.2" height="11.5" fill="url(#characters)" />
         <path d="${this.path(characters)}" transform="translate(12.45, 12.55)" fill="${color}" />
         ${this.renderCursor()}
