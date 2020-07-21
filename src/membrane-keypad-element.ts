@@ -1,4 +1,5 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { pinsFemalePattern } from './patterns/pins-female';
 
 const SPACE_KEY = 32;
 
@@ -8,7 +9,15 @@ function isNumeric(text: string) {
 
 @customElement('wokwi-membrane-keypad')
 export class MembraneKeypadElement extends LitElement {
-  @property() threeColumns = false;
+  /**
+   * Number of columns (3 or 4)
+   */
+  @property() columns: '3' | '4' = '4';
+
+  /**
+   * Whether to display a connector beneath the keypad
+   */
+  @property() connector = false;
 
   private pressedKeys = new Set<string>();
 
@@ -39,9 +48,13 @@ export class MembraneKeypadElement extends LitElement {
   }
 
   render() {
-    const fourColumns = !this.threeColumns;
+    const { connector } = this;
+    const fourColumns = this.columns === '4';
     const columnWidth = 15;
+    const pinWidth = 2.54;
     const width = fourColumns ? 70.336 : 70.336 - columnWidth;
+    const connectorWidth = fourColumns ? pinWidth * 8 : pinWidth * 7;
+    const height = 76 + (connector ? 15 : 0);
 
     return html`
       <style>
@@ -89,9 +102,9 @@ export class MembraneKeypadElement extends LitElement {
 
       <svg
         width="${width}mm"
-        height="76mm"
+        height="${height}mm"
         version="1.1"
-        viewBox="0 0 ${width} 76"
+        viewBox="0 0 ${width} ${height}"
         font-family="sans-serif"
         font-size="8.2px"
         text-anchor="middle"
@@ -109,7 +122,16 @@ export class MembraneKeypadElement extends LitElement {
             stroke="#b1b5b9"
             stroke-width=".75"
           />
-
+          <pattern id="wires" width="2.54" height="8" patternUnits="userSpaceOnUse">
+            <rect width="2.54" height="8" fill="#eee" />
+            <rect x="0.77" width="1" height="6" fill="#d9d5bc" />
+            <circle cx="1.27" cy="6" r="0.75" fill="#d9d5bc" />
+            <rect x="0.52" y="6" width="1.5" height="2" fill="#d9d5bc" />
+          </pattern>
+          <pattern id="wires-marks" width="2.54" height="8" patternUnits="userSpaceOnUse">
+            <rect x="0.52" y="6" width="1.5" height="2" fill="#746d41" />
+          </pattern>
+          ${pinsFemalePattern}
           <filter id="shadow">
             <feDropShadow dx="0" dy="0" stdDeviation="0.5" flood-color="#ffff99" />
           </filter>
@@ -128,6 +150,18 @@ export class MembraneKeypadElement extends LitElement {
           stroke="#b1b5b9"
           stroke-width="1"
         />
+
+        <!-- Connector -->
+        ${connector
+          ? svg`
+            <g transform="translate(${(width - connectorWidth) / 2}, 76)">
+              <rect width="${connectorWidth}" height="8" fill="url(#wires)" />
+              <rect width="10.16" height="8" fill="url(#wires-marks)" />
+              <rect y="8" width="${connectorWidth}" height="7" fill="#333" />
+              <rect transform="translate(0, 12)" width="${connectorWidth}" height="2.54" fill="url(#pins-female)" />
+            </g>
+          `
+          : null}
 
         <!-- Blue keys -->
         <g fill="#4e90d7">
@@ -204,8 +238,10 @@ export class MembraneKeypadElement extends LitElement {
 
     if (key === 'Shift') {
       pressedKeys?.forEach((pressedKey) => {
-        const pressedText = pressedKey.dataset.keyName!;
-        this.up(pressedText, pressedKey);
+        const pressedText = pressedKey.dataset.keyName;
+        if (pressedText) {
+          this.up(pressedText, pressedKey);
+        }
       });
     }
 

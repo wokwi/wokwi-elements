@@ -1,4 +1,5 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { pinsFemalePattern } from './patterns/pins-female';
 
 @customElement('wokwi-arduino-uno')
 export class ArduinoUnoElement extends LitElement {
@@ -29,30 +30,7 @@ export class ArduinoUnoElement extends LitElement {
           <feGaussianBlur stdDeviation="0.5" />
         </filter>
 
-        <pattern id="pins" width="2.54" height="2.54" patternUnits="userSpaceOnUse">
-          <rect x="0" y="0" width="2.54" height="2.54" fill="#333"></rect>
-          <rect x="1.079" y="0.896" width="0.762" height="0.762" style="fill: #191919"></rect>
-          <path
-            transform="translate(1.079, 1.658) rotate(180 0 0)"
-            d="m 0 0 v 0.762 l 0.433,0.433 c 0.046,-0.046 0.074,-0.109 0.074,-0.179 v -1.27 c 0,-0.070 -0.028,-0.133 -0.074,-0.179 z"
-            style="opacity: 0.25"
-          ></path>
-          <path
-            transform="translate(1.841, 1.658) rotate(90 0 0)"
-            d="m 0 0 v 0.762 l 0.433,0.433 c 0.046,-0.046 0.074,-0.109 0.074,-0.179 v -1.27 c 0,-0.070 -0.028,-0.133 -0.074,-0.179 z"
-            style="opacity: 0.3; fill: #fff"
-          ></path>
-          <path
-            transform="translate(1.841, 0.896)"
-            d="m 0 0 v 0.762 l 0.433,0.433 c 0.046,-0.046 0.074,-0.109 0.074,-0.179 v -1.27 c 0,-0.070 -0.028,-0.133 -0.074,-0.179 z"
-            style="opacity: 0.15; fill: #fff"
-          ></path>
-          <path
-            transform="translate(1.079, 0.896) rotate(270 0 0)"
-            d="m 0 0 v 0.762 l 0.433,0.433 c 0.046,-0.046 0.074,-0.109 0.074,-0.179 v -1.27 c 0,-0.070 -0.028,-0.133 -0.074,-0.179 z"
-            style="opacity: 0.35"
-          ></path>
-        </pattern>
+        ${pinsFemalePattern}
 
         <pattern id="pin-male" width="2.54" height="4.80" patternUnits="userSpaceOnUse">
           <rect ry="0.3" rx="0.3" width="2.12" height="4.80" fill="#565656" />
@@ -122,16 +100,16 @@ export class ArduinoUnoElement extends LitElement {
 
         <!-- Pin Headers -->
         <g transform="translate(17.497 1.27)">
-          <rect width="${0.38 + 2.54 * 10}" height="2.54" fill="url(#pins)"></rect>
+          <rect width="${0.38 + 2.54 * 10}" height="2.54" fill="url(#pins-female)"></rect>
         </g>
         <g transform="translate(44.421 1.27)">
-          <rect width="${0.38 + 2.54 * 8}" height="2.54" fill="url(#pins)"></rect>
+          <rect width="${0.38 + 2.54 * 8}" height="2.54" fill="url(#pins-female)"></rect>
         </g>
         <g transform="translate(26.641 49.53)">
-          <rect width="${0.38 + 2.54 * 8}" height="2.54" fill="url(#pins)"></rect>
+          <rect width="${0.38 + 2.54 * 8}" height="2.54" fill="url(#pins-female)"></rect>
         </g>
         <g transform="translate(49.501 49.53)">
-          <rect width="${0.38 + 2.54 * 6}" height="2.54" fill="url(#pins)"></rect>
+          <rect width="${0.38 + 2.54 * 6}" height="2.54" fill="url(#pins-female)"></rect>
         </g>
 
         <!-- MCU -->

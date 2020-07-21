@@ -15,12 +15,33 @@ storiesOf('Membrane Keypad', module)
     `
   )
   .add(
-    'Three Columns',
+    'With connector',
     () => html`
       <wokwi-membrane-keypad
-        .threeColumns="${true}"
         @button-press=${logEvent}
         @button-release=${logEvent}
+        .connector=${true}
+      ></wokwi-membrane-keypad>
+    `
+  )
+  .add(
+    'Three columns',
+    () => html`
+      <wokwi-membrane-keypad
+        columns="3"
+        @button-press=${logEvent}
+        @button-release=${logEvent}
+      ></wokwi-membrane-keypad>
+    `
+  )
+  .add(
+    'Three columns + connector',
+    () => html`
+      <wokwi-membrane-keypad
+        columns="3"
+        @button-press=${logEvent}
+        @button-release=${logEvent}
+        .connector=${true}
       ></wokwi-membrane-keypad>
     `
   );
