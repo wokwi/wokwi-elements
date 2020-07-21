@@ -14,6 +14,7 @@ import { PushbuttonElement } from './pushbutton-element';
 import { ResistorElement } from './resistor-element';
 import { RotaryDialerElement } from './rotary-dialer-element';
 import { SSD1306Element } from './ssd1306-element';
+import { ServoElement } from './servo-element';
 
 declare global {
   namespace JSX {
@@ -31,6 +32,7 @@ declare global {
       'wokwi-ssd1306': Partial<SSD1306Element>;
       'wokwi-buzzer': Partial<BuzzerElement>;
       'wokwi-rotary-dialer': Partial<RotaryDialerElement>;
+      'wokwi-servo': Partial<ServoElement>;
     }
   }
 }
