@@ -22,7 +22,7 @@ export class BreadboardElement extends LitElement {
   // Next value is the sum of the prev value + the amount we want to add
   private increaseBy(numToAdd: number, initValue: number, membersCount: number) {
     const xPositions = [initValue];
-    for (let i = 1; i <= membersCount; i++) {
+    for (let i = 1; i < membersCount; i++) {
       xPositions.push(xPositions[i - 1] + numToAdd);
     }
     return xPositions;
@@ -58,76 +58,16 @@ export class BreadboardElement extends LitElement {
             <line y1="4" y2="17" x1="10.5" x2="10.5" stroke="#8CE2F3" stroke-width="1" />
           </g>
           <rect x="6mm" y="5" width="149mm" height="1" fill-opacity="0.5" fill="#F97466" />
-          <rect
-            transform="translate(${gapBetweenBlocks[0]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[1]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[2]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[3]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[4]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[5]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[6]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[7]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[8]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[9]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
+          ${gapBetweenBlocks.map(
+            (gap) =>
+              svg`<rect
+                      transform="translate(${gap})"
+                      y="12.55"
+                      width="40"
+                      height="3.6mm"
+                      fill="url(#points)"
+            />`
+          )}
           <rect x="6mm" y="30" width="149mm" height="1" fill-opacity="0.5" fill="#8CE2F3" />
           <g class="plus" transform="translate(600 0) scale(0.5)">
             <line x1="4" x2="17" y1="10.5" y2="10.5" stroke="#F97466" stroke-width="1" />
@@ -173,11 +113,11 @@ export class BreadboardElement extends LitElement {
 
         <g class="mid-2" transform="translate(0, 65)">
           <g transform="translate(585, 0)">
-            <text class="spot" transform="translate(16, 47)">e</text>
-            <text class="spot" transform="translate(16, 57)">f</text>
-            <text class="spot" transform="translate(16, 65)">g</text>
-            <text class="spot" transform="translate(16, 76)">h</text>
-            <text class="spot" transform="translate(16, 85)">i</text>
+            <text class="spot" transform="translate(16, 47)">f</text>
+            <text class="spot" transform="translate(16, 57)">g</text>
+            <text class="spot" transform="translate(16, 65)">h</text>
+            <text class="spot" transform="translate(16, 76)">i</text>
+            <text class="spot" transform="translate(16, 85)">j</text>
           </g>
           <g class="numbers" transform="translate(0, 60)">
             <text class="spot" transform="translate(${textPositions[0]}, 33) rotate(90)">60</text>
@@ -195,11 +135,11 @@ export class BreadboardElement extends LitElement {
             <text class="spot" transform="translate(${textPositions[12]}, 36) rotate(90)">1</text>
           </g>
           <g>
-            <text class="spot" transform="translate(16, 47)">e</text>
-            <text class="spot" transform="translate(16, 57)">f</text>
-            <text class="spot" transform="translate(16, 65)">g</text>
-            <text class="spot" transform="translate(16, 76)">h</text>
-            <text class="spot" transform="translate(16, 85)">i</text>
+            <text class="spot" transform="translate(16, 47)">f</text>
+            <text class="spot" transform="translate(16, 57)">g</text>
+            <text class="spot" transform="translate(16, 65)">h</text>
+            <text class="spot" transform="translate(16, 76)">i</text>
+            <text class="spot" transform="translate(16, 85)">j</text>
           </g>
           <rect x="5mm" y="40" width="153mm" height="13mm" fill="url(#points-wide)" />
         </g>
@@ -213,76 +153,16 @@ export class BreadboardElement extends LitElement {
             <line y1="4" y2="17" x1="10.5" x2="10.5" stroke="#8CE2F3" stroke-width="1" />
           </g>
           <rect x="6mm" y="5" width="149mm" height="1" fill-opacity="0.5" fill="#F97466" />
-          <rect
-            transform="translate(${gapBetweenBlocks[0]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[1]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[2]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[3]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[4]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[5]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[6]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[7]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[8]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
-          <rect
-            transform="translate(${gapBetweenBlocks[9]})"
-            y="12.55"
-            width="40"
-            height="3.6mm"
-            fill="url(#points)"
-          />
+          ${gapBetweenBlocks.map(
+            (gap) =>
+              svg`<rect
+                      transform="translate(${gap})"
+                      y="12.55"
+                      width="40"
+                      height="3.6mm"
+                      fill="url(#points)"
+            />`
+          )}
           <rect x="6mm" y="30" width="149mm" height="1" fill-opacity="0.5" fill="#8CE2F3" />
           <g class="plus" transform="translate(600 0) scale(0.5)">
             <line x1="4" x2="17" y1="10.5" y2="10.5" stroke="#F97466" stroke-width="1" />
