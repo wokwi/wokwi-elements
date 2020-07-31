@@ -73,8 +73,7 @@ export class ServoElement extends LitElement {
         <circle fill="#999" cx="91.467" cy="59.773" r="18.606" />
         <path
           fill=${this.hornColor}
-          transform="rotate(${this.angle})"
-          transform-origin="91.467 59.773"
+          transform="translate(91.467 59.773) rotate(${this.angle ?? 0}) translate(-91.467 -59.773)"
           d="${this.hornPath()}"
         />
         <circle fill="gray" cx="91.467" cy="59.773" r="8.3729" />
