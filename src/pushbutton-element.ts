@@ -1,4 +1,5 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
+import { ElementPin } from './pin';
 
 const SPACE_KEY = 32;
 
@@ -6,6 +7,13 @@ const SPACE_KEY = 32;
 export class PushbuttonElement extends LitElement {
   @property() color = 'red';
   @property() pressed = false;
+
+  readonly pinInfo: ElementPin[] = [
+    { name: '1.l', x: 2, y: 9, signals: [] },
+    { name: '2.l', x: 2, y: 36, signals: [] },
+    { name: '1.r', x: 65, y: 36, signals: [] },
+    { name: '2.r', x: 65, y: 9, signals: [] },
+  ];
 
   static get styles() {
     return css`

@@ -1,5 +1,6 @@
 // Reference: https://cdn-learn.adafruit.com/assets/assets/000/036/494/original/lcds___displays_fabprint.png?1476374574
 import { customElement, html, LitElement, property, SVGTemplateResult } from 'lit-element';
+import { ElementPin, i2c } from './pin';
 
 type CanvasContext = CanvasRenderingContext2D | null | undefined;
 @customElement('wokwi-ssd1306')
@@ -18,6 +19,17 @@ export class SSD1306Element extends LitElement {
   private screenHeight = 64;
   private canvas: HTMLCanvasElement | null | undefined = void 0;
   private ctx: CanvasContext = null;
+
+  readonly pinInfo: ElementPin[] = [
+    { name: 'DATA', x: 36.5, y: 12.5, signals: [i2c('SDA')] },
+    { name: 'CLK', x: 45.5, y: 12.5, signals: [i2c('SCL')] },
+    { name: 'DC', x: 54.5, y: 12.5, signals: [] },
+    { name: 'RST', x: 64.5, y: 12.5, signals: [] },
+    { name: 'CS', x: 74.5, y: 12.5, signals: [] },
+    { name: '3V3', x: 83.5, y: 12.5, signals: [{ type: 'power', signal: 'VCC', voltage: 3.3 }] },
+    { name: 'VIN', x: 93.5, y: 12.5, signals: [{ type: 'power', signal: 'VCC' }] },
+    { name: 'GND', x: 103.5, y: 12, signals: [{ type: 'power', signal: 'GND' }] },
+  ];
 
   constructor() {
     super();

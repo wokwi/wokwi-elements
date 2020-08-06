@@ -1,4 +1,5 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
+import { ElementPin } from './pin';
 
 const lightColors: { [key: string]: string } = {
   red: '#ff8080',
@@ -16,6 +17,11 @@ export class LEDElement extends LitElement {
   @property() color = 'red';
   @property() lightColor: string | null = null;
   @property() label = '';
+
+  readonly pinInfo: ElementPin[] = [
+    { name: 'A', x: 24, y: 42, signals: [], description: 'Anode' },
+    { name: 'C', x: 16, y: 42, signals: [], description: 'Cathode' },
+  ];
 
   static get styles() {
     return css`
