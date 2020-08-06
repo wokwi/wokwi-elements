@@ -1,4 +1,5 @@
 import { customElement, html, LitElement, property } from 'lit-element';
+import { ElementPin } from './pin';
 
 const bandColors: { [key: number]: string } = {
   [-2]: 'silver',
@@ -25,6 +26,11 @@ export class ResistorElement extends LitElement {
    * standard [electronic color code](https://en.wikipedia.org/wiki/Electronic_color_code#Resistors).
    */
   @property() value = '1000';
+
+  readonly pinInfo: ElementPin[] = [
+    { name: '1', x: 0, y: 9, signals: [] },
+    { name: '2', x: 59, y: 9, signals: [] },
+  ];
 
   private breakValue(value: number) {
     const exponent =
