@@ -111,7 +111,7 @@ export class SevenSegmentElement extends LitElement {
     `;
   }
 
-  get pinPositions() {
+  private get pinPositions() {
     const { digits } = this;
     const numPins = digits === 4 ? 14 : 10;
     const cols = Math.ceil(numPins / 2);
