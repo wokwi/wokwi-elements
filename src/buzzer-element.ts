@@ -1,4 +1,5 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
+import { ElementPin } from './pin';
 
 /**
  * Renders a piezo electric buzzer.
@@ -10,6 +11,11 @@ export class BuzzerElement extends LitElement {
    * If true a music note will be displayed on top of the buzzer
    */
   @property() hasSignal = false;
+
+  readonly pinInfo: ElementPin[] = [
+    { name: '1', x: 30, y: 82, signals: [] },
+    { name: '2', x: 34, y: 82, signals: [] },
+  ];
 
   static get styles() {
     return css`
