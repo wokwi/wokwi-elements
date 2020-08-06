@@ -1,4 +1,5 @@
 import './react-types';
+export { ElementPin, PinSignalInfo } from './pin';
 export { SevenSegmentElement } from './7segment-element';
 export { ArduinoUnoElement } from './arduino-uno-element';
 export { LCD1602Element } from './lcd1602-element';
