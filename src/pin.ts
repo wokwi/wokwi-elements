@@ -45,6 +45,12 @@ export interface ElementPin {
   signals: PinSignalInfo[];
 
   /**
+   * Pin number. Only relevant for components with numbered pins
+   * (e.g. chips in DIP package), and always starts with 1.
+   */
+  number?: number;
+
+  /**
    * Optional pin description
    */
   description?: string;
