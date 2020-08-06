@@ -1,6 +1,6 @@
+import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
-import { logEvent } from 'storybook-events-logger';
 import './membrane-keypad-element';
 
 storiesOf('Membrane Keypad', module)
@@ -9,8 +9,8 @@ storiesOf('Membrane Keypad', module)
     'Default',
     () => html`
       <wokwi-membrane-keypad
-        @button-press=${logEvent}
-        @button-release=${logEvent}
+        @button-press=${action('button-press')}
+        @button-release=${action('button-release')}
       ></wokwi-membrane-keypad>
     `
   )
@@ -18,8 +18,8 @@ storiesOf('Membrane Keypad', module)
     'With connector',
     () => html`
       <wokwi-membrane-keypad
-        @button-press=${logEvent}
-        @button-release=${logEvent}
+        @button-press=${action('button-press')}
+        @button-release=${action('button-release')}
         .connector=${true}
       ></wokwi-membrane-keypad>
     `
@@ -28,8 +28,8 @@ storiesOf('Membrane Keypad', module)
     'Custom keys',
     () => html`
       <wokwi-membrane-keypad
-        @button-press=${logEvent}
-        @button-release=${logEvent}
+        @button-press=${action('button-press')}
+        @button-release=${action('button-release')}
         .keys=${['1', '2', '3', '4', 'Q', 'W', 'E', 'R', 'A', 'S', 'D', 'F', '!', '@', '#', '$']}
       ></wokwi-membrane-keypad>
     `
@@ -39,8 +39,8 @@ storiesOf('Membrane Keypad', module)
     () => html`
       <wokwi-membrane-keypad
         columns="3"
-        @button-press=${logEvent}
-        @button-release=${logEvent}
+        @button-press=${action('button-press')}
+        @button-release=${action('button-release')}
       ></wokwi-membrane-keypad>
     `
   )
@@ -49,8 +49,8 @@ storiesOf('Membrane Keypad', module)
     () => html`
       <wokwi-membrane-keypad
         columns="3"
-        @button-press=${logEvent}
-        @button-release=${logEvent}
+        @button-press=${action('button-press')}
+        @button-release=${action('button-release')}
         .connector=${true}
       ></wokwi-membrane-keypad>
     `

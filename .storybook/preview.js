@@ -1,10 +1,19 @@
-import { configure } from '@storybook/web-components';
-import { setCustomElements } from '@storybook/web-components';
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+}
+
+import { configure, setCustomElements } from '@storybook/web-components';
 import customElements from '../custom-elements.json';
 
-// automatically import all files ending in *.stories.ts
-const req = require.context('../src', true, /\.stories\.ts$/);
+// Configure Storybook Docs Addon for Web Components
+setCustomElements(customElements);
+
+// force full reload to not re-register web components
+const req = require.context('../src', true, /\.stories\.(ts|js)$/);
+
 configure(req, module);
+
 if (module.hot) {
   module.hot.accept(req.id, () => {
     const currentLocationHref = window.location.href;
@@ -12,6 +21,3 @@ if (module.hot) {
     window.location.reload();
   });
 }
-
-// Configure Storybook Docs Addon for Web Components
-setCustomElements(customElements);
