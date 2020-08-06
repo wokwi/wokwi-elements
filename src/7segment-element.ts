@@ -40,10 +40,10 @@ export class SevenSegmentElement extends LitElement {
     const pinXY = (n: number) => {
       const { startX, cols, bottomY } = this.pinPositions;
       const col = (n - 1) % cols;
-      const row = Math.floor((n - 1) / cols);
+      const row = 1 - Math.floor((n - 1) / cols);
       const xOffset = 1.27;
       const mmToPix = 3.78;
-      const x = startX + xOffset + col * 2.54;
+      const x = startX + xOffset + (row ? col : cols - col - 1) * 2.54;
       const y = this.pins === 'top' ? (row ? bottomY + 1 : 1) : row ? bottomY + 2 : 0;
       return { number: n, x: x * mmToPix, y: y * mmToPix };
     };
@@ -173,27 +173,25 @@ export class SevenSegmentElement extends LitElement {
       digitShapes.push(this.renderDigit(3.5 + i * 12.7, i * 8));
     }
     return html`
-      <div style="position:relative">
-        <svg
-          width="${width}mm"
-          height="${height}mm"
-          version="1.1"
-          viewBox="0 0 ${width} ${height}"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern id="pin-pattern" height="2" width="2.54" patternUnits="userSpaceOnUse">
-              ${pins === 'extend'
-                ? svg`<rect x="1.02" y="0" height="2" width="0.5" fill="#aaa" />`
-                : svg`<circle cx="1.27" cy="1" r=0.5 fill="#aaa" />`}
-            </pattern>
-          </defs>
-          <rect x="0" y="${yOffset}" width="${width}" height="19" />
-          ${digitShapes}<!-- -->
-          ${colon ? this.renderColon() : null}<!-- -->
-          ${pins !== 'none' ? this.renderPins() : null}
-        </svg>
-      </div>
+      <svg
+        width="${width}mm"
+        height="${height}mm"
+        version="1.1"
+        viewBox="0 0 ${width} ${height}"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern id="pin-pattern" height="2" width="2.54" patternUnits="userSpaceOnUse">
+            ${pins === 'extend'
+              ? svg`<rect x="1.02" y="0" height="2" width="0.5" fill="#aaa" />`
+              : svg`<circle cx="1.27" cy="1" r=0.5 fill="#aaa" />`}
+          </pattern>
+        </defs>
+        <rect x="0" y="${yOffset}" width="${width}" height="19" />
+        ${digitShapes}<!-- -->
+        ${colon ? this.renderColon() : null}<!-- -->
+        ${pins !== 'none' ? this.renderPins() : null}
+      </svg>
     `;
   }
 }
