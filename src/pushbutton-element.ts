@@ -11,8 +11,8 @@ export class PushbuttonElement extends LitElement {
   readonly pinInfo: ElementPin[] = [
     { name: '1.l', x: 2, y: 9, signals: [] },
     { name: '2.l', x: 2, y: 36, signals: [] },
-    { name: '1.r', x: 65, y: 36, signals: [] },
-    { name: '2.r', x: 65, y: 9, signals: [] },
+    { name: '1.r', x: 65, y: 9, signals: [] },
+    { name: '2.r', x: 65, y: 36, signals: [] },
   ];
 
   static get styles() {
