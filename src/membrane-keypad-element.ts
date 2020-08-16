@@ -1,5 +1,6 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { pinsFemalePattern } from './patterns/pins-female';
+import { ElementPin } from './pin';
 
 const SPACE_KEY = 32;
 
@@ -18,6 +19,33 @@ export class MembraneKeypadElement extends LitElement {
    * Whether to display a connector beneath the keypad
    */
   @property() connector = false;
+
+  get pinInfo(): ElementPin[] {
+    switch (this.columns) {
+      case '3':
+        return [
+          { name: 'R1', x: 76.5, y: 338, signals: [] },
+          { name: 'R2', x: 86, y: 338, signals: [] },
+          { name: 'R3', x: 95.75, y: 338, signals: [] },
+          { name: 'R4', x: 105.25, y: 338, signals: [] },
+          { name: 'C1', x: 115, y: 338, signals: [] },
+          { name: 'C2', x: 124.5, y: 338, signals: [] },
+          { name: 'C3', x: 134, y: 338, signals: [] },
+        ];
+
+      default:
+        return [
+          { name: 'R1', x: 100, y: 338, signals: [] },
+          { name: 'R2', x: 110, y: 338, signals: [] },
+          { name: 'R3', x: 119.5, y: 338, signals: [] },
+          { name: 'R4', x: 129, y: 338, signals: [] },
+          { name: 'C1', x: 138.5, y: 338, signals: [] },
+          { name: 'C2', x: 148, y: 338, signals: [] },
+          { name: 'C3', x: 157.75, y: 338, signals: [] },
+          { name: 'C4', x: 167.5, y: 338, signals: [] },
+        ];
+    }
+  }
 
   private pressedKeys = new Set<string>();
 
