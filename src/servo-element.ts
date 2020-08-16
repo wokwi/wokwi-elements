@@ -1,4 +1,5 @@
 import { customElement, html, LitElement, property } from 'lit-element';
+import { ElementPin } from './pin';
 
 @customElement('wokwi-servo')
 export class ServoElement extends LitElement {
@@ -15,6 +16,12 @@ export class ServoElement extends LitElement {
 
   /** Servo horn color (as an HTML color) */
   @property() hornColor = '#ccc';
+
+  readonly pinInfo: ElementPin[] = [
+    { name: 'GND', x: 0, y: 50, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'V+', x: 0, y: 59.5, signals: [{ type: 'power', signal: 'VCC' }] },
+    { name: 'PWM', x: 0, y: 69, signals: [{ type: 'pwm' }] },
+  ];
 
   hornPath() {
     switch (this.horn) {
