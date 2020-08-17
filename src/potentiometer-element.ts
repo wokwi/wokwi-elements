@@ -1,5 +1,6 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map';
+import { analog, ElementPin } from './pin';
 
 interface Point {
   x: number;
@@ -18,6 +19,12 @@ export class PotentiometerElement extends LitElement {
   @property() endDegree = 135;
   private center: Point = { x: 0, y: 0 };
   private pressed = false;
+
+  readonly pinInfo: ElementPin[] = [
+    { name: 'GND', x: 29, y: 68.5, number: 1, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'SIG', x: 37, y: 68.5, number: 2, signals: [analog(0)] },
+    { name: 'VCC', x: 44.75, y: 68.5, number: 3, signals: [{ type: 'power', signal: 'VCC' }] },
+  ];
 
   static get styles() {
     return css`
@@ -130,8 +137,8 @@ export class PotentiometerElement extends LitElement {
         />
         <g stroke-width=".15">
           <text x="6.21" y="16.6">GND</text>
-          <text x="8.75" y="16.63">VCC</text>
-          <text x="11.25" y="16.59">SIG</text>
+          <text x="8.75" y="16.63">SIG</text>
+          <text x="11.25" y="16.59">VCC</text>
         </g>
         <g fill="#fff" stroke-width=".15">
           <ellipse cx="1.68" cy="1.81" rx=".99" ry=".96" />
