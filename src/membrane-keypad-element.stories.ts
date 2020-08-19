@@ -25,6 +25,16 @@ storiesOf('Membrane Keypad', module)
     `
   )
   .add(
+    'Custom keys',
+    () => html`
+      <wokwi-membrane-keypad
+        @button-press=${logEvent}
+        @button-release=${logEvent}
+        .keys=${['1', '2', '3', '4', 'Q', 'W', 'E', 'R', 'A', 'S', 'D', 'F', '!', '@', '#', '$']}
+      ></wokwi-membrane-keypad>
+    `
+  )
+  .add(
     'Three columns',
     () => html`
       <wokwi-membrane-keypad

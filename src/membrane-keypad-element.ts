@@ -4,6 +4,9 @@ import { ElementPin } from './pin';
 
 const SPACE_KEY = 32;
 
+const rowPositions = [10.7, 25, 39.3, 53.6];
+const columnPositions = [7, 22, 37, 52];
+
 function isNumeric(text: string) {
   return !isNaN(parseFloat(text));
 }
@@ -19,6 +22,17 @@ export class MembraneKeypadElement extends LitElement {
    * Whether to display a connector beneath the keypad
    */
   @property() connector = false;
+
+  // prettier-ignore
+  /**
+   * Key labels
+   */
+  @property({ type: Array }) keys = [
+    '0',  '1',  '2',  'A',
+    '4',  '5',  '6',  'B',
+    '7',  '8',  '9',  'C',
+    '*',  '0',  '#',  'D',
+  ];
 
   get pinInfo(): ElementPin[] {
     switch (this.columns) {
@@ -49,12 +63,13 @@ export class MembraneKeypadElement extends LitElement {
 
   private pressedKeys = new Set<string>();
 
-  renderKey(text: string, x: number, y: number) {
+  renderKey(row: number, column: number) {
+    const text = this.keys[row * 4 + column] ?? '';
     const keyClass = isNumeric(text) ? 'blue-key' : 'red-key';
     const keyName = text.toUpperCase();
 
     return svg`<g
-      transform="translate(${x} ${y})"
+      transform="translate(${columnPositions[column]} ${rowPositions[row]})"
       tabindex="0"
       class=${keyClass}
       data-key-name=${keyName}
@@ -193,32 +208,37 @@ export class MembraneKeypadElement extends LitElement {
 
         <!-- Blue keys -->
         <g fill="#4e90d7">
-          <g>${this.renderKey('1', 7, 10.7)}</g>
-          <g>${this.renderKey('2', 22, 10.7)}</g>
-          <g>${this.renderKey('3', 37, 10.7)}</g>
-          <g>${this.renderKey('4', 7, 25)}</g>
-          <g>${this.renderKey('5', 22, 25)}</g>
-          <g>${this.renderKey('6', 37, 25)}</g>
-          <g>${this.renderKey('7', 7, 39.3)}</g>
-          <g>${this.renderKey('8', 22, 39.3)}</g>
-          <g>${this.renderKey('9', 37, 39.3)}</g>
-          <g>${this.renderKey('0', 22, 53.6)}</g>
+          <g>${this.renderKey(0, 0)}</g>
+          <g>${this.renderKey(0, 1)}</g>
+          <g>${this.renderKey(0, 2)}</g>
+          <g>${this.renderKey(1, 0)}</g>
+          <g>${this.renderKey(1, 1)}</g>
+          <g>${this.renderKey(1, 2)}</g>
+          <g>${this.renderKey(2, 0)}</g>
+          <g>${this.renderKey(2, 1)}</g>
+          <g>${this.renderKey(2, 2)}</g>
+          <g>${this.renderKey(3, 1)}</g>
         </g>
 
         <!-- Red keys -->
         <g fill="#e94541">
-          <g>${this.renderKey('*', 7, 53.6)}</g>
-          <g>${this.renderKey('#', 37, 53.6)}</g>
+          <g>${this.renderKey(3, 0)}</g>
+          <g>${this.renderKey(3, 2)}</g>
           ${fourColumns &&
           svg`
-              <g>${this.renderKey('A', 52, 10.7)}</g>
-              <g>${this.renderKey('B', 52, 25)}</g>
-              <g>${this.renderKey('C', 52, 39.3)}</g>
-              <g>${this.renderKey('D', 52, 53.6)}</g>
+              <g>${this.renderKey(0, 3)}</g>
+              <g>${this.renderKey(1, 3)}</g>
+              <g>${this.renderKey(2, 3)}</g>
+              <g>${this.renderKey(3, 3)}</g>
           `}
         </g>
       </svg>
     `;
+  }
+
+  private keyIndex(key: string) {
+    const index = this.keys.indexOf(key);
+    return { row: Math.floor(index / 4), column: index % 4 };
   }
 
   private down(key: string, element?: Element) {
@@ -229,7 +249,7 @@ export class MembraneKeypadElement extends LitElement {
       this.pressedKeys.add(key);
       this.dispatchEvent(
         new CustomEvent('button-press', {
-          detail: { key },
+          detail: { key, ...this.keyIndex(key) },
         })
       );
     }
@@ -243,7 +263,7 @@ export class MembraneKeypadElement extends LitElement {
       this.pressedKeys.delete(key);
       this.dispatchEvent(
         new CustomEvent('button-release', {
-          detail: { key },
+          detail: { key, ...this.keyIndex(key) },
         })
       );
     }
