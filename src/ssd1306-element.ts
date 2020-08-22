@@ -1,5 +1,5 @@
 // Reference: https://cdn-learn.adafruit.com/assets/assets/000/036/494/original/lcds___displays_fabprint.png?1476374574
-import { customElement, html, LitElement, property, SVGTemplateResult } from 'lit-element';
+import { customElement, html, LitElement, property, SVGTemplateResult, css } from 'lit-element';
 import { ElementPin, i2c } from './pin';
 
 type CanvasContext = CanvasRenderingContext2D | null | undefined;
@@ -30,6 +30,15 @@ export class SSD1306Element extends LitElement {
     { name: 'VIN', x: 93.5, y: 12.5, signals: [{ type: 'power', signal: 'VCC' }] },
     { name: 'GND', x: 103.5, y: 12, signals: [{ type: 'power', signal: 'GND' }] },
   ];
+
+  static get styles() {
+    return css`
+      .pixelated {
+        image-rendering: crisp-edges; /* firefox */
+        image-rendering: pixelated; /* chrome/webkit */
+      }
+    `;
+  }
 
   constructor() {
     super();
@@ -83,7 +92,7 @@ export class SSD1306Element extends LitElement {
             width="${screenWidth}"
             height="${screenHeight}"
           >
-            <canvas width="${screenWidth}" height="${screenHeight}"></canvas>
+            <canvas width="${screenWidth}" height="${screenHeight}" class="pixelated"></canvas>
           </foreignObject>
         </g>
 
