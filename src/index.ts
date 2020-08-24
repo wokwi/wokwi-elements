@@ -16,3 +16,4 @@ export { SSD1306Element } from './ssd1306-element';
 export { BuzzerElement } from './buzzer-element';
 export { RotaryDialerElement } from './rotary-dialer-element';
 export { ServoElement } from './servo-element';
+export { DHT22Element as Dht22Element } from './dht22-element';
