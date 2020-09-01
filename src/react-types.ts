@@ -16,6 +16,7 @@ import { RotaryDialerElement } from './rotary-dialer-element';
 import { SSD1306Element } from './ssd1306-element';
 import { ServoElement } from './servo-element';
 import { DHT22Element } from './dht22-element';
+import { ArduinoMegaElement } from './arduino-mega-element';
 
 declare global {
   namespace JSX {
@@ -35,6 +36,7 @@ declare global {
       'wokwi-rotary-dialer': Partial<RotaryDialerElement>;
       'wokwi-servo': Partial<ServoElement>;
       'wokwi-dht22': Partial<DHT22Element>;
+      'wokwi-arduino-mega': Partial<ArduinoMegaElement>;
     }
   }
 }
