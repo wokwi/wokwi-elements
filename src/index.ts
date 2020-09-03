@@ -18,3 +18,4 @@ export { RotaryDialerElement } from './rotary-dialer-element';
 export { ServoElement } from './servo-element';
 export { DHT22Element as Dht22Element } from './dht22-element';
 export { ArduinoMegaElement } from './arduino-mega-element';
+export { ArduinoNanoElement } from './arduino-nano-element';
