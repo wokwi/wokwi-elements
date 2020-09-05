@@ -1,7 +1,7 @@
-import { boolean, withKnobs, button } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
+import { logEvent } from 'storybook-events-logger';
 import './arduino-nano-element';
 
 storiesOf('Arduino Nano', module)
@@ -16,6 +16,8 @@ storiesOf('Arduino Nano', module)
         .ledRX=${boolean('RX LED', false)}
         .ledPower=${boolean('Power LED', true)}
         .resetButton=${boolean('Reset button', false)}
+        @button-press=${logEvent}
+        @button-release=${logEvent}
       ></wokwi-arduino-nano>
     `
   );

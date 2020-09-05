@@ -10,45 +10,42 @@ export class ArduinoNanoElement extends LitElement {
   @property() resetButton = false;
 
   readonly pinInfo: ElementPin[] = [
-    // bottom row
-    { name: '13', x: 3.67, y: 16.34, signals: [spi('SCK')] },
-    { name: '3.3V', x: 6.21, y: 16.34, signals: [{ type: 'power', signal: 'VCC', voltage: 3.3 }] },
-    { name: 'AREF', x: 8.75, y: 16.34, signals: [] },
-    { name: 'A0', x: 11.29, y: 16.34, signals: [analog(0)] },
-    { name: 'A1', x: 13.83, y: 16.34, signals: [analog(1)] },
-    { name: 'A2', x: 16.37, y: 16.34, signals: [analog(2)] },
-    { name: 'A3', x: 18.91, y: 16.34, signals: [analog(3)] },
-    { name: 'A4', x: 21.45, y: 16.34, signals: [analog(4), i2c('SCL')] },
-    { name: 'A5', x: 23.99, y: 16.34, signals: [analog(5), i2c('SDA')] },
-    { name: 'A6', x: 26.53, y: 16.34, signals: [analog(6)] },
-    { name: 'A7', x: 29.07, y: 16.34, signals: [analog(7)] },
-    { name: '5V.1', x: 31.61, y: 16.34, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
-    { name: 'RESET.1', x: 34.15, y: 16.34, signals: [] }, // TODO: attach signal
-    { name: 'GND.1', x: 36.69, y: 16.34, signals: [{ type: 'power', signal: 'GND' }] },
-    { name: 'VIN', x: 39.23, y: 16.34, signals: [{ type: 'power', signal: 'VCC' }] },
-    // top row
-    { name: '12', x: 3.67, y: 1.15, signals: [spi('MISO')] },
-    { name: '11', x: 6.21, y: 1.15, signals: [spi('MOSI'), { type: 'pwm' }] },
-    { name: '10', x: 8.75, y: 1.15, signals: [spi('SS'), { type: 'pwm' }] },
-    { name: '9', x: 11.29, y: 1.15, signals: [{ type: 'pwm' }] },
-    { name: '8', x: 13.83, y: 1.15, signals: [] },
-    { name: '7', x: 16.37, y: 1.15, signals: [] },
-    { name: '6', x: 18.91, y: 1.15, signals: [{ type: 'pwm' }] },
-    { name: '5', x: 21.45, y: 1.15, signals: [{ type: 'pwm' }] },
-    { name: '4', x: 23.99, y: 1.15, signals: [] },
-    { name: '3', x: 26.53, y: 1.15, signals: [{ type: 'pwm' }] },
-    { name: '2', x: 29.07, y: 1.15, signals: [] },
-    { name: 'GND.2', x: 31.61, y: 1.15, signals: [{ type: 'power', signal: 'GND' }] },
-    { name: 'RESET.2', x: 34.15, y: 1.15, signals: [] }, // TODO attach signal
-    { name: '1', x: 36.69, y: 1.15, signals: [usart('TX')] },
-    { name: '0', x: 39.23, y: 1.15, signals: [usart('RX')] },
-    // programming header
-    { name: '12.2', x: 41.7, y: 11.27, signals: [spi('MISO')] },
-    { name: '5V.2', x: 39.16, y: 11.27, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
-    { name: '13.2', x: 41.7, y: 8.73, signals: [spi('SCK')] },
-    { name: '11.2', x: 39.16, y: 8.73, signals: [spi('MOSI'), { type: 'pwm' }] },
-    { name: 'RESET.3', x: 41.7, y: 6.19, signals: [] }, // TODO attach signal
-    { name: 'GND.3', x: 39.16, y: 6.19, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: '12', x: 19.7, y: 4.8, signals: [spi('MISO')] },
+    { name: '11', x: 29.3, y: 4.8, signals: [spi('MOSI'), { type: 'pwm' }] },
+    { name: '10', x: 38.9, y: 4.8, signals: [spi('SS'), { type: 'pwm' }] },
+    { name: '9', x: 48.5, y: 4.8, signals: [{ type: 'pwm' }] },
+    { name: '8', x: 58.1, y: 4.8, signals: [] },
+    { name: '7', x: 67.7, y: 4.8, signals: [] },
+    { name: '6', x: 77.3, y: 4.8, signals: [{ type: 'pwm' }] },
+    { name: '5', x: 86.9, y: 4.8, signals: [{ type: 'pwm' }] },
+    { name: '4', x: 96.5, y: 4.8, signals: [] },
+    { name: '3', x: 106.1, y: 4.8, signals: [{ type: 'pwm' }] },
+    { name: '2', x: 115.7, y: 4.8, signals: [] },
+    { name: 'GND.2', x: 125.3, y: 4.8, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'RESET.2', x: 134.9, y: 4.8, signals: [] },
+    { name: '1', x: 144.5, y: 4.8, signals: [usart('TX')] },
+    { name: '0', x: 154.1, y: 4.8, signals: [usart('RX')] },
+    { name: '13', x: 19.7, y: 62.4, signals: [spi('SCK')] },
+    { name: '3.3V', x: 29.3, y: 62.4, signals: [{ type: 'power', signal: 'VCC', voltage: 3.3 }] },
+    { name: 'AREF', x: 38.9, y: 62.4, signals: [] },
+    { name: 'A0', x: 48.5, y: 62.4, signals: [analog(0)] },
+    { name: 'A1', x: 58.1, y: 62.4, signals: [analog(1)] },
+    { name: 'A2', x: 67.7, y: 62.4, signals: [analog(2)] },
+    { name: 'A3', x: 77.3, y: 62.4, signals: [analog(3)] },
+    { name: 'A4', x: 86.9, y: 62.4, signals: [analog(4), i2c('SCL')] },
+    { name: 'A5', x: 96.5, y: 62.4, signals: [analog(5), i2c('SDA')] },
+    { name: 'A6', x: 106.1, y: 62.4, signals: [analog(6)] },
+    { name: 'A7', x: 115.7, y: 62.4, signals: [analog(7)] },
+    { name: '5V.1', x: 125.3, y: 62.4, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
+    { name: 'RESET.1', x: 134.9, y: 62.4, signals: [] },
+    { name: 'GND.1', x: 144.5, y: 62.4, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'VIN', x: 154.1, y: 62.4, signals: [{ type: 'power', signal: 'VCC' }] },
+    { name: '12.2', x: 163.7, y: 43.2, signals: [spi('MISO')] },
+    { name: '5V.2', x: 154.1, y: 43.2, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
+    { name: '13.2', x: 163.7, y: 33.6, signals: [spi('SCK')] },
+    { name: '11.2', x: 154.1, y: 33.6, signals: [spi('MOSI'), { type: 'pwm' }] },
+    { name: 'RESET.3', x: 163.7, y: 24, signals: [] },
+    { name: 'GND.3', x: 154.1, y: 24, signals: [{ type: 'power', signal: 'GND' }] },
   ];
 
   render() {
@@ -57,116 +54,121 @@ export class ArduinoNanoElement extends LitElement {
       <svg
         width="44.9mm"
         height="17.8mm"
-        version="1.1"
         viewBox="-1.4 0 44.9 17.8"
-        style="font-size: 1px; font-family: monospace; font-weight: bold"
+        font-size="1px"
+        font-family="DejaVu Mono, Cascadia Mono, monospace"
+        font-weight="bold"
+        version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <defs>
           <filter id="solderPlate" style="color-interpolation-filters:sRGB;">
-            <feTurbulence result="r0" type="fractalNoise" baseFrequency="1" numOctaves="3" />
+            <feTurbulence result="r0" type="fractalNoise" baseFrequency="1" numOctaves="1" />
             <feComposite
               result="r1"
               in="r0"
               in2="SourceGraphic"
               operator="arithmetic"
-              k1="0.6"
-              k2="0.6"
+              k1=".6"
+              k2=".6"
               k3="1.2"
-              k4="0.25"
+              k4=".25"
             />
             <feBlend result="r2" in="r1" in2="SourceGraphic" mode="luminosity" />
             <feComposite result="r3" in="r2" in2="SourceGraphic" operator="in" />
           </filter>
-          <pattern id="pins-tqfp-0.5mm" width="1" height="0.5" patternUnits="userSpaceOnUse">
-            <rect fill="#333" width="1" height="0.2" y="0.17" filter="url(#solderPlate)" />
+          <pattern id="pins-tqfp-0.5mm" width="1" height=".5" patternUnits="userSpaceOnUse">
+            <rect fill="#333" width="1" height=".2" y=".17" />
           </pattern>
-          <pattern id="pins-pth" width="2.54" height="2.54" patternUnits="userSpaceOnUse">
-            <circle r="0.750" cx="1.27" cy="1.27" style="fill:#323232" filter="url(#solderPlate)" />
-            <circle r="0.375" cx="1.27" cy="1.27" style="fill:#ffffff" />
+          <pattern id="pins-pth-0.75" width="2.54" height="2.54" patternUnits="userSpaceOnUse">
+            <circle r=".75" cx="1.27" cy="1.27" fill="#333" filter="url(#solderPlate)" />
+            <g stroke="#333" stroke-width=".05" paint-order="stroke fill">
+              <circle r=".375" cx="1.27" cy="1.27" fill="#eee" />
+            </g>
           </pattern>
-          <pattern id="pins-gold-pth" width="2.54" height="2.54" patternUnits="userSpaceOnUse">
-            <circle r="0.750" cx="1.27" cy="1.27" style="fill:#484800" filter="url(#solderPlate)" />
-            <circle r="0.375" cx="1.27" cy="1.27" style="fill:#ffffff" />
+          <pattern id="pins-pth-1.00" width="2.54" height="2.54" patternUnits="userSpaceOnUse">
+            <circle r=".75" cx="1.27" cy="1.27" fill="#333" filter="url(#solderPlate)" />
+            <g stroke="#333" stroke-width=".05" paint-order="stroke fill">
+              <circle r=".5" cx="1.27" cy="1.27" fill="#eee" />
+            </g>
           </pattern>
           <g id="led-body" fill="#eee">
             <rect x="0" y="0" height="1.2" width="2.6" fill="#333" filter="url(#solderPlate)" />
-            <rect x="0.6" y="-0.1" width="1.35" height="1.4" stroke="#aaa" stroke-width="0.05" />
+            <rect x=".6" y="-0.1" width="1.35" height="1.4" stroke="#aaa" stroke-width=".05" />
           </g>
+          <filter id="ledFilter" x="-0.8" y="-0.8" height="2.2" width="2.8">
+            <feGaussianBlur stdDeviation=".5" />
+          </filter>
         </defs>
 
-        <filter id="ledFilter" x="-0.8" y="-0.8" height="2.2" width="2.8">
-          <feGaussianBlur stdDeviation="0.5" />
-        </filter>
-
         <!-- PCB -->
-        <g id="pcb" style="fill:#fff">
-          <rect width="43.5" height="17.8" x="0" y="0" style="fill:#1b7e84" />
-          <circle cx="1.00" cy="1.00" r="0.889" />
-          <circle cx="42.42" cy="1.00" r="0.889" />
-          <circle cx="42.42" cy="16.6" r="0.889" />
-          <circle cx="1.00" cy="16.6" r="0.889" />
+        <g id="pcb" fill="#fff">
+          <rect width="43.5" height="17.8" x="0" y="0" fill="#1b7e84" />
+          <circle cx="1" cy="1" r=".889" />
+          <circle cx="42.42" cy="1" r=".889" />
+          <circle cx="42.42" cy="16.6" r=".889" />
+          <circle cx="1" cy="16.6" r=".889" />
         </g>
 
         <!-- silkscreen -->
-        <g id="silkscreen" style="fill:#fff">
-          <rect id="gnd-box1" x="30.60" y="0.000" width="2.59" height="3.56" />
-          <rect id="gnd-box2" x="35.60" y="14.23" width="2.59" height="3.56" />
-          <text style="fill: #1b7e84">
-            <tspan x="30.93" y="3.28">GND</tspan>
-            <tspan x="36.00" y="15.08">GND</tspan>
-          </text>
-          <text>
-            <tspan x="2.93" y="3.28">D12</tspan>
-            <tspan x="5.47" y="3.28">D11</tspan>
-            <tspan x="8.00" y="3.28">D10</tspan>
-            <tspan x="10.87" y="3.28">D9</tspan>
-            <tspan x="13.41" y="3.28">D8</tspan>
-            <tspan x="15.95" y="3.28">D7</tspan>
-            <tspan x="18.50" y="3.28">D6</tspan>
-            <tspan x="21.03" y="3.28">D5</tspan>
-            <tspan x="23.57" y="3.28">D4</tspan>
-            <tspan x="26.11" y="3.28">D3</tspan>
-            <tspan x="28.65" y="3.28">D2</tspan>
-            <tspan x="33.48" y="3.28">RST</tspan>
-            <tspan x="36.00" y="4.39">RX0</tspan>
-            <tspan x="38.50" y="4.39">TX0</tspan>
-            <tspan x="2.93" y="15.08">D13</tspan>
-            <tspan x="5.47" y="15.08">3V3</tspan>
-            <tspan x="7.81" y="15.08">AREF</tspan>
-            <tspan x="10.87" y="15.08">A0</tspan>
-            <tspan x="13.41" y="15.08">A1</tspan>
-            <tspan x="15.95" y="15.08">A2</tspan>
-            <tspan x="18.50" y="15.08">A3</tspan>
-            <tspan x="21.03" y="15.08">A4</tspan>
-            <tspan x="23.57" y="15.08">A5</tspan>
-            <tspan x="26.11" y="15.08">A6</tspan>
-            <tspan x="28.65" y="15.08">A7</tspan>
-            <tspan x="31.14" y="15.08">5V</tspan>
-            <tspan x="33.43" y="15.08">RST</tspan>
-            <tspan x="38.51" y="15.08">VIN</tspan>
-          </text>
-          <text style="font-size: 1.75px">
-            <tspan x="36.5" y="3.25">↓</tspan>
-            <tspan x="38.9" y="3.25">↑</tspan>
-          </text>
-          <text transform="rotate(90)" style="font-size: 1.75px">
-            <tspan x="3.88" y="-31.4">↓</tspan>
-            <tspan x="6.78" y="-31.4">↑</tspan>
-          </text>
-          <text transform="rotate(90)">
-            <tspan x="7.13" y="-22.31">RESET</tspan>
-            <tspan x="3.75" y="-32.5">TX</tspan>
-            <tspan x="6.65" y="-32.5">RX</tspan>
-            <tspan x="9.73" y="-31.4">ON</tspan>
-            <tspan x="12.88" y="-31.4">L</tspan>
-          </text>
+        <g id="silkscreen" fill="#eee" text-anchor="middle">
+          <rect x="30.48" y="0" width="2.54" height="3.2" />
+          <rect x="35.56" y="14.6" width="2.54" height="3.2" />
+          <g fill="#1b7e84" transform="translate(1.27 1.27)">
+            <circle r=".85" cx="30.48" />
+            <circle r=".85" cx="35.56" cy="15.24" />
+          </g>
+          <g transform="translate(1.27 3)">
+            <text x="2.54">D12</text>
+            <text x="5.08">D11</text>
+            <text x="7.62">D10</text>
+            <text x="10.16">D9</text>
+            <text x="12.7">D8</text>
+            <text x="15.24">D7</text>
+            <text x="17.78">D6</text>
+            <text x="20.32">D5</text>
+            <text x="22.86">D4</text>
+            <text x="25.4">D3</text>
+            <text x="27.94">D2</text>
+            <text x="30.48" fill="#1b7e84">GND</text>
+            <text x="33.02">RST</text>
+            <text x="35.56" y=".65" font-size="200%">↓</text>
+            <text x="35.56" y="1.5">RX0</text>
+            <text x="38.1" y=".65" font-size="200%">↑</text>
+            <text x="38.1" y="1.5">TX0</text>
+          </g>
+          <g transform="translate(1.27 15.5)">
+            <text x="2.54">D13</text>
+            <text x="5.08">3V3</text>
+            <text x="7.62">AREF</text>
+            <text x="10.16">A0</text>
+            <text x="12.7">A1</text>
+            <text x="15.24">A2</text>
+            <text x="17.78">A3</text>
+            <text x="20.32">A4</text>
+            <text x="22.86">A5</text>
+            <text x="25.4">A6</text>
+            <text x="27.94">A7</text>
+            <text x="30.48">5V</text>
+            <text x="33.02">RST</text>
+            <text x="35.56" fill="#1b7e84">GND</text>
+            <text x="38.1">VIN</text>
+          </g>
+          <g transform="rotate(90)">
+            <text x="8.7" y="-22.5">RESET</text>
+            <text x="5.6" y="-32.2">TX</text>
+            <text x="5.6" y="-30.7" font-size="200%">↓</text>
+            <text x="7.6" y="-32.2">RX</text>
+            <text x="7.6" y="-30.7" font-size="200%">↑</text>
+            <text x="9.6" y="-30.7">ON</text>
+            <text x="11.6" y="-30.7">L</text>
+          </g>
         </g>
 
         <!-- MCU -->
         <g id="mcu" transform="rotate(45 -2.978 23.39)">
-          <g fill="url(#pins-tqfp-0.5mm)">
+          <g fill="url(#pins-tqfp-0.5mm)" filter="url(#solderPlate)">
             <rect x="-2.65" y="-1.975" width="5.3" height="3.95" />
             <rect x="-2.65" y="-1.975" width="5.3" height="3.95" transform="rotate(90)" />
           </g>
@@ -175,25 +177,28 @@ export class ArduinoNanoElement extends LitElement {
         </g>
 
         <!-- pins -->
-        <g id="pins">
-          <pattern id="pins-row1" patternTransform="translate(.076 -.2)" xlink:href="#pins-pth" />
-          <pattern id="pins-row2" patternTransform="translate(.076 .2)" xlink:href="#pins-pth" />
-          <rect x="2.9" y=".29" width="${15 * 2.54}" height="2.54" fill="url(#pins-row1)" />
-          <rect x="2.9" y="15.52" width="${15 * 2.54}" height="2.54" fill="url(#pins-row2)" />
+        <g id="pins" fill="url(#pins-pth-0.75)">
+          <g id="pins-pin1" fill="#333" filter="url(#solderPlate)">
+            <rect x="${15.5 * 2.54 - 0.875}" y="${0.5 * 2.54 - 0.875}" width="1.75" height="1.75" />
+            <rect x="${15.5 * 2.54 - 0.875}" y="${6.5 * 2.54 - 0.875}" width="1.75" height="1.75" />
+          </g>
+          <rect x="2.54" width="${15 * 2.54}" height="2.54" />
+          <rect x="2.54" y="${6 * 2.54}" width="${15 * 2.54}" height="2.54" />
         </g>
 
-        <!-- Programming Header -->
-        <g id="pgm-header" fill="url(#pins-pth)">
-          <rect x="38.1" y="5.09" width="${2 * 2.54}" height="${3 * 2.54}" />
+        <!-- programming header -->
+        <g id="pgm-header" fill="url(#pins-pth-1.00)" stroke="#eee" stroke-width=".1">
+          <g id="pgm-pin1" stroke="none" fill="#333" filter="url(#solderPlate)">
+            <rect x="${16.5 * 2.54 - 0.875}" y="${4.5 * 2.54 - 0.875}" width="1.75" height="1.75" />
+          </g>
+          <rect x="${15 * 2.54}" y="${2 * 2.54}" width="${2 * 2.54}" height="${3 * 2.54}" />
         </g>
 
         <!-- USB mini type B -->
-        <g id="usb-mini-b" style="paint-order:stroke fill markers" stroke-width=".1">
+        <g id="usb-mini-b" stroke-width=".1" paint-order="stroke fill">
           <g fill="#333" filter="url(#solderPlate)">
-            <rect x=".4" y="3.8" width="1.6" height="1.6" />
-            <rect x="5.5" y="3.8" width="1.6" height="1.6" />
-            <rect x="5.5" y="12" width="1.6" height="1.6" />
-            <rect x=".4" y="12" width="1.6" height="1.6" />
+            <rect x=".3" y="3.8" width="1.6" height="9.8" />
+            <rect x="5.5" y="3.8" width="1.6" height="9.8" />
             <rect x="7.3" y="7.07" width="1.1" height=".48" />
             <rect x="7.3" y="7.82" width="1.1" height=".48" />
             <rect x="7.3" y="8.58" width="1.1" height=".48" />
@@ -201,58 +206,72 @@ export class ArduinoNanoElement extends LitElement {
             <rect x="7.3" y="10.16" width="1.1" height=".48" />
           </g>
           <rect x="-1.4" y="4.8" width="8.9" height="7.8" fill="#999" stroke-width=".26" />
-          <rect x="-1.2" y="5.1" width="8.6" height="7.4" fill="#ccc" stroke="#bbb" />
-          <g fill="none" stroke="#000">
-            <path d="m-0.62 7.6 4.3 0.3" stroke-linecap="round" stroke-width=".26px" />
-            <path d="m-0.62 9.7 4.3-0.26" stroke-linecap="round" stroke-width=".26px" />
-            <path d="m3.3 7.9v1.5" stroke-width="1" />
-            <path d="m6 6.4v4.5" stroke-linecap="round" stroke-width=".35" />
-            <path d="m-0.7 5.9h3.3" stroke-linecap="round" stroke-width=".29px" />
-            <path d="m-0.7 6.8h3.3" stroke-linecap="round" stroke-width=".27px" />
-            <path d="m-0.7 5.9v0.9" stroke-width=".27" />
-            <path d="m-0.7 6.8h3.3" stroke-linecap="round" stroke-width=".27px" />
-            <path d="m-0.7 10.5h3.3" stroke-linecap="round" stroke-width=".29px" />
-            <path d="m-0.7 11.4h3.3" stroke-linecap="round" stroke-width=".27px" />
-            <path d="m-0.7 10.5v0.9" stroke-width=".27" />
+          <rect x="-1.25" y="5" width="8.6" height="7.4" fill="#ccc" stroke="#bbb" />
+          <g fill="none" stroke="#333" stroke-width=".26" stroke-linecap="round">
+            <path d="m2.6 5.9h-3.3v0.9h3.3m0 3.7h-3.3v0.9h3.3M-0.6 7.6l4.3 0.3v1.5l-4.3 0.3" />
+            <path d="m3.3 7.9v1.5" stroke-width="1" stroke-linecap="butt" />
+            <path d="m6 6.4v4.5" stroke-width=".35" />
           </g>
         </g>
 
         <!-- LEDs -->
-        <g transform="translate(27.69 3.92)">
+        <g transform="translate(27.7 5)">
           <use xlink:href="#led-body" />
           ${ledTX &&
-          svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#ff8080" filter="url(#ledFilter)" />`}
+          svg`<circle cx="1.3" cy=".55" r="1.3" fill="#ff8080" filter="url(#ledFilter)" />`}
         </g>
-
-        <g transform="translate(27.69 6.87)">
+        <g transform="translate(27.7 7)">
           <use xlink:href="#led-body" />
           ${ledRX &&
-          svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
+          svg`<circle cx="1.3" cy=".55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
         </g>
-
-        <g transform="translate(27.69 9.87)">
+        <g transform="translate(27.7 9)">
           <use xlink:href="#led-body" />
           ${ledPower &&
-          svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
+          svg`<circle cx="1.3" cy=".55" r="1.3" fill="#80ff80" filter="url(#ledFilter)" />`}
         </g>
-
-        <g transform="translate(27.69 12.72)">
+        <g transform="translate(27.7 11)">
           <use xlink:href="#led-body" />
           ${led13 &&
-          svg`<circle cx="1.3" cy="0.55" r="1.3" fill="#ffff80" filter="url(#ledFilter)" />`}
+          svg`<circle cx="1.3" cy=".55" r="1.3" fill="#ffff80" filter="url(#ledFilter)" />`}
         </g>
 
         <!-- reset button -->
-        <!-- TODO: WIP -->
-        <g style="paint-order:stroke fill markers">
-          <g filter="url(#solderPlate)" fill="#333">
-            <rect x="24.3" y="6.361" width="1" height=".6665" />
-            <rect x="24.3" y="10.41" width="1" height=".6665" />
-          </g>
-          <rect x="23.54" y="6.805" width="2.54" height="3.81" fill="#c4c4c4" />
-          <ellipse cx="24.83" cy="8.678" rx="1" ry="1" fill="#fffbe1" />
+        <g
+          id="reset-button"
+          stroke-width=".1"
+          paint-order="fill stroke"
+          @mousedown=${() => this.down()}
+          @mouseup=${() => this.up()}
+          @mouseleave=${() => this.up()}
+          @touchstart=${() => this.down()}
+          @touchend=${() => this.up()}
+        >
+          <rect x="24.3" y="6.3" width="1" height="4.8" filter="url(#solderPlate)" fill="#333" />
+          <rect x="23.54" y="6.8" width="2.54" height="3.8" fill="#ccc" stroke="#888" />
+          <ellipse cx="24.8" cy="8.7" rx="1" ry="1" fill="#eeb" stroke="#777" />
+          ${resetButton &&
+          svg`<circle cx="24.8" cy="8.7" r="1.5" fill="#f66" filter="url(#ledFilter)" />`}
         </g>
       </svg>
     `;
+  }
+
+  private down() {
+    this.resetButton = true;
+    this.dispatchEvent(
+      new CustomEvent('button-press', {
+        detail: 'reset',
+      })
+    );
+  }
+
+  private up() {
+    this.resetButton = false;
+    this.dispatchEvent(
+      new CustomEvent('button-release', {
+        detail: 'reset',
+      })
+    );
   }
 }
