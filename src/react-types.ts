@@ -17,6 +17,7 @@ import { SSD1306Element } from './ssd1306-element';
 import { ServoElement } from './servo-element';
 import { DHT22Element } from './dht22-element';
 import { ArduinoMegaElement } from './arduino-mega-element';
+import { ArduinoNanoElement } from './arduino-nano-element';
 
 declare global {
   namespace JSX {
@@ -37,6 +38,7 @@ declare global {
       'wokwi-servo': Partial<ServoElement>;
       'wokwi-dht22': Partial<DHT22Element>;
       'wokwi-arduino-mega': Partial<ArduinoMegaElement>;
+      'wokwi-arduino-nano': Partial<ArduinoNanoElement>;
     }
   }
 }
