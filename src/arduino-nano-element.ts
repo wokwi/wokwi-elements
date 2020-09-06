@@ -1,13 +1,15 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
 
+const triggerKeys = [32, 13]; // space and enter
+
 @customElement('wokwi-arduino-nano')
 export class ArduinoNanoElement extends LitElement {
   @property() led13 = false;
   @property() ledRX = false;
   @property() ledTX = false;
   @property() ledPower = false;
-  @property() resetButton = false;
+  @property() resetPressed = false;
 
   readonly pinInfo: ElementPin[] = [
     { name: '12', x: 19.7, y: 4.8, signals: [spi('MISO')] },
@@ -49,8 +51,19 @@ export class ArduinoNanoElement extends LitElement {
   ];
 
   render() {
-    const { ledPower, led13, ledRX, ledTX, resetButton } = this;
+    const { ledPower, led13, ledRX, ledTX, resetPressed } = this;
     return html`
+      <style>
+        text {
+          user-select: none;
+        }
+        circle[tabindex]:hover,
+        circle[tabindex]:focus {
+          stroke: white;
+          outline: none;
+        }
+      </style>
+
       <svg
         width="44.9mm"
         height="17.8mm"
@@ -237,28 +250,36 @@ export class ArduinoNanoElement extends LitElement {
         </g>
 
         <!-- reset button -->
-        <g
-          id="reset-button"
-          stroke-width=".1"
-          paint-order="fill stroke"
-          @mousedown=${() => this.down()}
-          @mouseup=${() => this.up()}
-          @mouseleave=${() => this.up()}
-          @touchstart=${() => this.down()}
-          @touchend=${() => this.up()}
-        >
+        <g id="reset-button" stroke-width=".1" paint-order="fill stroke">
           <rect x="24.3" y="6.3" width="1" height="4.8" filter="url(#solderPlate)" fill="#333" />
           <rect x="23.54" y="6.8" width="2.54" height="3.8" fill="#ccc" stroke="#888" />
-          <ellipse cx="24.8" cy="8.7" rx="1" ry="1" fill="#eeb" stroke="#777" />
-          ${resetButton &&
-          svg`<circle cx="24.8" cy="8.7" r="1.5" fill="#f66" filter="url(#ledFilter)" />`}
+          <circle
+            cx="24.8"
+            cy="8.7"
+            r="1"
+            fill="#eeb"
+            stroke="#777"
+            tabindex="0"
+            @mousedown=${() => this.down()}
+            @touchstart=${() => this.down()}
+            @mouseup=${() => this.up()}
+            @mouseleave=${() => this.up()}
+            @touchend=${() => this.up()}
+            @keydown=${(e: KeyboardEvent) => triggerKeys.includes(e.keyCode) && this.down()}
+            @keyup=${(e: KeyboardEvent) => triggerKeys.includes(e.keyCode) && this.up()}
+          />
+          ${resetPressed &&
+          svg`<circle cx="24.8" cy="8.7" r="1.5" fill="#f66" filter="url(#ledFilter)" pointer-events="none" />`}
         </g>
       </svg>
     `;
   }
 
   private down() {
-    this.resetButton = true;
+    if (this.resetPressed) {
+      return;
+    }
+    this.resetPressed = true;
     this.dispatchEvent(
       new CustomEvent('button-press', {
         detail: 'reset',
@@ -267,7 +288,10 @@ export class ArduinoNanoElement extends LitElement {
   }
 
   private up() {
-    this.resetButton = false;
+    if (!this.resetPressed) {
+      return;
+    }
+    this.resetPressed = false;
     this.dispatchEvent(
       new CustomEvent('button-release', {
         detail: 'reset',
