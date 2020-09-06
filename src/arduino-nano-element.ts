@@ -1,7 +1,7 @@
 import { customElement, html, LitElement, property, svg, query } from 'lit-element';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
 
-const triggerKeys = [32, 13]; // space and enter
+const triggerKeys = ['Spacebar', ' ', 'Enter'];
 
 @customElement('wokwi-arduino-nano')
 export class ArduinoNanoElement extends LitElement {
@@ -52,7 +52,7 @@ export class ArduinoNanoElement extends LitElement {
   ];
 
   render() {
-    const { ledPower, led13, ledRX, ledTX, resetPressed } = this;
+    const { ledPower, led13, ledRX, ledTX } = this;
     return html`
       <style>
         text {
@@ -266,12 +266,10 @@ export class ArduinoNanoElement extends LitElement {
             @touchstart=${() => this.down()}
             @mouseup=${() => this.up()}
             @mouseleave=${() => this.leave()}
-            @touchend=${() => this.up()}
-            @keydown=${(e: KeyboardEvent) => triggerKeys.includes(e.keyCode) && this.down()}
-            @keyup=${(e: KeyboardEvent) => triggerKeys.includes(e.keyCode) && this.up()}
+            @touchend=${() => this.leave()}
+            @keydown=${(e: KeyboardEvent) => triggerKeys.includes(e.key) && this.down()}
+            @keyup=${(e: KeyboardEvent) => triggerKeys.includes(e.key) && this.up()}
           />
-          ${resetPressed &&
-          svg`<circle cx="24.8" cy="8.7" r="1.5" fill="#f66" filter="url(#ledFilter)" pointer-events="none" />`}
         </g>
       </svg>
     `;
@@ -282,6 +280,7 @@ export class ArduinoNanoElement extends LitElement {
       return;
     }
     this.resetPressed = true;
+    this.resetButton.style.stroke = '#333';
     this.dispatchEvent(
       new CustomEvent('button-press', {
         detail: 'reset',
@@ -294,6 +293,7 @@ export class ArduinoNanoElement extends LitElement {
       return;
     }
     this.resetPressed = false;
+    this.resetButton.style.stroke = '';
     this.dispatchEvent(
       new CustomEvent('button-release', {
         detail: 'reset',

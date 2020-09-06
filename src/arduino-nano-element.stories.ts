@@ -15,7 +15,6 @@ storiesOf('Arduino Nano', module)
         .ledTX=${boolean('TX LED', false)}
         .ledRX=${boolean('RX LED', false)}
         .ledPower=${boolean('Power LED', true)}
-        .resetPressed=${boolean('Reset button', false)}
         @button-press=${logEvent}
         @button-release=${logEvent}
       ></wokwi-arduino-nano>
