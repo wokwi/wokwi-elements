@@ -1,4 +1,4 @@
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { customElement, html, LitElement, property, svg, query } from 'lit-element';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
 
 const triggerKeys = [32, 13]; // space and enter
@@ -10,6 +10,7 @@ export class ArduinoNanoElement extends LitElement {
   @property() ledTX = false;
   @property() ledPower = false;
   @property() resetPressed = false;
+  @query('#reset-button') resetButton!: SVGCircleElement;
 
   readonly pinInfo: ElementPin[] = [
     { name: '12', x: 19.7, y: 4.8, signals: [spi('MISO')] },
@@ -250,10 +251,11 @@ export class ArduinoNanoElement extends LitElement {
         </g>
 
         <!-- reset button -->
-        <g id="reset-button" stroke-width=".1" paint-order="fill stroke">
+        <g stroke-width=".1" paint-order="fill stroke">
           <rect x="24.3" y="6.3" width="1" height="4.8" filter="url(#solderPlate)" fill="#333" />
           <rect x="23.54" y="6.8" width="2.54" height="3.8" fill="#ccc" stroke="#888" />
           <circle
+            id="reset-button"
             cx="24.8"
             cy="8.7"
             r="1"
@@ -263,7 +265,7 @@ export class ArduinoNanoElement extends LitElement {
             @mousedown=${() => this.down()}
             @touchstart=${() => this.down()}
             @mouseup=${() => this.up()}
-            @mouseleave=${() => this.up()}
+            @mouseleave=${() => this.leave()}
             @touchend=${() => this.up()}
             @keydown=${(e: KeyboardEvent) => triggerKeys.includes(e.keyCode) && this.down()}
             @keyup=${(e: KeyboardEvent) => triggerKeys.includes(e.keyCode) && this.up()}
@@ -297,5 +299,10 @@ export class ArduinoNanoElement extends LitElement {
         detail: 'reset',
       })
     );
+  }
+
+  private leave() {
+    this.resetButton.blur();
+    this.up();
   }
 }
