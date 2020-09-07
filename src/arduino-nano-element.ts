@@ -1,7 +1,6 @@
 import { customElement, html, LitElement, property, svg, query } from 'lit-element';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
-
-const triggerKeys = ['Spacebar', ' ', 'Enter'];
+import { SPACE_KEYS } from './utils/keys';
 
 @customElement('wokwi-arduino-nano')
 export class ArduinoNanoElement extends LitElement {
@@ -267,8 +266,8 @@ export class ArduinoNanoElement extends LitElement {
             @mouseup=${() => this.up()}
             @mouseleave=${() => this.leave()}
             @touchend=${() => this.leave()}
-            @keydown=${(e: KeyboardEvent) => triggerKeys.includes(e.key) && this.down()}
-            @keyup=${(e: KeyboardEvent) => triggerKeys.includes(e.key) && this.up()}
+            @keydown=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.down()}
+            @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.up()}
           />
         </g>
       </svg>
