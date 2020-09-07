@@ -1,7 +1,6 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
 import { ElementPin } from './pin';
-
-const SPACE_KEY = 32;
+import { SPACE_KEYS } from './utils/keys';
 
 @customElement('wokwi-pushbutton')
 export class PushbuttonElement extends LitElement {
@@ -46,8 +45,8 @@ export class PushbuttonElement extends LitElement {
         @mouseup=${this.up}
         @touchstart=${this.down}
         @touchend=${this.up}
-        @keydown=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.down()}
-        @keyup=${(e: KeyboardEvent) => e.keyCode === SPACE_KEY && this.up()}
+        @keydown=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.down()}
+        @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.up()}
       >
         <svg
           width="18mm"
