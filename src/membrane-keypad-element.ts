@@ -2,7 +2,7 @@ import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { pinsFemalePattern } from './patterns/pins-female';
 import { ElementPin } from './pin';
 
-const SPACE_KEY = 32;
+const SPACE_KEYS = [' ', 'Spacebar'];
 
 const rowPositions = [10.7, 25, 39.3, 53.6];
 const columnPositions = [7, 22, 37, 52];
@@ -81,9 +81,9 @@ export class MembraneKeypadElement extends LitElement {
       @touchstart=${() => this.down(text)}
       @touchend=${() => this.up(text)}
       @keydown=${(e: KeyboardEvent) =>
-        e.keyCode === SPACE_KEY && this.down(text, e.currentTarget as SVGElement)}
+        SPACE_KEYS.includes(e.key) && this.down(text, e.currentTarget as SVGElement)}
       @keyup=${(e: KeyboardEvent) =>
-        e.keyCode === SPACE_KEY && this.up(text, e.currentTarget as SVGElement)}
+        SPACE_KEYS.includes(e.key) && this.up(text, e.currentTarget as SVGElement)}
     >
       <use xlink:href="#key" />
       <text x="5.6" y="8.1">${text}</text>
