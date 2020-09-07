@@ -1,8 +1,7 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { pinsFemalePattern } from './patterns/pins-female';
 import { ElementPin } from './pin';
-
-const SPACE_KEYS = [' ', 'Spacebar'];
+import { SPACE_KEYS } from './utils/keys';
 
 const rowPositions = [10.7, 25, 39.3, 53.6];
 const columnPositions = [7, 22, 37, 52];

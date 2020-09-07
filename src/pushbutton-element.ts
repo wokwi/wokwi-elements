@@ -1,7 +1,6 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
 import { ElementPin } from './pin';
-
-const SPACE_KEYS = [' ', 'Spacebar'];
+import { SPACE_KEYS } from './utils/keys';
 
 @customElement('wokwi-pushbutton')
 export class PushbuttonElement extends LitElement {
