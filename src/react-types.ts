@@ -18,6 +18,7 @@ import { ServoElement } from './servo-element';
 import { DHT22Element } from './dht22-element';
 import { ArduinoMegaElement } from './arduino-mega-element';
 import { ArduinoNanoElement } from './arduino-nano-element';
+import { PowerSwitchElement } from './power-switch-element';
 
 declare global {
   namespace JSX {
@@ -39,6 +40,7 @@ declare global {
       'wokwi-dht22': Partial<DHT22Element>;
       'wokwi-arduino-mega': Partial<ArduinoMegaElement>;
       'wokwi-arduino-nano': Partial<ArduinoNanoElement>;
+      'wokwi-power-switch': Partial<PowerSwitchElement>;
     }
   }
 }
