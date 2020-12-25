@@ -1,6 +1,10 @@
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-knobs'],
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-knobs',
+    '@storybook/addon-google-analytics',
+  ],
 
   // See https://github.com/storybookjs/storybook/issues/12578#issuecomment-702664081
   babel: async (options) => {
