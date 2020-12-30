@@ -42,11 +42,11 @@ export class PushbuttonElement extends LitElement {
       <button
         aria-label="${color} pushbutton"
         @mousedown=${this.down}
-        @mouseup=${this.up}
+        @mouseup=${(e: MouseEvent) => !e.ctrlKey && this.up()}
         @touchstart=${this.down}
-        @touchend=${this.up}
+        @touchend=${(e: TouchEvent) => !e.ctrlKey && this.up()}
         @keydown=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.down()}
-        @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.up()}
+        @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && !e.ctrlKey && this.up()}
       >
         <svg
           width="18mm"
@@ -92,7 +92,7 @@ export class PushbuttonElement extends LitElement {
             />
           </g>
           <g class="clickable-element">
-            <circle class="button-circle" cx="6" cy="6" r="3.822" fill="url(#grad-up)" />
+            <circle class="button-circle" cx="6" cy="6" r="3.822" fill="${this.state()}" />
             <circle
               cx="6"
               cy="6"
@@ -120,5 +120,9 @@ export class PushbuttonElement extends LitElement {
       this.pressed = false;
       this.dispatchEvent(new Event('button-release'));
     }
+  }
+
+  private state() {
+    return this.pressed ? 'url(#grad-down)' : 'url(#grad-up)';
   }
 }
