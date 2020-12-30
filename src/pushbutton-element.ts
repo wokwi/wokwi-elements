@@ -38,13 +38,15 @@ export class PushbuttonElement extends LitElement {
 
   render() {
     const { color } = this;
+    const buttonFill = this.pressed ? 'url(#grad-down)' : 'url(#grad-up)';
+
     return html`
       <button
         aria-label="${color} pushbutton"
         @mousedown=${this.down}
         @mouseup=${(e: MouseEvent) => !e.ctrlKey && this.up()}
         @touchstart=${this.down}
-        @touchend=${(e: TouchEvent) => !e.ctrlKey && this.up()}
+        @touchend=${this.up}
         @keydown=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.down()}
         @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && !e.ctrlKey && this.up()}
       >
@@ -92,7 +94,7 @@ export class PushbuttonElement extends LitElement {
             />
           </g>
           <g class="clickable-element">
-            <circle class="button-circle" cx="6" cy="6" r="3.822" fill="${this.state()}" />
+            <circle class="button-circle" cx="6" cy="6" r="3.822" fill="${buttonFill}" />
             <circle
               cx="6"
               cy="6"
@@ -120,9 +122,5 @@ export class PushbuttonElement extends LitElement {
       this.pressed = false;
       this.dispatchEvent(new Event('button-release'));
     }
-  }
-
-  private state() {
-    return this.pressed ? 'url(#grad-down)' : 'url(#grad-up)';
   }
 }
