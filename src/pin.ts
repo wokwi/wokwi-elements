@@ -76,3 +76,6 @@ export const usart = (signal: 'RX' | 'TX', bus = 0): PinSignalInfo => ({
   signal,
   bus,
 });
+
+export const GND = (): PinSignalInfo => ({ type: 'power', signal: 'GND' });
+export const VCC = (voltage?: number): PinSignalInfo => ({ type: 'power', signal: 'VCC', voltage });
