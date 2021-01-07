@@ -1,4 +1,5 @@
 import { css, customElement, html, LitElement, property, svg } from 'lit-element';
+import { ElementPin, GND, VCC } from './pin';
 
 const pixelWidth = 5.66;
 const pixelHeight = 5;
@@ -53,6 +54,27 @@ export class NeopixelMatrixElement extends LitElement {
    * this element.
    */
   @property() animation = false;
+
+  get pinInfo(): ElementPin[] {
+    const { cols, rows, rowSpacing, colSpacing } = this;
+    const mmToPix = 3.78;
+    const pinSpacing = 2.54;
+    const p = pinSpacing * mmToPix;
+    const cx = ((cols * (colSpacing + pixelWidth)) / 2) * mmToPix;
+    const y = rows * (rowSpacing + pixelHeight) * mmToPix;
+
+    return [
+      {
+        name: 'GND',
+        x: cx - 1.5 * p,
+        y,
+        signals: [GND()],
+      },
+      { name: 'VCC', x: cx - 0.5 * p, y, signals: [VCC()] },
+      { name: 'DIN', x: cx + 0.5 * p, y, signals: [] },
+      { name: 'DOUT', x: cx + 1.5 * p, y, signals: [] },
+    ];
+  }
 
   private pixelElements: Array<[SVGElement, SVGElement, SVGElement, SVGElement]> | null = null;
 
