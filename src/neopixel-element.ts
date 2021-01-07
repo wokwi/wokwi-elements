@@ -1,10 +1,18 @@
 import { customElement, html, LitElement, property } from 'lit-element';
+import { ElementPin, GND, VCC } from './pin';
 
 @customElement('wokwi-neopixel')
 export class NeoPixelElement extends LitElement {
   @property() r = 0;
   @property() g = 0;
   @property() b = 0;
+
+  readonly pinInfo: ElementPin[] = [
+    { name: 'VDD', y: 3.5, x: 0, number: 1, signals: [VCC()] },
+    { name: 'DOUT', y: 15.5, x: 0, number: 2, signals: [] },
+    { name: 'VSS', y: 15.5, x: 22, number: 3, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'DIN', y: 3.5, x: 22, number: 4, signals: [GND()] },
+  ];
 
   render() {
     const { r, g, b } = this;
