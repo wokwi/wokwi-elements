@@ -32,6 +32,7 @@ export class NeopixelMatrixElement extends LitElement {
   /**
    * The spacing between two adjacent rows, in mm
    */
+  @property({ attribute: 'rowspacing' }) rowSpacing = 1;
 
   /**
    * The spacing between two adjacent columns, in mm
@@ -52,8 +53,6 @@ export class NeopixelMatrixElement extends LitElement {
    * this element.
    */
   @property() animation = false;
-
-  @property({ attribute: 'rowspacing' }) rowSpacing = 1;
 
   private pixelElements: Array<[SVGElement, SVGElement, SVGElement, SVGElement]> | null = null;
 
