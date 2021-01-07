@@ -19,6 +19,7 @@ import { DHT22Element } from './dht22-element';
 import { ArduinoMegaElement } from './arduino-mega-element';
 import { ArduinoNanoElement } from './arduino-nano-element';
 import { Ds1307Element } from './ds1307-element';
+import { LEDRingElement } from './led-ring-element';
 
 declare global {
   namespace JSX {
@@ -41,6 +42,7 @@ declare global {
       'wokwi-arduino-mega': Partial<ArduinoMegaElement>;
       'wokwi-arduino-nano': Partial<ArduinoNanoElement>;
       'wokwi-ds1307': Partial<Ds1307Element>;
+      'wokwi-neopixel-ring': Partial<LEDRingElement>;
     }
   }
 }
