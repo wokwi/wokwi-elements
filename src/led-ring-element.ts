@@ -1,4 +1,4 @@
-import { customElement, html, LitElement, property, queryAll, svg } from 'lit-element';
+import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { ElementPin } from './pin';
 import { RGB } from './types/rgb';
 
@@ -29,7 +29,7 @@ export class LEDRingElement extends LitElement {
    */
   @property() animation = false;
 
-  @queryAll('.pixel') pixelElements: SVGCircleElement[] = [];
+  private pixelElements: SVGCircleElement[] | null = null;
 
   private animationFrame: number | null = null;
 
@@ -58,8 +58,22 @@ export class LEDRingElement extends LitElement {
     ];
   }
 
+  private getPixelElements() {
+    if (!this.shadowRoot) {
+      return null;
+    }
+    if (!this.pixelElements) {
+      this.pixelElements = Array.from(this.shadowRoot.querySelectorAll('rect.pixel'));
+    }
+    return this.pixelElements;
+  }
+
   setPixel(pixel: number, { r, g, b }: RGB) {
-    const { pixelElements } = this;
+    const pixelElements = this.getPixelElements();
+    if (!pixelElements) {
+      return;
+    }
+
     if (pixel < 0 || pixel >= pixelElements.length) {
       return;
     }
@@ -70,7 +84,8 @@ export class LEDRingElement extends LitElement {
    * Resets all the pixels to off state (r=0, g=0, b=0).
    */
   reset() {
-    for (const element of this.pixelElements) {
+    const pixelElements = this.getPixelElements();
+    for (const element of pixelElements ?? []) {
       element.style.fill = '';
     }
   }
@@ -118,6 +133,8 @@ export class LEDRingElement extends LitElement {
           transform="rotate(${angle} ${radius} ${radius})"/>`
       );
     }
+    this.pixelElements = null; // Invalidate element cache
+
     return html`
       <svg
         width="${width}mm"
