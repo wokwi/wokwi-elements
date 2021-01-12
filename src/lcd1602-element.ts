@@ -26,6 +26,17 @@ export class LCD1602Element extends LitElement {
   @property() backlight = true;
   @property() pins: 'full' | 'i2c' | 'none' = 'full';
 
+  @property()
+  get text() {
+    return Array.from(this.characters)
+      .map((c) => String.fromCharCode(c))
+      .join('');
+  }
+
+  set text(value: string) {
+    this.characters = new Uint8Array(value.split('').map((char) => char.charCodeAt(0)));
+  }
+
   static get styles() {
     return css`
       .cursor-blink {

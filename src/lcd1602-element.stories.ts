@@ -4,7 +4,6 @@ import { html } from 'lit-html';
 import { fontA02 } from './lcd1602-font-a02';
 import './lcd1602-element';
 
-const encode = (s: string) => new Uint8Array(s.split('').map((c) => c.charCodeAt(0)));
 const helloWorld = 'Hello,           World!';
 const symbols = '\x10 I \x9d Symbols! \x11\xab \x14\x18\x17\x1e \x91\x98\x96 \x93\x97\xa9 \xbb';
 
@@ -15,7 +14,7 @@ storiesOf('LCD1602', module)
     'Hello, World!',
     () => html`
       <wokwi-lcd1602
-        .characters="${encode(text('value', helloWorld))}"
+        .text="${text('value', helloWorld)}"
         .cursor=${boolean('cursor', false)}
         .blink=${boolean('blink', false)}
         cursorX=${number('cursorX', 0, { min: 0, max: 15 })}
@@ -31,30 +30,20 @@ storiesOf('LCD1602', module)
         color="white"
         background="blue"
         blink="true"
-        .characters="${encode(helloWorld)}"
+        .text="${helloWorld}"
       ></wokwi-lcd1602>
     `
   )
   .add(
     'Blinking cursor',
     () => html`
-      <wokwi-lcd1602
-        .characters="${encode(helloWorld)}"
-        blink="true"
-        cursorX="7"
-        cursorY="1"
-      ></wokwi-lcd1602>
+      <wokwi-lcd1602 .text="${helloWorld}" blink="true" cursorX="7" cursorY="1"></wokwi-lcd1602>
     `
   )
   .add(
     'Cursor',
     () => html`
-      <wokwi-lcd1602
-        .characters="${encode(helloWorld)}"
-        cursor="true"
-        cursorX="7"
-        cursorY="1"
-      ></wokwi-lcd1602>
+      <wokwi-lcd1602 .text="${helloWorld}" cursor="true" cursorX="7" cursorY="1"></wokwi-lcd1602>
     `
   )
   .add(
@@ -72,7 +61,7 @@ storiesOf('LCD1602', module)
     () =>
       html`
         <wokwi-lcd1602
-          .characters="${encode(text('value', symbols))}"
+          .text="${text('value', symbols)}"
           .font=${fontA02}
           .cursor=${boolean('cursor', false)}
           .blink=${boolean('blink', false)}
@@ -83,21 +72,10 @@ storiesOf('LCD1602', module)
   )
   .add(
     'I²C pins',
-    () =>
-      html`
-        <wokwi-lcd1602
-          .characters="${encode('I only need        4 pins!')}"
-          pins="i2c"
-        ></wokwi-lcd1602>
-      `
+    () => html` <wokwi-lcd1602 text="I only need        4 pins!" pins="i2c"></wokwi-lcd1602> `
   )
   .add(
     'No pins',
     () =>
-      html`
-        <wokwi-lcd1602
-          .characters="${encode('Look ma!           I got no pins')}"
-          pins="none"
-        ></wokwi-lcd1602>
-      `
+      html` <wokwi-lcd1602 text="Look ma!           I got no pins" pins="none"></wokwi-lcd1602> `
   );
