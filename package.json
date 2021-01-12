@@ -1,54 +1,40 @@
 {
   "name": "@wokwi/elements",
+  "description": "Web Components for Electronics and IoT Parts",
   "version": "0.27.2",
-  "main": "dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
-  "repository": "https://github.com/wokwi/wokwi-elements",
-  "author": "Uri Shaked <uri@urishaked.com>",
-  "license": "MIT",
+  "main": "dist/index.cjs.js",
+  "types": "dist/custom-elements/index.d.ts",
+  "module": "dist/custom-elements/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/wokwi-elements/wokwi-elements.js",
   "files": [
-    "dist"
+    "dist/",
+    "loader/"
   ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate"
+  },
   "devDependencies": {
-    "@babel/core": "^7.10.5",
-    "@storybook/addon-actions": "^5.3.19",
-    "@storybook/addon-docs": "^5.3.19",
-    "@storybook/addon-google-analytics": "^5.3.19",
-    "@storybook/addon-knobs": "^5.3.19",
-    "@storybook/web-components": "^5.3.19",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^2.34.0",
-    "awesome-typescript-loader": "^5.2.1",
-    "babel-loader": "^8.1.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.17.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-json": "^2.1.1",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
-    "hygen": "^5.0.3",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.22.1",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "storybook-events-logger": "^2.0.5",
-    "terser": "^4.8.0",
-    "typescript": "^3.9.7",
-    "web-component-analyzer": "^1.1.6"
+    "typescript": "^4.1.3"
   },
   "dependencies": {
-    "lit-element": "^2.3.1"
-  },
-  "scripts": {
-    "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.js && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",
-    "lint": "eslint src/**/*.ts",
-    "prepare": "npm run build",
-    "analyze-components": "web-component-analyzer analyze src/**/*-element.ts --outFile custom-elements.json",
-    "storybook": "npm run analyze-components && start-storybook -p 6006",
-    "build-storybook": "npm run analyze-components && build-storybook",
-    "new-element": "hygen element new"
+    "@stencil/core": "^2.0.1"
   },
   "husky": {
     "hooks": {
