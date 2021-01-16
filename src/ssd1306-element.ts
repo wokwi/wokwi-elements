@@ -92,7 +92,12 @@ export class SSD1306Element extends LitElement {
             width="${screenWidth}"
             height="${screenHeight}"
           >
-            <canvas width="${screenWidth}" height="${screenHeight}" class="pixelated"></canvas>
+            <canvas
+              width="${screenWidth}"
+              height="${screenHeight}"
+              style="position: fixed"
+              class="pixelated"
+            ></canvas>
           </foreignObject>
         </g>
 
