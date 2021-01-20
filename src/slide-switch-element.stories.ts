@@ -1,0 +1,11 @@
+import { html } from 'lit-html';
+import './slide-switch-element';
+import { action } from '@storybook/addon-actions';
+
+export default {
+  title: 'Slide Switch',
+  component: 'wokwi-slide-switch',
+};
+
+export const slideSwitch = () =>
+  html`<wokwi-slide-switch @input=${action('input')}></wokwi-slide-switch>`;

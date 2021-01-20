@@ -21,3 +21,4 @@ export { ArduinoMegaElement } from './arduino-mega-element';
 export { ArduinoNanoElement } from './arduino-nano-element';
 export { Ds1307Element } from './ds1307-element';
 export { LEDRingElement } from './led-ring-element';
+export { SlideSwitchElement } from './slide-switch-element';
