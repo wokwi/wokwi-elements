@@ -21,6 +21,7 @@ import { ArduinoNanoElement } from './arduino-nano-element';
 import { Ds1307Element } from './ds1307-element';
 import { LEDRingElement } from './led-ring-element';
 import { SlideSwitchElement } from './slide-switch-element';
+import { HCSR04Element } from './hc-sr04-element';
 
 declare global {
   namespace JSX {
@@ -45,6 +46,7 @@ declare global {
       'wokwi-ds1307': Partial<Ds1307Element>;
       'wokwi-neopixel-ring': Partial<LEDRingElement>;
       'wokwi-slide-switch': Partial<SlideSwitchElement>;
+      'wokwi-hc-sr04': Partial<HCSR04Element>;
     }
   }
 }
