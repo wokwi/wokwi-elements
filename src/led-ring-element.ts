@@ -1,6 +1,7 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { ElementPin } from './pin';
 import { RGB } from './types/rgb';
+import { mmToPix } from './utils/units';
 
 const pinHeight = 3;
 const pcbWidth = 6;
@@ -39,7 +40,6 @@ export class LEDRingElement extends LitElement {
 
   get pinInfo(): ElementPin[] {
     const { radius } = this;
-    const mmToPix = 3.78;
     const pinSpacing = 2.54;
     const y = (radius * 2 + pinHeight) * mmToPix;
     const cx = radius * mmToPix;

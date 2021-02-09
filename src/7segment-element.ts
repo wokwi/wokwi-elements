@@ -1,5 +1,6 @@
 import { css, customElement, html, LitElement, property, svg } from 'lit-element';
 import { ElementPin } from './pin';
+import { mmToPix } from './utils/units';
 
 @customElement('wokwi-7segment')
 export class SevenSegmentElement extends LitElement {
@@ -42,7 +43,6 @@ export class SevenSegmentElement extends LitElement {
       const col = (n - 1) % cols;
       const row = 1 - Math.floor((n - 1) / cols);
       const xOffset = 1.27;
-      const mmToPix = 3.78;
       const x = startX + xOffset + (row ? col : cols - col - 1) * 2.54;
       const y = this.pins === 'top' ? (row ? bottomY + 1 : 1) : row ? bottomY + 2 : 0;
       return { number: n, x: x * mmToPix, y: y * mmToPix };

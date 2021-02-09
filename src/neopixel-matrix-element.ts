@@ -1,6 +1,7 @@
 import { css, customElement, html, LitElement, property, svg } from 'lit-element';
 import { ElementPin, GND, VCC } from './pin';
 import { RGB } from './types/rgb';
+import { mmToPix } from './utils/units';
 
 const pixelWidth = 5.66;
 const pixelHeight = 5;
@@ -52,7 +53,6 @@ export class NeopixelMatrixElement extends LitElement {
 
   get pinInfo(): ElementPin[] {
     const { cols, rows, rowSpacing, colSpacing } = this;
-    const mmToPix = 3.78;
     const pinSpacing = 2.54;
     const p = pinSpacing * mmToPix;
     const cx = ((cols * (colSpacing + pixelWidth)) / 2) * mmToPix;
