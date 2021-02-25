@@ -7,6 +7,8 @@ Web Components for Arduino and various electronic parts.
 
 Check out [the component catalog](https://elements.wokwi.com).
 
+Note: these elements only provide the presentation and display of the represented hardware. They do not provide the functional simulation code of the hardware. That is dependant on the application (simulator) that you wish to use these with, and thus up to you to create. 
+
 ## Local development
 
 To prepare for local development, clone this repo, and then install
