@@ -1,8 +1,15 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
+import { ElementPin } from './pin';
 
 @customElement('wokwi-slide-switch')
 export class SlideSwitchElement extends LitElement {
   @property() value = 0;
+
+  readonly pinInfo: ElementPin[] = [
+    { name: '1', number: 1, y: 34, x: 6.5, signals: [] },
+    { name: '2', number: 2, y: 34, x: 16, signals: [] },
+    { name: '3', number: 3, y: 34, x: 25.5, signals: [] },
+  ];
 
   static get styles() {
     return css`
