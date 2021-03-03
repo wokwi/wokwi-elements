@@ -7,7 +7,7 @@ export class SevenSegmentElement extends LitElement {
   /** The color of a lit segment */
   @property() color = 'red';
 
-  /** The colon of an unlit segment */
+  /** The color of an unlit segment */
   @property() offColor = '#444';
 
   /** The background color of the 7-segment display */
