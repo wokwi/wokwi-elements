@@ -6,6 +6,7 @@ import { SPACE_KEYS } from './utils/keys';
 export class PushbuttonElement extends LitElement {
   @property() color = 'red';
   @property() pressed = false;
+  @property() label = '';
 
   readonly pinInfo: ElementPin[] = [
     { name: '1.l', x: 2, y: 9, signals: [] },
@@ -16,6 +17,11 @@ export class PushbuttonElement extends LitElement {
 
   static get styles() {
     return css`
+      :host {
+        display: inline-flex;
+        flex-direction: column;
+      }
+
       button {
         border: none;
         background: none;
@@ -33,16 +39,27 @@ export class PushbuttonElement extends LitElement {
       .clickable-element {
         cursor: pointer;
       }
+
+      .label {
+        width: 0;
+        min-width: 100%;
+        font-size: 12px;
+        text-align: center;
+        color: gray;
+        position: relative;
+        line-height: 1;
+        top: -2px;
+      }
     `;
   }
 
   render() {
-    const { color } = this;
+    const { color, label } = this;
     const buttonFill = this.pressed ? 'url(#grad-down)' : 'url(#grad-up)';
 
     return html`
       <button
-        aria-label="${color} pushbutton"
+        aria-label="${label} ${color} pushbutton"
         @mousedown=${this.down}
         @mouseup=${(e: MouseEvent) => !e.ctrlKey && this.up()}
         @touchstart=${this.down}
@@ -107,6 +124,7 @@ export class PushbuttonElement extends LitElement {
           </g>
         </svg>
       </button>
+      <span class="label">${this.label}</span>
     `;
   }
 

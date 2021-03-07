@@ -25,6 +25,26 @@ export const green = () =>
     ></wokwi-pushbutton>
   `;
 
+export const redWithLabel = () =>
+  html`
+    <wokwi-pushbutton
+      color="red"
+      label="Press me!"
+      @button-press=${action('button-press')}
+      @button-release=${action('button-release')}
+    ></wokwi-pushbutton>
+  `;
+
+export const redWithLongLabel = () =>
+  html`
+    <wokwi-pushbutton
+      color="red"
+      label="I have a realy long label..."
+      @button-press=${action('button-press')}
+      @button-release=${action('button-release')}
+    ></wokwi-pushbutton>
+  `;
+
 export const fourButtons = () =>
   html`
     <wokwi-pushbutton
