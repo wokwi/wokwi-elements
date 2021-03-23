@@ -4,4 +4,4 @@ inject: true
 before: \}\s+\}\s+\}
 skip_if: 'wokwi-<%= name %>'
 ---
-      'wokwi-<%= name %>': Partial<<%= h.className(name) %>Element>;
+      'wokwi-<%= name %>': WokwiElement<<%= h.className(name) %>Element>;

@@ -23,30 +23,32 @@ import { LEDRingElement } from './led-ring-element';
 import { SlideSwitchElement } from './slide-switch-element';
 import { HCSR04Element } from './hc-sr04-element';
 
+type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
+
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'wokwi-7segment': Partial<SevenSegmentElement>;
-      'wokwi-arduino-uno': Partial<ArduinoUnoElement>;
-      'wokwi-lcd1602': Partial<LCD1602Element>;
-      'wokwi-led': Partial<LEDElement>;
-      'wokwi-neopixel': Partial<NeoPixelElement>;
-      'wokwi-pushbutton': Partial<PushbuttonElement>;
-      'wokwi-resistor': Partial<ResistorElement>;
-      'wokwi-membrane-keypad': Partial<MembraneKeypadElement>;
-      'wokwi-potentiometer': Partial<PotentiometerElement>;
-      'wokwi-neopixel-matrix': Partial<NeopixelMatrixElement>;
-      'wokwi-ssd1306': Partial<SSD1306Element>;
-      'wokwi-buzzer': Partial<BuzzerElement>;
-      'wokwi-rotary-dialer': Partial<RotaryDialerElement>;
-      'wokwi-servo': Partial<ServoElement>;
-      'wokwi-dht22': Partial<DHT22Element>;
-      'wokwi-arduino-mega': Partial<ArduinoMegaElement>;
-      'wokwi-arduino-nano': Partial<ArduinoNanoElement>;
-      'wokwi-ds1307': Partial<Ds1307Element>;
-      'wokwi-neopixel-ring': Partial<LEDRingElement>;
-      'wokwi-slide-switch': Partial<SlideSwitchElement>;
-      'wokwi-hc-sr04': Partial<HCSR04Element>;
+      'wokwi-7segment': WokwiElement<SevenSegmentElement>;
+      'wokwi-arduino-uno': WokwiElement<ArduinoUnoElement>;
+      'wokwi-lcd1602': WokwiElement<LCD1602Element>;
+      'wokwi-led': WokwiElement<LEDElement>;
+      'wokwi-neopixel': WokwiElement<NeoPixelElement>;
+      'wokwi-pushbutton': WokwiElement<PushbuttonElement>;
+      'wokwi-resistor': WokwiElement<ResistorElement>;
+      'wokwi-membrane-keypad': WokwiElement<MembraneKeypadElement>;
+      'wokwi-potentiometer': WokwiElement<PotentiometerElement>;
+      'wokwi-neopixel-matrix': WokwiElement<NeopixelMatrixElement>;
+      'wokwi-ssd1306': WokwiElement<SSD1306Element>;
+      'wokwi-buzzer': WokwiElement<BuzzerElement>;
+      'wokwi-rotary-dialer': WokwiElement<RotaryDialerElement>;
+      'wokwi-servo': WokwiElement<ServoElement>;
+      'wokwi-dht22': WokwiElement<DHT22Element>;
+      'wokwi-arduino-mega': WokwiElement<ArduinoMegaElement>;
+      'wokwi-arduino-nano': WokwiElement<ArduinoNanoElement>;
+      'wokwi-ds1307': WokwiElement<Ds1307Element>;
+      'wokwi-neopixel-ring': WokwiElement<LEDRingElement>;
+      'wokwi-slide-switch': WokwiElement<SlideSwitchElement>;
+      'wokwi-hc-sr04': WokwiElement<HCSR04Element>;
     }
   }
 }
