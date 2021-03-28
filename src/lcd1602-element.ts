@@ -1,9 +1,7 @@
 import { customElement, html, LitElement, property, css, svg } from 'lit-element';
 import { fontA00 } from './lcd1602-font-a00';
 import { ElementPin, i2c } from './pin';
-
-const ROWS = 2;
-const COLS = 16;
+import { mmToPix } from './utils/units';
 
 const charXSpacing = 3.55;
 const charYSpacing = 5.95;
@@ -25,6 +23,9 @@ export class LCD1602Element extends LitElement {
   @property() cursorY = 0;
   @property() backlight = true;
   @property() pins: 'full' | 'i2c' | 'none' = 'full';
+
+  protected numCols = 16;
+  protected numRows = 2;
 
   @property()
   get text() {
@@ -60,7 +61,13 @@ export class LCD1602Element extends LitElement {
     `;
   }
 
+  protected get panelHeight() {
+    return this.rows * 5.75;
+  }
+
   get pinInfo(): ElementPin[] {
+    const { panelHeight } = this;
+    const y = 87.5 + panelHeight * mmToPix;
     switch (this.pins) {
       case 'i2c':
         return [
@@ -73,33 +80,42 @@ export class LCD1602Element extends LitElement {
       case 'full':
       default:
         return [
-          { name: 'VSS', x: 32, y: 131, number: 1, signals: [{ type: 'power', signal: 'GND' }] },
-          { name: 'VDD', x: 41.5, y: 131, number: 2, signals: [{ type: 'power', signal: 'VCC' }] },
-          { name: 'V0', x: 51.5, y: 131, number: 3, signals: [] },
-          { name: 'RS', x: 60.5, y: 131, number: 4, signals: [] },
-          { name: 'RW', x: 70.5, y: 131, number: 5, signals: [] },
-          { name: 'E', x: 80, y: 131, number: 6, signals: [] },
-          { name: 'D0', x: 89.5, y: 131, number: 7, signals: [] },
-          { name: 'D1', x: 99.5, y: 131, number: 8, signals: [] },
-          { name: 'D2', x: 109, y: 131, number: 9, signals: [] },
-          { name: 'D3', x: 118.5, y: 131, number: 10, signals: [] },
-          { name: 'D4', x: 128, y: 131, number: 11, signals: [] },
-          { name: 'D5', x: 137.5, y: 131, number: 12, signals: [] },
-          { name: 'D6', x: 147, y: 131, number: 13, signals: [] },
-          { name: 'D7', x: 156.5, y: 131, number: 14, signals: [] },
-          { name: 'A', x: 166.5, y: 131, number: 15, signals: [] },
-          { name: 'K', x: 176, y: 131, number: 16, signals: [] },
+          { name: 'VSS', x: 32, y, number: 1, signals: [{ type: 'power', signal: 'GND' }] },
+          { name: 'VDD', x: 41.5, y, number: 2, signals: [{ type: 'power', signal: 'VCC' }] },
+          { name: 'V0', x: 51.5, y, number: 3, signals: [] },
+          { name: 'RS', x: 60.5, y, number: 4, signals: [] },
+          { name: 'RW', x: 70.5, y, number: 5, signals: [] },
+          { name: 'E', x: 80, y, number: 6, signals: [] },
+          { name: 'D0', x: 89.5, y, number: 7, signals: [] },
+          { name: 'D1', x: 99.5, y, number: 8, signals: [] },
+          { name: 'D2', x: 109, y, number: 9, signals: [] },
+          { name: 'D3', x: 118.5, y, number: 10, signals: [] },
+          { name: 'D4', x: 128, y, number: 11, signals: [] },
+          { name: 'D5', x: 137.5, y, number: 12, signals: [] },
+          { name: 'D6', x: 147, y, number: 13, signals: [] },
+          { name: 'D7', x: 156.5, y, number: 14, signals: [] },
+          { name: 'A', x: 166.5, y, number: 15, signals: [] },
+          { name: 'K', x: 176, y, number: 16, signals: [] },
         ];
     }
+  }
+
+  get cols() {
+    return this.numCols;
+  }
+
+  get rows() {
+    return this.numRows;
   }
 
   path(characters: Uint8Array | number[]) {
     const xSpacing = 0.6;
     const ySpacing = 0.7;
     const result = [];
+    const { cols } = this;
     for (let i = 0; i < characters.length; i++) {
-      const charX = (i % COLS) * charXSpacing;
-      const charY = Math.floor(i / COLS) * charYSpacing;
+      const charX = (i % cols) * charXSpacing;
+      const charY = Math.floor(i / cols) * charYSpacing;
 
       for (let py = 0; py < 8; py++) {
         const row = this.font[characters[i] * 8 + py];
@@ -116,17 +132,18 @@ export class LCD1602Element extends LitElement {
   }
 
   renderCursor() {
-    const xOffset = 12.45 + this.cursorX * charXSpacing;
-    const yOffset = 12.55 + this.cursorY * charYSpacing;
-    if (this.cursorX < 0 || this.cursorX >= COLS || this.cursorY < 0 || this.cursorY >= ROWS) {
+    const { cols, rows, cursor, cursorX, cursorY, blink, color } = this;
+    const xOffset = 12.45 + cursorX * charXSpacing;
+    const yOffset = 12.55 + cursorY * charYSpacing;
+    if (cursorX < 0 || cursorX >= cols || cursorY < 0 || cursorY >= rows) {
       return null;
     }
 
     const result = [];
 
-    if (this.blink) {
+    if (blink) {
       result.push(svg`
-        <rect x="${xOffset}" y="${yOffset}" width="2.95" height="5.55" fill="${this.color}">
+        <rect x="${xOffset}" y="${yOffset}" width="2.95" height="5.55" fill="${color}">
           <animate
             attributeName="opacity"
             values="0;0;0;0;1;1;0;0;0;0"
@@ -138,11 +155,9 @@ export class LCD1602Element extends LitElement {
       `);
     }
 
-    if (this.cursor) {
+    if (cursor) {
       const y = yOffset + 0.7 * 7;
-      result.push(
-        svg`<rect x="${xOffset}" y="${y}" width="2.95" height="0.65" fill="${this.color}" />`
-      );
+      result.push(svg`<rect x="${xOffset}" y="${y}" width="2.95" height="0.65" fill="${color}" />`);
     }
 
     return result;
@@ -159,45 +174,52 @@ export class LCD1602Element extends LitElement {
     `;
   }
 
-  renderPins() {
+  renderPins(panelHeight: number) {
+    const y = panelHeight + 21.1;
     return svg`
-      <rect x="7.55" y="33.5" height="2.5" width="40.64" fill="url(#pins)" />
-      <text x="6" y="35.3" fill="white">1</text>
-      <text x="7.2" y="33.3" fill="white">VSS</text>
-      <text x="9.9" y="33.3" fill="white">VDD</text>
-      <text x="12.7" y="33.3" fill="white">V0</text>
-      <text x="15.2" y="33.3" fill="white">RS</text>
-      <text x="17.8" y="33.3" fill="white">RW</text>
-      <text x="20.8" y="33.3" fill="white">E</text>
-      <text x="22.7" y="33.3" fill="white">D0</text>
-      <text x="25.3" y="33.3" fill="white">D1</text>
-      <text x="27.9" y="33.3" fill="white">D2</text>
-      <text x="30.4" y="33.3" fill="white">D3</text>
-      <text x="33" y="33.3" fill="white">D4</text>
-      <text x="35.6" y="33.3" fill="white">D5</text>
-      <text x="38.2" y="33.3" fill="white">D6</text>
-      <text x="40.8" y="33.3" fill="white">D7</text>
-      <text x="43.6" y="33.3" fill="white">A</text>
-      <text x="46.2" y="33.3" fill="white">K</text>
-      <text x="48" y="35.3" fill="white">16</text>
+      <g transform="translate(0, ${y})">
+        <rect x="7.55" y="1" height="2.5" width="40.64" fill="url(#pins)" />
+        <text x="6" y="2.7" fill="white">1</text>
+        <text x="7.2" y="0.7" fill="white">VSS</text>
+        <text x="9.9" y="0.7" fill="white">VDD</text>
+        <text x="12.7" y="0.7" fill="white">V0</text>
+        <text x="15.2" y="0.7" fill="white">RS</text>
+        <text x="17.8" y="0.7" fill="white">RW</text>
+        <text x="20.8" y="0.7" fill="white">E</text>
+        <text x="22.7" y="0.7" fill="white">D0</text>
+        <text x="25.3" y="0.7" fill="white">D1</text>
+        <text x="27.9" y="0.7" fill="white">D2</text>
+        <text x="30.4" y="0.7" fill="white">D3</text>
+        <text x="33" y="0.7" fill="white">D4</text>
+        <text x="35.6" y="0.7" fill="white">D5</text>
+        <text x="38.2" y="0.7" fill="white">D6</text>
+        <text x="40.8" y="0.7" fill="white">D7</text>
+        <text x="43.6" y="0.7" fill="white">A</text>
+        <text x="46.2" y="0.7" fill="white">K</text>
+        <text x="48" y="2.7" fill="white">16</text>
+      </g>
     `;
   }
 
   render() {
-    const { color, characters, background } = this;
+    const { color, characters, background, pins, panelHeight, cols } = this;
 
     const darken = this.backlight ? 0 : 0.5;
     const actualBgColor =
       background in backgroundColors ? backgroundColors[background] : backgroundColors;
 
+    const panelWidth = cols * 3.5125;
+    const width = panelWidth + 23.8;
+    const height = panelHeight + 24.5;
+
     // Dimensions according to:
     // https://www.winstar.com.tw/products/character-lcd-display-module/16x2-lcd.html
     return html`
       <svg
-        width="80mm"
-        height="36mm"
+        width="${width}mm"
+        height="${height}mm"
         version="1.1"
-        viewBox="0 0 80 36"
+        viewBox="0 0 ${width} ${height}"
         style="font-size: 1.5px; font-family: monospace"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -220,13 +242,35 @@ export class LCD1602Element extends LitElement {
             <circle r="0.45" cx="0.827" cy="0.9" color="black" />
           </pattern>
         </defs>
-        <rect width="80" height="36" fill="#087f45" />
-        <rect x="4.95" y="5.7" width="71.2" height="25.2" />
-        <rect x="7.55" y="10.3" width="66" height="16" rx="1.5" ry="1.5" fill="${actualBgColor}" />
-        <rect x="7.55" y="10.3" width="66" height="16" rx="1.5" ry="1.5" opacity="${darken}" />
-        ${this.pins === 'i2c' ? this.renderI2CPins() : null}
-        ${this.pins === 'full' ? this.renderPins() : null}
-        <rect x="12.45" y="12.55" width="56.2" height="11.5" fill="url(#characters)" />
+        <rect width="${width}" height="${height}" fill="#087f45" />
+        <rect x="4.95" y="5.7" width="${panelWidth + 15}" height="${panelHeight + 13.7}" />
+        <rect
+          x="7.55"
+          y="10.3"
+          width="${panelWidth + 9.8}"
+          height="${panelHeight + 4.5}"
+          rx="1.5"
+          ry="1.5"
+          fill="${actualBgColor}"
+        />
+        <rect
+          x="7.55"
+          y="10.3"
+          width="${panelWidth + 9.8}"
+          height="${panelHeight + 4.5}"
+          rx="1.5"
+          ry="1.5"
+          opacity="${darken}"
+        />
+        ${pins === 'i2c' ? this.renderI2CPins() : null}
+        ${pins === 'full' ? this.renderPins(panelHeight) : null}
+        <rect
+          x="12.45"
+          y="12.55"
+          width="${panelWidth}"
+          height="${panelHeight}"
+          fill="url(#characters)"
+        />
         <path d="${this.path(characters)}" transform="translate(12.45, 12.55)" fill="${color}" />
         ${this.renderCursor()}
       </svg>

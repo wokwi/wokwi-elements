@@ -22,6 +22,7 @@ import { Ds1307Element } from './ds1307-element';
 import { LEDRingElement } from './led-ring-element';
 import { SlideSwitchElement } from './slide-switch-element';
 import { HCSR04Element } from './hc-sr04-element';
+import { LCD2004Element } from './lcd2004-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -49,6 +50,7 @@ declare global {
       'wokwi-neopixel-ring': WokwiElement<LEDRingElement>;
       'wokwi-slide-switch': WokwiElement<SlideSwitchElement>;
       'wokwi-hc-sr04': WokwiElement<HCSR04Element>;
+      'wokwi-lcd2004': WokwiElement<LCD2004Element>;
     }
   }
 }

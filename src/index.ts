@@ -23,3 +23,4 @@ export { Ds1307Element } from './ds1307-element';
 export { LEDRingElement } from './led-ring-element';
 export { SlideSwitchElement } from './slide-switch-element';
 export { HCSR04Element } from './hc-sr04-element';
+export { LCD2004Element } from './lcd2004-element';
