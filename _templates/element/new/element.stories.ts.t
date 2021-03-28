@@ -1,19 +1,24 @@
 ---
 to: src/<%= name %>-element.stories.ts
 ---
-import { withKnobs, number } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/web-components';
 import { html } from 'lit-html';
 import './<%= name %>-element';
 
-storiesOf('<%= h.changeCase.title(h.className(name)) %>', module)
-  .addParameters({ component: 'wokwi-<%= name %>' })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => html`
-      <wokwi-<%= name %>
-        value=${number('value', 5, { min: 1, max: 10 })}
-      ></wokwi-<%= name %>>
-    `
-  );
+export default {
+  title: '<%= h.changeCase.title(h.className(name)) %>',
+  component: 'wokwi-<%= name %>',
+  argTypes: {
+    value: { control: { type: 'number', min: 1, max: 10, step: 1 } },
+  },
+  args: {
+    value: 5,
+  },
+};
+
+const Template = ({ value }) => html`<wokwi-<%= name %> value=${value}></wokwi-<%= name %>>`;
+
+export const Default = Template.bind({});
+Default.args = { value: 5 };
+
+export const Large = Template.bind({});
+Large.args = { value: 10 };
