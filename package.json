@@ -1,6 +1,6 @@
 {
   "name": "@wokwi/elements",
-  "version": "0.31.3",
+  "version": "0.32.0",
   "main": "dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
