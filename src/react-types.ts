@@ -23,6 +23,7 @@ import { LEDRingElement } from './led-ring-element';
 import { SlideSwitchElement } from './slide-switch-element';
 import { HCSR04Element } from './hc-sr04-element';
 import { LCD2004Element } from './lcd2004-element';
+import { AnalogJoystickElement } from './analog-joystick-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -51,6 +52,7 @@ declare global {
       'wokwi-slide-switch': WokwiElement<SlideSwitchElement>;
       'wokwi-hc-sr04': WokwiElement<HCSR04Element>;
       'wokwi-lcd2004': WokwiElement<LCD2004Element>;
+      'wokwi-analog-joystick': WokwiElement<AnalogJoystickElement>;
     }
   }
 }
