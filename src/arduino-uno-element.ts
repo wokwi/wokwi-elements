@@ -39,8 +39,8 @@ export class ArduinoUnoElement extends LitElement {
     { name: 'A1', x: 217.5, y: 191.5, signals: [analog(1)] },
     { name: 'A2', x: 227, y: 191.5, signals: [analog(2)] },
     { name: 'A3', x: 236.5, y: 191.5, signals: [analog(3)] },
-    { name: 'A4', x: 246, y: 191.5, signals: [analog(4), i2c('SCL')] },
-    { name: 'A5', x: 255.5, y: 191.5, signals: [analog(5), i2c('SDA')] },
+    { name: 'A4', x: 246, y: 191.5, signals: [analog(4), i2c('SDA')] },
+    { name: 'A5', x: 255.5, y: 191.5, signals: [analog(5), i2c('SCL')] },
   ];
 
   render() {
