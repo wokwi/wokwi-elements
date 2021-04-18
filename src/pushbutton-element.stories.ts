@@ -39,7 +39,7 @@ export const redWithLongLabel = () =>
   html`
     <wokwi-pushbutton
       color="red"
-      label="I have a realy long label..."
+      label="I have a really long label..."
       @button-press=${action('button-press')}
       @button-release=${action('button-release')}
     ></wokwi-pushbutton>
