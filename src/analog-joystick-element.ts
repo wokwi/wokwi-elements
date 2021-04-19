@@ -148,7 +148,7 @@ export class AnalogJoystickElement extends LitElement {
           id="knob"
           cx="13.6"
           cy="13.6"
-          transform="translate(${2.5 * xValue}, ${2.5 * yValue})"
+          transform="translate(${2.5 * -xValue}, ${2.5 * -yValue})"
           r="10.6"
           fill="url(#g-knob)"
           filter="url(#noise)"
