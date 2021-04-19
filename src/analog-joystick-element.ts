@@ -250,8 +250,7 @@ export class AnalogJoystickElement extends LitElement {
         break;
     }
     if (SPACE_KEYS.includes(e.key)) {
-      this.pressed = true;
-      this.valueChanged();
+      this.press();
     }
   }
 
@@ -269,8 +268,7 @@ export class AnalogJoystickElement extends LitElement {
         break;
     }
     if (SPACE_KEYS.includes(e.key)) {
-      this.pressed = false;
-      this.valueChanged();
+      this.release();
     }
   }
 
