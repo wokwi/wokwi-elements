@@ -173,7 +173,7 @@ export class AnalogJoystickElement extends LitElement {
             x="1"
             height="10"
             width="7"
-            @mousedown=${() => this.mousedown(-1, 0)}
+            @mousedown=${() => this.mousedown(1, 0)}
             @mouseup=${() => this.mouseup(true, false)}
           />
           <path d="m 7.022,11.459 -3.202,2.497 3.202,2.497" />
@@ -184,7 +184,7 @@ export class AnalogJoystickElement extends LitElement {
             x="7.9"
             height="7"
             width="10"
-            @mousedown=${() => this.mousedown(0, -1)}
+            @mousedown=${() => this.mousedown(0, 1)}
             @mouseup=${() => this.mouseup(false, true)}
           />
           <path d="m 16.615,7.095 -2.497,-3.202 -2.497,3.202" />
@@ -195,7 +195,7 @@ export class AnalogJoystickElement extends LitElement {
             x="18"
             height="10"
             width="7"
-            @mousedown=${() => this.mousedown(1, 0)}
+            @mousedown=${() => this.mousedown(-1, 0)}
             @mouseup=${() => this.mouseup(true, false)}
           />
           <path d="m 19.980,16.101 3.202,-2.497 -3.202,-2.497" />
@@ -206,7 +206,7 @@ export class AnalogJoystickElement extends LitElement {
             x="7.9"
             height="7"
             width="10"
-            @mousedown=${() => this.mousedown(0, 1)}
+            @mousedown=${() => this.mousedown(0, -1)}
             @mouseup=${() => this.mouseup(false, true)}
           />
           <path d="m 11.620,20.112 2.497,3.202 2.497,-3.202" />
@@ -233,19 +233,19 @@ export class AnalogJoystickElement extends LitElement {
   private keydown(e: KeyboardEvent) {
     switch (e.key) {
       case 'ArrowUp':
-        this.yValue = -1;
-        this.valueChanged();
-        break;
-      case 'ArrowDown':
         this.yValue = 1;
         this.valueChanged();
         break;
+      case 'ArrowDown':
+        this.yValue = -1;
+        this.valueChanged();
+        break;
       case 'ArrowLeft':
-        this.xValue = -1;
+        this.xValue = 1;
         this.valueChanged();
         break;
       case 'ArrowRight':
-        this.xValue = 1;
+        this.xValue = -1;
         this.valueChanged();
         break;
     }
