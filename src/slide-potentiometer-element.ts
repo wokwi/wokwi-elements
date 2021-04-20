@@ -8,10 +8,10 @@ export class SlidePotentiometerElement extends LitElement {
     const { value } = this;
     return html`
       <svg
-        width="45mm"
+        width="55mm"
         height="19mm"
         version="1.1"
-        viewBox="0 0 45 19"
+        viewBox="0 0 55 19"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -43,7 +43,7 @@ export class SlidePotentiometerElement extends LitElement {
             <stop stop-color="#2a2a2a" offset="1" />
           </radialGradient>
         </defs>
-        <g>
+        <g transform="translate(5 0)">
           <!-- Body -->
           <rect
             x="0"
@@ -81,6 +81,12 @@ export class SlidePotentiometerElement extends LitElement {
             <circle cx="0" cy="0" r="1" fill="#858585" stroke="#000" stroke-width=".05" />
             <path d="m0 1 0-2" fill="none" stroke="#000" stroke-width=".151" />
           </g>
+        </g>
+        <!-- pins -->
+        <g fill="#ccc">
+          <rect x="0" y="6" width="5" height="0.75" />
+          <rect x="50" y="6" width="5" height="0.75" />
+          <rect x="0" y="12.25" width="5" height="0.75" />
         </g>
       </svg>
     `;
