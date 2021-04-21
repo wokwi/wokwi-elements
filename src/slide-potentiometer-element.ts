@@ -3,9 +3,11 @@ import { customElement, html, LitElement, property, svg } from 'lit-element';
 @customElement('wokwi-slide-potentiometer')
 export class SlidePotentiometerElement extends LitElement {
   @property() value = 0;
+  @property() minValue = 0;
+  @property() maxValue = 50;
 
   render() {
-    const { value } = this;
+    const { value, minValue, maxValue } = this;
     return html`
       <svg
         width="55mm"
@@ -42,6 +44,10 @@ export class SlidePotentiometerElement extends LitElement {
             <stop stop-color="#d2d2d2" offset="0" />
             <stop stop-color="#2a2a2a" offset="1" />
           </radialGradient>
+          <g id="screw">
+            <circle cx="0" cy="0" r="1" fill="#858585" stroke="#000" stroke-width=".05" />
+            <path d="m0 1 0-2" fill="none" stroke="#000" stroke-width=".151" />
+          </g>
         </defs>
         <g transform="translate(5 0)">
           <!-- Body -->
@@ -58,11 +64,19 @@ export class SlidePotentiometerElement extends LitElement {
           <rect x="3.25" y="8" width="38.5" height="3" rx=".1" ry=".1" fill="#3f1e1e" />
           <!-- Screw Left -->
           <g transform="translate(1.625 9.5) rotate(45)">
-            <circle cx="0" cy="0" r="1" fill="#858585" stroke="#000" stroke-width=".05" />
-            <path d="m0 1 0-2" fill="none" stroke="#000" stroke-width=".151" />
+            <use id="#screw" />
           </g>
           <!-- Button -->
-          <g transform="">
+          <g
+            transform=""
+            tabindex="0"
+            @mousedown=${this.down}
+            @mouseup=${this.up}
+            @touchstart=${this.down}
+            @touchend=${this.up}
+            @keydown=${this.down}
+            @keyup=${this.up}
+          >
             <rect x="19.75" y="8.6" width="5.5" height="1.8" />
             <rect
               x="16.5"
@@ -78,8 +92,7 @@ export class SlidePotentiometerElement extends LitElement {
           </g>
           <!-- Screw Right -->
           <g transform="translate(43.375 9.5) rotate(45)">
-            <circle cx="0" cy="0" r="1" fill="#858585" stroke="#000" stroke-width=".05" />
-            <path d="m0 1 0-2" fill="none" stroke="#000" stroke-width=".151" />
+            <use id="#screw" />
           </g>
         </g>
         <!-- pins -->
@@ -90,5 +103,13 @@ export class SlidePotentiometerElement extends LitElement {
         </g>
       </svg>
     `;
+  }
+
+  private down(): void {
+    this.dispatchEvent(new CustomEvent('button-press'));
+  }
+
+  private up(): void {
+    this.dispatchEvent(new CustomEvent('button-release'));
   }
 }
