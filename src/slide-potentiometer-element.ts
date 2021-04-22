@@ -8,6 +8,11 @@ export class SlidePotentiometerElement extends LitElement {
 
   render() {
     const { value, minValue, maxValue } = this;
+    const tipTravelInMM = 30;
+    // Tip is centered by default
+    const tipBaseOffsetX = -(tipTravelInMM / 2);
+    const tipMovementX = (value / (maxValue - minValue)) * tipTravelInMM;
+    const tipOffSetX = tipMovementX + tipBaseOffsetX;
     return html`
       <svg
         width="55mm"
@@ -68,7 +73,7 @@ export class SlidePotentiometerElement extends LitElement {
           </g>
           <!-- Button -->
           <g
-            transform=""
+            transform="translate(${tipOffSetX} 0)"
             tabindex="0"
             @mousedown=${this.down}
             @mouseup=${this.up}
