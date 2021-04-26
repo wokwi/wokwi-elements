@@ -5,6 +5,8 @@ export class SlidePotentiometerElement extends LitElement {
   @property() value = 0;
   @property() minValue = 0;
   @property() maxValue = 50;
+  private isPressed = false;
+  private caseRect: DOMRect | undefined;
 
   render() {
     const { value, minValue, maxValue } = this;
@@ -57,6 +59,7 @@ export class SlidePotentiometerElement extends LitElement {
         <g transform="translate(5 0)">
           <!-- Body -->
           <rect
+            id="sliderCase"
             x="0"
             y="5"
             width="45"
@@ -77,6 +80,8 @@ export class SlidePotentiometerElement extends LitElement {
             tabindex="0"
             @mousedown=${this.down}
             @mouseup=${this.up}
+            @mousemove=${this.mouseMove}
+            @mouseleave=${this.up}
             @touchstart=${this.down}
             @touchend=${this.up}
             @keydown=${this.down}
@@ -112,9 +117,48 @@ export class SlidePotentiometerElement extends LitElement {
 
   private down(): void {
     this.dispatchEvent(new CustomEvent('button-press'));
+    if (!this.isPressed) {
+      this.updateCaseRect();
+    }
+    this.isPressed = true;
   }
 
   private up(): void {
     this.dispatchEvent(new CustomEvent('button-release'));
+    this.isPressed = false;
+  }
+
+  private updateCaseRect(): void {
+    const rect = this.shadowRoot?.querySelector('#sliderCase')?.getBoundingClientRect();
+    this.caseRect = rect;
+  }
+
+  private mouseMove(event: MouseEvent): void {
+    if (this.isPressed) {
+      const width = this.caseRect?.width ?? 0;
+      const pixelPerMM = width / 45;
+      const travelInPixels = 30 * pixelPerMM;
+      const pixelPerIncrement = travelInPixels / (this.maxValue - this.minValue);
+      const tipPositionX = event.pageX - (this.caseRect?.left ?? 0) - pixelPerMM * 7.5;
+      this.value = Math.round(tipPositionX / pixelPerIncrement);
+      this.value = Math.min(this.value, this.maxValue);
+      this.value = Math.max(this.value, 0);
+
+      const details: any = {};
+      details.clientX = event.clientX;
+      details.clientY = event.clientY;
+      details.pageX = event.pageX;
+      details.pageY = event.pageY;
+      details.caseLeft = this.caseRect?.left ?? 0;
+      details.caseTop = this.caseRect?.top ?? 0;
+      details.caseRight = this.caseRect?.right ?? 0;
+      details.caseBottom = this.caseRect?.bottom ?? 0;
+      details.calculatedX = event.pageX - details.caseLeft;
+      details.calculatedY = event.pageY - details.caseTop;
+      details.pixelPerIncrement = pixelPerIncrement;
+      details.caseWidth = width;
+      details.value = this.value;
+      console.log(details);
+    }
   }
 }
