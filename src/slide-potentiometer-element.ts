@@ -1,4 +1,4 @@
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { css, customElement, html, LitElement, property } from 'lit-element';
 
 @customElement('wokwi-slide-potentiometer')
 export class SlidePotentiometerElement extends LitElement {
@@ -7,6 +7,19 @@ export class SlidePotentiometerElement extends LitElement {
   @property() maxValue = 50;
   private isPressed = false;
   private caseRect: DOMRect | undefined;
+  private zoom = 1;
+
+  static get styles() {
+    return css`
+      .hide-input {
+        position: absolute;
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+      }
+    `;
+  }
 
   render() {
     const { value, minValue, maxValue } = this;
@@ -16,6 +29,19 @@ export class SlidePotentiometerElement extends LitElement {
     const tipMovementX = (value / (maxValue - minValue)) * tipTravelInMM;
     const tipOffSetX = tipMovementX + tipBaseOffsetX;
     return html`
+      <input
+        tabindex="0"
+        type="range"
+        min="${this.minValue}"
+        max="${this.maxValue}"
+        value="${this.value}"
+        step="1"
+        aria-valuemin="${this.minValue}"
+        aria-valuenow="${this.value}"
+        aria-valuemax="${this.maxValue}"
+        @input="${this.onInputValueChange}"
+        class="hide-input"
+      />
       <svg
         width="55mm"
         height="19mm"
@@ -74,18 +100,20 @@ export class SlidePotentiometerElement extends LitElement {
           <g transform="translate(1.625 9.5) rotate(45)">
             <use id="#screw" />
           </g>
-          <!-- Button -->
+          <!-- Tip -->
           <g
+            id="tip"
             transform="translate(${tipOffSetX} 0)"
-            tabindex="0"
             @mousedown=${this.down}
             @mouseup=${this.up}
             @mousemove=${this.mouseMove}
             @mouseleave=${this.up}
             @touchstart=${this.down}
+            @touchmove=${this.touchMove}
             @touchend=${this.up}
             @keydown=${this.down}
             @keyup=${this.up}
+            @click="${this.focusInput}"
           >
             <rect x="19.75" y="8.6" width="5.5" height="1.8" />
             <rect
@@ -115,6 +143,13 @@ export class SlidePotentiometerElement extends LitElement {
     `;
   }
 
+  private focusInput() {
+    const inputEl: HTMLInputElement | null | undefined = this.shadowRoot?.querySelector(
+      '.hide-input'
+    );
+    inputEl?.focus();
+  }
+
   private down(): void {
     this.dispatchEvent(new CustomEvent('button-press'));
     if (!this.isPressed) {
@@ -124,41 +159,62 @@ export class SlidePotentiometerElement extends LitElement {
   }
 
   private up(): void {
-    this.dispatchEvent(new CustomEvent('button-release'));
-    this.isPressed = false;
+    if (this.isPressed) {
+      this.dispatchEvent(new CustomEvent('button-release'));
+      this.isPressed = false;
+    }
   }
 
   private updateCaseRect(): void {
-    const rect = this.shadowRoot?.querySelector('#sliderCase')?.getBoundingClientRect();
-    this.caseRect = rect;
+    const element = this.shadowRoot?.querySelector('#sliderCase');
+    if (element) {
+      this.caseRect = element?.getBoundingClientRect();
+    }
+
+    // Handle zooming in the storybook
+    const zoom = getComputedStyle(window.document.body)?.zoom;
+    if (zoom !== undefined) {
+      this.zoom = Number(zoom);
+    } else {
+      this.zoom = 1;
+    }
+  }
+
+  private onInputValueChange(event: KeyboardEvent): void {
+    const target = event.target as HTMLInputElement;
+    if (target.value) {
+      this.updateValue(Number(target.value));
+    }
   }
 
   private mouseMove(event: MouseEvent): void {
     if (this.isPressed) {
-      const width = this.caseRect?.width ?? 0;
-      const pixelPerMM = width / 45;
-      const travelInPixels = 30 * pixelPerMM;
-      const pixelPerIncrement = travelInPixels / (this.maxValue - this.minValue);
-      const tipPositionX = event.pageX - (this.caseRect?.left ?? 0) - pixelPerMM * 7.5;
-      this.value = Math.round(tipPositionX / pixelPerIncrement);
-      this.value = Math.min(this.value, this.maxValue);
-      this.value = Math.max(this.value, 0);
-
-      const details: any = {};
-      details.clientX = event.clientX;
-      details.clientY = event.clientY;
-      details.pageX = event.pageX;
-      details.pageY = event.pageY;
-      details.caseLeft = this.caseRect?.left ?? 0;
-      details.caseTop = this.caseRect?.top ?? 0;
-      details.caseRight = this.caseRect?.right ?? 0;
-      details.caseBottom = this.caseRect?.bottom ?? 0;
-      details.calculatedX = event.pageX - details.caseLeft;
-      details.calculatedY = event.pageY - details.caseTop;
-      details.pixelPerIncrement = pixelPerIncrement;
-      details.caseWidth = width;
-      details.value = this.value;
-      console.log(details);
+      this.updateValueFromXCoordinate(event.pageX);
     }
+  }
+
+  private touchMove(event: TouchEvent): void {
+    if (this.isPressed) {
+      if (event.targetTouches.length > 0) {
+        this.updateValueFromXCoordinate(event.targetTouches[0].pageX);
+      }
+    }
+  }
+
+  private updateValueFromXCoordinate(xPosition: number): void {
+    const width = this.caseRect?.width ?? 0;
+    const pixelPerMM = width / 45;
+    const travelInPixels = 30 * pixelPerMM;
+    const pixelPerIncrement = travelInPixels / (this.maxValue - this.minValue);
+    const caseBorderWidth = pixelPerMM * 7.5;
+    const tipPositionX = xPosition / this.zoom - (this.caseRect?.left ?? 0) - caseBorderWidth;
+    this.updateValue(Math.round(tipPositionX / pixelPerIncrement));
+  }
+
+  private updateValue(value: number) {
+    let clampedValue = Math.min(value, this.maxValue);
+    clampedValue = Math.max(clampedValue, this.minValue);
+    this.value = clampedValue;
+    this.dispatchEvent(new InputEvent('input', { detail: clampedValue }));
   }
 }
