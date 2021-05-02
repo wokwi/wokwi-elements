@@ -5,7 +5,7 @@ const bandColors: { [key: number]: string } = {
   [-2]: 'silver',
   [-1]: '#c4a000', // gold
   0: 'black',
-  1: 'brown',
+  1: '#8b4513',
   2: 'red',
   3: 'orange',
   4: 'yellow',
