@@ -1,4 +1,5 @@
-import { css, customElement, html, LitElement, property } from 'lit-element';
+import { css, customElement, html, LitElement, property, svg } from 'lit-element';
+import { ElementPin } from './pin';
 
 @customElement('wokwi-slide-potentiometer')
 export class SlidePotentiometerElement extends LitElement {
@@ -8,6 +9,11 @@ export class SlidePotentiometerElement extends LitElement {
   private isPressed = false;
   private caseRect: DOMRect | undefined;
   private zoom = 1;
+  readonly pinInfo: ElementPin[] = [
+    { name: '1', x: 17.5, y: 59, number: 1, signals: [] },
+    { name: '2', x: 222.25, y: 59, number: 2, signals: [] },
+    { name: '3', x: 17.5, y: 82.75, number: 3, signals: [] },
+  ];
 
   static get styles() {
     return css`
@@ -17,6 +23,10 @@ export class SlidePotentiometerElement extends LitElement {
         width: 1px;
         height: 1px;
         margin: -1px;
+      }
+      input:focus + svg #tip {
+        /* some style to add when the element has focus */
+        filter: url(#outline);
       }
     `;
   }
@@ -44,14 +54,17 @@ export class SlidePotentiometerElement extends LitElement {
       />
       <svg
         width="55mm"
-        height="19mm"
+        height="29mm"
         version="1.1"
-        viewBox="0 0 55 19"
+        viewBox="0 0 55 29"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <defs>
+          <filter id="outline">
+            <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="#4faaff" />
+          </filter>
           <linearGradient
             id="tipGradient"
             x1="36.482"
@@ -82,7 +95,13 @@ export class SlidePotentiometerElement extends LitElement {
             <path d="m0 1 0-2" fill="none" stroke="#000" stroke-width=".151" />
           </g>
         </defs>
-        <g transform="translate(5 0)">
+        <!-- pins -->
+        <g fill="#ccc">
+          <rect x="0" y="11" width="5" height="0.75" />
+          <rect x="50" y="11" width="5" height="0.75" />
+          <rect x="0" y="17.25" width="5" height="0.75" />
+        </g>
+        <g transform="translate(5 5)">
           <!-- Body -->
           <rect
             id="sliderCase"
@@ -98,7 +117,11 @@ export class SlidePotentiometerElement extends LitElement {
           <rect x="3.25" y="8" width="38.5" height="3" rx=".1" ry=".1" fill="#3f1e1e" />
           <!-- Screw Left -->
           <g transform="translate(1.625 9.5) rotate(45)">
-            <use id="#screw" />
+            <use href="#screw" />
+          </g>
+          <!-- Screw Right -->
+          <g transform="translate(43.375 9.5) rotate(45)">
+            <use href="#screw" />
           </g>
           <!-- Tip -->
           <g
@@ -128,16 +151,6 @@ export class SlidePotentiometerElement extends LitElement {
             />
             <rect x="22.2" y="0" width=".6" height="19" fill="#efefef" />
           </g>
-          <!-- Screw Right -->
-          <g transform="translate(43.375 9.5) rotate(45)">
-            <use id="#screw" />
-          </g>
-        </g>
-        <!-- pins -->
-        <g fill="#ccc">
-          <rect x="0" y="6" width="5" height="0.75" />
-          <rect x="50" y="6" width="5" height="0.75" />
-          <rect x="0" y="12.25" width="5" height="0.75" />
         </g>
       </svg>
     `;
