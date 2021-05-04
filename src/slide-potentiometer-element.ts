@@ -60,6 +60,9 @@ export class SlidePotentiometerElement extends LitElement {
         xmlns="http://www.w3.org/2000/svg"
         xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
         xmlns:xlink="http://www.w3.org/1999/xlink"
+        @mouseup=${this.up}
+        @mousemove=${this.mouseMove}
+        @mouseleave=${this.up}
       >
         <defs>
           <filter id="outline">
@@ -128,9 +131,6 @@ export class SlidePotentiometerElement extends LitElement {
             id="tip"
             transform="translate(${tipOffSetX} 0)"
             @mousedown=${this.down}
-            @mouseup=${this.up}
-            @mousemove=${this.mouseMove}
-            @mouseleave=${this.up}
             @touchstart=${this.down}
             @touchmove=${this.touchMove}
             @touchend=${this.up}
