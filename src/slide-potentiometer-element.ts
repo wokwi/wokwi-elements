@@ -11,8 +11,8 @@ export class SlidePotentiometerElement extends LitElement {
   private zoom = 1;
   readonly pinInfo: ElementPin[] = [
     { name: '1', x: 17.5, y: 59, number: 1, signals: [] },
-    { name: '2', x: 222.25, y: 59, number: 2, signals: [] },
-    { name: '3', x: 17.5, y: 82.75, number: 3, signals: [] },
+    { name: '2', x: 17.5, y: 82.75, number: 2, signals: [] },
+    { name: '3', x: 222.25, y: 59, number: 3, signals: [] },
   ];
 
   static get styles() {
