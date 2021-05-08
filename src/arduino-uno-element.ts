@@ -240,7 +240,7 @@ export class ArduinoUnoElement extends LitElement {
           <tspan x="0" dy="2.54">~10</tspan>
           <tspan x="0" dy="2.54">~9</tspan>
           <tspan x="0" dy="2.54">8</tspan>
-          <tspan x="0" dy="4.08">~7</tspan>
+          <tspan x="0" dy="4.08">7</tspan>
           <tspan x="0" dy="2.54">~6</tspan>
           <tspan x="0" dy="2.54">~5</tspan>
           <tspan x="0" dy="2.54">4</tspan>
