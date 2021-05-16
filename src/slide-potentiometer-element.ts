@@ -155,9 +155,6 @@ export class SlidePotentiometerElement extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    // @mouseup=${this.up}
-    // @mousemove=${this.mouseMove}
-    // @mouseleave=${this.up}
     window.addEventListener('mouseup', this.up);
     window.addEventListener('mousemove', this.mouseMove);
     window.addEventListener('mouseleave', this.up);
