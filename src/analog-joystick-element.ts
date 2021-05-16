@@ -1,4 +1,4 @@
-import { css, customElement, html, LitElement, property } from 'lit-element';
+import { css, customElement, html, LitElement, property, query } from 'lit-element';
 import { analog, ElementPin, GND, VCC } from './pin';
 import { SPACE_KEYS } from './utils/keys';
 
@@ -7,6 +7,8 @@ export class AnalogJoystickElement extends LitElement {
   @property({ type: Number }) xValue = 0;
   @property({ type: Number }) yValue = 0;
   @property() pressed = false;
+
+  @query('#knob') knob!: SVGCircleElement;
 
   readonly pinInfo: ElementPin[] = [
     { name: 'VCC', x: 33, y: 115.8, signals: [VCC()] },
@@ -38,6 +40,7 @@ export class AnalogJoystickElement extends LitElement {
         cursor: pointer;
       }
 
+      #knob:focus ~ .controls,
       #knob:hover ~ .controls {
         opacity: 1;
       }
@@ -173,7 +176,7 @@ export class AnalogJoystickElement extends LitElement {
             x="1"
             height="10"
             width="7"
-            @mousedown=${() => this.mousedown(1, 0)}
+            @mousedown=${(e: MouseEvent) => this.mousedown(e, 1, 0)}
             @mouseup=${() => this.mouseup(true, false)}
           />
           <path d="m 7.022,11.459 -3.202,2.497 3.202,2.497" />
@@ -184,7 +187,7 @@ export class AnalogJoystickElement extends LitElement {
             x="7.9"
             height="7"
             width="10"
-            @mousedown=${() => this.mousedown(0, 1)}
+            @mousedown=${(e: MouseEvent) => this.mousedown(e, 0, 1)}
             @mouseup=${() => this.mouseup(false, true)}
           />
           <path d="m 16.615,7.095 -2.497,-3.202 -2.497,3.202" />
@@ -195,7 +198,7 @@ export class AnalogJoystickElement extends LitElement {
             x="18"
             height="10"
             width="7"
-            @mousedown=${() => this.mousedown(-1, 0)}
+            @mousedown=${(e: MouseEvent) => this.mousedown(e, -1, 0)}
             @mouseup=${() => this.mouseup(true, false)}
           />
           <path d="m 19.980,16.101 3.202,-2.497 -3.202,-2.497" />
@@ -206,7 +209,7 @@ export class AnalogJoystickElement extends LitElement {
             x="7.9"
             height="7"
             width="10"
-            @mousedown=${() => this.mousedown(0, -1)}
+            @mousedown=${(e: MouseEvent) => this.mousedown(e, 0, -1)}
             @mouseup=${() => this.mouseup(false, true)}
           />
           <path d="m 11.620,20.112 2.497,3.202 2.497,-3.202" />
@@ -217,7 +220,7 @@ export class AnalogJoystickElement extends LitElement {
             r="3"
             stroke="#aaa"
             class=${this.pressed ? 'pressed' : ''}
-            @mousedown=${() => this.press()}
+            @mousedown=${(e: MouseEvent) => this.press(e)}
             @mouseup=${() => this.release()}
           />
         </g>
@@ -272,7 +275,7 @@ export class AnalogJoystickElement extends LitElement {
     }
   }
 
-  private mousedown(dx: number, dy: number) {
+  private mousedown(e: MouseEvent, dx: number, dy: number) {
     if (dx) {
       this.xValue = dx;
     }
@@ -280,6 +283,8 @@ export class AnalogJoystickElement extends LitElement {
       this.yValue = dy;
     }
     this.valueChanged();
+    this.knob?.focus();
+    e.preventDefault(); // Prevents stealing focus
   }
 
   private mouseup(x: boolean, y: boolean) {
@@ -290,16 +295,20 @@ export class AnalogJoystickElement extends LitElement {
       this.yValue = 0;
     }
     this.valueChanged();
+    this.knob?.focus();
   }
 
-  private press() {
+  private press(e?: MouseEvent) {
     this.pressed = true;
     this.dispatchEvent(new InputEvent('button-press'));
+    this.knob?.focus();
+    e?.preventDefault(); // Prevents stealing focus
   }
 
   private release() {
     this.pressed = false;
     this.dispatchEvent(new InputEvent('button-release'));
+    this.knob?.focus();
   }
 
   private valueChanged() {
