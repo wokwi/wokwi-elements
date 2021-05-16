@@ -60,9 +60,6 @@ export class SlidePotentiometerElement extends LitElement {
         xmlns="http://www.w3.org/2000/svg"
         xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        @mouseup=${this.up}
-        @mousemove=${this.mouseMove}
-        @mouseleave=${this.up}
       >
         <defs>
           <filter id="outline">
@@ -156,6 +153,23 @@ export class SlidePotentiometerElement extends LitElement {
     `;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    // @mouseup=${this.up}
+    // @mousemove=${this.mouseMove}
+    // @mouseleave=${this.up}
+    window.addEventListener('mouseup', this.up);
+    window.addEventListener('mousemove', this.mouseMove);
+    window.addEventListener('mouseleave', this.up);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('mouseup', this.up);
+    window.removeEventListener('mousemove', this.mouseMove);
+    window.removeEventListener('mouseleave', this.up);
+  }
+
   private focusInput() {
     const inputEl: HTMLInputElement | null | undefined = this.shadowRoot?.querySelector(
       '.hide-input'
@@ -171,12 +185,12 @@ export class SlidePotentiometerElement extends LitElement {
     this.isPressed = true;
   }
 
-  private up(): void {
+  private up = () => {
     if (this.isPressed) {
       this.dispatchEvent(new CustomEvent('button-release'));
       this.isPressed = false;
     }
-  }
+  };
 
   private updateCaseRect(): void {
     const element = this.shadowRoot?.querySelector('#sliderCase');
@@ -200,11 +214,11 @@ export class SlidePotentiometerElement extends LitElement {
     }
   }
 
-  private mouseMove(event: MouseEvent): void {
+  private mouseMove = (event: MouseEvent) => {
     if (this.isPressed) {
       this.updateValueFromXCoordinate(event.pageX);
     }
-  }
+  };
 
   private touchMove(event: TouchEvent): void {
     if (this.isPressed) {
