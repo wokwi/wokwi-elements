@@ -1,5 +1,5 @@
 import { css, customElement, html, LitElement, property, svg } from 'lit-element';
-import { ElementPin } from './pin';
+import { analog, ElementPin } from './pin';
 
 @customElement('wokwi-slide-potentiometer')
 export class SlidePotentiometerElement extends LitElement {
@@ -10,9 +10,9 @@ export class SlidePotentiometerElement extends LitElement {
   private caseRect: DOMRect | undefined;
   private zoom = 1;
   readonly pinInfo: ElementPin[] = [
-    { name: '1', x: 17.5, y: 59, number: 1, signals: [] },
-    { name: '2', x: 17.5, y: 82.75, number: 2, signals: [] },
-    { name: '3', x: 222.25, y: 59, number: 3, signals: [] },
+    { name: 'VCC', x: 17.5, y: 59, number: 1, signals: [{ type: 'power', signal: 'VCC' }] },
+    { name: 'SIG', x: 17.5, y: 82.75, number: 2, signals: [analog(0)] },
+    { name: 'GND', x: 222.25, y: 59, number: 3, signals: [{ type: 'power', signal: 'GND' }] },
   ];
 
   static get styles() {
