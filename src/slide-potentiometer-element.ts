@@ -175,7 +175,6 @@ export class SlidePotentiometerElement extends LitElement {
   }
 
   private down(): void {
-    this.dispatchEvent(new CustomEvent('button-press'));
     if (!this.isPressed) {
       this.updateCaseRect();
     }
@@ -184,7 +183,6 @@ export class SlidePotentiometerElement extends LitElement {
 
   private up = () => {
     if (this.isPressed) {
-      this.dispatchEvent(new CustomEvent('button-release'));
       this.isPressed = false;
     }
   };
