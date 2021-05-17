@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 import { drawWokwiW } from './utils/logo';
 import './ili9341-element';
 

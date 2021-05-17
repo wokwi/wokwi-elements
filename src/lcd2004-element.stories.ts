@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 import { fontA02 } from './lcd1602-font-a02';
 import './lcd2004-element';
 

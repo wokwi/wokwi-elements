@@ -1,5 +1,5 @@
 import { action } from '@storybook/addon-actions';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './ky-040-element';
 
 export default {

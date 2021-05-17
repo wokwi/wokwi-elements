@@ -1,6 +1,6 @@
 import { withKnobs, text, number, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import { fontA02 } from './lcd1602-font-a02';
 import './lcd1602-element';
 

@@ -1,4 +1,5 @@
-import { css, customElement, html, LitElement } from 'lit-element';
+import { css, html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { SPACE_KEYS } from './utils/keys';
 
 const irKeyCodes: { [key: string]: number } = {

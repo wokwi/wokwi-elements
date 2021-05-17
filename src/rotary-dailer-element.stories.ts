@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './rotary-dialer-element';
 
 storiesOf('Rotary Dialer', module)

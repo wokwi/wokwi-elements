@@ -1,6 +1,6 @@
 import { number, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf, forceReRender } from '@storybook/web-components';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './servo-element';
 
 class SweepAnimation {

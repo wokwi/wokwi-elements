@@ -1,6 +1,7 @@
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { html, LitElement, svg } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from '.';
-import { VCC, GND, analog } from './pin';
+import { analog, GND, VCC } from './pin';
 
 @customElement('wokwi-photoresistor-sensor')
 export class PhotoresistorSensorElement extends LitElement {

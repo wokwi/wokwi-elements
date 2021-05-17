@@ -1,7 +1,7 @@
 ---
 to: src/<%= name %>-element.stories.ts
 ---
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './<%= name %>-element';
 
 export default {

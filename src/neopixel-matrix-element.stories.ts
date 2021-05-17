@@ -1,6 +1,6 @@
 import { withKnobs, number, boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './neopixel-matrix-element';
 
 storiesOf('NeoPixel Matrix', module)

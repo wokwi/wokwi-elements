@@ -1,6 +1,7 @@
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { html, LitElement, svg } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from '.';
-import { VCC, GND } from './pin';
+import { GND, VCC } from './pin';
 
 @customElement('wokwi-small-sound-sensor')
 export class SmallSoundSensorElement extends LitElement {

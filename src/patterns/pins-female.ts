@@ -1,4 +1,4 @@
-import { svg } from 'lit-element';
+import { svg } from 'lit';
 
 export const pinsFemalePattern = svg`
   <pattern id="pins-female" width="2.54" height="2.54" patternUnits="userSpaceOnUse">

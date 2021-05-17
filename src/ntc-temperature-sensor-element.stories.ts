@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './ntc-temperature-sensor-element';
 
 export default {

@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './esp32-devkit-v1-element';
 
 export default {

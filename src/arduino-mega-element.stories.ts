@@ -1,6 +1,6 @@
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './arduino-mega-element';
 
 storiesOf('Arduino Mega', module)

@@ -1,4 +1,5 @@
-import { customElement, html, LitElement, property, css, svg } from 'lit-element';
+import { css, html, LitElement, svg } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { fontA00 } from './lcd1602-font-a00';
 import { ElementPin, i2c } from './pin';
 import { mmToPix } from './utils/units';

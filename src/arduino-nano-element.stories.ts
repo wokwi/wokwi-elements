@@ -1,6 +1,6 @@
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import './arduino-nano-element';
 

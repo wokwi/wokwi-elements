@@ -1,4 +1,5 @@
-import { customElement, html, LitElement } from 'lit-element';
+import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { analog, ElementPin, GND, VCC } from './pin';
 
 @customElement('wokwi-ntc-temperature-sensor')
