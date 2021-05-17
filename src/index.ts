@@ -26,3 +26,4 @@ export { HCSR04Element } from './hc-sr04-element';
 export { LCD2004Element } from './lcd2004-element';
 export { AnalogJoystickElement } from './analog-joystick-element';
 export { IRReceiverElement } from './ir-receiver-element';
+export { IRRemoteElement } from './ir-remote-element';
