@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './photoresistor-sensor-element';
 
 export default {

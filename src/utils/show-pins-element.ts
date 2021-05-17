@@ -1,4 +1,5 @@
-import { customElement, html, LitElement, property, query, svg } from 'lit-element';
+import { html, LitElement, svg } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { ElementPin } from '../pin';
 
 export interface ElementWithPinInfo extends Element {

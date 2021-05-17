@@ -1,4 +1,5 @@
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { html, LitElement, svg } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { pinsFemalePattern } from './patterns/pins-female';
 import { ElementPin } from './pin';
 import { SPACE_KEYS } from './utils/keys';

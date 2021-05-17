@@ -1,7 +1,8 @@
 ---
 to: src/<%= name %>-element.ts
 ---
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { html, LitElement, svg } from 'lit';
+import { customElement, property} from 'lit/decorators.js';
 
 @customElement('wokwi-<%= name %>')
 export class <%= h.className(name) %>Element extends LitElement {

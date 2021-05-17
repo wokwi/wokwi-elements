@@ -30,7 +30,6 @@
     "husky": "^6.0.0",
     "hygen": "^6.1.0",
     "lint-staged": "^10.2.11",
-    "lit-html": "^1.4.0",
     "prettier": "^2.3.2",
     "react-is": "^16.13.1",
     "rimraf": "^3.0.2",
@@ -42,7 +41,7 @@
     "web-component-analyzer": "^1.1.6"
   },
   "dependencies": {
-    "lit-element": "^2.3.1"
+    "lit": "^2.0.0"
   },
   "scripts": {
     "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.js && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",

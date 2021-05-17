@@ -1,6 +1,6 @@
 import { withKnobs, select } from '@storybook/addon-knobs';
 import { storiesOf, forceReRender } from '@storybook/web-components';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './7segment-element';
 
 class SpinnerAnimation {

@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/web-components';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './buzzer-element';
 
 storiesOf('Buzzer', module)

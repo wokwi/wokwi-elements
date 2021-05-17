@@ -1,4 +1,5 @@
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { html, LitElement, svg } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from '.';
 import { i2c, spi, usart } from './pin';
 

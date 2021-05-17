@@ -1,6 +1,6 @@
 import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/web-components';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './ssd1306-element';
 
 const logoBitmap = new Uint8Array([

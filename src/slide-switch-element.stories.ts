@@ -1,4 +1,4 @@
-import { html } from 'lit-html';
+import { html } from 'lit';
 import './slide-switch-element';
 import { action } from '@storybook/addon-actions';
 

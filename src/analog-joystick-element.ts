@@ -1,4 +1,5 @@
-import { css, customElement, html, LitElement, property, query } from 'lit-element';
+import { css, html, LitElement } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import { analog, ElementPin, GND, VCC } from './pin';
 import { SPACE_KEYS } from './utils/keys';
 
