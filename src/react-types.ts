@@ -26,6 +26,7 @@ import { LCD2004Element } from './lcd2004-element';
 import { AnalogJoystickElement } from './analog-joystick-element';
 import { IRReceiverElement } from './ir-receiver-element';
 import { IRRemoteElement } from './ir-remote-element';
+import { PIRMotionSensorElement } from './pir-motion-sensor-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -57,6 +58,7 @@ declare global {
       'wokwi-analog-joystick': WokwiElement<AnalogJoystickElement>;
       'wokwi-ir-receiver': WokwiElement<IRReceiverElement>;
       'wokwi-ir-remote': WokwiElement<IRRemoteElement>;
+      'wokwi-pir-motion-sensor': WokwiElement<PIRMotionSensorElement>;
     }
   }
 }

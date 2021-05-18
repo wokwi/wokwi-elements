@@ -27,3 +27,4 @@ export { LCD2004Element } from './lcd2004-element';
 export { AnalogJoystickElement } from './analog-joystick-element';
 export { IRReceiverElement } from './ir-receiver-element';
 export { IRRemoteElement } from './ir-remote-element';
+export { PIRMotionSensorElement } from './pir-motion-sensor-element';
