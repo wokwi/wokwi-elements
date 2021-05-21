@@ -69,12 +69,7 @@ When working on the `pinInfo` property, it is often useful to visually see the
 pins that you define. To see the pin locations, add the `<wokwi-show-pins>`
 utility element to your story:
 
-1. Import the element definition into your story, by adding this line at the top
-   of the story file:
-   ```
-   import './utils/show-pins-element';
-   ```
-2. Wrap your element with the <wokwi-show-pins> element, e.g.
+1. Wrap your element with the <wokwi-show-pins> element, e.g.
    ```
    export const HCSR04 = () => html`
      <wokwi-show-pins>
@@ -82,7 +77,7 @@ utility element to your story:
      </wokwi-show-pins>
    `;
    ```
-3. When you are happy with the pin definition, please remove the `<wokwi-show-pins>`
+2. When you are happy with the pin definition, please remove the `<wokwi-show-pins>`
    from your story. It is only a debugging tool, and shouldn't be present in the final story.
 
 ## Video Tutorial and Blog Post
