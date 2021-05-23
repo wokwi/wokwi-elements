@@ -12,9 +12,9 @@ export class SlidePotentiometerElement extends LitElement {
   private isPressed = false;
   private zoom = 1;
   readonly pinInfo: ElementPin[] = [
-    { name: 'VCC', x: 17.5, y: 59, number: 1, signals: [{ type: 'power', signal: 'VCC' }] },
-    { name: 'SIG', x: 17.5, y: 82.75, number: 2, signals: [analog(0)] },
-    { name: 'GND', x: 222.25, y: 59, number: 3, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'VCC', x: 1, y: 43, number: 1, signals: [{ type: 'power', signal: 'VCC' }] },
+    { name: 'SIG', x: 1, y: 66.5, number: 2, signals: [analog(0)] },
+    { name: 'GND', x: 207, y: 43, number: 3, signals: [{ type: 'power', signal: 'GND' }] },
   ];
   private pageToLocalTransformationMatrix: DOMMatrix | null = null;
 
