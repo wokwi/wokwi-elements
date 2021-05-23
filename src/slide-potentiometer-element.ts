@@ -4,8 +4,8 @@ import { analog, ElementPin } from './pin';
 @customElement('wokwi-slide-potentiometer')
 export class SlidePotentiometerElement extends LitElement {
   @property() value = 0;
-  @property() minValue = 0;
-  @property() maxValue = 50;
+  @property() min = 0;
+  @property() max = 100;
   readonly pinInfo: ElementPin[] = [
     { name: 'VCC', x: 1, y: 43, number: 1, signals: [{ type: 'power', signal: 'VCC' }] },
     { name: 'SIG', x: 1, y: 66.5, number: 2, signals: [analog(0)] },
@@ -32,7 +32,7 @@ export class SlidePotentiometerElement extends LitElement {
   }
 
   render() {
-    const { value, minValue, maxValue } = this;
+    const { value, min: minValue, max: maxValue } = this;
     const tipTravelInMM = 30;
     // Tip is centered by default
     const tipBaseOffsetX = -(tipTravelInMM / 2);
@@ -42,13 +42,13 @@ export class SlidePotentiometerElement extends LitElement {
       <input
         tabindex="0"
         type="range"
-        min="${this.minValue}"
-        max="${this.maxValue}"
+        min="${this.min}"
+        max="${this.max}"
         value="${this.value}"
-        step="1"
-        aria-valuemin="${this.minValue}"
+        step="2"
+        aria-valuemin="${this.min}"
         aria-valuenow="${this.value}"
-        aria-valuemax="${this.maxValue}"
+        aria-valuemax="${this.max}"
         @input="${this.onInputValueChange}"
         class="hide-input"
       />
@@ -233,14 +233,14 @@ export class SlidePotentiometerElement extends LitElement {
       localPosition = localPosition.matrixTransform(this.pageToLocalTransformationMatrix);
       const caseBorderWidth = 7.5;
       const tipPositionXinMM = localPosition.x - caseBorderWidth;
-      const mmPerIncrement = 30 / (this.maxValue - this.minValue);
+      const mmPerIncrement = 30 / (this.max - this.min);
       this.updateValue(Math.round(tipPositionXinMM / mmPerIncrement));
     }
   }
 
   private updateValue(value: number) {
-    let clampedValue = Math.min(value, this.maxValue);
-    clampedValue = Math.max(clampedValue, this.minValue);
+    let clampedValue = Math.min(value, this.max);
+    clampedValue = Math.max(clampedValue, this.min);
     this.value = clampedValue;
     this.dispatchEvent(new InputEvent('input', { detail: clampedValue }));
   }

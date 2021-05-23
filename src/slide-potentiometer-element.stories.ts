@@ -16,5 +16,5 @@ const Template = ({ degrees = 0 }) => html` <div
 export const Default = Template.bind({});
 Default.args = {};
 
-export const Portrait = Template.bind({});
-Portrait.args = { ...Default.args, degrees: 90 };
+export const Rotated = Template.bind({});
+Rotated.args = { ...Default.args, degrees: 90 };
