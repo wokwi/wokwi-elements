@@ -1,12 +1,12 @@
 import { customElement, html, LitElement } from 'lit-element';
-import { ElementPin, GND, VCC } from './pin';
+import { analog, ElementPin, GND, VCC } from './pin';
 
 @customElement('wokwi-ntc-temperature-sensor')
 export class NTCTemperatureSensorElement extends LitElement {
   readonly pinInfo: ElementPin[] = [
     { name: 'GND', y: 26.2, x: 135, number: 1, signals: [GND()] },
     { name: 'VCC', y: 35.8, x: 135, number: 2, signals: [VCC()] },
-    { name: 'OUT', y: 45.5, x: 135, number: 3, signals: [] },
+    { name: 'OUT', y: 45.5, x: 135, number: 3, signals: [analog(0)] },
   ];
 
   render() {
