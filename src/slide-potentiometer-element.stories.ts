@@ -5,19 +5,16 @@ import './slide-potentiometer-element';
 export default {
   title: 'Slide Potentiometer',
   component: 'wokwi-slide-potentiometer',
-  argTypes: {
-    value: { control: { type: 'number', min: 1, max: 10, step: 1 } },
-  },
-  args: {
-    value: 5,
-  },
 };
 
-const Template = ({ style, minValue, maxValue, value }) => html` <div style=${style}>
-  <wokwi-slide-potentiometer @minValue=${minValue} @value=${value} @maxValue=${maxValue} />
+const Template = ({ degrees = 0 }) => html` <div
+  style="transform: rotate(${degrees}deg) translate(50%, 50%); width:400px; height: 400px;"
+>
+  <wokwi-slide-potentiometer />
 </div>`;
 
 export const Default = Template.bind({});
+Default.args = {};
 
 export const Portrait = Template.bind({});
-Portrait.args = { style: 'transform: rotate(90deg) translate(50%, 50%);' };
+Portrait.args = { ...Default.args, degrees: 90 };
