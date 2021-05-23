@@ -1,6 +1,6 @@
 {
   "name": "@wokwi/elements",
-  "version": "0.33.0",
+  "version": "0.36.1",
   "main": "dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -12,11 +12,11 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.11.4",
-    "@storybook/addon-actions": "^6.1.14",
-    "@storybook/addon-essentials": "^6.1.14",
-    "@storybook/addon-google-analytics": "^6.1.14",
-    "@storybook/addon-knobs": "^6.1.14",
-    "@storybook/web-components": "^6.1.14",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-google-analytics": "^6.2.9",
+    "@storybook/addon-knobs": "^6.2.9",
+    "@storybook/web-components": "^6.2.9",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "babel-loader": "^8.1.0",
@@ -35,7 +35,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "terser": "^4.8.0",
-    "typescript": "^3.9.7",
+    "typescript": "^4.2.4",
     "web-component-analyzer": "^1.1.6"
   },
   "dependencies": {

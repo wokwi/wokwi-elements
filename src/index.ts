@@ -26,3 +26,7 @@ export { HCSR04Element } from './hc-sr04-element';
 export { LCD2004Element } from './lcd2004-element';
 export { AnalogJoystickElement } from './analog-joystick-element';
 export { SlidePotentiometerElement } from './slide-potentiometer-element';
+export { IRReceiverElement } from './ir-receiver-element';
+export { IRRemoteElement } from './ir-remote-element';
+export { PIRMotionSensorElement } from './pir-motion-sensor-element';
+export { NTCTemperatureSensorElement } from './ntc-temperature-sensor-element';

@@ -25,6 +25,10 @@ import { HCSR04Element } from './hc-sr04-element';
 import { LCD2004Element } from './lcd2004-element';
 import { AnalogJoystickElement } from './analog-joystick-element';
 import { SlidePotentiometerElement } from './slide-potentiometer-element';
+import { IRReceiverElement } from './ir-receiver-element';
+import { IRRemoteElement } from './ir-remote-element';
+import { PIRMotionSensorElement } from './pir-motion-sensor-element';
+import { NTCTemperatureSensorElement } from './ntc-temperature-sensor-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -55,6 +59,10 @@ declare global {
       'wokwi-lcd2004': WokwiElement<LCD2004Element>;
       'wokwi-analog-joystick': WokwiElement<AnalogJoystickElement>;
       'wokwi-slide-potentiometer': WokwiElement<SlidePotentiometerElement>;
+      'wokwi-ir-receiver': WokwiElement<IRReceiverElement>;
+      'wokwi-ir-remote': WokwiElement<IRRemoteElement>;
+      'wokwi-pir-motion-sensor': WokwiElement<PIRMotionSensorElement>;
+      'wokwi-ntc-temperature-sensor': WokwiElement<NTCTemperatureSensorElement>;
     }
   }
 }
