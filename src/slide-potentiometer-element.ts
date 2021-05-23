@@ -6,14 +6,17 @@ export class SlidePotentiometerElement extends LitElement {
   @property() value = 0;
   @property() minValue = 0;
   @property() maxValue = 50;
+  @property() mouseX = 0;
+  @property() mouseY = 0;
+  @property() rotation = 0;
   private isPressed = false;
-  private caseRect: DOMRect | undefined;
   private zoom = 1;
   readonly pinInfo: ElementPin[] = [
     { name: 'VCC', x: 17.5, y: 59, number: 1, signals: [{ type: 'power', signal: 'VCC' }] },
     { name: 'SIG', x: 17.5, y: 82.75, number: 2, signals: [analog(0)] },
     { name: 'GND', x: 222.25, y: 59, number: 3, signals: [{ type: 'power', signal: 'GND' }] },
   ];
+  private pageToLocalTransformationMatrix: DOMMatrix | null = null;
 
   static get styles() {
     return css`
@@ -176,7 +179,7 @@ export class SlidePotentiometerElement extends LitElement {
 
   private down(): void {
     if (!this.isPressed) {
-      this.updateCaseRect();
+      this.updateCaseDisplayProperties();
     }
     this.isPressed = true;
   }
@@ -187,10 +190,10 @@ export class SlidePotentiometerElement extends LitElement {
     }
   };
 
-  private updateCaseRect(): void {
-    const element = this.shadowRoot?.querySelector('#sliderCase');
+  private updateCaseDisplayProperties(): void {
+    const element = this.shadowRoot?.querySelector<SVGRectElement>('#sliderCase');
     if (element) {
-      this.caseRect = element?.getBoundingClientRect();
+      this.pageToLocalTransformationMatrix = element.getScreenCTM()?.inverse() || null;
     }
 
     // Handle zooming in the storybook
@@ -211,26 +214,31 @@ export class SlidePotentiometerElement extends LitElement {
 
   private mouseMove = (event: MouseEvent) => {
     if (this.isPressed) {
-      this.updateValueFromXCoordinate(event.pageX);
+      this.updateValueFromXCoordinate(new DOMPointReadOnly(event.pageX, event.pageY));
     }
   };
 
   private touchMove(event: TouchEvent): void {
     if (this.isPressed) {
       if (event.targetTouches.length > 0) {
-        this.updateValueFromXCoordinate(event.targetTouches[0].pageX);
+        const touchTarget = event.targetTouches[0];
+        this.updateValueFromXCoordinate(new DOMPointReadOnly(touchTarget.pageX, touchTarget.pageY));
       }
     }
   }
 
-  private updateValueFromXCoordinate(xPosition: number): void {
-    const width = this.caseRect?.width ?? 0;
-    const pixelPerMM = width / 45;
-    const travelInPixels = 30 * pixelPerMM;
-    const pixelPerIncrement = travelInPixels / (this.maxValue - this.minValue);
-    const caseBorderWidth = pixelPerMM * 7.5;
-    const tipPositionX = xPosition / this.zoom - (this.caseRect?.left ?? 0) - caseBorderWidth;
-    this.updateValue(Math.round(tipPositionX / pixelPerIncrement));
+  private updateValueFromXCoordinate(position: DOMPointReadOnly): void {
+    if (this.pageToLocalTransformationMatrix) {
+      // Handle zoom first, the transformation matrix does not take that into account
+      let localPosition = new DOMPointReadOnly(position.x / this.zoom, position.y / this.zoom);
+      // Converts the point from the page coordinate space to the #caseRect coordinate space
+      // It also translates the units from pixels to millimeters!
+      localPosition = localPosition.matrixTransform(this.pageToLocalTransformationMatrix);
+      const caseBorderWidth = 7.5;
+      const tipPositionXinMM = localPosition.x - caseBorderWidth;
+      const mmPerIncrement = 30 / (this.maxValue - this.minValue);
+      this.updateValue(Math.round(tipPositionXinMM / mmPerIncrement));
+    }
   }
 
   private updateValue(value: number) {

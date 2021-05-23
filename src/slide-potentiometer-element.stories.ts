@@ -14,12 +14,11 @@ export default {
 };
 
 const Template = ({ value }) =>
-  html` <wokwi-slide-potentiometer
+  html`<wokwi-slide-potentiometer
     value=${value}
     @button-press=${action('button-press')}
     @button-release=${action('button-release')}
-  >
-  </wokwi-slide-potentiometer>`;
+  />`;
 
 export const Default = Template.bind({});
 Default.args = { value: 5 };
