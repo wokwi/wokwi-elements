@@ -13,15 +13,11 @@ export default {
   },
 };
 
-const Template = ({ value }) =>
-  html`<wokwi-slide-potentiometer
-    value=${value}
-    @button-press=${action('button-press')}
-    @button-release=${action('button-release')}
-  />`;
+export const Default = () => html`<wokwi-slide-potentiometer />`;
 
-export const Default = Template.bind({});
-Default.args = { value: 5 };
-
-export const Large = Template.bind({});
-Large.args = { value: 10 };
+export const Portrait = () =>
+  html`
+    <div style="transform: rotate(90deg) translate(50%, 50%);">
+      <wokwi-slide-potentiometer />
+    </div>
+  `;

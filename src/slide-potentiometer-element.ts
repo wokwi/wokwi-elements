@@ -6,16 +6,13 @@ export class SlidePotentiometerElement extends LitElement {
   @property() value = 0;
   @property() minValue = 0;
   @property() maxValue = 50;
-  @property() mouseX = 0;
-  @property() mouseY = 0;
-  @property() rotation = 0;
-  private isPressed = false;
-  private zoom = 1;
   readonly pinInfo: ElementPin[] = [
     { name: 'VCC', x: 1, y: 43, number: 1, signals: [{ type: 'power', signal: 'VCC' }] },
     { name: 'SIG', x: 1, y: 66.5, number: 2, signals: [analog(0)] },
     { name: 'GND', x: 207, y: 43, number: 3, signals: [{ type: 'power', signal: 'GND' }] },
   ];
+  private isPressed = false;
+  private zoom = 1;
   private pageToLocalTransformationMatrix: DOMMatrix | null = null;
 
   static get styles() {
