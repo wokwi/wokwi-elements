@@ -13,11 +13,11 @@ export default {
   },
 };
 
-export const Default = () => html`<wokwi-slide-potentiometer />`;
+const Template = ({ style, minValue, maxValue, value }) => html` <div style=${style}>
+  <wokwi-slide-potentiometer @minValue=${minValue} @value=${value} @maxValue=${maxValue} />
+</div>`;
 
-export const Portrait = () =>
-  html`
-    <div style="transform: rotate(90deg) translate(50%, 50%);">
-      <wokwi-slide-potentiometer />
-    </div>
-  `;
+export const Default = Template.bind({});
+
+export const Portrait = Template.bind({});
+Portrait.args = { style: 'transform: rotate(90deg) translate(50%, 50%);' };
