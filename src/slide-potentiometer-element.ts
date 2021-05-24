@@ -1,11 +1,13 @@
 import { css, customElement, html, LitElement, property, svg } from 'lit-element';
 import { analog, ElementPin } from './pin';
+import { clamp } from './utils/clamp';
 
 @customElement('wokwi-slide-potentiometer')
 export class SlidePotentiometerElement extends LitElement {
   @property() value = 0;
   @property() min = 0;
   @property() max = 100;
+  @property() step = 2;
   readonly pinInfo: ElementPin[] = [
     { name: 'VCC', x: 1, y: 43, number: 1, signals: [{ type: 'power', signal: 'VCC' }] },
     { name: 'SIG', x: 1, y: 66.5, number: 2, signals: [analog(0)] },
@@ -45,7 +47,7 @@ export class SlidePotentiometerElement extends LitElement {
         min="${this.min}"
         max="${this.max}"
         value="${this.value}"
-        step="2"
+        step="${this.step}"
         aria-valuemin="${this.min}"
         aria-valuenow="${this.value}"
         aria-valuemax="${this.max}"
@@ -58,7 +60,6 @@ export class SlidePotentiometerElement extends LitElement {
         version="1.1"
         viewBox="0 0 55 29"
         xmlns="http://www.w3.org/2000/svg"
-        xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <defs>
@@ -239,9 +240,7 @@ export class SlidePotentiometerElement extends LitElement {
   }
 
   private updateValue(value: number) {
-    let clampedValue = Math.min(value, this.max);
-    clampedValue = Math.max(clampedValue, this.min);
-    this.value = clampedValue;
-    this.dispatchEvent(new InputEvent('input', { detail: clampedValue }));
+    this.value = clamp(this.min, this.max, value);
+    this.dispatchEvent(new InputEvent('input', { detail: this.value }));
   }
 }
