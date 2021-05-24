@@ -1,6 +1,7 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map';
 import { analog, ElementPin } from './pin';
+import { clamp } from './utils/clamp';
 
 interface Point {
   x: number;
@@ -54,10 +55,6 @@ export class PotentiometerElement extends LitElement {
     `;
   }
 
-  clamp(min: number, max: number, value: number): number {
-    return Math.min(Math.max(value, min), max);
-  }
-
   mapToMinMax(value: number, min: number, max: number): number {
     return value * (max - min) + min;
   }
@@ -67,7 +64,7 @@ export class PotentiometerElement extends LitElement {
   }
 
   render() {
-    const percent = this.clamp(0, 1, this.percentFromMinMax(this.value, this.min, this.max));
+    const percent = clamp(0, 1, this.percentFromMinMax(this.value, this.min, this.max));
     const knobDeg = (this.endDegree - this.startDegree) * percent + this.startDegree;
 
     return html`
@@ -222,7 +219,7 @@ export class PotentiometerElement extends LitElement {
       deg -= 360;
     }
 
-    deg = this.clamp(this.startDegree, this.endDegree, deg);
+    deg = clamp(this.startDegree, this.endDegree, deg);
     const percent = this.percentFromMinMax(deg, this.startDegree, this.endDegree);
     const value = this.mapToMinMax(percent, this.min, this.max);
 
@@ -230,7 +227,7 @@ export class PotentiometerElement extends LitElement {
   }
 
   private updateValue(value: number) {
-    const clamped = this.clamp(this.min, this.max, value);
+    const clamped = clamp(this.min, this.max, value);
     const updated = Math.round(clamped / this.step) * this.step;
     this.value = Math.round(updated * 100) / 100;
     this.dispatchEvent(new InputEvent('input', { detail: this.value }));

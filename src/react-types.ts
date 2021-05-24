@@ -24,6 +24,7 @@ import { SlideSwitchElement } from './slide-switch-element';
 import { HCSR04Element } from './hc-sr04-element';
 import { LCD2004Element } from './lcd2004-element';
 import { AnalogJoystickElement } from './analog-joystick-element';
+import { SlidePotentiometerElement } from './slide-potentiometer-element';
 import { IRReceiverElement } from './ir-receiver-element';
 import { IRRemoteElement } from './ir-remote-element';
 import { PIRMotionSensorElement } from './pir-motion-sensor-element';
@@ -57,6 +58,7 @@ declare global {
       'wokwi-hc-sr04': WokwiElement<HCSR04Element>;
       'wokwi-lcd2004': WokwiElement<LCD2004Element>;
       'wokwi-analog-joystick': WokwiElement<AnalogJoystickElement>;
+      'wokwi-slide-potentiometer': WokwiElement<SlidePotentiometerElement>;
       'wokwi-ir-receiver': WokwiElement<IRReceiverElement>;
       'wokwi-ir-remote': WokwiElement<IRRemoteElement>;
       'wokwi-pir-motion-sensor': WokwiElement<PIRMotionSensorElement>;
