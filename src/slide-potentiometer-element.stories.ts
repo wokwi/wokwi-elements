@@ -10,7 +10,7 @@ export default {
 const Template = ({ degrees = 0 }) => html` <div
   style="transform: rotate(${degrees}deg) translate(50%, 50%); width:400px; height: 400px;"
 >
-  <wokwi-slide-potentiometer />
+  <wokwi-slide-potentiometer @input=${action('input')} />
 </div>`;
 
 export const Default = Template.bind({});
