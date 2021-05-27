@@ -30,6 +30,7 @@ import { IRRemoteElement } from './ir-remote-element';
 import { PIRMotionSensorElement } from './pir-motion-sensor-element';
 import { NTCTemperatureSensorElement } from './ntc-temperature-sensor-element';
 import { HeartBeatSensorElement } from './heart-beat-sensor-element';
+import { TiltSwitchElement } from './tilt-switch-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -65,6 +66,7 @@ declare global {
       'wokwi-pir-motion-sensor': WokwiElement<PIRMotionSensorElement>;
       'wokwi-ntc-temperature-sensor': WokwiElement<NTCTemperatureSensorElement>;
       'wokwi-heart-beat-sensor': WokwiElement<HeartBeatSensorElement>;
+      'wokwi-tilt-switch': WokwiElement<TiltSwitchElement>;
     }
   }
 }
