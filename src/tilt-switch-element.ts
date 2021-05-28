@@ -44,9 +44,6 @@ export class TiltSwitchElement extends LitElement {
         >
           s
         </text>
-        <text transform="rotate(90 37.9 -35.9)" fill="#fffefe" font-size="6.32px">
-          <tspan x="97.97 102.499" y="-8.79">S1</tspan>
-        </text>
         <g fill="#bbb9b9">
           <ellipse cx="18.5" cy="18.5" rx="5.21" ry="3.44" />
           <ellipse cx="42.3" cy="18.5" rx="5.21" ry="3.44" />
