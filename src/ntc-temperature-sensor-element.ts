@@ -118,10 +118,6 @@ export class NTCTemperatureSensorElement extends LitElement {
             </tspan>
             <tspan x="-61.485" y="111.57" font-size="9.778px">S</tspan>
             <tspan x="-15.512" y="111.573" font-size="15.828px">-</tspan>
-            <tspan x="-39.152" y="36.819" font-size="9.778px">A</tspan>
-          </text>
-          <text transform="rotate(90)" font-size="6.072px">
-            <tspan x="32.449 36.797" y="-40.011">S1</tspan>
           </text>
         </g>
       </svg>
