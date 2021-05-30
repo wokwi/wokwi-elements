@@ -32,3 +32,4 @@ export { PIRMotionSensorElement } from './pir-motion-sensor-element';
 export { NTCTemperatureSensorElement } from './ntc-temperature-sensor-element';
 export { HeartBeatSensorElement } from './heart-beat-sensor-element';
 export { TiltSwitchElement } from './tilt-switch-element';
+export { FlameSensorElement } from './flame-sensor-element';
