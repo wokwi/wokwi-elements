@@ -8,9 +8,10 @@ export class FlameSensorElement extends LitElement {
   @property() ledSignal = false;
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'VCC', y: 19.5, x: 199, number: 1, signals: [VCC()] },
-    { name: 'GND', y: 29.5, x: 199, number: 2, signals: [GND()] },
-    { name: 'OUT', y: 39, x: 199, number: 3, signals: [] },
+    { name: 'VCC', y: 25.91, x: 199, number: 1, signals: [VCC()] },
+    { name: 'GND', y: 35.49, x: 199, number: 2, signals: [GND()] },
+    { name: 'DOUT', y: 45.07, x: 199, number: 3, signals: [] },
+    { name: 'AOUT', y: 54.65, x: 199, number: 4, signals: [] },
   ];
 
   render() {
@@ -202,6 +203,10 @@ export class FlameSensorElement extends LitElement {
           <path
             d="m173 28c-0.382 0-0.748 0.152-1.02 0.422-0.271 0.271-0.422 0.637-0.422 1.02s0.151 0.749 0.422 1.02c0.27 0.27 0.636 0.422 1.02 0.422h26.1c0.234 0 0.423-0.19 0.423-0.423v-2.04c0-0.234-0.189-0.424-0.423-0.424h-26.1z"
           />
+          <path
+            d="m173 18.3c-0.382 0-0.748 0.152-1.02 0.422-0.271 0.27-0.422 0.637-0.422 1.02s0.151 0.749 0.422 1.02c0.27 0.27 0.636 0.422 1.02 0.422h26.1c0.234 0 0.423-0.19 0.423-0.424v-2.03c0-0.234-0.189-0.424-0.423-0.424h-26.1z"
+          />
+
           <path
             d="m173 18.3c-0.382 0-0.748 0.152-1.02 0.422-0.271 0.27-0.422 0.637-0.422 1.02s0.151 0.749 0.422 1.02c0.27 0.27 0.636 0.422 1.02 0.422h26.1c0.234 0 0.423-0.19 0.423-0.424v-2.03c0-0.234-0.189-0.424-0.423-0.424h-26.1z"
           />
