@@ -32,6 +32,7 @@ import { NTCTemperatureSensorElement } from './ntc-temperature-sensor-element';
 import { HeartBeatSensorElement } from './heart-beat-sensor-element';
 import { TiltSwitchElement } from './tilt-switch-element';
 import { FlameSensorElement } from './flame-sensor-element';
+import { GasSensorElement } from './gas-sensor-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -69,6 +70,7 @@ declare global {
       'wokwi-heart-beat-sensor': WokwiElement<HeartBeatSensorElement>;
       'wokwi-tilt-switch': WokwiElement<TiltSwitchElement>;
       'wokwi-flame-sensor': WokwiElement<FlameSensorElement>;
+      'wokwi-gas-sensor': WokwiElement<GasSensorElement>;
     }
   }
 }
