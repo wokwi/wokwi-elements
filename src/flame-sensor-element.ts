@@ -8,10 +8,10 @@ export class FlameSensorElement extends LitElement {
   @property() ledSignal = false;
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'VCC', y: 25.91, x: 199, number: 1, signals: [VCC()] },
-    { name: 'GND', y: 35.49, x: 199, number: 2, signals: [GND()] },
-    { name: 'DOUT', y: 45.07, x: 199, number: 3, signals: [] },
-    { name: 'AOUT', y: 54.65, x: 199, number: 4, signals: [] },
+    { name: 'VCC', y: 14.6, x: 199, number: 1, signals: [VCC()] },
+    { name: 'GND', y: 24.3, x: 199, number: 2, signals: [GND()] },
+    { name: 'DOUT', y: 34, x: 199, number: 3, signals: [] },
+    { name: 'AOUT', y: 43.7, x: 199, number: 4, signals: [] },
   ];
 
   render() {
