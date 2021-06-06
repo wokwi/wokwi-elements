@@ -36,3 +36,4 @@ export { FlameSensorElement } from './flame-sensor-element';
 export { GasSensorElement } from './gas-sensor-element';
 export { FranzininhoElement } from './franzininho-element';
 export { NanoRP2040ConnectElement } from './nano-rp2040-connect-element';
+export { SmallSoundSensorElement } from './small-sound-sensor-element';
