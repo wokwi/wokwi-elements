@@ -102,33 +102,30 @@ export class SSD1306Element extends LitElement {
         </g>
 
         <!-- All texts -->
-        <g
+        <text
           fill="#FFF"
           text-anchor="middle"
           font-size="5"
           font-weight="300"
-          font-family="MarkerFelt-Wide, Marker Felt, monospace"
+          font-family="monospace"
         >
-          <g transform="translate(37 3)">
-            <text x="0" y="5">Data</text>
-            <text x="19" y="5">SA0</text>
-            <text x="41" y="5">CS</text>
-            <text x="60" y="5">Vin</text>
-          </g>
+          <tspan x="37" y="8">Data</tspan>
+          <tspan x="56" y="8">SA0</tspan>
+          <tspan x="78" y="8">CS</tspan>
+          <tspan x="97" y="8">Vin</tspan>
+          <tspan x="41" y="23">C1k</tspan>
+          <tspan x="53" y="23">DC</tspan>
+          <tspan x="64" y="23">Rst</tspan>
+          <tspan x="80" y="23">3v3</tspan>
+          <tspan x="99" y="23">Gnd</tspan>
+        </text>
 
-          <g transform="translate(41 17)">
-            <text x="0" y="6">C1k</text>
-            <text x="12" y="6">DC</text>
-            <text x="23" y="6">Rst</text>
-            <text x="39" y="6">3v3</text>
-            <text x="58" y="6">Gnd</text>
-          </g>
-          <!-- Star -->
-          <path
-            d="M115.5 10.06l-1.59 2.974-3.453.464 2.495 2.245-.6 3.229 3.148-1.528 3.148 1.528-.6-3.23 2.495-2.244-3.453-.464-1.59-2.974z"
-            stroke="#FFF"
-          />
-        </g>
+        <!-- Star -->
+        <path
+          fill="#FFF"
+          d="M115.5 10.06l-1.59 2.974-3.453.464 2.495 2.245-.6 3.229 3.148-1.528 3.148 1.528-.6-3.23 2.495-2.244-3.453-.464-1.59-2.974z"
+          stroke="#FFF"
+        />
 
         <!-- PINS -->
         <g transform="translate(33 9)" fill="#9D9D9A" stroke-width="0.4">

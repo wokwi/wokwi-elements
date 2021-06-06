@@ -49,10 +49,10 @@ export class IRReceiverElement extends LitElement {
             d="m41.6 62.5c0-0.377-0.15-0.739-0.417-1.01s-0.629-0.417-1.01-0.417c-0.377 0-0.739 0.15-1.01 0.417s-0.417 0.629-0.417 1.01v25.8c0 0.231 0.188 0.419 0.419 0.419h2.01c0.231 0 0.419-0.188 0.419-0.419v-25.8z"
           />
         </g>
-        <g transform="rotate(90)" fill="#ffffff" font-size="5px">
-          <text x="45.369" y="-37.601">DAT</text>
-          <text x="45.609" y="-28.801">VCC</text>
-          <text x="45.359" y="-20.2">GND</text>
+        <text transform="rotate(90)" fill="#ffffff" font-size="5px">
+          <tspan x="45.369" y="-37.601">DAT</tspan>
+          <tspan x="45.609" y="-28.801">VCC</tspan>
+          <tspan x="45.359" y="-20.2">GND</tspan>
           <text font-size="5.71px">
             <tspan
               x="16.234 18.076 22.422 24.263 28.608 32.018 35.112 36.639 40.05 43.144 46.553"
@@ -61,7 +61,7 @@ export class IRReceiverElement extends LitElement {
               IR Reciever
             </tspan>
           </text>
-        </g>
+        </text>
         <g fill="none" stroke="#fff">
           <path
             d="m56.3 6.32c-0.654 0.514-1.48 0.82-2.37 0.82-0.895 0-1.72-0.306-2.37-0.82"

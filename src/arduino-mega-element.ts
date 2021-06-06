@@ -1,4 +1,4 @@
-import { customElement, html, LitElement, property, svg } from 'lit-element';
+import { css, customElement, html, LitElement, property, svg } from 'lit-element';
 import { pinsFemalePattern } from './patterns/pins-female';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
 
@@ -99,6 +99,15 @@ export class ArduinoMegaElement extends LitElement {
     { name: 'A15', x: 357.75, y: 184.5, signals: [analog(15)] },
   ];
 
+  static get styles() {
+    return css`
+      text {
+        font-size: 2px;
+        font-family: monospace;
+      }
+    `;
+  }
+
   render() {
     const { ledPower, led13, ledRX, ledTX } = this;
     return html`
@@ -107,7 +116,6 @@ export class ArduinoMegaElement extends LitElement {
         height="50.80mm"
         version="1.1"
         viewBox="-4 0 102.66 50.80"
-        style="font-size: 2px; font-family: monospace"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>

@@ -166,11 +166,13 @@ export class LCD1602Element extends LitElement {
   renderI2CPins() {
     return svg`
       <rect x="7.55" y="-2.5" height="2.5" width="10.16" fill="url(#pins)" transform="rotate(90)" />
-      <text y="6.8" x="0.7" fill="white">1</text>
-      <text y="8.9" x="2.3" fill="white">GND</text>
-      <text y="11.4" x="2.3" fill="white">VCC</text>
-      <text y="14" x="2.3" fill="white">SDA</text>
-      <text y="16.6" x="2.3" fill="white">SCL</text>
+      <text fill="white" font-size="1.5px" font-family= "monospace">
+      <tspan y="6.8" x="0.7" fill="white">1</tspan>
+      <tspan y="8.9" x="2.3" fill="white">GND</tspan>
+      <tspan y="11.4" x="2.3" fill="white">VCC</tspan>
+      <tspan y="14" x="2.3" fill="white">SDA</tspan>
+      <tspan y="16.6" x="2.3" fill="white">SCL</tspan>
+      </text>
     `;
   }
 
@@ -179,24 +181,26 @@ export class LCD1602Element extends LitElement {
     return svg`
       <g transform="translate(0, ${y})">
         <rect x="7.55" y="1" height="2.5" width="40.64" fill="url(#pins)" />
-        <text x="6" y="2.7" fill="white">1</text>
-        <text x="7.2" y="0.7" fill="white">VSS</text>
-        <text x="9.9" y="0.7" fill="white">VDD</text>
-        <text x="12.7" y="0.7" fill="white">V0</text>
-        <text x="15.2" y="0.7" fill="white">RS</text>
-        <text x="17.8" y="0.7" fill="white">RW</text>
-        <text x="20.8" y="0.7" fill="white">E</text>
-        <text x="22.7" y="0.7" fill="white">D0</text>
-        <text x="25.3" y="0.7" fill="white">D1</text>
-        <text x="27.9" y="0.7" fill="white">D2</text>
-        <text x="30.4" y="0.7" fill="white">D3</text>
-        <text x="33" y="0.7" fill="white">D4</text>
-        <text x="35.6" y="0.7" fill="white">D5</text>
-        <text x="38.2" y="0.7" fill="white">D6</text>
-        <text x="40.8" y="0.7" fill="white">D7</text>
-        <text x="43.6" y="0.7" fill="white">A</text>
-        <text x="46.2" y="0.7" fill="white">K</text>
-        <text x="48" y="2.7" fill="white">16</text>
+        <text fill="white" font-size="1.5px" font-family= "monospace">
+          <tspan x="6" y="2.7">1</tspan>
+          <tspan x="7.2" y="0.7">VSS</tspan>
+          <tspan x="9.9" y="0.7">VDD</tspan>
+          <tspan x="12.7" y="0.7">V0</tspan>
+          <tspan x="15.2" y="0.7">RS</tspan>
+          <tspan x="17.8" y="0.7">RW</tspan>
+          <tspan x="20.8" y="0.7">E</tspan>
+          <tspan x="22.7" y="0.7">D0</tspan>
+          <tspan x="25.3" y="0.7">D1</tspan>
+          <tspan x="27.9" y="0.7">D2</tspan>
+          <tspan x="30.4" y="0.7">D3</tspan>
+          <tspan x="33" y="0.7">D4</tspan>
+          <tspan x="35.6" y="0.7">D5</tspan>
+          <tspan x="38.2" y="0.7">D6</tspan>
+          <tspan x="40.8" y="0.7">D7</tspan>
+          <tspan x="43.6" y="0.7">A</tspan>
+          <tspan x="46.2" y="0.7">K</tspan>
+          <tspan x="48" y="2.7">16</tspan>
+        </text>
       </g>
     `;
   }

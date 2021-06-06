@@ -1,4 +1,4 @@
-import { customElement, html, LitElement, property, svg, query } from 'lit-element';
+import { customElement, html, LitElement, property, svg, query, css } from 'lit-element';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
 import { SPACE_KEYS } from './utils/keys';
 
@@ -50,26 +50,29 @@ export class ArduinoNanoElement extends LitElement {
     { name: 'GND.3', x: 154.1, y: 24, signals: [{ type: 'power', signal: 'GND' }] },
   ];
 
+  static get styles() {
+    return css`
+      text {
+        font-size: 1px;
+        font-family: monospace;
+        user-select: none;
+      }
+
+      circle[tabindex]:hover,
+      circle[tabindex]:focus {
+        stroke: white;
+        outline: none;
+      }
+    `;
+  }
+
   render() {
     const { ledPower, led13, ledRX, ledTX } = this;
     return html`
-      <style>
-        text {
-          user-select: none;
-        }
-        circle[tabindex]:hover,
-        circle[tabindex]:focus {
-          stroke: white;
-          outline: none;
-        }
-      </style>
-
       <svg
         width="44.9mm"
         height="17.8mm"
         viewBox="-1.4 0 44.9 17.8"
-        font-size="1px"
-        font-family="DejaVu Mono, Cascadia Mono, monospace"
         font-weight="bold"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
