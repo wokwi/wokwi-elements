@@ -2,18 +2,18 @@ import { customElement, html, LitElement, property } from 'lit-element';
 import { ElementPin } from './pin';
 
 const bandColors: { [key: number]: string } = {
-  [-2]: 'silver',
-  [-1]: '#c4a000', // gold
-  0: 'black',
-  1: '#8b4513',
-  2: 'red',
-  3: 'orange',
-  4: 'yellow',
-  5: 'green',
-  6: 'blue',
-  7: 'violet',
-  8: 'gray',
-  9: 'white',
+  [-2]: '#C3C7C0', // Silver
+  [-1]: '#F1D863', // Gold
+  0: '#000000', // Black
+  1: '#8F4814', // Brown
+  2: '#FB0000', // Red
+  3: '#FC9700', // Orange
+  4: '#FCF800', // Yellow
+  5: '#00B800', // Green
+  6: '#0000FF', // Blue
+  7: '#A803D6', // Violet
+  8: '#808080', // Gray
+  9: '#FCFCFC', // White
 };
 
 /**
@@ -112,8 +112,8 @@ export class ResistorElement extends LitElement {
             d="m4.6917 0c-0.10922 0-0.21558 0.00884-0.31985 0.022624v2.955c0.10426 0.013705 0.21063 0.02234 0.31985 0.02234 0.15603 0 0.3074-0.015363 0.4522-0.043551v-2.9129c-0.1448-0.028193-0.29617-0.043551-0.4522-0.043552z"
             fill="${band1Color}"
           />
-          <path d="m6.4482 0.29411v2.4117h0.77205v-2.4117z" fill="${band2Color}" />
-          <path d="m8.5245 0.29411v2.4117h0.77205v-2.4117z" fill="${band3Color}" />
+          <path d="m6.3482 0.29411v2.4117h0.96v-2.4117z" fill="${band2Color}" />
+          <path d="m8.4245 0.29411v2.4117h0.96v-2.4117z" fill="${band3Color}" />
           <path
             d="m11.054 0c-0.15608 0-0.30749 0.015253-0.45277 0.043268v2.9134c0.14527 0.028012 0.29669 0.043268 0.45277 0.043268 0.10912 0 0.21539-0.00867 0.31957-0.02234v-2.955c-0.10418-0.013767-0.21044-0.022624-0.31957-0.022624z"
             fill="#c4a000"
