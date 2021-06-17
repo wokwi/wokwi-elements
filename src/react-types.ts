@@ -33,6 +33,7 @@ import { HeartBeatSensorElement } from './heart-beat-sensor-element';
 import { TiltSwitchElement } from './tilt-switch-element';
 import { FlameSensorElement } from './flame-sensor-element';
 import { GasSensorElement } from './gas-sensor-element';
+import { FranzininhoElement } from './franzininho-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -71,6 +72,7 @@ declare global {
       'wokwi-tilt-switch': WokwiElement<TiltSwitchElement>;
       'wokwi-flame-sensor': WokwiElement<FlameSensorElement>;
       'wokwi-gas-sensor': WokwiElement<GasSensorElement>;
+      'wokwi-franzininho': WokwiElement<FranzininhoElement>;
     }
   }
 }
