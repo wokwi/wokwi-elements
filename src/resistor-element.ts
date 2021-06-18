@@ -101,12 +101,12 @@ export class ResistorElement extends LitElement {
             d="m4.6918 0c-1.0586 0-1.9185 0.67468-1.9185 1.5022 0 0.82756 0.85995 1.4978 1.9185 1.4978 0.4241 0 0.81356-0.11167 1.1312-0.29411h4.0949c0.31802 0.18313 0.71075 0.29411 1.1357 0.29411 1.0586 0 1.9185-0.67015 1.9185-1.4978 0-0.8276-0.85995-1.5022-1.9185-1.5022-0.42499 0-0.81773 0.11098-1.1357 0.29411h-4.0949c-0.31765-0.18244-0.7071-0.29411-1.1312-0.29411z"
           />
           <use xlink:href="#body" fill="url(#a)" opacity=".44886" />
-          <rect x="4" y=" 0" width="1" height="3" fill="${band1Color}" clip-path="url(#g)" />
+          <rect x="4" y="0" width="1" height="3" fill="${band1Color}" clip-path="url(#g)" />
 
           <path d="m6 0.29411v2.4117h0.96v-2.4117z" fill="${band2Color}" />
           <path d="m7.8 0.29411v2.4117h0.96v-2.4117z" fill="${band3Color}" />
 
-          <rect x="10.69" y=" 0" width="1" height="3" fill="#F1D863" clip-path="url(#g)" />
+          <rect x="10.69" y="0" width="1" height="3" fill="#F1D863" clip-path="url(#g)" />
           <clippath id="g">
             <use xlink:href="#body" />
           </clippath>
