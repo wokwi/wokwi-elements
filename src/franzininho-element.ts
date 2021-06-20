@@ -13,8 +13,8 @@ export class FranzininhoElement extends LitElement {
   readonly pinInfo: ElementPin[] = [
     { name: 'GND.1', x: 218.5, y: 23.3, signals: [{ type: 'power', signal: 'GND' }] },
     { name: 'VCC.1', x: 218.5, y: 32.9, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
-    { name: 'PB5', x: 218.5, y: 42.5, signals: [analog(0)] },
-    { name: 'PB4', x: 218.5, y: 52.2, signals: [analog(2), { type: 'pwm' }] },
+    { name: 'PB4', x: 218.5, y: 42.5, signals: [analog(2), { type: 'pwm' }] },
+    { name: 'PB5', x: 218.5, y: 52.2, signals: [analog(0)] },
     { name: 'PB3', x: 218.5, y: 61.7, signals: [analog(3)] },
     { name: 'PB2', x: 218.5, y: 71.2, signals: [spi('SCK'), i2c('SCL'), analog(1)] },
     { name: 'PB1', x: 218.5, y: 80.9, signals: [spi('MISO'), { type: 'pwm' }] },
