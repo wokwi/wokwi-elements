@@ -9,22 +9,23 @@ storiesOf('Arduino Uno', module)
   .add(
     'Uno R3',
     () => html`
-      <wokwi-arduino-uno 
+      <wokwi-arduino-uno
         .led13=${boolean('LED 13', false)}
         .ledTX=${boolean('TX LED', false)}
         .ledRX=${boolean('RX LED', false)}
         .ledPower=${boolean('Power LED', true)}
-      ></wokwi-7segment>
+      ></wokwi-arduino-uno>
     `
   )
   .add(
     'Uno R3 (Large)',
     () => html`
-          <wokwi-arduino-uno style="zoom: 2"
-            .led13=${boolean('LED 13', false)}
-            .ledTX=${boolean('TX LED', false)}
-            .ledRX=${boolean('RX LED', false)}
-            .ledPower=${boolean('Power LED', true)}
-          ></wokwi-7segment>
-        `
+      <wokwi-arduino-uno
+        style="zoom: 2"
+        .led13=${boolean('LED 13', false)}
+        .ledTX=${boolean('TX LED', false)}
+        .ledRX=${boolean('RX LED', false)}
+        .ledPower=${boolean('Power LED', true)}
+      ></wokwi-arduino-uno>
+    `
   );
