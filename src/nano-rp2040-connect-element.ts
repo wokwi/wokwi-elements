@@ -55,8 +55,11 @@ export class NanoRP2040ConnectElement extends LitElement {
     { name: 'GND.2', x: 145.3, y: 67.5, signals: [{ type: 'power', signal: 'GND' }] },
     { name: 'VIN', x: 154.1, y: 67.5, signals: [{ type: 'power', signal: 'VCC' }] },
   ];
+
   render() {
     const { ledPower, ledBuiltIn, ledRed, ledGreen, ledBlue } = this;
+    const brightness = Math.max(ledRed, ledGreen, ledBlue);
+    const opacity = brightness ? 0.3 + brightness * 0.7 : 0;
     return html`
       <svg
         width="44.573mm"
@@ -308,12 +311,13 @@ export class NanoRP2040ConnectElement extends LitElement {
             <feGaussianBlur stdDeviation="2" />
           </filter>
 
-          ${ledBuiltIn && svg`<circle cx="14" cy="14" r="3" fill="red" filter="url(#ledFilter)" />`}
+          ${ledBuiltIn &&
+          svg`<circle cx="14.5" cy="14.5" r="3" fill="red" filter="url(#ledFilter)" />`}
 
           <!-- LED POWER -->
           <rect x="11.9" y="50.9" width="4.94" height="4.06" fill="#f1d99f" />
           ${ledPower &&
-          svg`<circle cx="14" cy="53" r="3" fill="#80ff80" filter="url(#ledFilter)" />`}
+          svg`<circle cx="14.5" cy="53" r="3" fill="#80ff80" filter="url(#ledFilter)" />`}
 
           <!-- LED RGB -->
           <g fill="#ffdc8e">
@@ -322,12 +326,17 @@ export class NanoRP2040ConnectElement extends LitElement {
             <rect x="33.4" y="26.8" width="1.25" height="1.25" />
             <rect x="30.2" y="26.8" width="1.25" height="1.25" />
           </g>
-          ${ledRed && svg`<circle cx="33" cy="25" r="3" fill="red" filter="url(#ledFilter)" />`}
-          ${ledGreen &&
-          svg`<circle cx="33" cy="25" r="3" fill="#80ff80" filter="url(#ledFilter)" />`}
-          ${ledBlue && svg`<circle cx="33" cy="25" r="3" fill="blue" filter="url(#ledFilter)" />`}
+          <rect x="30.8" y="24.1" width="3.4" height="3.4" fill="#cecccb" />
 
-          <rect x="30.8" y="24.1" width="3.4" height="3.4" fill="#fff" />
+          <circle
+            cx="32.4"
+            cy="25.4"
+            r="3"
+            fill="rgb(${ledRed * 255}, ${ledGreen * 255}, ${ledBlue * 255})"
+            filter="url(#ledFilter)"
+            opacity="${opacity}"
+          />
+
           <path
             d="m122 0.00992v5.57c0 1.9 1.54 3.44 3.44 3.44h1e-3c1.9 0 3.44-1.54 3.44-3.44v-5.57h1.47v9.55h-9.88v-9.55zm0.756 6.78-7e-3 -0.0161c0.459 1.03 1.49 1.75 2.69 1.75h1e-3c0.661 0 1.27-0.218 1.76-0.587-0.491 0.368-1.1 0.587-1.76 0.587h-1e-3c-1.2 0-2.22-0.712-2.69-1.73zm4.55 1.07c-0.0186 0.0161-0.0384 0.031-0.057 0.0459 0.0186-0.0149 0.0384-0.0298 0.057-0.0459zm0.0942-0.0794c-0.0136 0.0112-0.0273 0.0236-0.0397 0.0347l-0.0136 0.0112c0.0174-0.0149 0.036-0.031 0.0533-0.0459zm0.342-0.36c-0.0744 0.0918-0.154 0.18-0.239 0.263 0.0856-0.0831 0.165-0.171 0.239-0.263zm0.098-0.129c-0.0248 0.0347-0.0496 0.0682-0.0756 0.1 0.026-0.0322 0.0508-0.0657 0.0756-0.1zm0.0397-0.057c-9e-3 0.0124-0.0161 0.0248-0.0248 0.036 9e-3 -0.0112 0.0161-0.0236 0.0248-0.036zm0.181-0.301-1e-3 0.00124 1e-3 -0.00124 6e-3 -0.0124zm-5.56-6.93v5.57c0 0.424 0.0893 0.826 0.25 1.19-0.161-0.365-0.25-0.766-0.25-1.19zm5.82 6.24c-5e-3 0.0223-0.01 0.0446-0.0161 0.067 6e-3 -0.0223 0.0112-0.0446 0.0161-0.067zm4e-3 -0.0136 1e-3 -0.00372z"
             fill="#fff"
