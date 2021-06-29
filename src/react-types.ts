@@ -36,6 +36,7 @@ import { GasSensorElement } from './gas-sensor-element';
 import { FranzininhoElement } from './franzininho-element';
 import { NanoRP2040ConnectElement } from './nano-rp2040-connect-element';
 import { SmallSoundSensorElement } from './small-sound-sensor-element';
+import { BigSoundSensorElement } from './big-sound-sensor-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -77,6 +78,7 @@ declare global {
       'wokwi-franzininho': WokwiElement<FranzininhoElement>;
       'wokwi-nano-rp2040-connect': WokwiElement<NanoRP2040ConnectElement>;
       'wokwi-small-sound-sensor': WokwiElement<SmallSoundSensorElement>;
+      'wokwi-big-sound-sensor': WokwiElement<BigSoundSensorElement>;
     }
   }
 }
