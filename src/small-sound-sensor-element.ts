@@ -20,6 +20,8 @@ export class SmallSoundSensorElement extends LitElement {
       <svg
         width="35.211mm"
         height="13.346mm"
+        clip-rule="evenodd"
+        fill-rule="evenodd"
         version="1.1"
         viewBox="0 0 133 50.4"
         xmlns="http://www.w3.org/2000/svg"
