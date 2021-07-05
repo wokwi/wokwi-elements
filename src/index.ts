@@ -38,3 +38,4 @@ export { FranzininhoElement } from './franzininho-element';
 export { NanoRP2040ConnectElement } from './nano-rp2040-connect-element';
 export { SmallSoundSensorElement } from './small-sound-sensor-element';
 export { BigSoundSensorElement } from './big-sound-sensor-element';
+export { MPU6050Element } from './mpu6050-element';
