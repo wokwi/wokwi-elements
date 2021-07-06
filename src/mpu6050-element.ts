@@ -8,7 +8,7 @@ export class MPU6050Element extends LitElement {
 
   readonly pinInfo: ElementPin[] = [
     { name: 'INT', x: 7.28, y: 5.78, signals: [] },
-    { name: 'ADO', x: 16.9, y: 5.78, signals: [] },
+    { name: 'AD0', x: 16.9, y: 5.78, signals: [] },
     { name: 'XCL', x: 26.4, y: 5.78, signals: [] },
     { name: 'XDA', x: 36.0, y: 5.78, signals: [] },
     { name: 'SDA', x: 45.6, y: 5.78, signals: [i2c('SDA')] },
@@ -144,28 +144,28 @@ export class MPU6050Element extends LitElement {
           font-size="3.6px"
           x="10.056"
         >
-          <tspan x="10.056" y="-6.193">
+          <tspan x="10.056" y="-6">
             INT
           </tspan>
-          <tspan x="10.056" y="-15.817">
-            ADO
+          <tspan x="10.056" y="-15.5">
+            AD0
           </tspan>
           <tspan x="10.056" y="-25.157">
             XCL
           </tspan>
-          <tspan x="10.056" y="-34.891">
+          <tspan x="10.056" y="-34.5">
             XDA
           </tspan>
-          <tspan x="10.056" y="-44.383">
+          <tspan x="10.056" y="-44.38">
             SDA
           </tspan>
-          <tspan x="9.911" y="-54.049">
+          <tspan x="9.911" y="-54">
             SCL
           </tspan>
-          <tspan x="10.057" y="-63.545">
+          <tspan x="10.057" y="-63.54">
             GND
           </tspan>
-          <tspan x="10.057" y="-73.260">
+          <tspan x="10.057" y="-73">
             VCC
           </tspan>
         </text>
