@@ -295,8 +295,8 @@ export class ArduinoMegaElement extends LitElement {
           <tspan x="0" dy="2.54">RX2 17</tspan>
           <tspan x="0" dy="2.54">TX1 18</tspan>
           <tspan x="0" dy="2.54">RX1 19</tspan>
-          <tspan x="0" dy="2.54">SCL 20</tspan>
-          <tspan x="0" dy="2.54">SDA 21</tspan>
+          <tspan x="0" dy="2.54">SDA 20</tspan>
+          <tspan x="0" dy="2.54">SCL 21</tspan>
           <tspan x="0" dy="2.54">&nbsp;</tspan>
         </text>
 
