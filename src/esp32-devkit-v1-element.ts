@@ -24,7 +24,7 @@ export class ESP32DevkitV1Element extends LitElement {
     { name: 'VP', x: 5, y: 34, signals: [] },
     { name: 'EN', x: 5, y: 24, signals: [] },
 
-    { name: '3.3V', x: 101.3, y: 158.5, signals: [{ type: 'power', signal: 'VCC', voltage: 3.3 }] },
+    { name: '3V3', x: 101.3, y: 158.5, signals: [{ type: 'power', signal: 'VCC', voltage: 3.3 }] },
     { name: 'GND.1', x: 101.3, y: 149, signals: [{ type: 'power', signal: 'GND' }] },
     { name: 'D15', x: 101.3, y: 139.5, signals: [spi('SS', 0), { type: 'pwm' }] },
     { name: 'D2', x: 101.3, y: 130.4, signals: [{ type: 'pwm' }] },
