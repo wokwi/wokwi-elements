@@ -8,13 +8,15 @@ export class KY040Element extends LitElement {
   @property() stepSize = 18;
   @property() private pressed = false;
 
+  private arrowTimer: ReturnType<typeof setInterval> | null = null;
+
   static get styles() {
     return css`
       svg {
         user-select: none;
       }
 
-      .arrow {
+      .arrow-container {
         cursor: pointer;
       }
 
@@ -25,8 +27,8 @@ export class KY040Element extends LitElement {
         transition: stroke-width 0.3s;
       }
 
-      svg:hover .arrow:hover {
-        fill: black;
+      .arrow-container:hover .arrow {
+        fill: white;
       }
 
       svg:hover .handle:hover {
@@ -44,6 +46,14 @@ export class KY040Element extends LitElement {
 
       .handle {
         cursor: pointer;
+      }
+
+      g[tabindex]:focus {
+        outline: none;
+      }
+
+      g[tabindex]:focus + .focus-indicator {
+        opacity: 1;
       }
     `;
   }
@@ -96,56 +106,76 @@ export class KY040Element extends LitElement {
         </g>
 
         <g tabindex="0" @keydown=${this.keydown} @keyup=${this.keyup}>
-          <rect
-            x="12.2"
-            y="8.05"
-            width="48.4"
-            height="41"
-            rx="7.12"
-            fill="#e6e6e6"
-            fill-rule="evenodd"
-          />
-          <g>
-            <g fill-rule="evenodd">
-              <circle cx="36.6" cy="28.5" r="13.5" fill="#666" />
-              <rect x="32.5" y="7.87" width="7.42" height="41.5" fill="#666" />
+          <rect x="12.2" y="8.05" width="48.4" height="41" rx="7.12" fill="#e6e6e6" />
 
-              <!-- handle -->
-              <path
-                transform="rotate(${this.angle}, 36.244, 28.5)"
-                d="m36.3 21.4a7.03 7.14 0 0
+          <circle cx="36.6" cy="28.5" r="13.5" fill="#666" />
+          <rect x="32.5" y="7.87" width="7.42" height="41.5" fill="#666" />
+
+          <!-- Handle -->
+          <path
+            transform="rotate(${this.angle}, 36.244, 28.5)"
+            d="m36.3 21.4a7.03 7.14 0 0
               0-3.74 1.1v12.1a7.03 7.14 0 0 0 3.74 1.1 7.03 7.14 0 0 0 7.03-7.14 7.03 7.14 0 0
               0-7.03-7.14z"
-                fill="#ccc"
-                stroke="#060606"
-                stroke-width=".3"
-                class="handle ${this.pressed ? 'active' : ''}"
-                @mousedown=${this.press}
-                @mouseup=${this.release}
-              />
-            </g>
+            fill="#ccc"
+            stroke="#060606"
+            stroke-width=".3"
+            class="handle ${this.pressed ? 'active' : ''}"
+            @mousedown=${this.press}
+            @mouseup=${this.release}
+            @mouseleave=${this.release}
+          />
 
-            <!-- Counter Clockwise Arrow -->
+          <!-- Counter Clockwise Arrow -->
+          <g
+            class="arrow-container"
+            @click=${this.counterClockwiseStep}
+            @mousedown=${this.counterclockwiseArrowPress}
+            @mouseup=${this.arrowRelease}
+            @mouseleave=${this.arrowRelease}
+          >
+            <circle cx="20" cy="43" r="12" fill="red" opacity="0" />
             <path
               d="m21 44.5c-5.17-1.78-7.55-5.53-6.6-11.2 0.0662-0.327 0.107-0.938 0.272-1.06 0.204-0.137 0.312-0.116 0.39-0.1 0.0775 0.0152 0.139 0.0274 0.189 0.102 0.846 3.81 3.13 6.84 6.57 7.59 0.304-0.787 0.461-3.32 0.826-3.24 0.428 0.0848 4.31 5.73 4.93 6.65-0.978 0.839-6.07 4.44-6.95 4.28 0 0 0.206-2.19 0.362-2.96z"
               fill="#b3b3b3"
               stroke="#000"
               stroke-width=".0625px"
               class="arrow"
-              @click=${this.counterClockwiseClick}
             />
+          </g>
 
-            <!-- Clockwise Arrow -->
+          <!-- Clockwise Arrow -->
+          <g
+            class="arrow-container"
+            @click=${this.clockwiseStep}
+            @mousedown=${this.clockwiseArrowPress}
+            @mouseup=${this.arrowRelease}
+            @mouseleave=${this.arrowRelease}
+          >
+            <circle cx="20" cy="15" r="12" fill="red" opacity="0" />
             <path
               d="m21.2 12.1c-5.17 1.78-7.55 5.53-6.6 11.2 0.0662 0.327 0.107 0.938 0.272 1.06 0.204 0.137 0.312 0.116 0.39 0.1 0.0775-0.0152 0.139-0.0274 0.189-0.102 0.846-3.81 3.13-6.84 6.57-7.59 0.304 0.787 0.461 3.32 0.826 3.24 0.428-0.0848 4.31-5.73 4.93-6.65-0.978-0.839-6.07-4.44-6.95-4.28 0 0 0.206 2.19 0.362 2.96z"
               fill="#b3b3b3"
               stroke="#022"
               stroke-width=".0625px"
               class="arrow"
-              @click=${this.clockwiseClick}
             />
           </g>
         </g>
+
+        <!-- Focus indicator for the group above-->
+        <rect
+          class="focus-indicator"
+          x="10.2"
+          y="6.05"
+          width="52.4"
+          height="45"
+          rx="7.12"
+          stroke="white"
+          stroke-width="2"
+          fill="none"
+          opacity="0"
+        />
 
         <!-- Chip Pins -->
         <rect
@@ -177,12 +207,12 @@ export class KY040Element extends LitElement {
     `;
   }
 
-  private clockwiseClick() {
+  private clockwiseStep() {
     this.angle = (this.angle + this.stepSize) % 360;
     this.dispatchEvent(new InputEvent('rotate-cw'));
   }
 
-  private counterClockwiseClick() {
+  private counterClockwiseStep() {
     this.angle = (this.angle - this.stepSize + 360) % 360;
     this.dispatchEvent(new InputEvent('rotate-ccw'));
   }
@@ -195,21 +225,42 @@ export class KY040Element extends LitElement {
   }
 
   private release() {
-    this.dispatchEvent(new InputEvent('button-release'));
-    this.pressed = false;
+    if (this.pressed) {
+      this.dispatchEvent(new InputEvent('button-release'));
+      this.pressed = false;
+    }
+  }
+
+  private counterclockwiseArrowPress() {
+    this.arrowTimer = setInterval(() => {
+      this.counterClockwiseStep();
+    }, 300);
+  }
+
+  private clockwiseArrowPress() {
+    this.arrowTimer = setInterval(() => {
+      this.clockwiseStep();
+    }, 300);
+  }
+
+  private arrowRelease() {
+    if (this.arrowTimer != null) {
+      clearInterval(this.arrowTimer);
+      this.arrowTimer = null;
+    }
   }
 
   private keydown(e: KeyboardEvent) {
     switch (e.key) {
       case 'ArrowUp':
       case 'ArrowRight':
-        this.clockwiseClick();
+        this.clockwiseStep();
         e.preventDefault();
         break;
 
       case 'ArrowDown':
       case 'ArrowLeft':
-        this.counterClockwiseClick();
+        this.counterClockwiseStep();
         e.preventDefault();
         break;
 
