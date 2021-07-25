@@ -33,6 +33,16 @@ export class SSD1306Element extends LitElement {
 
   static get styles() {
     return css`
+      .container {
+        position: relative;
+      }
+
+      .container > canvas {
+        position: absolute;
+        left: 11.5px;
+        top: 27px;
+      }
+
       .pixelated {
         image-rendering: crisp-edges; /* firefox */
         image-rendering: pixelated; /* chrome/webkit */
@@ -70,10 +80,9 @@ export class SSD1306Element extends LitElement {
   }
 
   render(): SVGTemplateResult {
-    const { width, height, screenWidth, screenHeight, imageData } = this;
-    const visibility = imageData ? 'visible' : 'hidden';
-    return html`<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-      <g>
+    const { width, height, screenWidth, screenHeight } = this;
+    return html` <div class="container">
+      <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
         <rect stroke="#BE9B72" fill="#025CAF" x=".5" y=".5" width="148" height="114" rx="13" />
 
         <g transform="translate(6 6)" fill="#59340A" stroke="#BE9B72" stroke-width="0.6px">
@@ -83,23 +92,8 @@ export class SSD1306Element extends LitElement {
           <circle cx="6" cy="96" r="5.5" />
         </g>
 
-        <g transform="translate(11.4 26)">
-          <!-- 128 x 64 screen -->
-          <rect fill="#1A1A1A" width="${screenWidth}" height="${screenHeight}" />
-          <!-- image holder -->
-          <foreignObject
-            ?visibility="${visibility}"
-            width="${screenWidth}"
-            height="${screenHeight}"
-          >
-            <canvas
-              width="${screenWidth}"
-              height="${screenHeight}"
-              style="position: fixed"
-              class="pixelated"
-            ></canvas>
-          </foreignObject>
-        </g>
+        <!-- 128 x 64 screen -->
+        <rect x="11.4" y="26" fill="#1A1A1A" width="${screenWidth}" height="${screenHeight}" />
 
         <!-- All texts -->
         <text
@@ -138,7 +132,8 @@ export class SSD1306Element extends LitElement {
           <circle stroke="#B4AEAB" cx="12.5" cy="3.5" r="3.5" />
           <circle stroke="#E7DBDB" cx="3.5" cy="3.5" r="3.5" />
         </g>
-      </g>
-    </svg> `;
+      </svg>
+      <canvas width="${screenWidth}" height="${screenHeight}" class="pixelated"></canvas>
+    </div>`;
   }
 }
