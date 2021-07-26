@@ -1,6 +1,6 @@
 import { customElement, html, LitElement, property, svg } from 'lit-element';
 import { ElementPin } from '.';
-import { VCC, GND } from './pin';
+import { VCC, GND, analog } from './pin';
 
 @customElement('wokwi-photoresistor-sensor')
 export class PhotoresistorSensorElement extends LitElement {
@@ -11,7 +11,7 @@ export class PhotoresistorSensorElement extends LitElement {
     { name: 'VCC', x: 172, y: 16, signals: [VCC()] },
     { name: 'GND', x: 172, y: 26, signals: [GND()] },
     { name: 'DO', x: 172, y: 35.8, signals: [] },
-    { name: 'A0', x: 172, y: 45.5, signals: [] },
+    { name: 'AO', x: 172, y: 45.5, signals: [analog(0)] },
   ];
 
   render() {
@@ -142,8 +142,8 @@ export class PhotoresistorSensorElement extends LitElement {
         />
 
         <!-- Text -->
-        <g fill="#fffefe" font-size="3.4px" font-family="sans-serif">
-          <text x="117.46" y="14.90">
+        <g fill="#fffefe" font-size="4.4px" font-family="sans-serif">
+          <text x="117.46" y="13.90">
             PWR
           </text>
           <text x="117.46" y="18.41">
@@ -164,7 +164,7 @@ export class PhotoresistorSensorElement extends LitElement {
           <text x="117.44" y="45.53">
             DO
           </text>
-          <text x="117.44" y="49.036">
+          <text x="117.44" y="50.036">
             LED
           </text>
         </g>
