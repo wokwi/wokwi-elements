@@ -5,11 +5,11 @@ import { mmToPix } from './utils/units';
 
 @customElement('wokwi-slide-potentiometer')
 export class SlidePotentiometerElement extends LitElement {
-  @property() travelLength = 30;
-  @property() value = 0;
-  @property() min = 0;
-  @property() max = 100;
-  @property() step = 2;
+  @property({ type: Number }) travelLength = 30;
+  @property({ type: Number }) value = 0;
+  @property({ type: Number }) min = 0;
+  @property({ type: Number }) max = 100;
+  @property({ type: Number }) step = 2;
 
   get pinInfo(): ElementPin[] {
     return [
