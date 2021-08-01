@@ -9,6 +9,22 @@ Check out [the component catalog](https://elements.wokwi.com).
 
 Note: these elements only provide the presentation and display of the represented hardware. They do not provide the functional simulation code of the hardware. That is dependant on the application (simulator) that you wish to use these with, and thus up to you to create. 
 
+## Using Wokwi Elements
+
+You can install the package with `npm` and then import it into your code:
+
+```js
+import '@wokwi/elements';
+```
+
+Alternatively, you can load the Wokwi Elements bundle from unpkg's CDN:
+
+```html
+<script src="https://unpkg.com/@wokwi/elements@0.48.3/dist/wokwi-elements.bundle.js"></script>
+```
+
+Replace 0.48.3 with the latest version number. You can find a list of all the versions in the [releases](https://github.com/wokwi/wokwi-elements/) page.
+
 ## Local development
 
 To prepare for local development, clone this repo, and then install
