@@ -42,3 +42,4 @@ export { MPU6050Element } from './mpu6050-element';
 export { ESP32DevkitV1Element } from './esp32-devkit-v1-element';
 export { KY040Element } from './ky-040-element';
 export { PhotoresistorSensorElement } from './photoresistor-sensor-element';
+export { RGBLedElement } from './rgb-led-element';

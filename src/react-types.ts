@@ -41,6 +41,7 @@ import { MPU6050Element } from './mpu6050-element';
 import { ESP32DevkitV1Element } from './esp32-devkit-v1-element';
 import { KY040Element } from './ky-040-element';
 import { PhotoresistorSensorElement } from './photoresistor-sensor-element';
+import { RGBLedElement } from './rgb-led-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -87,6 +88,7 @@ declare global {
       'wokwi-esp32-devkit-v1': WokwiElement<ESP32DevkitV1Element>;
       'wokwi-ky-040': WokwiElement<KY040Element>;
       'wokwi-photoresistor-sensor': WokwiElement<PhotoresistorSensorElement>;
+      'wokwi-rgb-led': WokwiElement<RGBLedElement>;
     }
   }
 }
