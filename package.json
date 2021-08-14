@@ -48,7 +48,7 @@
     "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.js && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",
     "lint": "eslint src/**/*.ts",
     "prepare": "husky install && npm run build",
-    "analyze-components": "web-component-analyzer analyze src/**/*-element.ts --outFile custom-elements.json",
+    "analyze-components": "web-component-analyzer analyze src/*-element.ts --outFile custom-elements.json",
     "storybook": "npm run analyze-components && start-storybook -p 6006",
     "build-storybook": "npm run analyze-components && build-storybook",
     "new-element": "hygen element new",
