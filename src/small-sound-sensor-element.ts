@@ -197,21 +197,11 @@ export class SmallSoundSensorElement extends LitElement {
           <tspan x="33.049" y="12.085">AO</tspan>
           <tspan x="33.049" y="41.951">DO</tspan>
           <tspan x="33.049" y="22.067">G</tspan>
-          <tspan x="32.964001" y="32.418999" font-size="5.25px">
-            +
-          </tspan>
-          <tspan x="52.675778" y="9.31008">
-            PWR
-          </tspan>
-          <tspan x="52.675778" y="13.100851">
-            LED
-          </tspan>
-          <tspan x="52.675778" y="40">
-            DO
-          </tspan>
-          <tspan x="52.675778" y="43.4">
-            LED
-          </tspan>
+          <tspan x="32.964001" y="32.418999" font-size="5.25px">+</tspan>
+          <tspan x="52.675778" y="9.31008">PWR</tspan>
+          <tspan x="52.675778" y="13.100851">LED</tspan>
+          <tspan x="52.675778" y="40">DO</tspan>
+          <tspan x="52.675778" y="43.4">LED</tspan>
         </text>
 
         <path

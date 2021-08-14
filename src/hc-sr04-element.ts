@@ -78,9 +78,7 @@ export class HCSR04Element extends LitElement {
           <rect x="24.875" y="19" width=".75" height="7" rx=".2" />
         </g>
         <text font-weight="400" font-size="2.2" fill="#e6e6e6" stroke-width=".055">
-          <tspan y="8" x="18">
-            HC-SR04
-          </tspan>
+          <tspan y="8" x="18">HC-SR04</tspan>
         </text>
         <text
           transform="rotate(-90)"
@@ -89,18 +87,10 @@ export class HCSR04Element extends LitElement {
           fill="#e6e6e6"
           stroke-width=".039"
         >
-          <tspan x="-17.591" y="19.561">
-            Vcc
-          </tspan>
-          <tspan x="-17.591" y="21.654">
-            Trig
-          </tspan>
-          <tspan x="-17.591" y="23.747">
-            Echo
-          </tspan>
-          <tspan x="-17.591" y="25.84">
-            Gnd
-          </tspan>
+          <tspan x="-17.591" y="19.561">Vcc</tspan>
+          <tspan x="-17.591" y="21.654">Trig</tspan>
+          <tspan x="-17.591" y="23.747">Echo</tspan>
+          <tspan x="-17.591" y="25.84">Gnd</tspan>
         </text>
       </svg>
     `;

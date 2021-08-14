@@ -306,9 +306,7 @@ export class ArduinoUnoElement extends LitElement {
           ry="1"
         />
 
-        <text x="46.5" y="16" style="font-size:5px; line-height:1.25" fill="#fff">
-          UNO
-        </text>
+        <text x="46.5" y="16" style="font-size:5px; line-height:1.25" fill="#fff">UNO</text>
       </svg>
     `;
   }

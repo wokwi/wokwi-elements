@@ -202,12 +202,8 @@ export class IRRemoteElement extends LitElement {
           <path d="m21.8 113 8.95 4.79v-9.58z" fill="#fff" stroke-width="1.29" />
           <path d="m22.4 109v9.58" fill="none" stroke="#fff" stroke-width="1.29" />
           <text fill="#e6252e" font-size="9.72px" font-weight="700" stroke-width="1.29">
-            <tspan x="106.892 115.469 122.432 129.931" y="41.288">
-              MENU
-            </tspan>
-            <tspan x="16.488 22.904 29.866 36.829" y="78.679">
-              TEST
-            </tspan>
+            <tspan x="106.892 115.469 122.432 129.931" y="41.288">MENU</tspan>
+            <tspan x="16.488 22.904 29.866 36.829" y="78.679">TEST</tspan>
           </text>
           <g fill="none" stroke="#fff" stroke-width="1.29">
             <path d="m67.7 152h15.5" />

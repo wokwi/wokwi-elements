@@ -198,9 +198,7 @@ export class BigSoundSensorElement extends LitElement {
           <tspan x="33.049" y="12.085">AO</tspan>
           <tspan x="33.049" y="41.951">DO</tspan>
           <tspan x="33.049" y="22.067">G</tspan>
-          <tspan x="32.964001" y="32.418999" font-size="5.25px">
-            +
-          </tspan>
+          <tspan x="32.964001" y="32.418999" font-size="5.25px">+</tspan>
         </text>
 
         <text

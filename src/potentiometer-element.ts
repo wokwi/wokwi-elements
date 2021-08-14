@@ -155,9 +155,8 @@ export class PotentiometerElement extends LitElement {
   }
 
   private focusInput() {
-    const inputEl: HTMLInputElement | null | undefined = this.shadowRoot?.querySelector(
-      '.hide-input'
-    );
+    const inputEl: HTMLInputElement | null | undefined =
+      this.shadowRoot?.querySelector('.hide-input');
     inputEl?.focus();
   }
 

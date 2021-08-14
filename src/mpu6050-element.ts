@@ -144,30 +144,14 @@ export class MPU6050Element extends LitElement {
           font-size="3.6px"
           x="10.056"
         >
-          <tspan x="10.056" y="-6">
-            INT
-          </tspan>
-          <tspan x="10.056" y="-15.5">
-            AD0
-          </tspan>
-          <tspan x="10.056" y="-25.157">
-            XCL
-          </tspan>
-          <tspan x="10.056" y="-34.5">
-            XDA
-          </tspan>
-          <tspan x="10.056" y="-44.38">
-            SDA
-          </tspan>
-          <tspan x="9.911" y="-54">
-            SCL
-          </tspan>
-          <tspan x="10.057" y="-63.54">
-            GND
-          </tspan>
-          <tspan x="10.057" y="-73">
-            VCC
-          </tspan>
+          <tspan x="10.056" y="-6">INT</tspan>
+          <tspan x="10.056" y="-15.5">AD0</tspan>
+          <tspan x="10.056" y="-25.157">XCL</tspan>
+          <tspan x="10.056" y="-34.5">XDA</tspan>
+          <tspan x="10.056" y="-44.38">SDA</tspan>
+          <tspan x="9.911" y="-54">SCL</tspan>
+          <tspan x="10.057" y="-63.54">GND</tspan>
+          <tspan x="10.057" y="-73">VCC</tspan>
         </text>
       </svg>
     `;

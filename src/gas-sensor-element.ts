@@ -57,18 +57,10 @@ export class GasSensorElement extends LitElement {
         <circle cx="47.7" cy="29.8" r="21.4" fill="url(#a)" />
 
         <text fill="#ffffff" font-family="sans-serif" font-size="3.72px">
-          <tspan x="94.656" y="16.729">
-            AOUT
-          </tspan>
-          <tspan x="94.656" y="26.098">
-            DOUT
-          </tspan>
-          <tspan x="94.656" y="35.911">
-            GND
-          </tspan>
-          <tspan x="94.656" y="45.696">
-            VCC
-          </tspan>
+          <tspan x="94.656" y="16.729">AOUT</tspan>
+          <tspan x="94.656" y="26.098">DOUT</tspan>
+          <tspan x="94.656" y="35.911">GND</tspan>
+          <tspan x="94.656" y="45.696">VCC</tspan>
         </text>
       </svg>
     `;

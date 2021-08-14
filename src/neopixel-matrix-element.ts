@@ -90,7 +90,7 @@ export class NeopixelMatrixElement extends LitElement {
     if (!this.pixelElements) {
       this.pixelElements = Array.from(this.shadowRoot.querySelectorAll('g.pixel')).map(
         (e) =>
-          (Array.from(e.querySelectorAll('ellipse')) as unknown) as [
+          Array.from(e.querySelectorAll('ellipse')) as unknown as [
             SVGElement,
             SVGElement,
             SVGElement,
@@ -244,9 +244,7 @@ export class NeopixelMatrixElement extends LitElement {
           />
         </pattern>
         <rect width="${width}" height="${height}" fill="url(#pixel)"></rect>
-        <g style="${blurLight ? 'filter: url(#blurLight)' : ''}">
-          ${this.renderPixels()}
-        </g>
+        <g style="${blurLight ? 'filter: url(#blurLight)' : ''}">${this.renderPixels()}</g>
       </svg>
     `;
   }

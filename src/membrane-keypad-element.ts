@@ -279,9 +279,8 @@ export class MembraneKeypadElement extends LitElement {
   private keyStrokeUp(key: string) {
     const text = key.toUpperCase();
     const selectedKey = this.shadowRoot?.querySelector(`[data-key-name="${text}"]`);
-    const pressedKeys: NodeListOf<SVGElement> | undefined = this.shadowRoot?.querySelectorAll(
-      '.pressed'
-    );
+    const pressedKeys: NodeListOf<SVGElement> | undefined =
+      this.shadowRoot?.querySelectorAll('.pressed');
 
     if (key === 'Shift') {
       pressedKeys?.forEach((pressedKey) => {
