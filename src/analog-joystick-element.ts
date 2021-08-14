@@ -54,7 +54,7 @@ export class AnalogJoystickElement extends LitElement {
       }
 
       .controls .region {
-        pointer-events: bounding-box;
+        pointer-events: fill;
         fill: none;
       }
 
