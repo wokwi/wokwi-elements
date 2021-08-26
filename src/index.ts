@@ -43,3 +43,4 @@ export { ESP32DevkitV1Element } from './esp32-devkit-v1-element';
 export { KY040Element } from './ky-040-element';
 export { PhotoresistorSensorElement } from './photoresistor-sensor-element';
 export { RGBLedElement } from './rgb-led-element';
+export { ILI9341Element } from './ili9341-element';
