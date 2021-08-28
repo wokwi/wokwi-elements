@@ -108,7 +108,7 @@ export class ILI9341Element extends LitElement {
           <text font-family="monospace" font-size="3.5px" fill="#fff">
             <tspan x="8.2" y="76.9">1</tspan>
             <tspan x="35.6" y="76.9">9</tspan>
-            <tspan x="14.2" y="4.3" font-size="4.6px">ILI9431</tspan>
+            <tspan x="14.2" y="4.3" font-size="4.6px">ILI9341</tspan>
           </text>
         </svg>
         <canvas width="${screenWidth}" height="${screenHeight}" class="pixelated"></canvas>
