@@ -43,6 +43,7 @@ import { KY040Element } from './ky-040-element';
 import { PhotoresistorSensorElement } from './photoresistor-sensor-element';
 import { RGBLedElement } from './rgb-led-element';
 import { ILI9341Element } from './ili9341-element';
+import { LedBarGraphElement } from './led-bar-graph-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -91,6 +92,7 @@ declare global {
       'wokwi-photoresistor-sensor': WokwiElement<PhotoresistorSensorElement>;
       'wokwi-rgb-led': WokwiElement<RGBLedElement>;
       'wokwi-ili9341': WokwiElement<ILI9341Element>;
+      'wokwi-led-bar-graph': WokwiElement<LedBarGraphElement>;
     }
   }
 }
