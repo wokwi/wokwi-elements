@@ -30,7 +30,7 @@ export class SevenSegmentElement extends LitElement {
   @property() pins: 'top' | 'extend' | 'none' = 'top';
 
   /**
-   * The values for the individual segments. Each digits has 8
+   * The values for the individual segments. Each digit has 8
    * segment values in the following order: A, B, C, D, E, F, G, DP
    *
    * The values are 1 for a lit segment, and 0 for an unlit segment.
