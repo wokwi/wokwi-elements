@@ -25,3 +25,9 @@ Green.args = { color: 'lime' };
 
 export const Off = Template.bind({});
 Off.args = { color: 'lime', values: '[]' };
+
+export const SpecialGYR = Template.bind({});
+SpecialGYR.args = { color: 'GYR', values: '[1,1,1,1,1,1,1,1,1,1]' };
+
+export const SpecialBCYR = Template.bind({});
+SpecialBCYR.args = { color: 'BCYR', values: '[1,1,1,1,1,1,1,1,1,1]' };

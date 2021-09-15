@@ -7,9 +7,20 @@ const mm = mmToPix;
 const anodeX = 1.27 * mm;
 const cathodeX = 8.83 * mm;
 
+const green = '#9eff3c';
+const blue = '#2c95fa';
+const cyan = '#6cf9dc';
+const yellow = '#f1d73c';
+const red = '#dc012d';
+
+const colorPalettes: Record<string, string[]> = {
+  GYR: [green, green, green, green, green, yellow, yellow, yellow, red, red],
+  BCYR: [blue, cyan, cyan, cyan, cyan, yellow, yellow, yellow, red, red],
+};
+
 @customElement('wokwi-led-bar-graph')
 export class LedBarGraphElement extends LitElement {
-  /** The color of a lit segment */
+  /** The color of a lit segment. Either HTML color or the special values GYR / BCYR */
   @property() color = 'red';
 
   /** The color of an unlit segment */
@@ -46,6 +57,7 @@ export class LedBarGraphElement extends LitElement {
 
   render() {
     const { values, color, offColor } = this;
+    const palette = colorPalettes[color];
     return html`
       <svg
         width="10.1mm"
@@ -63,7 +75,7 @@ export class LedBarGraphElement extends LitElement {
         ${segments.map(
           (index) =>
             svg`<rect x="2.5" y="${0.4 + index * 2.54}" width="5" height="1.74" fill="${
-              values[index] ? color : offColor
+              values[index] ? palette?.[index] ?? color : offColor
             }"/>`
         )}
       </svg>
