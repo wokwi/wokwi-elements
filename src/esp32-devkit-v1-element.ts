@@ -94,7 +94,7 @@ export class ESP32DevkitV1Element extends LitElement {
         ></rect>
         <rect x="20" y="24.8" width="65.6" height="73.3" fill="#808080" fill-rule="evenodd" />
 
-        <!-- Swich -->
+        <!-- Regulator -->
         <g fill="#ececec" fill-rule="evenodd">
           <rect x="19.3" y="143" width="7.21" height="11.5" />
           <rect x="39.8" y="139" width="6.59" height="3.07" />
