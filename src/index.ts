@@ -45,3 +45,4 @@ export { PhotoresistorSensorElement } from './photoresistor-sensor-element';
 export { RGBLedElement } from './rgb-led-element';
 export { ILI9341Element } from './ili9341-element';
 export { LedBarGraphElement } from './led-bar-graph-element';
+export { MicrosdCardElement } from './microsd-card-element';
