@@ -45,6 +45,7 @@ import { RGBLedElement } from './rgb-led-element';
 import { ILI9341Element } from './ili9341-element';
 import { LedBarGraphElement } from './led-bar-graph-element';
 import { MicrosdCardElement } from './microsd-card-element';
+import { DipSwitch8Element } from './dip-switch-8-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -95,6 +96,7 @@ declare global {
       'wokwi-ili9341': WokwiElement<ILI9341Element>;
       'wokwi-led-bar-graph': WokwiElement<LedBarGraphElement>;
       'wokwi-microsd-card': WokwiElement<MicrosdCardElement>;
+      'wokwi-dip-switch-8': WokwiElement<DipSwitch8Element>;
     }
   }
 }

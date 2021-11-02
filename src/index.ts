@@ -46,3 +46,4 @@ export { RGBLedElement } from './rgb-led-element';
 export { ILI9341Element } from './ili9341-element';
 export { LedBarGraphElement } from './led-bar-graph-element';
 export { MicrosdCardElement } from './microsd-card-element';
+export { DipSwitch8Element } from './dip-switch-8-element';
