@@ -32,6 +32,7 @@ export class DipSwitch8Element extends LitElement {
    */
   private toggleSwitch(index: number) {
     this.values[index] = this.values[index] ? 0 : 1;
+    this.dispatchEvent(new InputEvent('switch-change', { detail: index }));
     this.requestUpdate(); // force lit to render again
   }
 
