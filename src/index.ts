@@ -47,3 +47,4 @@ export { ILI9341Element } from './ili9341-element';
 export { LedBarGraphElement } from './led-bar-graph-element';
 export { MicrosdCardElement } from './microsd-card-element';
 export { DipSwitch8Element } from './dip-switch-8-element';
+export { StepperMotorElement } from './stepper-motor-element';
