@@ -185,7 +185,13 @@ export class ArduinoUnoElement extends LitElement {
           ></rect>
           <circle cx="33.269" cy="36.847" r="1.016" fill="#252728" />
           <circle cx="59.939" cy="36.847" r="1.016" fill="#252728" />
+          <ellipse cx="62.978" cy="34.32" rx=".57135" ry=".58305" stroke-width=".56808" />
         </g>
+        <path
+          transform="matrix(.26458 0 0 .26458 -4 0)"
+          d="m260.78 134.29a5.4373 5.8099 0 0 0-3.4512 5.4082 5.4373 5.8099 0 0 0 3.4531 5.4082v-10.816a5.4373 5.8099 0 0 0-0.00196 0z"
+          stroke-width="5.532"
+        />
 
         <!-- Programming Headers -->
         <g transform="translate(14.1 4.4)">
