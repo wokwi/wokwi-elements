@@ -18,11 +18,17 @@ export class LEDElement extends LitElement {
   @property() color = 'red';
   @property() lightColor: string | null = null;
   @property() label = '';
+  @property({ type: Boolean }) flip = false;
 
-  readonly pinInfo: ElementPin[] = [
-    { name: 'A', x: 24, y: 42, signals: [], description: 'Anode' },
-    { name: 'C', x: 16, y: 42, signals: [], description: 'Cathode' },
-  ];
+  get pinInfo(): ElementPin[] {
+    const anodeX = this.flip ? 16 : 24;
+    const cathodeX = this.flip ? 24 : 16;
+
+    return [
+      { name: 'A', x: anodeX, y: 42, signals: [], description: 'Anode' },
+      { name: 'C', x: cathodeX, y: 42, signals: [], description: 'Cathode' },
+    ];
+  }
 
   static get styles() {
     return css`
@@ -48,15 +54,18 @@ export class LEDElement extends LitElement {
   }
 
   render() {
-    const { color, lightColor } = this;
+    const { color, lightColor, flip } = this;
     const lightColorActual = lightColor || lightColors[color] || '#ff8080';
     const opacity = this.brightness ? 0.3 + this.brightness * 0.7 : 0;
     const lightOn = this.value && this.brightness > Number.EPSILON;
+    const xScale = flip ? -1 : 1;
+
     return html`
       <div class="led-container">
         <svg
           width="40"
           height="50"
+          transform="scale(${xScale} 1)"
           version="1.2"
           viewBox="-10 -5 35.456 39.618"
           xmlns="http://www.w3.org/2000/svg"

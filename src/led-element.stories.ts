@@ -37,6 +37,17 @@ storiesOf('LED', module)
       `
   )
   .add(
+    'Flipped',
+    () =>
+      html`
+        <wokwi-led
+          color="red"
+          .value=${boolean('value', false)}
+          .flip=${boolean('flip', true)}
+        ></wokwi-led>
+      `
+  )
+  .add(
     'Green',
     () =>
       html`
