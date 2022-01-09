@@ -1,182 +1,413 @@
-import { html, LitElement, svg } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { html, LitElement } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { ElementPin, GND, VCC } from './pin';
 
 @customElement('wokwi-hx711')
 export class HX711Element extends LitElement {
+  @property() sensorType = '50kg Load Sensor';
+
   readonly pinInfo: ElementPin[] = [
-    { name: 'VDD', y: 53, x: 109, number: 1, signals: [VCC()] },
-    { name: 'DOUT', y: 35, x: 109, number: 2, signals: [] },
-    { name: 'SCK', y: 44, x: 109, number: 3, signals: [] },
-    { name: 'GND', y: 26, x: 109, number: 4, signals: [GND()] },
+    { name: 'VDD', y: 84, x: 199, number: 1, signals: [VCC()] },
+    { name: 'DT', y: 66, x: 199, number: 2, signals: [] },
+    { name: 'SCK', y: 75, x: 199, number: 3, signals: [] },
+    { name: 'GND', y: 57, x: 199, number: 4, signals: [GND()] },
   ];
 
   render() {
+    const sensorType = this.sensorType;
     return html`
       <svg
-        width="34mm"
-        height="20mm"
         version="1.1"
-        viewBox="0 0 340 200"
+        width="58mm"
+        height="43mm"
+        viewBox="0 0 580 438"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <defs>
           <path
-            id="e"
-            d="m45 77c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 25c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 23c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-120c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm244 71c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-49c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm-0.5 115c-6.3513 0-11.5-5.1487-11.5-11.5s5.1487-11.5 11.5-11.5 11.5 5.1487 11.5 11.5-5.1487 11.5-11.5 11.5zm0-156c-6.3513 0-11.5-5.1487-11.5-11.5s5.1487-11.5 11.5-11.5 11.5 5.1487 11.5 11.5-5.1487 11.5-11.5 11.5zm-288.5-34h340v200h-340v-200z"
+            id="f"
+            d="m27 77c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 25c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 23c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-120c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm262 71c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-49c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm-0.5 115c-6.3513 0-11.5-5.1487-11.5-11.5s5.1487-11.5 11.5-11.5 11.5 5.1487 11.5 11.5-5.1487 11.5-11.5 11.5zm0-156c-6.3513 0-11.5-5.1487-11.5-11.5s5.1487-11.5 11.5-11.5 11.5 5.1487 11.5 11.5-5.1487 11.5-11.5 11.5zm-288.5-34h340v200h-340v-200z"
           />
-          <path id="c" d="m0 0h340v200h-340v-200z" />
-          <mask id="f" x="0" y="0" width="340" height="200" fill="white">
-            <use xlink:href="#c" />
+          <path id="d" d="m0 0h340v200h-340v-200z" />
+          <mask id="g" x="0" y="0" width="340" height="200" fill="white">
+            <use xlink:href="#d" />
           </mask>
           <linearGradient id="a" y1="50%" y2="50%">
             <stop stop-color="#767676" offset="0" />
             <stop stop-color="#FFFEDF" offset="1" />
           </linearGradient>
-          <radialGradient id="d" r="37.794%">
-            <stop stop-color="#fff" offset="0" />
+          <radialGradient id="b" r="100%">
+            <stop stop-color="#8A8A8A" offset="0" />
             <stop offset="1" />
+          </radialGradient>
+          <radialGradient
+            id="e"
+            r="100%"
+            gradientTransform="translate(.5 .5) scale(.58621 1) rotate(90) translate(-.5 -.5)"
+          >
+            <stop stop-color="#fff" offset="0" />
+            <stop stop-color="#E7E7E7" offset="1" />
           </radialGradient>
         </defs>
         <g fill="none" fill-rule="evenodd">
-          <mask id="b" fill="white">
-            <use xlink:href="#e" />
-          </mask>
+          <g transform="translate(240 86)">
+            <mask id="c" fill="white">
+              <use xlink:href="#f" />
+            </mask>
+            <g
+              fill="#1C8944"
+              mask="url(#c)"
+              stroke="#ADA216"
+              stroke-dasharray="1,1"
+              stroke-opacity=".53643"
+              stroke-width="4"
+            >
+              <use mask="url(#g)" xlink:href="#d" />
+            </g>
+            <g fill="#D2CDC3" mask="url(#c)">
+              <g transform="translate(18 37)">
+                <rect x="262" y="22" width="17" height="18" />
+                <rect width="17" height="18" />
+              </g>
+            </g>
+            <g mask="url(#c)">
+              <g transform="translate(13 30)">
+                <rect x="1" y="1" width="26" height="147" stroke="#fff" stroke-width="2" />
+                <rect x="264" y="22" width="25" height="102" stroke="#fff" stroke-width="2" />
+                <text
+                  font-family="Arial-BoldItalicMT, Arial"
+                  font-size="14"
+                  font-style="italic"
+                  font-weight="bold"
+                >
+                  <tspan x="291.444824" y="42" fill="#FBFBFB">GND</tspan>
+                  <tspan x="291.168945" y="66" fill="#FBFBFB">DT</tspan>
+                  <tspan x="291.220703" y="91" fill="#FBFBFB">SCK</tspan>
+                  <tspan x="291.220703" y="116" fill="#FBFBFB">VCC</tspan>
+                  <tspan x="34" y="45" fill="#FBFBFB">E-</tspan>
+                  <tspan x="34.4921875" y="18" fill="#FBFBFB">E+</tspan>
+                  <tspan x="34.0585938" y="117" fill="#FBFBFB">B-</tspan>
+                  <tspan x="34.0507812" y="140" fill="#FBFBFB">B+</tspan>
+                  <tspan x="34.0585938" y="69" fill="#FBFBFB">A-</tspan>
+                  <tspan x="34.0507812" y="94" fill="#FBFBFB">A+</tspan>
+                  <tspan x="91.2929688" y="157" fill="#FBFBFB">Load Cell Amp</tspan>
+                  <tspan x="119.132812" y="137" fill="#FBFBFB">HX711</tspan>
+                </text>
+              </g>
+            </g>
+            <g mask="url(#c)">
+              <g transform="translate(122 28)">
+                <rect
+                  x="14.5"
+                  y=".5"
+                  width="36"
+                  height="98"
+                  fill="#434341"
+                  fill-rule="evenodd"
+                  stroke="#3B3939"
+                />
+                <rect x="51" y="2" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+                <rect x="51" y="15" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+                <rect x="51" y="27" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+                <rect x="51" y="40" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+                <rect x="51" y="52" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+                <rect x="51" y="65" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+                <rect x="51" y="77" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+                <rect x="51" y="90" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+                <rect
+                  transform="translate(7 5) scale(-1 1) translate(-7 -5)"
+                  y="2"
+                  width="14"
+                  height="6"
+                  fill="url(#a)"
+                  fill-rule="evenodd"
+                />
+                <rect
+                  transform="translate(7 18) scale(-1 1) translate(-7 -18)"
+                  y="15"
+                  width="14"
+                  height="6"
+                  fill="url(#a)"
+                  fill-rule="evenodd"
+                />
+                <rect
+                  transform="translate(7 31) scale(-1 1) translate(-7 -31)"
+                  y="28"
+                  width="14"
+                  height="6"
+                  fill="url(#a)"
+                  fill-rule="evenodd"
+                />
+                <rect
+                  transform="translate(7 43) scale(-1 1) translate(-7 -43)"
+                  y="40"
+                  width="14"
+                  height="6"
+                  fill="url(#a)"
+                  fill-rule="evenodd"
+                />
+                <rect
+                  transform="translate(7 56) scale(-1 1) translate(-7 -56)"
+                  y="53"
+                  width="14"
+                  height="6"
+                  fill="url(#a)"
+                  fill-rule="evenodd"
+                />
+                <rect
+                  transform="translate(7 68) scale(-1 1) translate(-7 -68)"
+                  y="65"
+                  width="14"
+                  height="6"
+                  fill="url(#a)"
+                  fill-rule="evenodd"
+                />
+                <rect
+                  transform="translate(7 80) scale(-1 1) translate(-7 -80)"
+                  y="77"
+                  width="14"
+                  height="6"
+                  fill="url(#a)"
+                  fill-rule="evenodd"
+                />
+                <rect
+                  transform="translate(7 93) scale(-1 1) translate(-7 -93)"
+                  y="90"
+                  width="14"
+                  height="6"
+                  fill="url(#a)"
+                  fill-rule="evenodd"
+                />
+                <circle
+                  cx="20"
+                  cy="5"
+                  r="3"
+                  fill="#211919"
+                  fill-opacity=".54978"
+                  fill-rule="evenodd"
+                  stroke="#000"
+                />
+                <text
+                  transform="translate(27 52) rotate(-90) translate(-27 -52)"
+                  fill="none"
+                  font-family="Arial-BoldItalicMT, Arial"
+                  font-size="12"
+                  font-style="italic"
+                  font-weight="bold"
+                >
+                  <tspan x="9.09960938" y="56" fill="#BBBBBB">HX711</tspan>
+                </text>
+              </g>
+            </g>
+          </g>
+
+          <!-- 50kg Load Sensor -->
           <g
-            fill="#1C8944"
-            mask="url(#b)"
-            stroke="#ADA216"
-            stroke-dasharray="1,1"
-            stroke-opacity=".53643"
-            stroke-width="4"
+            style="visibility: ${sensorType === '50kg Load Sensor' ? '' : 'hidden'}"
+            transform="translate(5 8)"
           >
-            <use mask="url(#f)" xlink:href="#c" />
-          </g>
-          <g fill="#D2CDC3" mask="url(#b)">
-            <g transform="translate(36 37)">
-              <rect x="244" y="22" width="17" height="18" />
-              <rect width="17" height="18" />
+            <path
+              d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+              fill="#D8D8D8"
+              stroke="#979797"
+            />
+            <g transform="translate(18 17)" fill="#D8D8D8">
+              <path
+                d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+              />
+              <rect x="61" y="24" width="13" height="24" />
+              <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
             </g>
-          </g>
-          <g mask="url(#b)">
-            <g transform="translate(7 30)">
-              <rect x="25" y="1" width="26" height="147" stroke="#fff" stroke-width="2" />
-              <rect x="270" y="22" width="25" height="102" stroke="#fff" stroke-width="2" />
-              <text
-                font-family="Arial-BoldItalicMT, Arial"
-                font-size="16"
-                font-style="italic"
-                font-weight="bold"
-              >
-                <tspan x="0.05859375" y="69" fill="#FBFBFB">A-</tspan>
-                <tspan x="0.4921875" y="18" fill="#FBFBFB">E+</tspan>
-                <tspan x="297.444824" y="42" fill="#FBFBFB">GND</tspan>
-                <tspan x="297.168945" y="66" fill="#FBFBFB">DT</tspan>
-                <tspan x="297.220703" y="91" fill="#FBFBFB">SCK</tspan>
-                <tspan x="297.220703" y="116" fill="#FBFBFB">VCC</tspan>
-                <tspan x="0.05078125" y="94" fill="#FBFBFB">A+</tspan>
-                <tspan x="0.05859375" y="117" fill="#FBFBFB">B-</tspan>
-                <tspan x="0.05078125" y="140" fill="#FBFBFB">B+</tspan>
-                <tspan x="0" y="45" fill="#FBFBFB">E-</tspan>
-              </text>
+            <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+            <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+            <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+            <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+            <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+            <g transform="translate(0 106)">
+              <path
+                d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+                fill="#D8D8D8"
+                stroke="#979797"
+              />
+              <g transform="translate(18 17)" fill="#D8D8D8">
+                <path
+                  d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+                />
+                <rect x="61" y="24" width="13" height="24" />
+                <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
+              </g>
+              <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+              <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+              <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+              <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+              <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+              <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
             </g>
-          </g>
-          <g mask="url(#b)">
-            <g transform="translate(122 28)">
-              <rect
-                x="14.5"
-                y=".5"
-                width="36"
-                height="98"
-                fill="#434341"
-                fill-rule="evenodd"
-                stroke="#3B3939"
+            <path
+              d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+              fill="#D8D8D8"
+              stroke="#979797"
+            />
+            <g transform="translate(18 17)" fill="#D8D8D8">
+              <path
+                d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
               />
-              <rect x="51" y="2" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-              <rect x="51" y="15" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-              <rect x="51" y="27" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-              <rect x="51" y="40" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-              <rect x="51" y="52" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-              <rect x="51" y="65" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-              <rect x="51" y="77" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-              <rect x="51" y="90" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-              <rect
-                transform="translate(7 5) scale(-1 1) translate(-7 -5)"
-                y="2"
-                width="14"
-                height="6"
-                fill="url(#a)"
-                fill-rule="evenodd"
-              />
-              <rect
-                transform="translate(7 18) scale(-1 1) translate(-7 -18)"
-                y="15"
-                width="14"
-                height="6"
-                fill="url(#a)"
-                fill-rule="evenodd"
-              />
-              <rect
-                transform="translate(7 31) scale(-1 1) translate(-7 -31)"
-                y="28"
-                width="14"
-                height="6"
-                fill="url(#a)"
-                fill-rule="evenodd"
-              />
-              <rect
-                transform="translate(7 43) scale(-1 1) translate(-7 -43)"
-                y="40"
-                width="14"
-                height="6"
-                fill="url(#a)"
-                fill-rule="evenodd"
-              />
-              <rect
-                transform="translate(7 56) scale(-1 1) translate(-7 -56)"
-                y="53"
-                width="14"
-                height="6"
-                fill="url(#a)"
-                fill-rule="evenodd"
-              />
-              <rect
-                transform="translate(7 68) scale(-1 1) translate(-7 -68)"
-                y="65"
-                width="14"
-                height="6"
-                fill="url(#a)"
-                fill-rule="evenodd"
-              />
-              <rect
-                transform="translate(7 80) scale(-1 1) translate(-7 -80)"
-                y="77"
-                width="14"
-                height="6"
-                fill="url(#a)"
-                fill-rule="evenodd"
-              />
-              <rect
-                transform="translate(7 93) scale(-1 1) translate(-7 -93)"
-                y="90"
-                width="14"
-                height="6"
-                fill="url(#a)"
-                fill-rule="evenodd"
-              />
-              <circle cx="20" cy="5" r="3" fill="url(#d)" fill-rule="evenodd" stroke="#000" />
-              <text
-                transform="translate(27 52) rotate(-90) translate(-27 -52)"
-                fill="none"
-                font-family="Arial-BoldItalicMT, Arial"
-                font-size="12"
-                font-style="italic"
-                font-weight="bold"
-              >
-                <tspan x="9.09960938" y="56" fill="#BBBBBB">HX711</tspan>
-              </text>
+              <rect x="61" y="24" width="13" height="24" />
+              <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
             </g>
+            <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+            <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+            <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+            <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+            <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+            <g transform="translate(0 212)">
+              <path
+                d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+                fill="#D8D8D8"
+                stroke="#979797"
+              />
+              <g transform="translate(18 17)" fill="#D8D8D8">
+                <path
+                  d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+                />
+                <rect x="61" y="24" width="13" height="24" />
+                <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
+              </g>
+              <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+              <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+              <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+              <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+              <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+              <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+            </g>
+            <g transform="translate(0 318)">
+              <path
+                d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+                fill="#D8D8D8"
+                stroke="#979797"
+              />
+              <g transform="translate(18 17)" fill="#D8D8D8">
+                <path
+                  d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+                />
+                <rect x="61" y="24" width="13" height="24" />
+                <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
+              </g>
+              <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+              <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+              <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+              <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+              <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+              <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+            </g>
+            <path d="m128.5 53.5h86" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path
+              d="m261.5 123.5l-47-70"
+              stroke="#FF7F7F"
+              stroke-linecap="square"
+              stroke-width="3"
+            />
+            <path d="m128.5 371.25h63" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path
+              d="m260.5 196.5l-68 174"
+              stroke="#FF7F7F"
+              stroke-linecap="square"
+              stroke-width="3"
+            />
+            <path d="m128.5 265.25h66" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path
+              d="m261.5 172.5l-66 92"
+              stroke="#FF7F7F"
+              stroke-linecap="square"
+              stroke-width="3"
+            />
+            <path d="m128.5 159.25h71" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path
+              d="m261.5 148.5l-61 11"
+              stroke="#FF7F7F"
+              stroke-linecap="square"
+              stroke-width="3"
+            />
+            <path d="m136.5 164.5v212" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
+            <path d="m147.25 58v212" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+            <path d="m162.25 48v317.5" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
+            <path d="m180.25 154.5v104" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
+            <path d="m129 376.23h6" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
+            <path d="m136.5 164.15h-8" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
+            <path d="m146.5 58.15h-18" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+            <path d="m161.5 48.208h-34" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
+            <path d="m180.5 154.1h-52" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
+            <path d="m180.5 260.2h-51" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
+            <path d="m161.5 366.2h-34" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
+            <path d="m146.5 270.25h-18" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+            <text
+              fill="#FBFBFB"
+              font-family="Arial-BoldItalicMT, Arial"
+              font-size="14"
+              font-style="italic"
+              font-weight="bold"
+            >
+              <tspan x="87.1137695" y="270">A-</tspan>
+              <tspan x="87.5" y="164">E-</tspan>
+              <tspan x="85.7431641" y="57">E+</tspan>
+              <tspan x="86.2431641" y="377">A+</tspan>
+            </text>
+          </g>
+
+          <!-- 5kg Load Cell -->
+          <g
+            style="visibility: ${sensorType === '5kg Load Sensor' ? '' : 'hidden'}"
+            transform="translate(79 66)"
+          >
+            <path
+              d="m0.5 0.5v266h62v-266h-62zm31 123c-12.698 0-23-9.8445-23-22 0-12.155 10.302-22 23-22s23 9.8445 23 22c0 12.155-10.302 22-23 22zm0 57c-12.698 0-23-9.8445-23-22s10.302-22 23-22 23 9.8445 23 22-10.302 22-23 22z"
+              fill="#D8D8D8"
+              stroke="#979797"
+            />
+            <path d="m53.5 51.5l135 14" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
+            <path d="m54.5 57.5l134 33" stroke="#000" stroke-linecap="square" stroke-width="3" />
+            <path d="m55.5 64.5l132 50" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
+            <path d="m56.5 71.5l132 68" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
+            <rect x="3.5" y="43.5" width="57" height="33" rx="11" fill="url(#e)" stroke="#979797" />
+            <text
+              fill="#FBFBFB"
+              font-family="Arial-ItalicMT, Arial"
+              font-size="14"
+              font-style="italic"
+            >
+              <tspan x="17.2138672" y="250">5kg</tspan>
+            </text>
+          </g>
+
+          <!-- Gauge Pressure Sensor -->
+          <g
+            style="visibility: ${sensorType === 'Gauge Pressure Sensor' ? '' : 'hidden'}"
+            transform="translate(71 128)"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="m53.5 56.5l143-53" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
+            <path d="m54.5 56.5l142-28" stroke="#000" stroke-linecap="square" stroke-width="3" />
+            <path d="m52.5 56.5l143-4" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
+            <path d="m51.5 56.5l145 21" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
+            <path
+              d="m50.5 113c-14.636 0-26.5-25.296-26.5-56.5s11.864-56.5 26.5-56.5 26.5 25.296 26.5 56.5-11.864 56.5-26.5 56.5zm-1-88c3.5899 0 6.5-3.134 6.5-7s-2.9101-7-6.5-7-6.5 3.134-6.5 7 2.9101 7 6.5 7zm0 77c3.5899 0 6.5-3.134 6.5-7s-2.9101-7-6.5-7-6.5 3.134-6.5 7 2.9101 7 6.5 7z"
+              fill="#D8D8D8"
+              stroke="#979797"
+            />
+            <path d="m0 54.1l33-5.1v17l-33-5.1v-6.8z" fill="#D8D8D8" stroke="#979797" />
+            <circle cx="50" cy="57" r="20" fill="#D8D8D8" stroke="#979797" />
+            <text
+              fill="#FBFBFB"
+              font-family="Arial-BoldItalicMT, Arial"
+              font-size="16"
+              font-style="italic"
+              font-weight="bold"
+            >
+              <tspan x="38.4414062" y="62">GP</tspan>
+            </text>
           </g>
         </g>
       </svg>
