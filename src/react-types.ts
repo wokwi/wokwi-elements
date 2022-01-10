@@ -47,6 +47,7 @@ import { LedBarGraphElement } from './led-bar-graph-element';
 import { MicrosdCardElement } from './microsd-card-element';
 import { DipSwitch8Element } from './dip-switch-8-element';
 import { StepperMotorElement } from './stepper-motor-element';
+import { FTDIElement } from './ftdi-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -99,6 +100,7 @@ declare global {
       'wokwi-microsd-card': WokwiElement<MicrosdCardElement>;
       'wokwi-dip-switch-8': WokwiElement<DipSwitch8Element>;
       'wokwi-stepper-motor': WokwiElement<StepperMotorElement>;
+      'wokwi-ftdi': WokwiElement<FTDIElement>;
     }
   }
 }
