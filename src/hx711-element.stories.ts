@@ -1,19 +1,30 @@
 import { html } from 'lit';
-import { storiesOf } from '@storybook/web-components';
-import { withKnobs } from '@storybook/addon-knobs';
 import './hx711-element';
 
 export default {
   title: 'HX711',
   component: 'wokwi-hx711',
+  argTypes: {
+    angle: { control: { type: '50kg', width: 580, height: 430 } },
+  },
+  args: {
+    angle: 0,
+    units: '',
+    value: '',
+  },
 };
 
-storiesOf('HX711', module)
-  .addParameters({ component: 'wokwi-hx711' })
-  .addDecorator(withKnobs)
-  .add('50kg Load Sensor', () => html`<wokwi-hx711 sensorType="50kg Load Sensor"></wokwi-hx711>`)
-  .add('5kg Load Sensor', () => html`<wokwi-hx711 sensorType="5kg Load Sensor"></wokwi-hx711>`)
-  .add(
-    'Gauge Pressure Sensor',
-    () => html`<wokwi-hx711 sensorType="Gauge Pressure Sensor"></wokwi-hx711>`
-  );
+const Template = ({ type, width, height }) =>
+  html`<wokwi-hx711 .type=${type} .width=${width} .height=${height}></wokwi-hx711>`;
+
+// export const Default = Template.bind({});
+// Default.args = { type: '50kg', width: 580, height: 430 };
+
+export const loadCell50kg = Template.bind({});
+loadCell50kg.args = { type: '50kg', width: 580, height: 430 };
+
+export const loadCell5kg = Template.bind({});
+loadCell5kg.args = { type: '5kg', width: 507, height: 269 };
+
+export const gaugePressure = Template.bind({});
+gaugePressure.args = { type: 'gauge', width: 509, height: 200 };

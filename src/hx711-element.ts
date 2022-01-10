@@ -4,30 +4,34 @@ import { ElementPin, GND, VCC } from './pin';
 
 @customElement('wokwi-hx711')
 export class HX711Element extends LitElement {
-  @property() sensorType = '50kg Load Sensor';
+  @property() type: '5kg' | '50kg' | 'gauge' | undefined;
+  @property() width = '58mm';
+  @property() height = '43mm';
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'VDD', y: 84, x: 199, number: 1, signals: [VCC()] },
-    { name: 'DT', y: 66, x: 199, number: 2, signals: [] },
-    { name: 'SCK', y: 75, x: 199, number: 3, signals: [] },
-    { name: 'GND', y: 57, x: 199, number: 4, signals: [GND()] },
+    { name: 'VCC', y: 53, x: 7, number: 1, signals: [VCC()] },
+    { name: 'DT', y: 35, x: 7, number: 2, signals: [] },
+    { name: 'SCK', y: 44, x: 7, number: 3, signals: [] },
+    { name: 'GND', y: 25.5, x: 7, number: 4, signals: [GND()] },
   ];
 
   render() {
-    const sensorType = this.sensorType;
+    const type = this.type;
+    const width = this.width;
+    const height = this.height;
     return html`
       <svg
+        width="${+width / 10}mm"
+        height="${+height / 10}mm"
+        viewBox="0 0 ${width} ${height}"
         version="1.1"
-        width="58mm"
-        height="43mm"
-        viewBox="0 0 580 438"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <defs>
           <path
             id="f"
-            d="m27 77c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 25c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 23c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-120c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm262 71c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-49c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm-0.5 115c-6.3513 0-11.5-5.1487-11.5-11.5s5.1487-11.5 11.5-11.5 11.5 5.1487 11.5 11.5-5.1487 11.5-11.5 11.5zm0-156c-6.3513 0-11.5-5.1487-11.5-11.5s5.1487-11.5 11.5-11.5 11.5 5.1487 11.5 11.5-5.1487 11.5-11.5 11.5zm-288.5-34h340v200h-340v-200z"
+            d="m317 74c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 25c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 23c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0 24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-120c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm-298 98c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-25c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm0-24c-3.866 0-7-3.134-7-7s3.134-7 7-7 7 3.134 7 7-3.134 7-7 7zm9.5 115c-6.3513 0-11.5-5.1487-11.5-11.5s5.1487-11.5 11.5-11.5 11.5 5.1487 11.5 11.5-5.1487 11.5-11.5 11.5zm0-156c-6.3513 0-11.5-5.1487-11.5-11.5s5.1487-11.5 11.5-11.5 11.5 5.1487 11.5 11.5-5.1487 11.5-11.5 11.5zm-28.5-34h340v200h-340v-200z"
           />
           <path id="d" d="m0 0h340v200h-340v-200z" />
           <mask id="g" x="0" y="0" width="340" height="200" fill="white">
@@ -51,161 +55,159 @@ export class HX711Element extends LitElement {
           </radialGradient>
         </defs>
         <g fill="none" fill-rule="evenodd">
-          <g transform="translate(240 86)">
-            <mask id="c" fill="white">
-              <use xlink:href="#f" />
-            </mask>
-            <g
-              fill="#1C8944"
-              mask="url(#c)"
-              stroke="#ADA216"
-              stroke-dasharray="1,1"
-              stroke-opacity=".53643"
-              stroke-width="4"
-            >
-              <use mask="url(#g)" xlink:href="#d" />
+          <mask id="c" fill="white">
+            <use xlink:href="#f" />
+          </mask>
+          <g
+            fill="#1C8944"
+            mask="url(#c)"
+            stroke="#ADA216"
+            stroke-dasharray="1,1"
+            stroke-opacity=".53643"
+            stroke-width="4"
+          >
+            <use mask="url(#g)" xlink:href="#d" />
+          </g>
+          <g fill="#D2CDC3" mask="url(#c)">
+            <g transform="translate(10 34)">
+              <rect y="25" width="17" height="18" />
+              <rect x="298" width="17" height="18" />
             </g>
-            <g fill="#D2CDC3" mask="url(#c)">
-              <g transform="translate(18 37)">
-                <rect x="262" y="22" width="17" height="18" />
-                <rect width="17" height="18" />
-              </g>
+          </g>
+          <g mask="url(#c)">
+            <g transform="translate(6 27)">
+              <rect x="298" y="1" width="26" height="147" stroke="#fff" stroke-width="2" />
+              <rect x="1" y="25" width="25" height="102" stroke="#fff" stroke-width="2" />
+              <text
+                font-family="Arial-BoldItalicMT, Arial"
+                font-size="14"
+                font-style="italic"
+                font-weight="bold"
+              >
+                <tspan x="28.4448242" y="45" fill="#FBFBFB">GND</tspan>
+                <tspan x="28.1689453" y="69" fill="#FBFBFB">DT</tspan>
+                <tspan x="27.2207031" y="94" fill="#FBFBFB">SCK</tspan>
+                <tspan x="28.2207031" y="119" fill="#FBFBFB">VCC</tspan>
+                <tspan x="274" y="45" fill="#FBFBFB">E-</tspan>
+                <tspan x="274.492188" y="18" fill="#FBFBFB">E+</tspan>
+                <tspan x="274.058594" y="117" fill="#FBFBFB">B-</tspan>
+                <tspan x="274.050781" y="140" fill="#FBFBFB">B+</tspan>
+                <tspan x="274.058594" y="69" fill="#FBFBFB">A-</tspan>
+                <tspan x="274.050781" y="94" fill="#FBFBFB">A+</tspan>
+                <tspan x="98.2929688" y="160" fill="#FBFBFB">Load Cell Amp</tspan>
+                <tspan x="126.132812" y="140" fill="#FBFBFB">HX711</tspan>
+              </text>
             </g>
-            <g mask="url(#c)">
-              <g transform="translate(13 30)">
-                <rect x="1" y="1" width="26" height="147" stroke="#fff" stroke-width="2" />
-                <rect x="264" y="22" width="25" height="102" stroke="#fff" stroke-width="2" />
-                <text
-                  font-family="Arial-BoldItalicMT, Arial"
-                  font-size="14"
-                  font-style="italic"
-                  font-weight="bold"
-                >
-                  <tspan x="291.444824" y="42" fill="#FBFBFB">GND</tspan>
-                  <tspan x="291.168945" y="66" fill="#FBFBFB">DT</tspan>
-                  <tspan x="291.220703" y="91" fill="#FBFBFB">SCK</tspan>
-                  <tspan x="291.220703" y="116" fill="#FBFBFB">VCC</tspan>
-                  <tspan x="34" y="45" fill="#FBFBFB">E-</tspan>
-                  <tspan x="34.4921875" y="18" fill="#FBFBFB">E+</tspan>
-                  <tspan x="34.0585938" y="117" fill="#FBFBFB">B-</tspan>
-                  <tspan x="34.0507812" y="140" fill="#FBFBFB">B+</tspan>
-                  <tspan x="34.0585938" y="69" fill="#FBFBFB">A-</tspan>
-                  <tspan x="34.0507812" y="94" fill="#FBFBFB">A+</tspan>
-                  <tspan x="91.2929688" y="157" fill="#FBFBFB">Load Cell Amp</tspan>
-                  <tspan x="119.132812" y="137" fill="#FBFBFB">HX711</tspan>
-                </text>
-              </g>
-            </g>
-            <g mask="url(#c)">
-              <g transform="translate(122 28)">
-                <rect
-                  x="14.5"
-                  y=".5"
-                  width="36"
-                  height="98"
-                  fill="#434341"
-                  fill-rule="evenodd"
-                  stroke="#3B3939"
-                />
-                <rect x="51" y="2" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-                <rect x="51" y="15" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-                <rect x="51" y="27" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-                <rect x="51" y="40" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-                <rect x="51" y="52" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-                <rect x="51" y="65" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-                <rect x="51" y="77" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-                <rect x="51" y="90" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
-                <rect
-                  transform="translate(7 5) scale(-1 1) translate(-7 -5)"
-                  y="2"
-                  width="14"
-                  height="6"
-                  fill="url(#a)"
-                  fill-rule="evenodd"
-                />
-                <rect
-                  transform="translate(7 18) scale(-1 1) translate(-7 -18)"
-                  y="15"
-                  width="14"
-                  height="6"
-                  fill="url(#a)"
-                  fill-rule="evenodd"
-                />
-                <rect
-                  transform="translate(7 31) scale(-1 1) translate(-7 -31)"
-                  y="28"
-                  width="14"
-                  height="6"
-                  fill="url(#a)"
-                  fill-rule="evenodd"
-                />
-                <rect
-                  transform="translate(7 43) scale(-1 1) translate(-7 -43)"
-                  y="40"
-                  width="14"
-                  height="6"
-                  fill="url(#a)"
-                  fill-rule="evenodd"
-                />
-                <rect
-                  transform="translate(7 56) scale(-1 1) translate(-7 -56)"
-                  y="53"
-                  width="14"
-                  height="6"
-                  fill="url(#a)"
-                  fill-rule="evenodd"
-                />
-                <rect
-                  transform="translate(7 68) scale(-1 1) translate(-7 -68)"
-                  y="65"
-                  width="14"
-                  height="6"
-                  fill="url(#a)"
-                  fill-rule="evenodd"
-                />
-                <rect
-                  transform="translate(7 80) scale(-1 1) translate(-7 -80)"
-                  y="77"
-                  width="14"
-                  height="6"
-                  fill="url(#a)"
-                  fill-rule="evenodd"
-                />
-                <rect
-                  transform="translate(7 93) scale(-1 1) translate(-7 -93)"
-                  y="90"
-                  width="14"
-                  height="6"
-                  fill="url(#a)"
-                  fill-rule="evenodd"
-                />
-                <circle
-                  cx="20"
-                  cy="5"
-                  r="3"
-                  fill="#211919"
-                  fill-opacity=".54978"
-                  fill-rule="evenodd"
-                  stroke="#000"
-                />
-                <text
-                  transform="translate(27 52) rotate(-90) translate(-27 -52)"
-                  fill="none"
-                  font-family="Arial-BoldItalicMT, Arial"
-                  font-size="12"
-                  font-style="italic"
-                  font-weight="bold"
-                >
-                  <tspan x="9.09960938" y="56" fill="#BBBBBB">HX711</tspan>
-                </text>
-              </g>
+          </g>
+          <g mask="url(#c)">
+            <g transform="translate(122 28)">
+              <rect
+                x="14.5"
+                y=".5"
+                width="36"
+                height="98"
+                fill="#434341"
+                fill-rule="evenodd"
+                stroke="#3B3939"
+              />
+              <rect x="51" y="2" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+              <rect x="51" y="15" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+              <rect x="51" y="27" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+              <rect x="51" y="40" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+              <rect x="51" y="52" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+              <rect x="51" y="65" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+              <rect x="51" y="77" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+              <rect x="51" y="90" width="14" height="6" fill="url(#a)" fill-rule="evenodd" />
+              <rect
+                transform="translate(7 5) scale(-1 1) translate(-7 -5)"
+                y="2"
+                width="14"
+                height="6"
+                fill="url(#a)"
+                fill-rule="evenodd"
+              />
+              <rect
+                transform="translate(7 18) scale(-1 1) translate(-7 -18)"
+                y="15"
+                width="14"
+                height="6"
+                fill="url(#a)"
+                fill-rule="evenodd"
+              />
+              <rect
+                transform="translate(7 31) scale(-1 1) translate(-7 -31)"
+                y="28"
+                width="14"
+                height="6"
+                fill="url(#a)"
+                fill-rule="evenodd"
+              />
+              <rect
+                transform="translate(7 43) scale(-1 1) translate(-7 -43)"
+                y="40"
+                width="14"
+                height="6"
+                fill="url(#a)"
+                fill-rule="evenodd"
+              />
+              <rect
+                transform="translate(7 56) scale(-1 1) translate(-7 -56)"
+                y="53"
+                width="14"
+                height="6"
+                fill="url(#a)"
+                fill-rule="evenodd"
+              />
+              <rect
+                transform="translate(7 68) scale(-1 1) translate(-7 -68)"
+                y="65"
+                width="14"
+                height="6"
+                fill="url(#a)"
+                fill-rule="evenodd"
+              />
+              <rect
+                transform="translate(7 80) scale(-1 1) translate(-7 -80)"
+                y="77"
+                width="14"
+                height="6"
+                fill="url(#a)"
+                fill-rule="evenodd"
+              />
+              <rect
+                transform="translate(7 93) scale(-1 1) translate(-7 -93)"
+                y="90"
+                width="14"
+                height="6"
+                fill="url(#a)"
+                fill-rule="evenodd"
+              />
+              <circle
+                cx="20"
+                cy="5"
+                r="3"
+                fill="#211919"
+                fill-opacity=".54978"
+                fill-rule="evenodd"
+                stroke="#000"
+              />
+              <text
+                transform="translate(27 52) rotate(-90) translate(-27 -52)"
+                fill="none"
+                font-family="Arial-BoldItalicMT, Arial"
+                font-size="12"
+                font-style="italic"
+                font-weight="bold"
+              >
+                <tspan x="9.09960938" y="56" fill="#BBBBBB">HX711</tspan>
+              </text>
             </g>
           </g>
 
           <!-- 50kg Load Sensor -->
           <g
-            style="visibility: ${sensorType === '50kg Load Sensor' ? '' : 'hidden'}"
-            transform="translate(5 8)"
+            style="visibility: ${type === '50kg' || type === undefined ? '' : 'hidden'}"
+            transform="translate(448 212) scale(-1 1) translate(-131 -212)"
           >
             <path
               d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
@@ -303,34 +305,18 @@ export class HX711Element extends LitElement {
               <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
               <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
             </g>
-            <path d="m128.5 53.5h86" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path
-              d="m261.5 123.5l-47-70"
-              stroke="#FF7F7F"
-              stroke-linecap="square"
-              stroke-width="3"
-            />
-            <path d="m128.5 371.25h63" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path
-              d="m260.5 196.5l-68 174"
-              stroke="#FF7F7F"
-              stroke-linecap="square"
-              stroke-width="3"
-            />
-            <path d="m128.5 265.25h66" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path
-              d="m261.5 172.5l-66 92"
-              stroke="#FF7F7F"
-              stroke-linecap="square"
-              stroke-width="3"
-            />
+            <path d="m128.5 53.5h82" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m201.5 68.5h60" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m211.5 44.5h50" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m213.5 94.5h48" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m225.5 118.5h36" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m128.5 371.25h94" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m225.5 118.5v253" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m128.5 265.25h83" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m213.5 96.5v169" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m201.5 71.5v88" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+            <path d="m211.5 44.5v9" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
             <path d="m128.5 159.25h71" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path
-              d="m261.5 148.5l-61 11"
-              stroke="#FF7F7F"
-              stroke-linecap="square"
-              stroke-width="3"
-            />
             <path d="m136.5 164.5v212" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
             <path d="m147.25 58v212" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
             <path d="m162.25 48v317.5" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
@@ -344,6 +330,7 @@ export class HX711Element extends LitElement {
             <path d="m161.5 366.2h-34" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
             <path d="m146.5 270.25h-18" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
             <text
+              transform="translate(94.5 265) scale(-1 1) translate(-94.5 -265)"
               fill="#FBFBFB"
               font-family="Arial-BoldItalicMT, Arial"
               font-size="14"
@@ -357,22 +344,22 @@ export class HX711Element extends LitElement {
             </text>
           </g>
 
-          <!-- 5kg Load Cell -->
+          <!-- 5kg Load Sensor -->
           <g
-            style="visibility: ${sensorType === '5kg Load Sensor' ? '' : 'hidden'}"
-            transform="translate(79 66)"
-          >
+            style="visibility: ${type === '5kg' ? '' : 'hidden'}"
+            transform="translate(413 133.5) scale(-1 1) translate(-94 -133.5)">
             <path
               d="m0.5 0.5v266h62v-266h-62zm31 123c-12.698 0-23-9.8445-23-22 0-12.155 10.302-22 23-22s23 9.8445 23 22c0 12.155-10.302 22-23 22zm0 57c-12.698 0-23-9.8445-23-22s10.302-22 23-22 23 9.8445 23 22-10.302 22-23 22z"
               fill="#D8D8D8"
               stroke="#979797"
             />
-            <path d="m53.5 51.5l135 14" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
-            <path d="m54.5 57.5l134 33" stroke="#000" stroke-linecap="square" stroke-width="3" />
-            <path d="m55.5 64.5l132 50" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
-            <path d="m56.5 71.5l132 68" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
+            <path d="m53.5 51.5l133-10" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
+            <path d="m54.5 57.5l131 8" stroke="#000" stroke-linecap="square" stroke-width="3" />
+            <path d="m55.5 64.5l130 27" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
+            <path d="m56.5 71.5l131 43" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
             <rect x="3.5" y="43.5" width="57" height="33" rx="11" fill="url(#e)" stroke="#979797" />
             <text
+              transform="translate(28.5 245) scale(-1 1) translate(-28.5 -245)"
               fill="#FBFBFB"
               font-family="Arial-ItalicMT, Arial"
               font-size="14"
@@ -384,14 +371,12 @@ export class HX711Element extends LitElement {
 
           <!-- Gauge Pressure Sensor -->
           <g
-            style="visibility: ${sensorType === 'Gauge Pressure Sensor' ? '' : 'hidden'}"
-            transform="translate(71 128)"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="m53.5 56.5l143-53" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
-            <path d="m54.5 56.5l142-28" stroke="#000" stroke-linecap="square" stroke-width="3" />
-            <path d="m52.5 56.5l143-4" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
-            <path d="m51.5 56.5l145 21" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
+            style="visibility: ${type === 'gauge' ? '' : 'hidden'}"
+            transform="translate(412.5 99.5) scale(-1 1) translate(-94.5 -56.5)">
+            <path d="m53.5 56.5l135-56" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
+            <path d="m54.5 56.5l133-33" stroke="#000" stroke-linecap="square" stroke-width="3" />
+            <path d="m52.5 56.5l133-7" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
+            <path d="m51.5 56.5l136 18" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
             <path
               d="m50.5 113c-14.636 0-26.5-25.296-26.5-56.5s11.864-56.5 26.5-56.5 26.5 25.296 26.5 56.5-11.864 56.5-26.5 56.5zm-1-88c3.5899 0 6.5-3.134 6.5-7s-2.9101-7-6.5-7-6.5 3.134-6.5 7 2.9101 7 6.5 7zm0 77c3.5899 0 6.5-3.134 6.5-7s-2.9101-7-6.5-7-6.5 3.134-6.5 7 2.9101 7 6.5 7z"
               fill="#D8D8D8"
@@ -400,6 +385,7 @@ export class HX711Element extends LitElement {
             <path d="m0 54.1l33-5.1v17l-33-5.1v-6.8z" fill="#D8D8D8" stroke="#979797" />
             <circle cx="50" cy="57" r="20" fill="#D8D8D8" stroke="#979797" />
             <text
+              transform="translate(50 56.5) scale(-1 1) translate(-50 -56.5)"
               fill="#FBFBFB"
               font-family="Arial-BoldItalicMT, Arial"
               font-size="16"
