@@ -6,7 +6,7 @@ export default {
   component: 'wokwi-hx711',
 };
 
-const Template = ({ type, width, height }) =>
+const Template = ({ width, height, type = '50kg' }) =>
   html`<wokwi-hx711 .type=${type} .width=${width} .height=${height}></wokwi-hx711>`;
 
 export const loadCell50kg = Template.bind({});
