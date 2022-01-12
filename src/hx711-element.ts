@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin, GND, VCC } from './pin';
 
@@ -26,8 +26,205 @@ export class HX711Element extends LitElement {
     }
   }
 
+  renderSensor() {
+    switch (this.type) {
+      case 'gauge':
+        return svg`
+       <!-- Gauge Pressure Sensor -->
+       <g
+         transform="translate(412.5 99.5) scale(-1 1) translate(-94.5 -56.5)">
+         <path d="m53.5 56.5l135-56" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
+         <path d="m54.5 56.5l133-33" stroke="#000" stroke-linecap="square" stroke-width="3" />
+         <path d="m52.5 56.5l133-7" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
+         <path d="m51.5 56.5l136 18" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
+         <path
+           d="m50.5 113c-14.636 0-26.5-25.296-26.5-56.5s11.864-56.5 26.5-56.5 26.5 25.296 26.5 56.5-11.864 56.5-26.5 56.5zm-1-88c3.5899 0 6.5-3.134 6.5-7s-2.9101-7-6.5-7-6.5 3.134-6.5 7 2.9101 7 6.5 7zm0 77c3.5899 0 6.5-3.134 6.5-7s-2.9101-7-6.5-7-6.5 3.134-6.5 7 2.9101 7 6.5 7z"
+           fill="#D8D8D8"
+           stroke="#979797"
+         />
+         <path d="m0 54.1l33-5.1v17l-33-5.1v-6.8z" fill="#D8D8D8" stroke="#979797" />
+         <circle cx="50" cy="57" r="20" fill="#D8D8D8" stroke="#979797" />
+         <text
+           transform="translate(50 56.5) scale(-1 1) translate(-50 -56.5)"
+           fill="#FBFBFB"
+           font-family="Arial-BoldItalicMT, Arial"
+           font-size="16"
+           font-style="italic"
+           font-weight="bold"
+         >
+           <tspan x="38.4414062" y="62">GP</tspan>
+         </text>
+       </g>`;
+      case '5kg':
+        return svg`
+       <!-- 5kg Load Sensor -->
+       <g
+         transform="translate(413 133.5) scale(-1 1) translate(-94 -133.5)">
+         <path
+           d="m0.5 0.5v266h62v-266h-62zm31 123c-12.698 0-23-9.8445-23-22 0-12.155 10.302-22 23-22s23 9.8445 23 22c0 12.155-10.302 22-23 22zm0 57c-12.698 0-23-9.8445-23-22s10.302-22 23-22 23 9.8445 23 22-10.302 22-23 22z"
+           fill="#D8D8D8"
+           stroke="#979797"
+         />
+         <path d="m53.5 51.5l133-10" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
+         <path d="m54.5 57.5l131 8" stroke="#000" stroke-linecap="square" stroke-width="3" />
+         <path d="m55.5 64.5l130 27" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
+         <path d="m56.5 71.5l131 43" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
+         <rect x="3.5" y="43.5" width="57" height="33" rx="11" fill="url(#e)" stroke="#979797" />
+         <text
+           transform="translate(28.5 245) scale(-1 1) translate(-28.5 -245)"
+           fill="#FBFBFB"
+           font-family="Arial-ItalicMT, Arial"
+           font-size="14"
+           font-style="italic"
+         >
+           <tspan x="17.2138672" y="250">5kg</tspan>
+         </text>
+       </g>`;
+      case '50kg':
+      default:
+        return svg`
+       <!-- 50kg Load Sensor -->
+       <g
+         transform="translate(448 212) scale(-1 1) translate(-131 -212)"
+       >
+         <path
+           d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+           fill="#D8D8D8"
+           stroke="#979797"
+         />
+         <g transform="translate(18 17)" fill="#D8D8D8">
+           <path
+             d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+           />
+           <rect x="61" y="24" width="13" height="24" />
+           <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
+         </g>
+         <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+         <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+         <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+         <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+         <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+         <g transform="translate(0 106)">
+           <path
+             d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+             fill="#D8D8D8"
+             stroke="#979797"
+           />
+           <g transform="translate(18 17)" fill="#D8D8D8">
+             <path
+               d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+             />
+             <rect x="61" y="24" width="13" height="24" />
+             <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
+           </g>
+           <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+           <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+           <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+           <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+           <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+           <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+         </g>
+         <path
+           d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+           fill="#D8D8D8"
+           stroke="#979797"
+         />
+         <g transform="translate(18 17)" fill="#D8D8D8">
+           <path
+             d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+           />
+           <rect x="61" y="24" width="13" height="24" />
+           <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
+         </g>
+         <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+         <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+         <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+         <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+         <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+         <g transform="translate(0 212)">
+           <path
+             d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+             fill="#D8D8D8"
+             stroke="#979797"
+           />
+           <g transform="translate(18 17)" fill="#D8D8D8">
+             <path
+               d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+             />
+             <rect x="61" y="24" width="13" height="24" />
+             <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
+           </g>
+           <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+           <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+           <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+           <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+           <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+           <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+         </g>
+         <g transform="translate(0 318)">
+           <path
+             d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
+             fill="#D8D8D8"
+             stroke="#979797"
+           />
+           <g transform="translate(18 17)" fill="#D8D8D8">
+             <path
+               d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
+             />
+             <rect x="61" y="24" width="13" height="24" />
+             <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
+           </g>
+           <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
+           <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
+           <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
+           <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
+           <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+           <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+         </g>
+         <path d="m128.5 53.5h82" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m201.5 68.5h60" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m211.5 44.5h50" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m213.5 94.5h48" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m225.5 118.5h36" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m128.5 371.25h94" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m225.5 118.5v253" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m128.5 265.25h83" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m213.5 96.5v169" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m201.5 71.5v88" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m211.5 44.5v9" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m128.5 159.25h71" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
+         <path d="m136.5 164.5v212" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
+         <path d="m147.25 58v212" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+         <path d="m162.25 48v317.5" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
+         <path d="m180.25 154.5v104" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
+         <path d="m129 376.23h6" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
+         <path d="m136.5 164.15h-8" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
+         <path d="m146.5 58.15h-18" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+         <path d="m161.5 48.208h-34" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
+         <path d="m180.5 154.1h-52" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
+         <path d="m180.5 260.2h-51" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
+         <path d="m161.5 366.2h-34" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
+         <path d="m146.5 270.25h-18" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
+         <text
+           transform="translate(94.5 265) scale(-1 1) translate(-94.5 -265)"
+           fill="#FBFBFB"
+           font-family="Arial-BoldItalicMT, Arial"
+           font-size="14"
+           font-style="italic"
+           font-weight="bold"
+         >
+           <tspan x="87.1137695" y="270">A-</tspan>
+           <tspan x="87.5" y="164">E-</tspan>
+           <tspan x="85.7431641" y="57">E+</tspan>
+           <tspan x="86.2431641" y="377">A+</tspan>
+         </text>
+       </g>`;
+    }
+  }
+
   render() {
-    const type = this.type;
     const { width, height } = this.dimension;
     return html`
       <style>
@@ -218,198 +415,7 @@ export class HX711Element extends LitElement {
               </text>
             </g>
           </g>
-
-          <!-- 50kg Load Sensor -->
-          <g
-            style="visibility: ${type === '50kg' || type === undefined ? '' : 'hidden'}"
-            transform="translate(448 212) scale(-1 1) translate(-131 -212)"
-          >
-            <path
-              d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
-              fill="#D8D8D8"
-              stroke="#979797"
-            />
-            <g transform="translate(18 17)" fill="#D8D8D8">
-              <path
-                d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
-              />
-              <rect x="61" y="24" width="13" height="24" />
-              <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
-            </g>
-            <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
-            <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
-            <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
-            <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
-            <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
-            <g transform="translate(0 106)">
-              <path
-                d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
-                fill="#D8D8D8"
-                stroke="#979797"
-              />
-              <g transform="translate(18 17)" fill="#D8D8D8">
-                <path
-                  d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
-                />
-                <rect x="61" y="24" width="13" height="24" />
-                <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
-              </g>
-              <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
-              <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
-              <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
-              <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
-              <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-              <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
-            </g>
-            <path
-              d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
-              fill="#D8D8D8"
-              stroke="#979797"
-            />
-            <g transform="translate(18 17)" fill="#D8D8D8">
-              <path
-                d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
-              />
-              <rect x="61" y="24" width="13" height="24" />
-              <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
-            </g>
-            <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
-            <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
-            <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
-            <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
-            <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
-            <g transform="translate(0 212)">
-              <path
-                d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
-                fill="#D8D8D8"
-                stroke="#979797"
-              />
-              <g transform="translate(18 17)" fill="#D8D8D8">
-                <path
-                  d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
-                />
-                <rect x="61" y="24" width="13" height="24" />
-                <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
-              </g>
-              <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
-              <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
-              <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
-              <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
-              <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-              <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
-            </g>
-            <g transform="translate(0 318)">
-              <path
-                d="m30 0.5c-16.292 0-29.5 13.208-29.5 29.5v46c0 16.292 13.208 29.5 29.5 29.5h46c16.292 0 29.5-13.208 29.5-29.5v-46c0-16.292-13.208-29.5-29.5-29.5h-46zm-3 9h40c9.1127 0 16.5 7.3873 16.5 16.5v54c0 9.1127-7.3873 16.5-16.5 16.5h-40c-9.1127 0-16.5-7.3873-16.5-16.5v-54c0-9.1127 7.3873-16.5 16.5-16.5z"
-                fill="#D8D8D8"
-                stroke="#979797"
-              />
-              <g transform="translate(18 17)" fill="#D8D8D8">
-                <path
-                  d="m63 48h-36c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36c0 7.1797-5.8203 13-13 13h-37c-7.1797 0-13-5.8203-13-13v-43c-8.7926e-16 -7.1797 5.8203-13 13-13h37c6.8432 0 12.451 5.2876 12.962 12h0.03789v1c0-0.33647-0.012783-0.66996-0.03789-1h-35.962c-2.7614 0-5 2.2386-5 5s2.2386 5 5 5h36v24z"
-                />
-                <rect x="61" y="24" width="13" height="24" />
-                <rect x="30.5" y=".5" width="32" height="72" rx="11" stroke="#979797" />
-              </g>
-              <circle cx="64.5" cy="53.5" r="7.5" fill="url(#b)" />
-              <ellipse cx="64.5" cy="25" rx="4.5" ry="4" fill="#737373" />
-              <ellipse cx="64.5" cy="82" rx="4.5" ry="4" fill="#737373" />
-              <path d="m106.5 48.25h21" stroke="#979797" stroke-linecap="square" stroke-width="3" />
-              <path d="m106.5 53.25h21" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-              <path d="m106.5 58.25h21" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
-            </g>
-            <path d="m128.5 53.5h82" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m201.5 68.5h60" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m211.5 44.5h50" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m213.5 94.5h48" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m225.5 118.5h36" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m128.5 371.25h94" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m225.5 118.5v253" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m128.5 265.25h83" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m213.5 96.5v169" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m201.5 71.5v88" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m211.5 44.5v9" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m128.5 159.25h71" stroke="#FF7F7F" stroke-linecap="square" stroke-width="3" />
-            <path d="m136.5 164.5v212" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
-            <path d="m147.25 58v212" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
-            <path d="m162.25 48v317.5" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
-            <path d="m180.25 154.5v104" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
-            <path d="m129 376.23h6" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
-            <path d="m136.5 164.15h-8" stroke="#D3D1D1" stroke-linecap="square" stroke-width="3" />
-            <path d="m146.5 58.15h-18" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
-            <path d="m161.5 48.208h-34" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
-            <path d="m180.5 154.1h-52" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
-            <path d="m180.5 260.2h-51" stroke="#999B7D" stroke-linecap="square" stroke-width="3" />
-            <path d="m161.5 366.2h-34" stroke="#8A8198" stroke-linecap="square" stroke-width="3" />
-            <path d="m146.5 270.25h-18" stroke="#EFEFEF" stroke-linecap="square" stroke-width="3" />
-            <text
-              transform="translate(94.5 265) scale(-1 1) translate(-94.5 -265)"
-              fill="#FBFBFB"
-              font-family="Arial-BoldItalicMT, Arial"
-              font-size="14"
-              font-style="italic"
-              font-weight="bold"
-            >
-              <tspan x="87.1137695" y="270">A-</tspan>
-              <tspan x="87.5" y="164">E-</tspan>
-              <tspan x="85.7431641" y="57">E+</tspan>
-              <tspan x="86.2431641" y="377">A+</tspan>
-            </text>
-          </g>
-
-          <!-- 5kg Load Sensor -->
-          <g
-            style="visibility: ${type === '5kg' ? '' : 'hidden'}"
-            transform="translate(413 133.5) scale(-1 1) translate(-94 -133.5)">
-            <path
-              d="m0.5 0.5v266h62v-266h-62zm31 123c-12.698 0-23-9.8445-23-22 0-12.155 10.302-22 23-22s23 9.8445 23 22c0 12.155-10.302 22-23 22zm0 57c-12.698 0-23-9.8445-23-22s10.302-22 23-22 23 9.8445 23 22-10.302 22-23 22z"
-              fill="#D8D8D8"
-              stroke="#979797"
-            />
-            <path d="m53.5 51.5l133-10" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
-            <path d="m54.5 57.5l131 8" stroke="#000" stroke-linecap="square" stroke-width="3" />
-            <path d="m55.5 64.5l130 27" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
-            <path d="m56.5 71.5l131 43" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
-            <rect x="3.5" y="43.5" width="57" height="33" rx="11" fill="url(#e)" stroke="#979797" />
-            <text
-              transform="translate(28.5 245) scale(-1 1) translate(-28.5 -245)"
-              fill="#FBFBFB"
-              font-family="Arial-ItalicMT, Arial"
-              font-size="14"
-              font-style="italic"
-            >
-              <tspan x="17.2138672" y="250">5kg</tspan>
-            </text>
-          </g>
-
-          <!-- Gauge Pressure Sensor -->
-          <g
-            style="visibility: ${type === 'gauge' ? '' : 'hidden'}"
-            transform="translate(412.5 99.5) scale(-1 1) translate(-94.5 -56.5)">
-            <path d="m53.5 56.5l135-56" stroke="#F01919" stroke-linecap="square" stroke-width="3" />
-            <path d="m54.5 56.5l133-33" stroke="#000" stroke-linecap="square" stroke-width="3" />
-            <path d="m52.5 56.5l133-7" stroke="#C8C8C8" stroke-linecap="square" stroke-width="3" />
-            <path d="m51.5 56.5l136 18" stroke="#24C22B" stroke-linecap="square" stroke-width="3" />
-            <path
-              d="m50.5 113c-14.636 0-26.5-25.296-26.5-56.5s11.864-56.5 26.5-56.5 26.5 25.296 26.5 56.5-11.864 56.5-26.5 56.5zm-1-88c3.5899 0 6.5-3.134 6.5-7s-2.9101-7-6.5-7-6.5 3.134-6.5 7 2.9101 7 6.5 7zm0 77c3.5899 0 6.5-3.134 6.5-7s-2.9101-7-6.5-7-6.5 3.134-6.5 7 2.9101 7 6.5 7z"
-              fill="#D8D8D8"
-              stroke="#979797"
-            />
-            <path d="m0 54.1l33-5.1v17l-33-5.1v-6.8z" fill="#D8D8D8" stroke="#979797" />
-            <circle cx="50" cy="57" r="20" fill="#D8D8D8" stroke="#979797" />
-            <text
-              transform="translate(50 56.5) scale(-1 1) translate(-50 -56.5)"
-              fill="#FBFBFB"
-              font-family="Arial-BoldItalicMT, Arial"
-              font-size="16"
-              font-style="italic"
-              font-weight="bold"
-            >
-              <tspan x="38.4414062" y="62">GP</tspan>
-            </text>
-          </g>
+          ${this.renderSensor()}
         </g>
       </svg>
     `;
