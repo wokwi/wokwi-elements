@@ -5,8 +5,6 @@ import { ElementPin, GND, VCC } from './pin';
 @customElement('wokwi-hx711')
 export class HX711Element extends LitElement {
   @property() type: '5kg' | '50kg' | 'gauge' | undefined;
-  @property() width = '58mm';
-  @property() height = '43mm';
 
   readonly pinInfo: ElementPin[] = [
     { name: 'VCC', y: 53, x: 7, number: 1, signals: [VCC()] },
@@ -15,10 +13,22 @@ export class HX711Element extends LitElement {
     { name: 'GND', y: 25.5, x: 7, number: 4, signals: [GND()] },
   ];
 
+  get dimension() {
+    switch (this.type) {
+      case '50kg':
+        return { width: '580', height: '430' };
+      case '5kg':
+        return { width: '507', height: '269' };
+      case 'gauge':
+        return { width: '509', height: '200' };
+      default:
+        return { width: '580', height: '430' };
+    }
+  }
+
   render() {
     const type = this.type;
-    const width = this.width;
-    const height = this.height;
+    const { width, height } = this.dimension;
     return html`
       <svg
         width="${+width / 10}mm"

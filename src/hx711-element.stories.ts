@@ -7,18 +7,10 @@ export default {
   argTypes: {
     angle: { control: { type: '50kg', width: 580, height: 430 } },
   },
-  args: {
-    angle: 0,
-    units: '',
-    value: '',
-  },
 };
 
 const Template = ({ type, width, height }) =>
   html`<wokwi-hx711 .type=${type} .width=${width} .height=${height}></wokwi-hx711>`;
-
-// export const Default = Template.bind({});
-// Default.args = { type: '50kg', width: 580, height: 430 };
 
 export const loadCell50kg = Template.bind({});
 loadCell50kg.args = { type: '50kg', width: 580, height: 430 };
