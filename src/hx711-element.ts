@@ -30,6 +30,11 @@ export class HX711Element extends LitElement {
     const type = this.type;
     const { width, height } = this.dimension;
     return html`
+      <style>
+        text {
+          user-select: none;
+        }
+      </style>
       <svg
         width="${+width / 10}mm"
         height="${+height / 10}mm"
