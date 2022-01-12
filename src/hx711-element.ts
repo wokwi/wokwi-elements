@@ -16,13 +16,13 @@ export class HX711Element extends LitElement {
   get dimension() {
     switch (this.type) {
       case '50kg':
-        return { width: '580', height: '430' };
+        return { width: 580, height: 430 };
       case '5kg':
-        return { width: '507', height: '269' };
+        return { width: 507, height: 269 };
       case 'gauge':
-        return { width: '509', height: '200' };
+        return { width: 509, height: 200 };
       default:
-        return { width: '580', height: '430' };
+        return { width: 580, height: 430 };
     }
   }
 
