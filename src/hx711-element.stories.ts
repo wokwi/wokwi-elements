@@ -4,9 +4,6 @@ import './hx711-element';
 export default {
   title: 'HX711',
   component: 'wokwi-hx711',
-  argTypes: {
-    angle: { control: { type: '50kg', width: 580, height: 430 } },
-  },
 };
 
 const Template = ({ type, width, height }) =>
