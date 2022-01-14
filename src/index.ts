@@ -49,3 +49,4 @@ export { MicrosdCardElement } from './microsd-card-element';
 export { DipSwitch8Element } from './dip-switch-8-element';
 export { StepperMotorElement } from './stepper-motor-element';
 export { HX711Element } from './hx711-element';
+export { PcFanElement } from './pc-fan-element';
