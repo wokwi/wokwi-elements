@@ -33,113 +33,22 @@ export class KS2EMDC5Element extends LitElement {
         viewBox="0 0 21 10"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect
-          x=".19797"
-          y=".19797"
-          width="20.604"
-          height="9.6041"
-          ry=".58463"
-          fill="#f7b93c"
-          stroke="#dda137"
-          stroke-linecap="square"
-          stroke-linejoin="round"
-          stroke-width=".39594"
-          style="paint-order:markers stroke fill"
-        />
-        <g fill="none" stroke="#dda137" stroke-linecap="square" stroke-linejoin="round">
-          <ellipse
-            cx="2"
-            cy="1.35"
-            rx=".76317"
-            ry=".76317"
-            stroke-width=".47366"
-            style="paint-order:markers stroke fill"
-          />
-          <g stroke-width=".47362">
-            <ellipse
-              cx="6.8244"
-              cy="1.35"
-              rx=".76319"
-              ry=".76319"
-              style="paint-order:markers stroke fill"
-            />
-            <ellipse
-              cx="11.649"
-              cy="1.35"
-              rx=".76319"
-              ry=".76319"
-              style="paint-order:markers stroke fill"
-            />
-            <ellipse
-              cx="19"
-              cy="1.35"
-              rx=".76319"
-              ry=".76319"
-              style="paint-order:markers stroke fill"
-            />
-          </g>
+        <g stroke-width=".4" fill="#f7b93c" stroke="#dda137">
+          <rect x=".20" y=".20" width="20.6" height="9.61" ry=".58" />
+          <rect x="20.2" y="4.5" width=".40" height="1" fill="#dda137" />
         </g>
-        <g
-          transform="translate(-1.1921e-7 7.3)"
-          fill="none"
-          stroke="#dda137"
-          stroke-linecap="square"
-          stroke-linejoin="round"
-        >
-          <ellipse
-            cx="2"
-            cy="1.35"
-            rx=".76317"
-            ry=".76317"
-            stroke-width=".47366"
-            style="paint-order:markers stroke fill"
-          />
-          <g stroke-width=".47362">
-            <ellipse
-              cx="6.8244"
-              cy="1.35"
-              rx=".76319"
-              ry=".76319"
-              style="paint-order:markers stroke fill"
-            />
-            <ellipse
-              cx="11.649"
-              cy="1.35"
-              rx=".76319"
-              ry=".76319"
-              style="paint-order:markers stroke fill"
-            />
-            <ellipse
-              cx="19"
-              cy="1.35"
-              rx=".76319"
-              ry=".76319"
-              style="paint-order:markers stroke fill"
-            />
-          </g>
+        <g fill="none" stroke="#dda137" stroke-width=".47">
+          <ellipse cx="2" cy="1.35" rx=".76" ry=".76" />
+          <ellipse cx="6.8244" cy="1.35" rx=".76" ry=".76" />
+          <ellipse cx="11.649" cy="1.35" rx=".76" ry=".76" />
+          <ellipse cx="19" cy="1.35" rx=".76" ry=".76" />
+          <ellipse cx="2" cy="8.65" rx=".76" ry=".76" />
+          <ellipse cx="6.8244" cy="8.65" rx=".76" ry=".76" />
+          <ellipse cx="11.649" cy="8.65" rx=".76" ry=".76" />
+          <ellipse cx="19" cy="8.65" rx=".76" ry=".76" />
         </g>
-        <rect
-          x="20.208"
-          y="4.4984"
-          width=".40327"
-          height="1.0033"
-          fill="#dda137"
-          stroke="#dda137"
-          stroke-linecap="square"
-          stroke-width=".39673"
-          style="paint-order:markers stroke fill"
-        />
-        <text
-          x="1.0733131"
-          y="6.0273261"
-          fill="#000000"
-          font-family="sans-serif"
-          font-size="2.8222px"
-          stroke-width=".26458"
-          style="line-height:1.25"
-          xml:space="preserve"
-        >
-          <tspan x="1.0733131" y="6.0273261">KS2E-M-DC5</tspan>
+        <text fill="#000" font-family="sans-serif" font-size="2.8222px">
+          <tspan x="1.07" y="6.03">KS2E-M-DC5</tspan>
         </text>
       </svg>
     `;
