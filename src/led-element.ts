@@ -9,6 +9,7 @@ const lightColors: { [key: string]: string } = {
   yellow: '#ffff80',
   orange: '#ffcf80',
   white: '#ffffff',
+  purple: '#ff80ff',
 };
 
 @customElement('wokwi-led')
@@ -55,7 +56,7 @@ export class LEDElement extends LitElement {
 
   render() {
     const { color, lightColor, flip } = this;
-    const lightColorActual = lightColor || lightColors[color?.toLowerCase()] || '#ff8080';
+    const lightColorActual = lightColor || lightColors[color?.toLowerCase()] || color;
     const opacity = this.brightness ? 0.3 + this.brightness * 0.7 : 0;
     const lightOn = this.value && this.brightness > Number.EPSILON;
     const xScale = flip ? -1 : 1;
