@@ -27,7 +27,7 @@ export class StepperMotorElement extends LitElement {
       >
         <defs>
           <linearGradient
-            id="linearGradient3777"
+            id="motor-body"
             x1="17.567"
             x2="197.27"
             y1="171.8"
@@ -36,7 +36,7 @@ export class StepperMotorElement extends LitElement {
             gradientUnits="userSpaceOnUse"
           >
             <stop stop-color="#666" offset="0" />
-            <stop stop-color="#666" stop-opacity="0" offset="1" />
+            <stop stop-color="#fff" offset="1" />
           </linearGradient>
           <linearGradient
             id="linearGradient5454"
@@ -59,8 +59,8 @@ export class StepperMotorElement extends LitElement {
             gradientUnits="userSpaceOnUse"
           >
             <stop stop-color="#9d9d9d" offset="0" />
-            <stop stop-color="#fdfafa" stop-opacity=".99216" offset=".29501" />
-            <stop stop-opacity=".98039" offset="1" />
+            <stop stop-color="#fdfafa" offset=".29501" />
+            <stop offset="1" />
           </linearGradient>
         </defs>
 
@@ -74,8 +74,7 @@ export class StepperMotorElement extends LitElement {
               height="55.731"
               rx="4.7308"
               ry="4.6584"
-              fill="url(#linearGradient3777)"
-              opacity=".62"
+              fill="url(#motor-body)"
               stroke="#000"
               stroke-width=".3245"
             />
@@ -89,7 +88,7 @@ export class StepperMotorElement extends LitElement {
               stroke-linejoin="round"
               stroke-width=".47984"
             />
-            <ellipse cx="65.704" cy="88.613" rx="1.0232" ry=".99314" fill="#e6e6e6" opacity=".73" />
+            <ellipse cx="65.704" cy="88.613" rx="1.0232" ry=".99314" fill="#e6e6e6" />
             <circle
               cx="66.278"
               cy="133.65"
@@ -99,7 +98,7 @@ export class StepperMotorElement extends LitElement {
               stroke-linejoin="round"
               stroke-width=".47984"
             />
-            <ellipse cx="66.25" cy="133.54" rx="1.0232" ry=".99314" fill="#e6e6e6" opacity=".73" />
+            <ellipse cx="66.25" cy="133.54" rx="1.0232" ry=".99314" fill="#e6e6e6" />
             <circle
               cx="19.6"
               cy="133.13"
@@ -109,8 +108,8 @@ export class StepperMotorElement extends LitElement {
               stroke-linejoin="round"
               stroke-width=".47984"
             />
-            <ellipse cx="19.572" cy="133.16" rx="1.0232" ry=".99314" fill="#ccc" opacity=".73" />
-            <ellipse cx="20.378" cy="88.702" rx="1.0232" ry=".99314" fill="#ccc" opacity=".73" />
+            <ellipse cx="19.572" cy="133.16" rx="1.0232" ry=".99314" fill="#ccc" />
+            <ellipse cx="20.378" cy="88.702" rx="1.0232" ry=".99314" fill="#ccc" />
 
             <!-- Rotator -->
             <circle
