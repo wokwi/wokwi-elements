@@ -5,6 +5,7 @@ import { ElementPin } from '.';
 @customElement('wokwi-stepper-motor')
 export class StepperMotorElement extends LitElement {
   @property() angle = 0;
+  @property() arrow = '';
   @property() value = '';
   @property() units = '';
 
@@ -16,6 +17,8 @@ export class StepperMotorElement extends LitElement {
   ];
 
   render() {
+    const { arrow } = this;
+
     return html`
       <svg
         width="57mm"
@@ -121,6 +124,11 @@ export class StepperMotorElement extends LitElement {
               opacity=".73"
               stroke="url(#linearGradient29501)"
               stroke-width=".41429"
+            />
+            <path
+              transform="rotate(${this.angle}, 43.82, 111.2)"
+              fill="${arrow || 'transparent'}"
+              d="M48.706051,111.66821H38.189949L43.448,83.34119Z"
             />
             <path
               transform="rotate(${this.angle}, 43.82, 111.2)"
