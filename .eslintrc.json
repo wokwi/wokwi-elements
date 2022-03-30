@@ -10,7 +10,7 @@
     "es6": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "extends": ["eslint:recommended", "plugin:storybook/recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/explicit-module-boundary-types": 0
