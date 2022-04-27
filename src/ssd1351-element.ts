@@ -1,3 +1,5 @@
+// Reference: https://www.jaycar.com.au/medias/sys_master/images/images/9665859715102/XC3726-duinotech-1-5in-128x128-oled-colour-display-modulegallery5-300.jpg
+
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin, i2c } from './pin';
@@ -21,13 +23,13 @@ export class Ssd1351Element extends LitElement {
   private ctx: CanvasContext = null;
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'GND', x: 103.5, y: 12, signals: [{ type: 'power', signal: 'GND' }] },
-    { name: 'VIN', x: 93.5, y: 12.5, signals: [{ type: 'power', signal: 'VCC' }] },
-    { name: 'SCL', x: 45.5, y: 12.5, signals: [i2c('SCL')] },
-    { name: 'SDA', x: 36.5, y: 12.5, signals: [i2c('SDA')] },
-    { name: 'RES', x: 54.5, y: 12.5, signals: [] },
-    { name: 'DC', x: 64.5, y: 12.5, signals: [] },
-    { name: 'CS', x: 74.5, y: 12.5, signals: [] },
+    { name: 'GND', x: 55.5, y: 13.5, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'VIN', x: 65.5, y: 13.5, signals: [{ type: 'power', signal: 'VCC' }] },
+    { name: 'SCL', x: 75.5, y: 13.5, signals: [i2c('SCL')] },
+    { name: 'SDA', x: 85.5, y: 13.5, signals: [i2c('SDA')] },
+    { name: 'RES', x: 95.5, y: 13.5, signals: [] },
+    { name: 'DC', x: 105.5, y: 13.5, signals: [] },
+    { name: 'CS', x: 115.5, y: 13.5, signals: [] },
   ];
 
   static get styles() {
@@ -38,7 +40,7 @@ export class Ssd1351Element extends LitElement {
 
       .container > canvas {
         position: absolute;
-        left: 21px;
+        left: 19px;
         top: 21px;
       }
 
@@ -88,29 +90,23 @@ export class Ssd1351Element extends LitElement {
           fill="#025CAF"
           x=".5"
           y=".5"
-          width="${width}"
-          height="${height}"
+          width="${width - 5}"
+          height="${height - 5}"
           rx="13"
         />
 
         <g transform="translate(6 6)" fill="#59340A" stroke="#BE9B72" stroke-width="0.6px">
-          <circle cx="150" cy="6" r="5.5" />
+          <circle cx="${width - 21.5}" cy="6" r="5.5" />
           <circle cx="6" cy="6" r="5.5" />
-          <circle cx="150" cy="148" r="5.5" />
-          <circle cx="6" cy="148" r="5.5" />
+          <circle cx="${width - 21.5}" cy="${height - 21.5}" r="5.5" />
+          <circle cx="6" cy="${height - 21.5}" r="5.5" />
         </g>
 
         <!-- 128 x 128 screen -->
-        <rect
-          x="${width / 2 - screenWidth / 2}"
-          y="${height / 2 - screenHeight / 2}"
-          fill="#1A1A1A"
-          width="${screenWidth}"
-          height="${screenHeight}"
-        />
+        <rect x="19" y="21" fill="#1A1A1A" width="${screenWidth}" height="${screenHeight}" />
 
         <!-- All texts -->
-        <g transform="translate(${width / 2 - (this.pinInfo.length * 10) / 2 + 1} 8)">
+        <g transform="translate(46.5 8)">
           <text
             fill="#FFF"
             text-anchor="middle"
@@ -124,32 +120,19 @@ export class Ssd1351Element extends LitElement {
             <tspan x="40" y="0">SDA</tspan>
             <tspan x="50" y="0">RES</tspan>
             <tspan x="60" y="0">DC</tspan>
-            <tspan x="70" y="0">CS</tspan>
+            <tspan x="69" y="0">CS</tspan>
           </text>
         </g>
 
-        <!-- Star -->
-        <g transform="translate(40,6)">
-          <path
-            fill="#FFF"
-            d="M0 0l-1.59 2.974-3.453.464 2.495 2.245-.6 3.229 3.148-1.528 3.148 1.528-.6-3.23 2.495-2.244-3.453-.464-1.59-2.974z"
-            stroke="#FF"
-          />
-        </g>
-
         <!-- PINS -->
-        <g
-          transform="translate(${width / 2 - (this.pinInfo.length * 10) / 2} 9)"
-          fill="#9D9D9A"
-          stroke-width="0.4"
-        >
-          <circle stroke="#262626" cx="70.5" cy="3.5" r="3.5" />
-          <circle stroke="#007ADB" cx="60.5" cy="3.5" r="3.5" />
-          <circle stroke="#9D5B96" cx="50.5" cy="3.5" r="3.5" />
-          <circle stroke="#009E9B" cx="40.5" cy="3.5" r="3.5" />
-          <circle stroke="#E8D977" cx="30.5" cy="3.5" r="3.5" />
-          <circle stroke="#C08540" cx="20.5" cy="3.5" r="3.5" />
-          <circle stroke="#B4AEAB" cx="10.5" cy="3.5" r="3.5" />
+        <g transform="translate(45 13.5)" fill="#9D9D9A" stroke-width="0.4">
+          <circle stroke="#262626" cx="70.5" cy="0" r="3.5" />
+          <circle stroke="#007ADB" cx="60.5" cy="0" r="3.5" />
+          <circle stroke="#9D5B96" cx="50.5" cy="0" r="3.5" />
+          <circle stroke="#009E9B" cx="40.5" cy="0" r="3.5" />
+          <circle stroke="#E8D977" cx="30.5" cy="0" r="3.5" />
+          <circle stroke="#C08540" cx="20.5" cy="0" r="3.5" />
+          <circle stroke="#B4AEAB" cx="10.5" cy="0" r="3.5" />
         </g>
       </svg>
       <canvas width="${screenWidth}" height="${screenHeight}" class="pixelated"> </canvas>
