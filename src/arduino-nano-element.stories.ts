@@ -16,7 +16,7 @@ storiesOf('Arduino Nano', module)
         .ledRX=${boolean('RX LED', false)}
         .ledPower=${boolean('Power LED', true)}
         @button-press=${action('button-press')}
-        @button-release=${action('button-press')}
+        @button-release=${action('button-release')}
       ></wokwi-arduino-nano>
     `
   );
