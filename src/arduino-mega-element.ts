@@ -1,7 +1,8 @@
 import { css, html, LitElement, svg } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { pinsFemalePattern } from './patterns/pins-female';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
+import { SPACE_KEYS } from './utils/keys';
 
 @customElement('wokwi-arduino-mega')
 export class ArduinoMegaElement extends LitElement {
@@ -9,6 +10,8 @@ export class ArduinoMegaElement extends LitElement {
   @property() ledRX = false;
   @property() ledTX = false;
   @property() ledPower = false;
+  @property() resetPressed = false;
+  @query('#reset-button') resetButton!: SVGCircleElement;
 
   readonly pinInfo: ElementPin[] = [
     { name: 'SCL', x: 90, y: 9, signals: [i2c('SCL')] },
@@ -106,6 +109,11 @@ export class ArduinoMegaElement extends LitElement {
         font-size: 2px;
         font-family: monospace;
       }
+      circle[tabindex]:hover,
+      circle[tabindex]:focus {
+        stroke: white;
+        outline: none;
+      }
     `;
   }
 
@@ -142,6 +150,41 @@ export class ArduinoMegaElement extends LitElement {
         <path
           d="M2.105.075v50.653h94.068v-1.206l2.412-2.412V14.548l-2.412-2.413V2.487L93.785.075zm14.443.907a1.505 1.505 0 01.03 0 1.505 1.505 0 011.504 1.505 1.505 1.505 0 01-1.504 1.506 1.505 1.505 0 01-1.506-1.506A1.505 1.505 0 0116.548.982zm71.154 0a1.505 1.505 0 01.03 0 1.505 1.505 0 011.505 1.505 1.505 1.505 0 01-1.505 1.506 1.505 1.505 0 01-1.506-1.506A1.505 1.505 0 0187.702.982zM64.818 15.454a1.505 1.505 0 011.504 1.506 1.505 1.505 0 01-1.504 1.505 1.505 1.505 0 01-1.506-1.505 1.505 1.505 0 011.506-1.506zm0 26.532a1.505 1.505 0 011.504 1.506 1.505 1.505 0 01-1.504 1.505 1.505 1.505 0 01-1.506-1.505 1.505 1.505 0 011.506-1.506zm-49.476 4.825a1.505 1.505 0 01.03 0 1.505 1.505 0 011.505 1.504 1.505 1.505 0 01-1.506 1.506 1.505 1.505 0 01-1.505-1.506 1.505 1.505 0 011.476-1.504zm78.39 0a1.505 1.505 0 01.03 0 1.505 1.505 0 011.504 1.504 1.505 1.505 0 01-1.504 1.506 1.505 1.505 0 01-1.506-1.506 1.505 1.505 0 011.476-1.504z"
           fill="#2b6b99"
+        />
+
+        <!-- reset button -->
+        <rect
+          transform="rotate(269.81)"
+          x="-28.046"
+          y="68.977"
+          width="6.2151"
+          height="6.0268"
+          fill="#9b9b9b"
+        />
+        <g fill="#e6e6e6">
+          <rect transform="rotate(269.81)" x="-29.725" y="69.518" width="1.695" height=".84994" />
+          <rect transform="rotate(269.81)" x="-29.741" y="71.4" width="1.695" height=".84994" />
+          <rect transform="rotate(269.81)" x="-29.764" y="73.425" width="1.695" height=".84994" />
+          <rect transform="rotate(269.81)" x="-21.831" y="73.59" width="1.695" height=".84994" />
+          <rect transform="rotate(269.81)" x="-21.854" y="69.517" width="1.695" height=".84994" />
+        </g>
+        <circle
+          id="reset-button"
+          transform="rotate(269.81)"
+          cx="-24.9"
+          cy="72.092"
+          r="1.5405"
+          fill="#960000"
+          stroke="#777"
+          stroke-width="0.15"
+          tabindex="0"
+          @mousedown=${() => this.down()}
+          @touchstart=${() => this.down()}
+          @mouseup=${() => this.up()}
+          @mouseleave=${() => this.leave()}
+          @touchend=${() => this.leave()}
+          @keydown=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.down()}
+          @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.up()}
         />
 
         <!-- USB Connector -->
@@ -340,5 +383,35 @@ export class ArduinoMegaElement extends LitElement {
         </text>
       </svg>
     `;
+  }
+  private down() {
+    if (this.resetPressed) {
+      return;
+    }
+    this.resetPressed = true;
+    this.resetButton.style.stroke = '#333';
+    this.dispatchEvent(
+      new CustomEvent('button-press', {
+        detail: 'reset',
+      })
+    );
+  }
+
+  private up() {
+    if (!this.resetPressed) {
+      return;
+    }
+    this.resetPressed = false;
+    this.resetButton.style.stroke = '';
+    this.dispatchEvent(
+      new CustomEvent('button-release', {
+        detail: 'reset',
+      })
+    );
+  }
+
+  private leave() {
+    this.resetButton.blur();
+    this.up();
   }
 }

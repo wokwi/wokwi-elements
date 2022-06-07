@@ -1,7 +1,8 @@
 import { css, html, LitElement, svg } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { pinsFemalePattern } from './patterns/pins-female';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
+import { SPACE_KEYS } from './utils/keys';
 
 @customElement('wokwi-arduino-uno')
 export class ArduinoUnoElement extends LitElement {
@@ -9,6 +10,8 @@ export class ArduinoUnoElement extends LitElement {
   @property() ledRX = false;
   @property() ledTX = false;
   @property() ledPower = false;
+  @property() resetPressed = false;
+  @query('#reset-button') resetButton!: SVGCircleElement;
 
   readonly pinInfo: ElementPin[] = [
     { name: 'A5.2', x: 87, y: 9, signals: [analog(5), i2c('SCL')] },
@@ -50,6 +53,12 @@ export class ArduinoUnoElement extends LitElement {
         font-size: 2px;
         font-family: monospace;
         user-select: none;
+      }
+
+      circle[tabindex]:hover,
+      circle[tabindex]:focus {
+        stroke: white;
+        outline: none;
       }
     `;
   }
@@ -94,6 +103,33 @@ export class ArduinoUnoElement extends LitElement {
         <path
           d="m0.999 0a1 1 0 0 0-0.999 0.999v51.34a1 1 0 0 0 0.999 0.999h64.04a1 1 0 0 0 0.999-0.999v-1.54l2.539-2.539v-32.766l-2.539-2.539v-11.43l-1.524-1.523zm14.078 0.835h0.325l0.212 0.041h0l0.105 0.021 0.300 0.124 0.270 0.180 0.229 0.229 0.180 0.270 0.017 0.042 0.097 0.234 0.01 0.023 0.050 0.252 0.013 0.066v0.325l-0.063 0.318-0.040 0.097-0.083 0.202-0 0.001-0.180 0.270-0.229 0.229-0.270 0.180-0.300 0.124-0.106 0.020-0.212 0.042h-0.325l-0.212-0.042-0.106-0.020-0.300-0.124-0.270-0.180-0.229-0.229-0.180-0.270-0 -0.001-0.083-0.202-0.040-0.097-0.063-0.318v-0.325l0.013-0.066 0.050-0.252 0.01-0.023 0.097-0.234 0.017-0.042 0.180-0.270 0.229-0.229 0.270-0.180 0.300-0.124 0.105-0.021zm50.799 15.239h0.325l0.212 0.042 0.105 0.021 0.300 0.124 0.270 0.180 0.229 0.229 0.180 0.270 0.014 0.035 0.110 0.264 0.01 0.051 0.053 0.267v0.325l-0.03 0.152-0.033 0.166-0.037 0.089-0.079 0.191-0 0.020-0.180 0.270-0.229 0.229-0.270 0.180-0.071 0.029-0.228 0.094-0.106 0.021-0.212 0.042h-0.325l-0.212-0.042-0.106-0.021-0.228-0.094-0.071-0.029-0.270-0.180-0.229-0.229-0.180-0.270-0 -0.020-0.079-0.191-0.036-0.089-0.033-0.166-0.030-0.152v-0.325l0.053-0.267 0.010-0.051 0.109-0.264 0.014-0.035 0.180-0.270 0.229-0.229 0.270-0.180 0.300-0.124 0.105-0.021zm0 27.94h0.325l0.180 0.036 0.138 0.027 0.212 0.087 0.058 0.024 0.029 0.012 0.270 0.180 0.229 0.229 0.180 0.270 0.124 0.300 0.063 0.319v0.325l-0.063 0.318-0.124 0.300-0.180 0.270-0.229 0.229-0.270 0.180-0.300 0.124-0.106 0.021-0.212 0.042h-0.325l-0.212-0.042-0.105-0.021-0.300-0.124-0.270-0.180-0.229-0.229-0.180-0.270-0.124-0.300-0.063-0.318v-0.325l0.063-0.319 0.124-0.300 0.180-0.270 0.229-0.229 0.270-0.180 0.029-0.012 0.058-0.024 0.212-0.087 0.137-0.027zm-52.07 5.080h0.325l0.212 0.041 0.106 0.021 0.300 0.124 0.270 0.180 0.229 0.229 0.121 0.182 0.058 0.087h0l0.114 0.275 0.01 0.023 0.063 0.318v0.325l-0.035 0.179-0.027 0.139-0.01 0.023-0.114 0.275h-0l-0.180 0.270-0.229 0.229-0.270 0.180-0.300 0.124-0.106 0.020-0.212 0.042h-0.325l-0.212-0.042-0.105-0.020-0.300-0.124-0.270-0.180-0.229-0.229-0.180-0.270-0.114-0.275-0.01-0.023-0.027-0.139-0.036-0.179v-0.325l0.063-0.318 0.01-0.023 0.114-0.275 0.058-0.087 0.121-0.182 0.229-0.229 0.270-0.180 0.300-0.124 0.105-0.021z"
           fill="#2b6b99"
+        />
+
+        <!-- reset button -->
+        <rect x="3.816" y="1.4125" width="6.2151" height="6.0268" fill="#9b9b9b" />
+        <g fill="#e6e6e6">
+          <rect x="2.1368" y="1.954" width="1.695" height=".84994" />
+          <rect x="2.121" y="3.8362" width="1.695" height=".84994" />
+          <rect x="2.0974" y="5.8608" width="1.695" height=".84994" />
+          <rect x="10.031" y="6.0256" width="1.695" height=".84994" />
+          <rect x="10.008" y="1.9528" width="1.695" height=".84994" />
+        </g>
+        <circle
+          id="reset-button"
+          cx="6.9619"
+          cy="4.5279"
+          r="1.5405"
+          fill="#960000"
+          stroke="#777"
+          stroke-width="0.15"
+          tabindex="0"
+          @mousedown=${() => this.down()}
+          @touchstart=${() => this.down()}
+          @mouseup=${() => this.up()}
+          @mouseleave=${() => this.leave()}
+          @touchend=${() => this.leave()}
+          @keydown=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.down()}
+          @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.up()}
         />
 
         <!-- USB Connector -->
@@ -313,5 +349,35 @@ export class ArduinoUnoElement extends LitElement {
         <text x="46.5" y="16" style="font-size:5px; line-height:1.25" fill="#fff">UNO</text>
       </svg>
     `;
+  }
+  private down() {
+    if (this.resetPressed) {
+      return;
+    }
+    this.resetPressed = true;
+    this.resetButton.style.stroke = '#333';
+    this.dispatchEvent(
+      new CustomEvent('button-press', {
+        detail: 'reset',
+      })
+    );
+  }
+
+  private up() {
+    if (!this.resetPressed) {
+      return;
+    }
+    this.resetPressed = false;
+    this.resetButton.style.stroke = '';
+    this.dispatchEvent(
+      new CustomEvent('button-release', {
+        detail: 'reset',
+      })
+    );
+  }
+
+  private leave() {
+    this.resetButton.blur();
+    this.up();
   }
 }
