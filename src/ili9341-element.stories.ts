@@ -5,6 +5,14 @@ import './ili9341-element';
 export default {
   title: 'ILI9341',
   component: 'wokwi-ili9341',
+  argTypes: {
+    flipHorizontal: { control: { type: 'boolean' } },
+    flipVertical: { control: { type: 'boolean' } },
+  },
+  args: {
+    flipHorizontal: false,
+    flipVertical: false,
+  },
 };
 
 function drawLogo(canvas: HTMLCanvasElement) {
@@ -21,5 +29,11 @@ function drawLogo(canvas: HTMLCanvasElement) {
 
 export const Default = () => html` <wokwi-ili9341></wokwi-ili9341> `;
 
-export const Logo = () =>
-  html` <wokwi-ili9341 @canvas-ready=${(e) => drawLogo(e.target.canvas)}></wokwi-ili9341> `;
+export const Logo = ({ flipHorizontal, flipVertical }) =>
+  html`
+    <wokwi-ili9341
+      @canvas-ready=${(e) => drawLogo(e.target.canvas)}
+      .flipHorizontal=${flipHorizontal}
+      .flipVertical=${flipVertical}
+    ></wokwi-ili9341>
+  `;

@@ -1,11 +1,14 @@
 import { css, html, LitElement } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { ElementPin, spi } from './pin';
 
 @customElement('wokwi-ili9341')
 export class ILI9341Element extends LitElement {
   readonly screenWidth = 240;
   readonly screenHeight = 320;
+
+  @property() flipHorizontal = false;
+  @property() flipVertical = false;
 
   readonly pinInfo: ElementPin[] = [
     { name: 'VCC', x: 48.3, y: 287.2, signals: [{ type: 'power', signal: 'VCC' }] },
@@ -49,7 +52,11 @@ export class ILI9341Element extends LitElement {
   }
 
   render() {
-    const { screenWidth, screenHeight } = this;
+    const { screenWidth, screenHeight, flipHorizontal, flipVertical } = this;
+    const flip = flipHorizontal || flipVertical;
+    const scaleX = flipHorizontal ? -1 : 1;
+    const scaleY = flipVertical ? -1 : 1;
+    const canvasStyle = flip ? `transform: scaleX(${scaleX}) scaleY(${scaleY});` : '';
     return html`
       <div class="container">
         <svg
@@ -112,7 +119,12 @@ export class ILI9341Element extends LitElement {
             <tspan x="14.2" y="4.3" font-size="4.6px">ILI9341</tspan>
           </text>
         </svg>
-        <canvas width="${screenWidth}" height="${screenHeight}" class="pixelated"></canvas>
+        <canvas
+          width="${screenWidth}"
+          height="${screenHeight}"
+          class="pixelated"
+          style=${canvasStyle}
+        ></canvas>
       </div>
     `;
   }
