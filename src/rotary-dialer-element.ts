@@ -2,16 +2,24 @@ import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import { ElementPin, GND } from './pin';
 
 type InitialValue = '';
 type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 @customElement('wokwi-rotary-dialer')
 export class RotaryDialerElement extends LitElement {
+  readonly pinInfo: ElementPin[] = [
+    { name: 'GND', x: 122, y: 286, signals: [GND()] },
+    { name: 'DIAL', x: 131.6, y: 286, signals: [] },
+    { name: 'PULSE', x: 141.2, y: 286, signals: [] },
+  ];
+
   private digit: Digit | InitialValue = '';
   private stylesMapping = {};
   private classes: Record<string, boolean> = { 'rotate-path': true };
   private degrees = [320, 56, 87, 115, 143, 173, 204, 232, 260, 290];
+
   static get styles() {
     return css`
       .text {
@@ -30,7 +38,7 @@ export class RotaryDialerElement extends LitElement {
         margin: -1px;
       }
       .rotate-path {
-        transform-origin: center;
+        transform-origin: 133px 133px;
         transition: transform 1000ms ease-in;
       }
       .dialer-anim {
@@ -87,7 +95,19 @@ export class RotaryDialerElement extends LitElement {
         value="${this.digit}"
         @input="${this.onValueChange}"
       />
-      <svg width="266" height="266" @click="${this.focusInput}" xmlns="http://www.w3.org/2000/svg">
+      <svg width="266" height="286" @click="${this.focusInput}" xmlns="http://www.w3.org/2000/svg">
+        <!-- Pins -->
+        <g fill="#9f9f9f" stroke-width=".987">
+          <path
+            d="m123.4 266c0-0.377-0.149-0.739-0.416-1.01-0.268-0.267-0.629-0.417-1.01-0.417-0.377 0-0.739 0.15-1.01 0.417s-0.417 0.629-0.417 1.01v25.8c0 0.231 0.188 0.419 0.418 0.419h2.01c0.231 0 0.418-0.188 0.418-0.419v-25.8z"
+          />
+          <path
+            d="m133 266c0-0.377-0.149-0.739-0.416-1.01-0.268-0.267-0.629-0.417-1.01-0.417-0.377 0-0.739 0.15-1.01 0.417s-0.417 0.629-0.417 1.01v25.8c0 0.231 0.188 0.419 0.418 0.419h2.01c0.231 0 0.418-0.188 0.418-0.419v-25.8z"
+          />
+          <path
+            d="m142.6 266c0-0.377-0.15-0.739-0.417-1.01s-0.629-0.417-1.01-0.417c-0.377 0-0.739 0.15-1.01 0.417s-0.417 0.629-0.417 1.01v25.8c0 0.231 0.188 0.419 0.419 0.419h2.01c0.231 0 0.419-0.188 0.419-0.419v-25.8z"
+          />
+        </g>
         <g transform="translate(1 1)">
           <circle stroke="#979797" stroke-width="3" fill="#1F1F1F" cx="133" cy="133" r="131" />
           <circle stroke="#fff" stroke-width="2" fill="#D8D8D8" cx="133" cy="133" r="72" />
