@@ -55,6 +55,15 @@ storiesOf('7 Segment', module)
       ></wokwi-7segment>`
   )
   .add(
+    '3 white digits',
+    () =>
+      html`<wokwi-7segment
+        color="white"
+        digits="3"
+        values="[0,1,1,0,0,1,1,1,0,1,1,0,0,1,1,0,0,1,1,0]"
+      ></wokwi-7segment>`
+  )
+  .add(
     'Clock mode',
     () =>
       html`<wokwi-7segment

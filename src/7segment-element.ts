@@ -69,21 +69,21 @@ export class SevenSegmentElement extends LitElement {
           { name: 'CLN', ...pinXY(8), signals: [], description: 'Colon' },
         ];
 
-        case 3:
-          // Pinout based on SP420281N model
-          return [
-            { name: 'A', ...pinXY(11), signals: [], description: 'Segment A' },
-            { name: 'B', ...pinXY(7), signals: [], description: 'Segment B' },
-            { name: 'C', ...pinXY(4), signals: [], description: 'Segment C' },
-            { name: 'D', ...pinXY(2), signals: [], description: 'Segment D' },
-            { name: 'E', ...pinXY(1), signals: [], description: 'Segment E' },
-            { name: 'F', ...pinXY(10), signals: [], description: 'Segment F' },
-            { name: 'G', ...pinXY(5), signals: [], description: 'Segment G' },
-            { name: 'DP', ...pinXY(3), signals: [], description: 'Decimal Point' },
-            { name: 'DIG1', ...pinXY(12), signals: [], description: 'Digit 1 Common' },
-            { name: 'DIG2', ...pinXY(9), signals: [], description: 'Digit 2 Common' },
-            { name: 'DIG3', ...pinXY(8), signals: [], description: 'Digit 3 Common' },
-          ];
+      case 3:
+        // Pinout based on SP420281N model
+        return [
+          { name: 'A', ...pinXY(11), signals: [], description: 'Segment A' },
+          { name: 'B', ...pinXY(7), signals: [], description: 'Segment B' },
+          { name: 'C', ...pinXY(4), signals: [], description: 'Segment C' },
+          { name: 'D', ...pinXY(2), signals: [], description: 'Segment D' },
+          { name: 'E', ...pinXY(1), signals: [], description: 'Segment E' },
+          { name: 'F', ...pinXY(10), signals: [], description: 'Segment F' },
+          { name: 'G', ...pinXY(5), signals: [], description: 'Segment G' },
+          { name: 'DP', ...pinXY(3), signals: [], description: 'Decimal Point' },
+          { name: 'DIG1', ...pinXY(12), signals: [], description: 'Digit 1 Common' },
+          { name: 'DIG2', ...pinXY(9), signals: [], description: 'Digit 2 Common' },
+          { name: 'DIG3', ...pinXY(8), signals: [], description: 'Digit 3 Common' },
+        ];
 
       case 2:
         // Pinout based on CL5621C model
@@ -130,7 +130,7 @@ export class SevenSegmentElement extends LitElement {
 
   private get pinPositions() {
     const { digits } = this;
-    const numPins = digits === 4 ? 14 : 10;
+    const numPins = digits === 4 ? 14 : digits === 3 ? 12 : 10;
     const cols = Math.ceil(numPins / 2);
     return {
       startX: (12.55 * digits - cols * 2.54) / 2,
