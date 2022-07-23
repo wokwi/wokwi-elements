@@ -13,8 +13,8 @@ interface Point {
     functions are taken from https://github.com/vitaliy-bobrov/js-rocks knob component */
 @customElement('wokwi-potentiometer')
 export class PotentiometerElement extends LitElement {
-  @property() min = 0;
-  @property() max = 100;
+  @property({ type: Number }) min = 0;
+  @property({ type: Number }) max = 100;
   @property() value = 0;
   @property() step = 1;
   @property() startDegree = -135;
@@ -209,7 +209,7 @@ export class PotentiometerElement extends LitElement {
     const y = this.center.y - pageY;
     let deg = Math.round((Math.atan2(y, x) * 180) / Math.PI);
 
-    if (deg < 0) {
+    if (deg <= 0) {
       deg += 360;
     }
 
