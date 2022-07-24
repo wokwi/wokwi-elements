@@ -4,23 +4,24 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { analog, ElementPin } from './pin';
 import { clamp } from './utils/clamp';
 
-interface Point {
-  x: number;
-  y: number;
-}
+const knobCenter = {
+  x: 9.91,
+  y: 8.18,
+};
 
 /** The potentiometer SVG is taken from https://freesvg.org/potentiometer and some of the
     functions are taken from https://github.com/vitaliy-bobrov/js-rocks knob component */
 @customElement('wokwi-potentiometer')
 export class PotentiometerElement extends LitElement {
   @property({ type: Number }) min = 0;
-  @property({ type: Number }) max = 100;
+  @property({ type: Number }) max = 1023;
   @property() value = 0;
   @property() step = 1;
   @property() startDegree = -135;
   @property() endDegree = 135;
-  private center: Point = { x: 0, y: 0 };
+
   private pressed = false;
+  private pageToKnobMatrix: SVGMatrix | null = null;
 
   readonly pinInfo: ElementPin[] = [
     { name: 'GND', x: 29, y: 68.5, number: 1, signals: [{ type: 'power', signal: 'GND' }] },
@@ -117,8 +118,8 @@ export class PotentiometerElement extends LitElement {
         <rect x="5.4" y=".70" width="9.1" height="1.9" fill="#ccdae3" stroke-width=".15" />
         <ellipse
           id="knob"
-          cx="9.91"
-          cy="8.18"
+          cx=${knobCenter.x}
+          cy=${knobCenter.y}
           rx="7.27"
           ry="7.43"
           fill="#e4e8eb"
@@ -169,7 +170,11 @@ export class PotentiometerElement extends LitElement {
   private down(event: MouseEvent) {
     if (event.button === 0 || window.navigator.maxTouchPoints) {
       this.pressed = true;
-      this.updatePotentiometerPosition(event);
+
+      event.stopPropagation();
+      event.preventDefault();
+
+      this.updateKnobMatrix();
     }
   }
 
@@ -184,38 +189,33 @@ export class PotentiometerElement extends LitElement {
     this.pressed = false;
   }
 
-  private updatePotentiometerPosition(event: MouseEvent | TouchEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-
-    const potentiometerRect = this.shadowRoot?.querySelector('#knob')?.getBoundingClientRect();
-
-    if (potentiometerRect) {
-      this.center = {
-        x: window.scrollX + potentiometerRect.left + potentiometerRect.width / 2,
-        y: window.scrollY + potentiometerRect.top + potentiometerRect.height / 2,
-      };
-    }
+  private updateKnobMatrix() {
+    const knob = this.shadowRoot?.querySelector<SVGRectElement>('#knob');
+    this.pageToKnobMatrix = knob?.getScreenCTM()?.inverse() ?? null;
   }
 
   private rotateHandler(event: MouseEvent | TouchEvent) {
     event.stopPropagation();
     event.preventDefault();
 
+    if (!this.pageToKnobMatrix) {
+      return;
+    }
+
     const isTouch = event.type === 'touchmove';
     const pageX = isTouch ? (event as TouchEvent).touches[0].pageX : (event as MouseEvent).pageX;
     const pageY = isTouch ? (event as TouchEvent).touches[0].pageY : (event as MouseEvent).pageY;
-    const x = this.center.x - pageX;
-    const y = this.center.y - pageY;
+    const localPosition = new DOMPointReadOnly(pageX, pageY).matrixTransform(this.pageToKnobMatrix);
+    const x = knobCenter.x - localPosition.x;
+    const y = knobCenter.y - localPosition.y;
     let deg = Math.round((Math.atan2(y, x) * 180) / Math.PI);
-
-    if (deg <= 0) {
+    if (deg < 0) {
       deg += 360;
     }
 
     deg -= 90;
 
-    if (x > 0 && y <= 0) {
+    if (x > 0 && y <= 0 && deg > 0) {
       deg -= 360;
     }
 
