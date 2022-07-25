@@ -7,8 +7,8 @@ export default {
   component: 'wokwi-potentiometer',
 };
 
-const Template = ({ degrees = 0, zoom = 1 }) => html`
-  <span style="transform: rotate(${degrees}deg); zoom: ${zoom}; display: inline-block;">
+const Template = ({ transform = '' }) => html`
+  <span style="transform: ${transform}; display: inline-block;">
     <wokwi-potentiometer @input=${action('input')} />
   </span>
 `;
@@ -17,7 +17,7 @@ export const Default = Template.bind({});
 Default.args = {};
 
 export const Rotated = Template.bind({});
-Rotated.args = { ...Default.args, degrees: 90 };
+Rotated.args = { ...Default.args, transform: 'rotate(90deg)' };
 
 export const Zoomed = Template.bind({});
-Zoomed.args = { ...Default.args, zoom: 1.5 };
+Zoomed.args = { ...Default.args, transform: 'translate(25px, 25px) scale(1.5)' };

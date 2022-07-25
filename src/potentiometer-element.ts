@@ -3,6 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { analog, ElementPin } from './pin';
 import { clamp } from './utils/clamp';
+import { calculateBoundingRect } from './utils/geometry';
 
 const knobCenter = {
   x: 9.91,
@@ -152,6 +153,7 @@ export class PotentiometerElement extends LitElement {
         </g>
         <ellipse cx="9.95" cy="8.06" rx="6.60" ry="6.58" fill="#c3c2c3" stroke-width=".15" />
         <rect id="rotating" x="10" y="2" width=".42" height="3.1" stroke-width=".15" />
+        <rect x="0" y="9.5" width="1" height="1" fill="none" id="firefox-workaround" />
       </svg>
     `;
   }
@@ -192,6 +194,39 @@ export class PotentiometerElement extends LitElement {
   private updateKnobMatrix() {
     const knob = this.shadowRoot?.querySelector<SVGRectElement>('#knob');
     this.pageToKnobMatrix = knob?.getScreenCTM()?.inverse() ?? null;
+
+    if (navigator.userAgent.indexOf('Firefox') >= 0) {
+      // Firefox's getScreenCTM() is broken: https://bugzilla.mozilla.org/show_bug.cgi?id=1610093
+      const firefoxWorkaround =
+        this.shadowRoot?.querySelector<SVGRectElement>('#firefox-workaround');
+      const boundingRect = firefoxWorkaround?.getBoundingClientRect();
+      const svgRect = firefoxWorkaround?.ownerSVGElement?.getBoundingClientRect();
+      if (!boundingRect || !svgRect) {
+        return;
+      }
+
+      const cx = svgRect.x + svgRect.width / 2;
+      const cy = svgRect.y + svgRect.height / 2;
+      const deltaX = cx - (boundingRect.x + boundingRect.width / 2);
+      const deltaY = cy - (boundingRect.y + boundingRect.height / 2);
+      const angle = (Math.atan2(deltaY, deltaX) / Math.PI) * 180;
+      const rotation = new DOMMatrix().rotate(angle);
+      const rotatedRect = calculateBoundingRect(new DOMRect(0, 9.5, 1, 1), rotation);
+      const sx = rotatedRect.width / boundingRect.width;
+      const sy = rotatedRect.height / boundingRect.height;
+      this.pageToKnobMatrix = rotation
+        .inverse()
+        .multiply(
+          new DOMMatrix([
+            sx,
+            0,
+            0,
+            sy,
+            rotatedRect.left - boundingRect.left * sx,
+            rotatedRect.top - boundingRect.top * sy,
+          ])
+        );
+    }
   }
 
   private rotateHandler(event: MouseEvent | TouchEvent) {
