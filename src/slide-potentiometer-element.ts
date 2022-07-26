@@ -1,7 +1,8 @@
-import { html, LitElement, css } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { analog, ElementPin } from './pin';
 import { clamp } from './utils/clamp';
+import { getScreenCTM } from './utils/ctm-workaround';
 import { mmToPix } from './utils/units';
 
 @customElement('wokwi-slide-potentiometer')
@@ -171,6 +172,7 @@ export class SlidePotentiometerElement extends LitElement {
             <rect x="22.2" y="0" width=".6" height="19" fill="#efefef" />
           </g>
         </g>
+        <rect x="0" y="14" width="1" height="1" fill="none" id="firefox-workaround" />
       </svg>
     `;
   }
@@ -210,8 +212,14 @@ export class SlidePotentiometerElement extends LitElement {
 
   private updateCaseDisplayProperties(): void {
     const element = this.shadowRoot?.querySelector<SVGRectElement>('#sliderCase');
-    if (element) {
-      this.pageToLocalTransformationMatrix = element.getScreenCTM()?.inverse() || null;
+    const firefoxWorkaround = this.shadowRoot?.querySelector<SVGRectElement>('#firefox-workaround');
+
+    if (element && firefoxWorkaround) {
+      this.pageToLocalTransformationMatrix = getScreenCTM(
+        element,
+        firefoxWorkaround,
+        new DOMRect(0, 14, 1, 1)
+      );
     }
 
     // Handle zooming in the storybook
