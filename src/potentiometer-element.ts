@@ -195,7 +195,9 @@ export class PotentiometerElement extends LitElement {
     const knob = this.shadowRoot?.querySelector<SVGRectElement>('#knob');
     this.pageToKnobMatrix = knob?.getScreenCTM()?.inverse() ?? null;
 
-    if (navigator.userAgent.indexOf('Firefox') >= 0) {
+    const { userAgent } = navigator;
+
+    if (userAgent.indexOf('Firefox') >= 0 || userAgent.indexOf('Epiphany') >= 0) {
       // Firefox's getScreenCTM() is broken: https://bugzilla.mozilla.org/show_bug.cgi?id=1610093
       const firefoxWorkaround =
         this.shadowRoot?.querySelector<SVGRectElement>('#firefox-workaround');
