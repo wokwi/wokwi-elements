@@ -58,8 +58,8 @@ Default.args = {
   // innerColour:  'darkgrey',
   // innerShape:  'plain',
 
-  innerHand: new StepperHand(25, "red", "plain", 225),
-  outerHand: new StepperHand(30, "green", "plain", 270),
+  innerHand: new StepperHand(25, "red", "arrow", 225),
+  outerHand: new StepperHand(30, "green", "arrow", 270),
 };
 
 export const NineOclock = Template.bind({});
