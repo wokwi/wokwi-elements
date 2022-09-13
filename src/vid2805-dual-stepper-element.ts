@@ -1,6 +1,7 @@
 import { html, LitElement, svg } from 'lit';
 import { customElement, property} from 'lit/decorators.js';
 import { ElementPin } from '.';
+import { mmToPix } from './utils/units';
 
 
 export type HandShape = 'arrow' | 'plain'; // | 'fancy';
@@ -44,16 +45,43 @@ export class VID2805DualStepperElement extends LitElement {
   @property() outerHand = new StepperHand();
   @property() innerHand = new StepperHand();
 
-  readonly pinInfo: ElementPin[] = [
-    { name: 'A1+', y: 237, x: 98, number: 1, signals: [] },
-    { name: 'A1-', y: 237, x: 108, number: 2, signals: [] },
-    { name: 'B1+', y: 237, x: 117, number: 3, signals: [] },
-    { name: 'B1-', y: 237, x: 127, number: 4, signals: [] },
-    { name: 'A2+', y: 237, x: 137, number: 5, signals: [] },
-    { name: 'A2-', y: 237, x: 147, number: 6, signals: [] },
-    { name: 'B2+', y: 237, x: 157, number: 7, signals: [] },
-    { name: 'B2-', y: 237, x: 167, number: 8, signals: [] },
-  ];
+
+  private coords() {
+    const x = 112.3;        // x location of shaft point
+    const y = 50;           // y location of shaft point
+    const innerOff = 4.7;   // offset to center of inner hand's ring
+    const outerOff = 9;     // offset to center of outer hand's ring
+    let trY = 0;
+
+
+    const ml = Math.max(this.innerHand.length, this.outerHand.length);
+    if (ml > 30) {
+      trY = ml - 30;
+    }
+    return {
+      x : x,
+      y: y,
+      innerOff : innerOff,
+      outerOff: outerOff,
+      trY : trY
+    }
+  }
+
+  get pinInfo(): ElementPin[] {
+    const { x, y, innerOff, outerOff, trY} = this.coords();
+
+    return [
+    { name: 'A1+', y: trY, x: 58 * mmToPix, number: 1, signals: [] },
+    { name: 'A1-', y: trY, x: 65  * mmToPix, number: 2, signals: [] },
+    { name: 'B1+', y: trY, x: 72  * mmToPix, number: 3, signals: [] },
+    { name: 'B1-', y: trY, x: 79  * mmToPix, number: 4, signals: [] },
+    { name: 'A2+', y: trY, x: 86  * mmToPix, number: 5, signals: [] },
+    { name: 'A2-', y: trY, x: 93  * mmToPix, number: 6, signals: [] },
+    { name: 'B2+', y: trY, x: 100  * mmToPix, number: 7, signals: [] },
+    { name: 'B2-', y: trY, x: 107  * mmToPix, number: 8, signals: [] },
+    ];
+
+  }
 
 
   readonly handMap : {[key:string] : string } = {
@@ -66,11 +94,11 @@ export class VID2805DualStepperElement extends LitElement {
 
   render() {
 
-    const x = 112.3;        // x location of shaft point
-    const y = 50;           // y location of shaft point
-    const innerOff = 4.7;   // offset to center of inner hand's ring
-    const outerOff = 9;     // offset to center of outer hand's ring
-    let trY = 0;
+    // const x = 112.3;        // x location of shaft point
+    // const y = 50;           // y location of shaft point
+    // const innerOff = 4.7;   // offset to center of inner hand's ring
+    // const outerOff = 9;     // offset to center of outer hand's ring
+    // let trY = 0;
 
     let inner_svg = this.handMap['inner_' + this.innerHand.shape + '_hand'];
     let outer_svg = this.handMap['outer_' + this.outerHand.shape + '_hand'];
@@ -88,13 +116,11 @@ export class VID2805DualStepperElement extends LitElement {
     inner_svg = inner_svg.split("${len}").join(this.innerHand.length.toString());
     outer_svg = outer_svg.split("${len}").join(this.outerHand.length.toString());
 
-    const ml = Math.max(this.innerHand.length, this.outerHand.length);
-    if (ml > 30) {
-      trY = ml - 30;
-    }
+    const { x, y, innerOff, outerOff, trY} = this.coords();
+
 
     return html`
-    <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160">
+    <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" width=70mm height=70mm viewBox="0 0 180 180">
     <defs>
         <style>.cls-1{fill:#939598;}.cls-2{fill:#f1f2f2;}.cls-3{fill:#808285;}.cls-4{fill:#ed1f24;}.cls-5{fill:#70bf44;}.cls-6{fill:#414042;}
         .cls-h{fill:"blue";stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:.1px;
@@ -105,15 +131,15 @@ export class VID2805DualStepperElement extends LitElement {
     </defs>
     <g id="Layer_1-2" transform="translate(0,${trY})">
         <g id="scaled_body">
-          <g id="pins">
-          <path id="pin-1" class="cls-3" d="M58.42,86.17v12.76c0,.78,.63,1.42,1.42,1.42s1.42-.63,1.42-1.42v-12.76h-2.83Z" />
-          <path id="pin-2" class="cls-3" d="M65.62,86.17v12.76c0,.78,.63,1.42,1.42,1.42s1.42-.63,1.42-1.42v-12.76h-2.83Z" />
-          <path id="pin-3" class="cls-3" d="M72.82,86.17v12.76c0,.78,.63,1.42,1.42,1.42s1.42-.63,1.42-1.42v-12.76h-2.83Z" />
-          <path id="pin-4" class="cls-3" d="M80.02,86.17v12.76c0,.78,.63,1.42,1.42,1.42s1.42-.63,1.42-1.42v-12.76h-2.83Z" />
-          <path id="pin-5" class="cls-3" d="M87.22,86.17v12.76c0,.78,.63,1.42,1.42,1.42s1.42-.63,1.42-1.42v-12.76h-2.83Z" />
-          <path id="pin-6" class="cls-3" d="M94.42,86.17v12.76c0,.78,.63,1.42,1.42,1.42s1.42-.63,1.42-1.42v-12.76h-2.83Z" />
-          <path id="pin-7" class="cls-3" d="M101.62,86.17v12.76c0,.78,.63,1.42,1.42,1.42s1.42-.63,1.42-1.42v-12.76h-2.83Z" />
-          <path id="pin-8" class="cls-3" d="M108.82,86.17v12.76c0,.78,.63,1.42,1.42,1.42s1.42-.63,1.42-1.42v-12.76h-2.83Z" />
+          <g id="pins" transform="scale(${mmToPix})>
+          <path id="pin-1" class="cls-3" d="m 58 0 v 5 c 0 2 2 2 2 0 v -5 z" />
+          <path id="pin-2" class="cls-3" d="m 65 0 v 5 c 0 2 2 2 2 0 v -5 z" />
+          <path id="pin-3" class="cls-3" d="m 72 0 v 5 c 0 2 2 2 2 0 v -5 z" />
+          <path id="pin-4" class="cls-3" d="m 79 0 v 5 c 0 2 2 2 2 0 v -5 z" />
+          <path id="pin-5" class="cls-3" d="m 86 0 v 5 c 0 2 2 2 2 0 v -5 z" />
+          <path id="pin-6" class="cls-3" d="m 93 0 v 5 c 0 2 2 2 2 0 v -5 z" />
+          <path id="pin-7" class="cls-3" d="m 100 0 v 5 c 0 2 2 2 2 0 v -5 z" />
+          <path id="pin-8" class="cls-3" d="m 107 0 v 5 c 0 2 2 2 2 0 v -5 z" />
         </g>
         <path id="base" class="cls-6" d="M170.08,32.12c-4.98-15.86-18.92-27.75-35.9-29.71-1.2-1.4-2.96-2.31-4.96-2.31s-3.76,.91-4.96,2.31c-2.13,.25-4.2,.67-6.23,1.22H51.81c-1.93-.52-3.9-.92-5.92-1.17-1.2-1.48-3.01-2.45-5.07-2.45s-3.82,.94-5.02,2.39C19,4.27,5.19,15.86,0,31.41v27.09c5.15,15.43,18.82,26.97,35.45,28.97,1.2,1.56,3.06,2.58,5.17,2.58s3.98-1.02,5.17-2.58c2.18-.26,4.3-.7,6.37-1.28H117.67c2.07,.58,4.19,1.01,6.37,1.28,1.2,1.56,3.06,2.58,5.17,2.58s3.98-1.02,5.17-2.58c16.89-2.04,30.72-13.89,35.69-29.68v-25.67Z" />
             <g id="ribs">
