@@ -45,12 +45,12 @@ export class StepperMotorElement extends LitElement {
   }
 
   readonly nemaSpecMap : {[key:string] : NemaSpec } = {
-    "8":  { "id": 8, "frameSize": 20.4, "holeRadius": 0.5, "shaftRadius": 3.5, "cornerRadius": 2.5, "cornerOffset": 2.5, "bodyRadius": 7.7, "textSize":6 },
-    "11": { "id": 11, "frameSize": 28.2, "holeRadius": 1.25, "shaftRadius": 5, "cornerRadius": 2.5, "cornerOffset": 2.5, "bodyRadius": 11, "textSize":6 },
-    "14": { "id": 14, "frameSize": 35.2, "holeRadius": 1.5, "shaftRadius": 5, "cornerRadius": 4.5, "cornerOffset": 4.5, "bodyRadius": 11, "textSize":8 },
-    "17": { "id": 17, "frameSize": 42.3, "holeRadius": 1.5, "shaftRadius": 5, "cornerRadius": 5, "cornerOffset": 5.5, "bodyRadius": 14, "textSize":8 },
-    "23": { "id": 23, "frameSize": 57.3, "holeRadius": 2.5, "shaftRadius": 6.35, "cornerRadius": 5, "cornerOffset": 5.5, "bodyRadius": 19.5, "textSize":10 },
-    "34": { "id": 34, "frameSize": 86, "holeRadius": 3.25, "shaftRadius": 14, "cornerRadius": 3.25, "cornerOffset": 8.4, "bodyRadius": 36.5, "textSize":10 },
+    "8":  { "id": 8, "frameSize": 20.4, "holeRadius": 0.5, "shaftRadius": 3.5, "cornerRadius": 2.5, "cornerOffset": 2.5, "bodyRadius": 7.7, "textSize":8 },
+    "11": { "id": 11, "frameSize": 28.2, "holeRadius": 1.25, "shaftRadius": 5, "cornerRadius": 2.5, "cornerOffset": 2.5, "bodyRadius": 11, "textSize":8 },
+    "14": { "id": 14, "frameSize": 35.2, "holeRadius": 1.5, "shaftRadius": 5, "cornerRadius": 4.5, "cornerOffset": 4.5, "bodyRadius": 11, "textSize":10 },
+    "17": { "id": 17, "frameSize": 42.3, "holeRadius": 1.5, "shaftRadius": 5, "cornerRadius": 5, "cornerOffset": 5.5, "bodyRadius": 14, "textSize":10 },
+    "23": { "id": 23, "frameSize": 57.3, "holeRadius": 2.5, "shaftRadius": 6.35, "cornerRadius": 5, "cornerOffset": 5.5, "bodyRadius": 19.5, "textSize":16 },
+    "34": { "id": 34, "frameSize": 86, "holeRadius": 3.25, "shaftRadius": 14, "cornerRadius": 3.25, "cornerOffset": 8.4, "bodyRadius": 36.5, "textSize":16 },
   }
 
   render() { 
@@ -117,7 +117,7 @@ export class StepperMotorElement extends LitElement {
 
           <!-- Text -->
           <text font-family="arial" font-size="14.667px" text-align="center" text-anchor="middle" > 
-            <tspan x="${frameSize/ 2}" y="${frameSize - spec.textSize/2}" font-size="${spec.textSize}px">${this.value} ${this.units}</tspan>
+            <tspan x="${frameSize/ 2}" y="${frameSize - spec.textSize/2}" font-size="${spec.textSize/mmToPix}px">${this.value} ${this.units}</tspan>
           </text>         
 
         </g>
