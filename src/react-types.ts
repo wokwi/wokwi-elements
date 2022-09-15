@@ -49,7 +49,6 @@ import { DipSwitch8Element } from './dip-switch-8-element';
 import { StepperMotorElement } from './stepper-motor-element';
 import { HX711Element } from './hx711-element';
 import { KS2EMDC5Element } from './ks2e-m-dc5-element';
-import { NemaStepperElement } from './nema-stepper-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -104,7 +103,6 @@ declare global {
       'wokwi-stepper-motor': WokwiElement<StepperMotorElement>;
       'wokwi-hx711': WokwiElement<HX711Element>;
       'wokwi-ks2e-m-dc5': WokwiElement<KS2EMDC5Element>;
-      'wokwi-nema-stepper': WokwiElement<NemaStepperElement>;
     }
   }
 }

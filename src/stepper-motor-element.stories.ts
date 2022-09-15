@@ -6,6 +6,7 @@ export default {
   component: 'wokwi-stepper-motor',
   argTypes: {
     angle: { control: { type: 'range', min: 0, max: 360 } },
+    size: { control: { type: 'select', options: [8, 11, 14, 17, 23, 34] } },
     arrow: { control: { type: 'color' } },
   },
   args: {
@@ -13,25 +14,36 @@ export default {
     arrow: '',
     units: '',
     value: '',
+    size: 17,
   },
 };
 
-const Template = ({ angle, arrow, units, value }) =>
+const Template = ({ angle, arrow, units, value, size }) =>
   html`<wokwi-stepper-motor
     .angle=${angle}
     .arrow=${arrow}
     .units=${units}
     .value=${value}
+    .size=${size}
   ></wokwi-stepper-motor>`;
 
 export const Default = Template.bind({});
 Default.args = {};
 
 export const Rotated90 = Template.bind({});
-Rotated90.args = { angle: 90, units: 'degrees', value: '90' };
+Rotated90.args = { angle: 90, units: 'degrees', value: '90', size: 14 };
 
 export const Steps = Template.bind({});
-Steps.args = { angle: 180, value: '52,500', units: 'steps' };
+Steps.args = { angle: 180, value: '52,500', units: 'steps', size: 14 };
 
 export const PurpleArrow = Template.bind({});
-PurpleArrow.args = { angle: 70, arrow: '#4a36ba' };
+PurpleArrow.args = { angle: 70, arrow: '#4a36ba', size: 14 };
+
+export const Nema17 = Template.bind({});
+Nema17.args = { angle: 70, arrow: '#4a36ba', size: 17 };
+
+export const Nema23 = Template.bind({});
+Nema23.args = { angle: 70, arrow: '#4a36ba', size: 23 };
+
+export const Nema34 = Template.bind({});
+Nema34.args = { angle: 45, arrow: '#4a36ba', size: 34 };
