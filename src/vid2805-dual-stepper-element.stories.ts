@@ -64,15 +64,6 @@ const Template = ({
 
 export const Default = Template.bind({});
 Default.args = {
-  // outerLength: 20,
-  // outerAngle: 0,
-  // outerColour: 'grey',
-  // outerShape: 'plain',
-  // innerLength: 20,
-  // innerAngle:  0,
-  // innerColour:  'darkgrey',
-  // innerShape:  'plain',
-
   innerHand: new StepperHand(25, 'red', 'arrow', 225),
   outerHand: new StepperHand(30, 'green', 'arrow', 270),
 };
