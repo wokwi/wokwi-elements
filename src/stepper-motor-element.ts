@@ -126,10 +126,10 @@ export class StepperMotorElement extends LitElement {
     const rOff = Math.sqrt(0.75 * Math.pow(shaftRadius, 2));
 
     return html`<svg
-      width="100mm"
-      height="100mm"
+      width="${frameSize + 1}mm"
+      height="${frameSize + 5}mm"
       version="1.1"
-      viewBox="0 0 ${100 * mmToPix} ${100 * mmToPix}"
+      viewBox="0 0 ${(1 + frameSize) * mmToPix} ${(5 + frameSize) * mmToPix}"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
     >
