@@ -27,15 +27,6 @@ export default {
   },
 };
 
-//  .innerHand = ${new ClockHand(innerLength, innerColour, innerShape, innerAngle)}
-// .outerHand = ${new ClockHand(outerLength, outerColour, outerShape, outerAngle)}
-
-export const VIS2805 = () => html`
-  <wokwi-show-pins>
-    <wokwi-vid2805-dual-stepper></wokwi-vid2805-dual-stepper>
-  </wokwi-show-pins>
-`;
-
 const Template = ({
   outerLength,
   outerAngle,
@@ -47,20 +38,18 @@ const Template = ({
   innerShape,
   innerHand,
   outerHand,
-}) => html`<wokwi-show-pins>
-  <wokwi-vid2805-dual-stepper
-    .outerLength=${outerLength}
-    .outerAngle=${outerAngle}
-    .outerColour=${outerColour}
-    .outerShape=${outerShape}
-    .innerLength=${innerLength}
-    .innerAngle=${innerAngle}
-    .innerColour=${innerColour}
-    .innerShape=${innerShape}
-    .innerHand=${innerHand}
-    .outerHand=${outerHand}
-  ></wokwi-vid2805-dual-stepper>
-</wokwi-show-pins>`;
+}) => html`<wokwi-vid2805-dual-stepper
+  .outerLength=${outerLength}
+  .outerAngle=${outerAngle}
+  .outerColour=${outerColour}
+  .outerShape=${outerShape}
+  .innerLength=${innerLength}
+  .innerAngle=${innerAngle}
+  .innerColour=${innerColour}
+  .innerShape=${innerShape}
+  .innerHand=${innerHand}
+  .outerHand=${outerHand}
+></wokwi-vid2805-dual-stepper>`;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -70,20 +59,20 @@ Default.args = {
 
 export const NineOclock = Template.bind({});
 NineOclock.args = {
-  innerHand: new StepperHand(70, 'silver', 'plain', 90),
-  outerHand: new StepperHand(70, 'gold', 'plain', 0),
+  innerHand: new StepperHand(70, 'silver', 'plain', 0),
+  outerHand: new StepperHand(40, 'gold', 'plain', 270),
 };
 
 export const SixOclock = Template.bind({});
 SixOclock.args = {
-  innerHand: new StepperHand(70, 'silver', 'plain', 180),
-  outerHand: new StepperHand(60, 'gold', 'plain', 0),
+  innerHand: new StepperHand(70, 'silver', 'plain', 0),
+  outerHand: new StepperHand(40, 'gold', 'plain', 180),
 };
 
 export const ThreeOclock = Template.bind({});
 ThreeOclock.args = {
   innerHand: new StepperHand(70, 'silver', 'plain', 270),
-  outerHand: new StepperHand(60, 'gold', 'plain', 90),
+  outerHand: new StepperHand(50, 'gold', 'plain', 90),
 };
 
 export const TenPastTen = Template.bind({});
@@ -94,6 +83,6 @@ TenPastTen.args = {
 
 export const SameLength = Template.bind({});
 SameLength.args = {
-  innerHand: new StepperHand(20, 'blue', 'plain', 0),
-  outerHand: new StepperHand(20, 'green', 'plain', 180),
+  innerHand: new StepperHand(30, 'blue', 'plain', 0),
+  outerHand: new StepperHand(30, 'green', 'plain', 180),
 };

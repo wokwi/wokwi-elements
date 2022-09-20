@@ -61,19 +61,19 @@ export class VID2805DualStepperElement extends LitElement {
 
   get pinInfo(): ElementPin[] {
     const { x, y, innerOff, outerOff, trY } = this.coords();
-    const pinX = (x: number) => {
-      return (21.5 + x * 2.54) * mmToPix;
+    const pinXY = (x: number) => {
+      return { x: 15 + trY, y: (48.5 - x * 2.54) * mmToPix };
     };
 
     const pi = [
-      { name: 'A1+', y: trY, x: pinX(0), number: 1, signals: [] },
-      { name: 'A1-', y: trY, x: pinX(1), number: 2, signals: [] },
-      { name: 'B1+', y: trY, x: pinX(2), number: 3, signals: [] },
-      { name: 'B1-', y: trY, x: pinX(3), number: 4, signals: [] },
-      { name: 'A2+', y: trY, x: pinX(4), number: 5, signals: [] },
-      { name: 'A2-', y: trY, x: pinX(5), number: 6, signals: [] },
-      { name: 'B2+', y: trY, x: pinX(6), number: 7, signals: [] },
-      { name: 'B2-', y: trY, x: pinX(7), number: 8, signals: [] },
+      { name: 'A1+', ...pinXY(0), number: 1, signals: [] },
+      { name: 'A1-', ...pinXY(1), number: 2, signals: [] },
+      { name: 'B1+', ...pinXY(2), number: 3, signals: [] },
+      { name: 'B1-', ...pinXY(3), number: 4, signals: [] },
+      { name: 'A2+', ...pinXY(4), number: 5, signals: [] },
+      { name: 'A2-', ...pinXY(5), number: 6, signals: [] },
+      { name: 'B2+', ...pinXY(6), number: 7, signals: [] },
+      { name: 'B2-', ...pinXY(7), number: 8, signals: [] },
     ];
 
     console.debug(pi);
@@ -133,7 +133,7 @@ export class VID2805DualStepperElement extends LitElement {
             <stop stop-color="grey" offset="75%" />
         </linearGradient>
     </defs>
-      <g id="vid2805-translated" transform="translate(0,${trY})">
+      <g id="vid2805-translated" transform="translate(15,265) rotate(270 0 0) translate(0,${trY})">
 
       <!-- pins - translate to top of base, between holes -->
         <g id="pins" transform="scale(${mmToPix}) translate(21 3) ">
@@ -173,7 +173,7 @@ export class VID2805DualStepperElement extends LitElement {
           <g id="hours">
               <path class="cls-h" transform="
                 translate(${x} ${y + outerOff / 2})
-                rotate(${this.innerHand.angle}) 
+                rotate(${this.outerHand.angle}) 
                 translate(-${outerOff}, -${outerOff})" 
                 fill="${this.outerHand.colour}" d=${outer_svg} />
           </g>
@@ -181,7 +181,7 @@ export class VID2805DualStepperElement extends LitElement {
               <path class="cls-h" 
                 transform="
                   translate(${x} ${y})
-                  rotate(${this.outerHand.angle}) 
+                  rotate(${this.innerHand.angle}) 
                   translate(-${innerOff}, -${innerOff})" 
                 fill="${this.innerHand.colour}" d=${inner_svg} />
           </g>
