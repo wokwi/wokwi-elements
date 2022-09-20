@@ -7,3 +7,4 @@ build
 *.log
 storybook-static
 custom-elements.json
+.DS_Store
