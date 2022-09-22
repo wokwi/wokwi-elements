@@ -19,29 +19,9 @@ export default {
   },
 };
 
-class RotateAnimation {
-  angle = 0;
-  dirCW = true;
-
-  step() {
-    this.angle += this.dirCW ? 1 : -1;
-
-    // change direction if we hit the limit
-    if (this.angle === 360 || this.angle === 0) {
-      this.dirCW = !this.dirCW;
-    }
-  }
-}
-
-const rotateAnimation = new RotateAnimation();
-setInterval(() => {
-  rotateAnimation.step();
-  forceReRender();
-}, 20);
-
 const Template = ({ angle, arrow, units, value, size }) =>
   html`<wokwi-stepper-motor
-    .angle=${rotateAnimation.angle}
+    .angle=${angle}
     .arrow=${arrow}
     .units=${units}
     .value=${value}
@@ -58,7 +38,7 @@ export const Steps = Template.bind({});
 Steps.args = { angle: 180, value: '52,500', units: 'steps', size: 14 };
 
 export const Degrees = Template.bind({});
-Steps.args = { angle: 180, value: '180', units: 'degrees', size: 14 };
+Degrees.args = { angle: 180, value: '180', units: 'degrees', size: 14 };
 
 export const PurpleArrow = Template.bind({});
 PurpleArrow.args = { angle: 350, arrow: '#4a36ba', size: 14 };
@@ -67,7 +47,7 @@ export const Nema17 = Template.bind({});
 Nema17.args = { angle: 70, arrow: '#4a36ba', size: 17 };
 
 export const Nema23 = Template.bind({});
-Nema23.args = { angle: 70, arrow: '#4a36ba', size: 23 };
+Nema23.args = { angle: 70, arrow: '#4a36ba', value: '1234', units: 'steps',  size: 23 };
 
 export const Nema34 = Template.bind({});
-Nema34.args = { angle: 70, arrow: '#4a36ba', size: 34 };
+Nema34.args = { angle: 70, arrow: '#4a36ba', value: '180', units: 'degrees', size: 34 };

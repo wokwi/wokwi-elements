@@ -62,7 +62,7 @@ export class StepperMotorElement extends LitElement {
       cornerRadius: 2.5,
       cornerOffset: 2.5,
       bodyRadius: 11,
-      textSize: 8,
+      textSize: 11,
     },
     '14': {
       id: 14,
@@ -72,7 +72,7 @@ export class StepperMotorElement extends LitElement {
       cornerRadius: 4.5,
       cornerOffset: 4.5,
       bodyRadius: 11,
-      textSize: 10,
+      textSize: 14,
     },
     '17': {
       id: 17,
@@ -82,7 +82,7 @@ export class StepperMotorElement extends LitElement {
       cornerRadius: 5,
       cornerOffset: 5.5,
       bodyRadius: 14,
-      textSize: 10,
+      textSize: 16,
     },
     '23': {
       id: 23,
@@ -92,7 +92,7 @@ export class StepperMotorElement extends LitElement {
       cornerRadius: 5,
       cornerOffset: 5.5,
       bodyRadius: 19.5,
-      textSize: 16,
+      textSize: 24,
     },
     '34': {
       id: 34,
@@ -102,12 +102,17 @@ export class StepperMotorElement extends LitElement {
       cornerRadius: 3.25,
       cornerOffset: 8.4,
       bodyRadius: 36.5,
-      textSize: 16,
+      textSize: 32,
     },
   };
 
   render() {
-    const spec = this.nemaSpecMap[this.size];
+    console.debug("Render");
+    let spec = this.nemaSpecMap[this.size];
+
+    if (spec === undefined) {
+      spec = this.nemaSpecMap[17];
+    }
 
     const cornerRadius = spec.cornerRadius;
     const holeRadius = spec.holeRadius;
@@ -285,7 +290,7 @@ export class StepperMotorElement extends LitElement {
             <tspan
               x="${halfFrame}"
               y="${frameSize - spec.textSize / 2 + spec.textSize / mmToPix}"
-              font-size="${spec.textSize / mmToPix}px"
+              font-size="${(0.67 * spec.textSize) / mmToPix}px"
             >
               ${this.units}
             </tspan>
