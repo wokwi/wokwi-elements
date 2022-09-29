@@ -46,6 +46,7 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.js && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",
+    "test": "npm run lint",
     "lint": "eslint src/**/*.ts",
     "prepare": "husky install && npm run build",
     "analyze-components": "web-component-analyzer analyze src/*-element.ts --outFile custom-elements.json",
