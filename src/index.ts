@@ -50,3 +50,4 @@ export { DipSwitch8Element } from './dip-switch-8-element';
 export { StepperMotorElement } from './stepper-motor-element';
 export { HX711Element } from './hx711-element';
 export { KS2EMDC5Element } from './ks2e-m-dc5-element';
+export { BiaxialStepperElement } from './biaxial-stepper-element';
