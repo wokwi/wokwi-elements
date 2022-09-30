@@ -1,4 +1,4 @@
-import { html, LitElement, svg } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from '.';
 import { mmToPix } from './utils/units';
@@ -12,7 +12,6 @@ const OUTER_OFFSET = 9; // offset to center of outer hand's ring
 const INNER_OFFSET = 4.7; // offset to center of inner hand's ring
 const ORNATE_OUTER_OFFSET = 9; // offset to center of outer ornate hand's ring
 const ORNATE_INNER_OFFSET = 5; // offset to center of inner ornate hand's ring
-const BASE_MOVE_THOLD = 30; // threshold above which we need to move the base to allow for hands extending outside the base
 
 @customElement('wokwi-biaxial-stepper')
 export class BiaxialStepperElement extends LitElement {
@@ -26,7 +25,7 @@ export class BiaxialStepperElement extends LitElement {
   @property() outerHandColor = 'gold';
 
   // the current outer hand shape
-  @property() outerHandShape: 'arrow' | 'plain' | 'ornate' = 'plain';
+  @property() outerHandShape: HandShape = 'plain';
 
   // length used to control inner hand length in mm
   @property() innerHandLength = 30;
@@ -38,7 +37,7 @@ export class BiaxialStepperElement extends LitElement {
   @property() innerHandColor = 'silver';
 
   // the current inner hand shape
-  @property() innerHandShape: 'arrow' | 'plain' | 'ornate' = 'plain';
+  @property() innerHandShape: HandShape = 'plain';
 
   get pinInfo(): ElementPin[] {
     const pinXY = (y: number) => {
@@ -70,7 +69,7 @@ export class BiaxialStepperElement extends LitElement {
       path: `m 0 0 c 0 5 4 9 9 9 c 3.89 0 7.16 -2.42 8.43 -5.85 c 0.3 -0.58 0.78 -1.16 1.27 -1.45 c 0.6 -0.3 1.29 -0.4 1.99 -0.2 c 0 0 0 0 0 0 h 0.01 s 0.9 0.2 0.9 0.2 h 20 l ${len} -1.7 l -${len} -1.9 h -20 l -0.9 0.3 c -0.7 0.2 -1.4 0.1 -2 -0.2 c -0.6 -0.3 -1.1 -0.8 -1.3 -1.5 c 0 0 -0.01 0.02 -0.02 0.02 c -1.38 -3.72 -4.38 -5.72 -8.38 -5.72 c -5 0 -9 4 -9 9 Z m 3.5 0 c 0 -3.1 2.5 -5.5 5.5 -5.5 s 5.5 2.5 5.5 5.5 s -2.5 5.5 -5.5 5.5 s -5.5 -2.5 -5.5 -5.5 Z`,
     }),
 
-    outerOrnateHand: (len: number): HandDesc => ({
+    outerOrnateHand: (): HandDesc => ({
       xOff: ORNATE_OUTER_OFFSET,
       yOff: ORNATE_OUTER_OFFSET,
       path: `m 0 0 c 0 5 4 9 9 9 c 4.951 0.028 9.683 -3.101 9.6 -7.6 c 0 0 1.1 1.4 3.3 1.2 c -0.2 1 0.3 1.2 0.3 1.2 c 0.6 -1.5 6.4 -6.3 8.6 -0.3 c -3.1 -0.3 -1.8 3.8 0.5 1.6 c 0 0 0.9 2.3 4 2.1 c -0.8 1.7 3.1 2.1 1.7 -0.4 c 0 0 2.7 -1 2.3 -3.9 c 0 0 0.8 0.6 2.6 0.6 c 2.7 0.2 6.2 -3.7 16 -2.9 l 0.6 -0.7 l -0.6 -0.8 c -8.9 0.7 -13 -2.3 -16 -3 c -1.9 0 -2.5 0.8 -2.5 0.8 c 0 0 0.3 -2.6 -2.5 -4.1 c 0.8 -0.8 0 -1.6 -0.8 -1.6 c -0.5 0 -1 0.4 -0.8 1.5 c 0 0 -2.8 -0.8 -4 2.1 c 0 0 -1.4 -2 -2.5 0.3 c 0.2 0.5 0 0.9 0.8 1.2 c 0.2 0.3 1.2 -0.2 1.2 -0.2 c 0 0 -0.6 3.2 -3.9 3 c 0 0 -2.7 0.1 -4.8 -3.3 c -0.3 0.5 -0.3 0.7 -0.3 0.7 v 0.7 c 0 0 -2.1 -0.4 -3.4 1.2 c -0.06 -4.37 -4.449 -7.347 -9.41 -7.385 c -5 0 -9 4 -9 9 z m 44 -2.2 c 2.1 1.2 4.1 1.5 4.1 1.5 c -0.4 0.7 -0.5 0.7 0 1.6 c 0 0 -2.6 0.2 -4.1 1.4 c 0 0 0.2 -1.7 -0.6 -2.2 c 1 -0.6 0.6 -2.2 0.6 -2.2 z m -2.3 -0.5 c 1.3 0.1 1.6 1.1 1.6 1.1 c 0.1 0.4 -1.2 0.8 -1.1 1.1 l 0.3 0.5 l -0.2 0.6 c 0 0.3 0.6 0.4 1.2 1 c -0.5 0.6 -0.5 1.3 -2.1 1.3 c -1.1 0 -3.1 -2.5 -4.2 -2.9 c 1.1 -0.1 2.5 -2.8 4.5 -2.8 z m -10.8 0.9 c 0.5 1 2 1.9 2 1.9 c -1.4 0.7 -2 1.7 -2 1.7 c -1 -1.2 -2.2 -1.9 -2.2 -1.9 c 1.3 -0.6 2.2 -1.8 2.2 -1.8 z m -10.1 0.4 c 1.4 0 1.5 1.1 3.656 1.552 c -2 0.3 -2.4 1.5 -3.6 1.4 c -1.5 -0.1 -1.6 -1.3 -1.6 -1.3 c 0 0 -0.2 -1.5 1.6 -1.6 c 0 0 0 0 0.1 0 z m 14.1 2.1 c 3.1 0.1 3.1 3.2 3.1 3.2 c -0.3 1.7 -2.5 2.6 -2.5 2.6 c -2.5 0.2 -3.3 -1.5 -3.3 -1.5 c 0 0 1.4 0.6 1.8 -1 c -0.4 -2 -2.2 -0.8 -2.2 -0.8 c 0.3 -2.3 3 -2.5 3 -2.5 z`,
@@ -88,7 +87,7 @@ export class BiaxialStepperElement extends LitElement {
       path: `m 0 0 c 0 2.6 2.1 4.7 4.7 4.7 c 1.37 0 2.59 -0.59 3.44 -1.52 c 0.7 -0.7 1.5 -1.2 2.5 -1.5 s 2 -0.3 2.9 -0.1 l 0.9 0.2 l ${len} -1.8 l -${len} -1.8 l -0.9 0.2 c -1 0.2 -2 0.2 -2.9 -0.1 c -1 -0.3 -1.8 -0.8 -2.5 -1.5 c -0.86 -0.93 -2.08 -1.52 -3.44 -1.52 c -2.6 0 -4.7 2.1 -4.7 4.7 z m 2.7 0 c 0 -1.1 0.9 -2 2 -2 s 2 0.9 2 2 s -0.9 2 -2 2 s -2 -0.9 -2 -2 z`,
     }),
 
-    innerOrnateHand: (len: number): HandDesc => ({
+    innerOrnateHand: (): HandDesc => ({
       xOff: ORNATE_INNER_OFFSET,
       yOff: ORNATE_INNER_OFFSET,
       path: `m 0 0 c 0 5 5 5 5 5 c 5 0 4.6565 -5.696 5 -2.6 l 0.028 1.101 l 1.4525 0.016 l 0.55 -1.5 c 0 0 1.05 1.55 3.3 1.75 c 2.35 0.05 3.2 -0.85 3.2 -0.85 l 0.05 0.75 l 0.95 -0.05 l -0.05 1 l 4 -2.4 c 0.4 1.35 1.75 1.5 1.75 1.5 c 0.65 0.1 1.85 -0.95 1.85 -0.95 l 0.7 1.45 l 1 -1.75 l 1 1 l 0.35 -1.45 c 2.4 1.45 4.15 1.2 4.15 1.2 c 2.95 -0.1 3.9 -1.05 6.6 -1.95 c 4.85 -0.7 10.3 -0.1 10.3 -0.1 l -0.25 1.65 l 3.85 -1.45 l 15.2 -0.3 l 0.45 -0.4 l -0.55 -0.4 l -15.4 -0.25 l -3.6 -1.55 l 0.4 1.8 c 0 0 -4.75 -0.85 -10.1 -0.25 l -0.25 -1.05 l -1.05 0.85 c 0 0 0.45 -2.2 0.25 -3.8 c -1.15 2.55 -1.95 6.25 -6.45 6.3 c -4.4 -0.35 -5.7 -4.05 -5.7 -4.05 l -0.45 1 l -0.5 -0.5 l -0.55 0.75 c 0 0 -0.85 -0.6 -2.35 -0.75 c -1.85 0.15 -2.35 0.45 -2.35 0.45 l -0.25 -1.45 l -1.2 1.25 l -0.5 -0.8 l -1.05 1.05 l -0.6 -0.85 c -0.6 -0.45 -1.15 -0.55 -1.75 -0.3 c 0 0 -0.6 0.25 -0.8 0.75 c 0 0 -0.45 -0.7 -1.2 -0.85 c -0.75 -0.05 -2.3 1.3 -2.3 1.3 l -0.6175 -2.289 l -1.469 -0.032 l -0.0165 1.2265 c -0.3785 2.4515 0.0485 -3.212 -5.036 -3.228 c -4 0 -5.004 2.518 -5 5 z m 13.25 -1.2 c 0 0 0.15 1.3 1.05 1.3 c 0 0 0.5 -0.25 0.7 -0.8 c 0 0 0.35 0.85 0.75 0.9 c 0.9 -0.1 0.85 -1.25 1.15 -1.3 c 0 0 0.9 0.35 0.9 2.15 c 0 0 -0.6 1.7 -3 1.65 c 0 0 -2.05 -0.15 -2.55 -1.95 c 0 0 -0.15 -1.5 0.95 -2 z m 10.5 0.55 c 1.05 0 1.4 0.25 1.4 0.25 c 0.75 0.45 1 1.2 1 1.2 c 0.05 1.6 -0.85 1.55 -1.65 1.6 c 0 0 -0.95 -0.35 -1.3 -1.35 l -3.1 1.75 c 0 0 0.45 -2.5 2.8 -3.45 c 0.35 -0.05 0.6 -0.05 0.85 -0.05 z`,
