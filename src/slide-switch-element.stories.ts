@@ -7,5 +7,5 @@ export default {
   component: 'wokwi-slide-switch',
 };
 
-export const slideSwitch = () =>
+export const SlideSwitch = () =>
   html`<wokwi-slide-switch @input=${action('input')}></wokwi-slide-switch>`;

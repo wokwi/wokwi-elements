@@ -7,7 +7,7 @@ export default {
   component: 'wokwi-pushbutton',
 };
 
-export const red = () =>
+export const Red = () =>
   html`
     <wokwi-pushbutton
       color="red"
@@ -16,7 +16,7 @@ export const red = () =>
     ></wokwi-pushbutton>
   `;
 
-export const green = () =>
+export const Green = () =>
   html`
     <wokwi-pushbutton
       color="green"
@@ -25,7 +25,7 @@ export const green = () =>
     ></wokwi-pushbutton>
   `;
 
-export const redWithLabel = () =>
+export const RedWithLabel = () =>
   html`
     <wokwi-pushbutton
       color="red"
@@ -35,7 +35,7 @@ export const redWithLabel = () =>
     ></wokwi-pushbutton>
   `;
 
-export const redWithLongLabel = () =>
+export const RedWithLongLabel = () =>
   html`
     <wokwi-pushbutton
       color="red"
@@ -45,7 +45,7 @@ export const redWithLongLabel = () =>
     ></wokwi-pushbutton>
   `;
 
-export const fourButtons = () =>
+export const FourButtons = () =>
   html`
     <wokwi-pushbutton
       color="red"
