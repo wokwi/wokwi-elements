@@ -22,8 +22,8 @@ export class LEDElement extends LitElement {
   @property({ type: Boolean }) flip = false;
 
   get pinInfo(): ElementPin[] {
-    const anodeX = this.flip ? 15 : 25; 
-    const cathodeX = this.flip ? 25 : 15; 
+    const anodeX = this.flip ? 15 : 25;
+    const cathodeX = this.flip ? 25 : 15;
 
     return [
       { name: 'A', x: anodeX, y: 42, signals: [], description: 'Anode' },
@@ -78,8 +78,11 @@ export class LEDElement extends LitElement {
             <feGaussianBlur stdDeviation="4" />
           </filter>
           <rect x="2.5099" y="20.382" width="2.1514" height="9.8273" fill="#8c8c8c" />
-          <path d="m12.977 30.269c0-1.1736-0.86844-2.5132-1.8916-3.4024-0.41616-0.3672-1.1995-1.0015-1.1995-1.4249v-5.4706h-2.1614v5.7802c0 1.0584 0.94752 1.8785 1.9462 2.7482 0.44424 0.37584 1.3486 1.2496 1.3486 1.7694" fill="#8c8c8c"/>
-          
+          <path
+            d="m12.977 30.269c0-1.1736-0.86844-2.5132-1.8916-3.4024-0.41616-0.3672-1.1995-1.0015-1.1995-1.4249v-5.4706h-2.1614v5.7802c0 1.0584 0.94752 1.8785 1.9462 2.7482 0.44424 0.37584 1.3486 1.2496 1.3486 1.7694"
+            fill="#8c8c8c"
+          />
+
           <path
             d="m14.173 13.001v-5.9126c0-3.9132-3.168-7.0884-7.0855-7.0884-3.9125 0-7.0877 3.1694-7.0877 7.0884v13.649c1.4738 1.651 4.0968 2.7526 7.0877 2.7526 4.6195 0 8.3686-2.6179 8.3686-5.8594v-1.5235c-7.4e-4 -1.1426-0.47444-2.2039-1.283-3.1061z"
             opacity=".3"
