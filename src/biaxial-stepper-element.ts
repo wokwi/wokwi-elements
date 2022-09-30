@@ -19,7 +19,7 @@ export class BiaxialStepperElement extends LitElement {
   @property() outerHandLength = 30;
 
   // the current hand angle in degrees
-  @property() outerHandAngle = 0;
+  @property({ type: Number }) outerHandAngle = 0;
 
   // the current outer hand color
   @property() outerHandColor = 'gold';
@@ -31,7 +31,7 @@ export class BiaxialStepperElement extends LitElement {
   @property() innerHandLength = 30;
 
   // the current hand angle in degrees
-  @property() innerHandAngle = 0;
+  @property({ type: Number }) innerHandAngle = 0;
 
   // the current inner hand color
   @property() innerHandColor = 'silver';
