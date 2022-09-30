@@ -17,9 +17,9 @@ export interface NEMASpec {
   bodyRadius: number; // the round motor body size
   textSize: number; // Text size showing units etc
   /**  Y position of value text */
-  valueYPosition: number; 
+  valueYPosition: number;
   /**  Y position of units text */
-  unitsYPosition: number;  
+  unitsYPosition: number;
 }
 
 const defaultSize = 23;
