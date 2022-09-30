@@ -48,13 +48,13 @@ const Template = ({
 
 export const Default = Template.bind({});
 Default.args = {
-  innerHandLength: 25,
-  innerHandColor: 'red',
-  innerHandShape: 'arrow',
-  innerHandAngle: 225,
-  outerHandLength: 30,
-  outerHandColor: 'green',
-  outerHandShape: 'arrow',
+  innerHandLength: 70,
+  innerHandColor: 'silver',
+  innerHandShape: 'plain',
+  innerHandAngle: 90,
+  outerHandLength: 70,
+  outerHandColor: 'gold',
+  outerHandShape: 'plain',
   outerHandAngle: 270,
 };
 
@@ -116,6 +116,18 @@ SameLength.args = {
   outerHandColor: 'green',
   outerHandShape: 'plain',
   outerHandAngle: 180,
+};
+
+export const LongArrows = Template.bind({});
+LongArrows.args = {
+  innerHandLength: 70,
+  innerHandColor: 'blue',
+  innerHandShape: 'arrow',
+  innerHandAngle: 90,
+  outerHandLength: 70,
+  outerHandColor: 'green',
+  outerHandShape: 'arrow',
+  outerHandAngle: 270,
 };
 
 export const OrnateClock = Template.bind({});
