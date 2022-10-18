@@ -30,7 +30,7 @@ export class ResistorElement extends LitElement {
 
   readonly pinInfo: ElementPin[] = [
     { name: '1', x: 0, y: 9, signals: [] },
-    { name: '2', x: 59, y: 9, signals: [] },
+    { name: '2', x: 58.8, y: 9, signals: [] },
   ];
 
   private breakValue(value: number) {
@@ -95,7 +95,7 @@ export class ResistorElement extends LitElement {
             <stop stop-color="#fff" stop-opacity=".42268" offset="1" />
           </linearGradient>
         </defs>
-        <rect y="1.1759" width="15.645" height=".63826" fill="#eaeaea" />
+        <rect y="1.1759" width="15.558" height=".63826" fill="#aaa" />
         <g stroke-width=".14479" fill="#d5b597">
           <path
             id="body"
