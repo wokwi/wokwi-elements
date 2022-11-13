@@ -42,7 +42,7 @@
     "web-component-analyzer": "^1.1.6"
   },
   "dependencies": {
-    "@types/react": "^18.0.25",
+    "@types/react": ">=16",
     "lit": "^2.0.0"
   },
   "scripts": {
