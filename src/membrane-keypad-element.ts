@@ -61,6 +61,13 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
+  update(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('columns')) {
+      this.dispatchEvent(new CustomEvent('pininfo-change'));
+    }
+    super.update(changedProperties);
+  }
+
   private pressedKeys = new Set<string>();
 
   renderKey(row: number, column: number) {

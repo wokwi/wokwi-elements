@@ -124,6 +124,13 @@ export class StepperMotorElement extends LitElement {
     },
   };
 
+  update(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('size')) {
+      this.dispatchEvent(new CustomEvent('pininfo-change'));
+    }
+    super.update(changedProperties);
+  }
+
   render() {
     const spec = this.nemaSpecMap[this.size] ?? this.nemaSpecMap[defaultSize];
 

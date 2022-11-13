@@ -47,6 +47,13 @@ export class SlidePotentiometerElement extends LitElement {
     `;
   }
 
+  update(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('travelLength')) {
+      this.dispatchEvent(new CustomEvent('pininfo-change'));
+    }
+    super.update(changedProperties);
+  }
+
   render() {
     const { value, min: minValue, max: maxValue, travelLength } = this;
     // Tip is centered by default

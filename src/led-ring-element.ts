@@ -105,6 +105,13 @@ export class LEDRingElement extends LitElement {
     this.animationFrame = requestAnimationFrame(this.animateStep);
   };
 
+  update(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('pixels') || changedProperties.has('pixelSpacing')) {
+      this.dispatchEvent(new CustomEvent('pininfo-change'));
+    }
+    super.update(changedProperties);
+  }
+
   updated() {
     if (this.animation && !this.animationFrame) {
       this.animationFrame = requestAnimationFrame(this.animateStep);

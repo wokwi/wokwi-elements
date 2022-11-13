@@ -30,15 +30,31 @@ export class ShowPinsElement extends LitElement {
   @property() pinColor = 'red';
   @query('#content') elementSlot!: HTMLSlotElement;
 
+  previousSlotChild?: ElementWithPinInfo;
+
   get slotChild() {
     return this.elementSlot?.assignedElements()[0] as ElementWithPinInfo | undefined;
+  }
+
+  private pinInfoChangeCallback = () => {
+    this.requestUpdate();
+  };
+
+  handleSlotChange() {
+    const slotChild = this.slotChild;
+    if (slotChild !== this.previousSlotChild) {
+      this.previousSlotChild?.removeEventListener('pininfo-change', this.pinInfoChangeCallback);
+      slotChild?.addEventListener('pininfo-change', this.pinInfoChangeCallback);
+      this.previousSlotChild = slotChild;
+    }
+    this.requestUpdate();
   }
 
   render() {
     const pinInfo = this.slotChild?.pinInfo ?? [];
     const { pinColor } = this;
     return html`<div style="position: relative">
-      <slot id="content" @slotchange=${() => this.requestUpdate()}></slot>
+      <slot id="content" @slotchange=${() => this.handleSlotChange()}></slot>
 
       <svg style="position: absolute; top: 0; left: 0" width="100%" height="100%" fill=${pinColor}>
         ${pinInfo.map(

@@ -143,6 +143,13 @@ export class SevenSegmentElement extends LitElement {
     return this.pins === 'extend' ? 2 : 0;
   }
 
+  update(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('digits') || changedProperties.has('pins')) {
+      this.dispatchEvent(new CustomEvent('pininfo-change'));
+    }
+    super.update(changedProperties);
+  }
+
   renderDigit(x: number, startIndex: number) {
     const fill = (index: number) => (this.values[startIndex + index] ? this.color : this.offColor);
     return svg`

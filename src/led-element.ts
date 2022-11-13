@@ -54,6 +54,13 @@ export class LEDElement extends LitElement {
     `;
   }
 
+  update(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('flip')) {
+      this.dispatchEvent(new CustomEvent('pininfo-change'));
+    }
+    super.update(changedProperties);
+  }
+
   render() {
     const { color, lightColor, flip } = this;
     const lightColorActual = lightColor || lightColors[color?.toLowerCase()] || color;

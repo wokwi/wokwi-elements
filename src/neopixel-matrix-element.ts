@@ -168,6 +168,18 @@ export class NeopixelMatrixElement extends LitElement {
     this.animationFrame = requestAnimationFrame(this.animateStep);
   };
 
+  update(changedProperties: Map<string, unknown>) {
+    if (
+      changedProperties.has('rows') ||
+      changedProperties.has('cols') ||
+      changedProperties.has('rowSpacing') ||
+      changedProperties.has('colSpacing')
+    ) {
+      this.dispatchEvent(new CustomEvent('pininfo-change'));
+    }
+    super.update(changedProperties);
+  }
+
   updated() {
     if (this.animation && !this.animationFrame) {
       this.animationFrame = requestAnimationFrame(this.animateStep);

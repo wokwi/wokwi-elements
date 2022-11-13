@@ -11,18 +11,16 @@ const x4Pos = 71.8;
 
 @customElement('wokwi-ks2e-m-dc5')
 export class KS2EMDC5Element extends LitElement {
-  get pinInfo(): ElementPin[] {
-    return [
-      { name: 'NO2', x: x1Pos, y: y1Pos, signals: [], number: 8 },
-      { name: 'NC2', x: x2Pos, y: y1Pos, signals: [], number: 6 },
-      { name: 'P2', x: x3Pos, y: y1Pos, signals: [], number: 4 },
-      { name: 'COIL2', x: x4Pos, y: y1Pos, signals: [{ type: 'power', signal: 'GND' }], number: 1 },
-      { name: 'NO1', x: x1Pos, y: y2Pos, signals: [], number: 9 },
-      { name: 'NC1', x: x2Pos, y: y2Pos, signals: [], number: 11 },
-      { name: 'P1', x: x3Pos, y: y2Pos, signals: [], number: 13 },
-      { name: 'COIL1', x: x4Pos, y: y2Pos, signals: [], number: 16 },
-    ];
-  }
+  readonly pinInfo: ElementPin[] = [
+    { name: 'NO2', x: x1Pos, y: y1Pos, signals: [], number: 8 },
+    { name: 'NC2', x: x2Pos, y: y1Pos, signals: [], number: 6 },
+    { name: 'P2', x: x3Pos, y: y1Pos, signals: [], number: 4 },
+    { name: 'COIL2', x: x4Pos, y: y1Pos, signals: [{ type: 'power', signal: 'GND' }], number: 1 },
+    { name: 'NO1', x: x1Pos, y: y2Pos, signals: [], number: 9 },
+    { name: 'NC1', x: x2Pos, y: y2Pos, signals: [], number: 11 },
+    { name: 'P1', x: x3Pos, y: y2Pos, signals: [], number: 13 },
+    { name: 'COIL1', x: x4Pos, y: y2Pos, signals: [], number: 16 },
+  ];
 
   render() {
     return html`

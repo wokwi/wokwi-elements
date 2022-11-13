@@ -109,6 +109,13 @@ export class LCD1602Element extends LitElement {
     return this.numRows;
   }
 
+  update(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has('pins')) {
+      this.dispatchEvent(new CustomEvent('pininfo-change'));
+    }
+    super.update(changedProperties);
+  }
+
   path(characters: Uint8Array | number[]) {
     const xSpacing = 0.6;
     const ySpacing = 0.7;
