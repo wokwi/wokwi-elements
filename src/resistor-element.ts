@@ -29,8 +29,8 @@ export class ResistorElement extends LitElement {
   @property() value = '1000';
 
   readonly pinInfo: ElementPin[] = [
-    { name: '1', x: 0, y: 9, signals: [] },
-    { name: '2', x: 58.8, y: 9, signals: [] },
+    { name: '1', x: 0, y: 10, signals: [] },
+    { name: '2', x: 58.8, y: 10, signals: [] },
   ];
 
   private breakValue(value: number) {
