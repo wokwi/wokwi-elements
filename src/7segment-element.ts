@@ -134,7 +134,7 @@ export class SevenSegmentElement extends LitElement {
     const cols = Math.ceil(numPins / 2);
     return {
       startX: (12.55 * digits - cols * 2.54) / 2,
-      bottomY: this.pins === 'extend' ? 21 : 17,
+      bottomY: this.pins === 'extend' ? 21 : 18,
       cols,
     };
   }
@@ -191,7 +191,7 @@ export class SevenSegmentElement extends LitElement {
   render() {
     const { digits, colon, pins, yOffset } = this;
     const width = 12.55 * digits;
-    const height = pins === 'extend' ? 23 : 19;
+    const height = pins === 'extend' ? 23 : 22;
     const digitShapes = [];
     for (let i = 0; i < digits; i++) {
       digitShapes.push(this.renderDigit(3.5 + i * 12.7, i * 8));
@@ -211,7 +211,7 @@ export class SevenSegmentElement extends LitElement {
               : svg`<circle cx="1.27" cy="1" r=0.5 fill="#aaa" />`}
           </pattern>
         </defs>
-        <rect x="0" y="${yOffset}" width="${width}" height="19" />
+        <rect x="0" y="${yOffset}" width="${width}" height="20.5" />
         ${digitShapes}<!-- -->
         ${colon ? this.renderColon() : null}<!-- -->
         ${pins !== 'none' ? this.renderPins() : null}

@@ -14,8 +14,8 @@ export class BuzzerElement extends LitElement {
   @property() hasSignal = false;
 
   readonly pinInfo: ElementPin[] = [
-    { name: '1', x: 30, y: 82, signals: [] },
-    { name: '2', x: 34, y: 82, signals: [] },
+    { name: '1', x: 27, y: 84, signals: [] },
+    { name: '2', x: 37, y: 84, signals: [] },
   ];
 
   static get styles() {
@@ -90,8 +90,8 @@ export class BuzzerElement extends LitElement {
           viewBox="0 0 17 20"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="m8 16.5v3.5" fill="none" stroke="#000" stroke-width=".5" />
-          <path d="m9 16.5v3.5" fill="#f00" stroke="#f00" stroke-width=".5" />
+          <path d="m7.23 16.5v3.5" fill="none" stroke="#000" stroke-width=".5" />
+          <path d="m9.77 16.5v3.5" fill="#f00" stroke="#f00" stroke-width=".5" />
           <g stroke="#000">
             <g>
               <ellipse cx="8.5" cy="8.5" rx="8.15" ry="8.15" fill="#1a1a1a" stroke-width=".7" />

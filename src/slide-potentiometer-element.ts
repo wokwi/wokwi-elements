@@ -16,7 +16,7 @@ export class SlidePotentiometerElement extends LitElement {
   get pinInfo(): ElementPin[] {
     return [
       { name: 'VCC', x: 1, y: 43, number: 1, signals: [{ type: 'power', signal: 'VCC' }] },
-      { name: 'SIG', x: 1, y: 66.5, number: 2, signals: [analog(0)] },
+      { name: 'SIG', x: 1, y: 63, number: 2, signals: [analog(0)] },
       {
         name: 'GND',
         x: 93.6 + this.travelLength * mmToPix,
@@ -121,7 +121,7 @@ export class SlidePotentiometerElement extends LitElement {
         <g fill="#ccc">
           <rect x="0" y="11" width="5" height="0.75" />
           <rect x="${travelLength + 20}" y="11" width="5" height="0.75" />
-          <rect x="0" y="17.25" width="5" height="0.75" />
+          <rect x="0" y="16.25" width="5" height="0.75" />
         </g>
         <g transform="translate(5 5)">
           <!-- Body -->

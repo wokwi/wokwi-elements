@@ -9,10 +9,10 @@ export class NeoPixelElement extends LitElement {
   @property() b = 0;
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'VDD', y: 3.5, x: 0, number: 1, signals: [VCC()] },
-    { name: 'DOUT', y: 15.5, x: 0, number: 2, signals: [] },
-    { name: 'VSS', y: 15.5, x: 22, number: 3, signals: [{ type: 'power', signal: 'GND' }] },
-    { name: 'DIN', y: 3.5, x: 22, number: 4, signals: [GND()] },
+    { name: 'VDD', y: 3.5, x: 1, number: 1, signals: [VCC()] },
+    { name: 'DOUT', y: 14, x: 1, number: 2, signals: [] },
+    { name: 'VSS', y: 14, x: 21, number: 3, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'DIN', y: 3.5, x: 21, number: 4, signals: [GND()] },
   ];
 
   render() {
@@ -49,10 +49,10 @@ export class NeoPixelElement extends LitElement {
           <feGaussianBlur stdDeviation="0.5" />
         </filter>
         <rect x=".33308" y="0" width="5" height="5" fill="${background}" />
-        <rect x=".016709" y=".4279" width=".35114" height=".9" fill="#eaeaea" />
-        <rect x="0" y="3.6518" width=".35114" height=".9" fill="#eaeaea" />
-        <rect x="5.312" y="3.6351" width=".35114" height=".9" fill="#eaeaea" />
-        <rect x="5.312" y=".3945" width=".35114" height=".9" fill="#eaeaea" />
+        <rect x="0" y=".5" width=".35" height=".9" fill="#c3c2c3" />
+        <rect x="0" y="3.1" width=".35" height=".9" fill="#c3c2c3" />
+        <rect x="5.3" y="3.1" width=".35" height=".9" fill="#c3c2c3" />
+        <rect x="5.3" y=".5" width=".35" height=".9" fill="#c3c2c3" />
         <circle cx="2.8331" cy="2.5" r="2.1" fill="#ddd" />
         <circle cx="2.8331" cy="2.5" r="1.7325" fill="#e6e6e6" />
         <g fill="#bfbfbf">

@@ -26,8 +26,8 @@ export class PotentiometerElement extends LitElement {
 
   readonly pinInfo: ElementPin[] = [
     { name: 'GND', x: 29, y: 68.5, number: 1, signals: [{ type: 'power', signal: 'GND' }] },
-    { name: 'SIG', x: 37, y: 68.5, number: 2, signals: [analog(0)] },
-    { name: 'VCC', x: 44.75, y: 68.5, number: 3, signals: [{ type: 'power', signal: 'VCC' }] },
+    { name: 'SIG', x: 39, y: 68.5, number: 2, signals: [analog(0)] },
+    { name: 'VCC', x: 49, y: 68.5, number: 3, signals: [{ type: 'power', signal: 'VCC' }] },
   ];
 
   static get styles() {
@@ -126,19 +126,11 @@ export class PotentiometerElement extends LitElement {
           fill="#e4e8eb"
           stroke-width=".15"
         />
-        <rect
-          x="6.6"
-          y="17"
-          width="6.5"
-          height="2"
-          fill-opacity="0"
-          stroke="#fff"
-          stroke-width=".30"
-        />
+        <rect x="6" y="17" width="8" height="2" fill-opacity="0" stroke="#fff" stroke-width=".30" />
         <g stroke-width=".15">
           <text x="6.21" y="16.6">GND</text>
-          <text x="8.75" y="16.63">SIG</text>
-          <text x="11.25" y="16.59">VCC</text>
+          <text x="9.2" y="16.63">SIG</text>
+          <text x="11.5" y="16.59">VCC</text>
         </g>
         <g fill="#fff" stroke-width=".15">
           <ellipse cx="1.68" cy="1.81" rx=".99" ry=".96" />
@@ -148,8 +140,8 @@ export class PotentiometerElement extends LitElement {
         </g>
         <g fill="#b3b1b0" stroke-width=".15">
           <ellipse cx="7.68" cy="18" rx=".61" ry=".63" />
-          <ellipse cx="9.75" cy="18" rx=".61" ry=".63" />
-          <ellipse cx="11.87" cy="18" rx=".61" ry=".63" />
+          <ellipse cx="10.22" cy="18" rx=".61" ry=".63" />
+          <ellipse cx="12.76" cy="18" rx=".61" ry=".63" />
         </g>
         <ellipse cx="9.95" cy="8.06" rx="6.60" ry="6.58" fill="#c3c2c3" stroke-width=".15" />
         <rect id="rotating" x="10" y="2" width=".42" height="3.1" stroke-width=".15" />
