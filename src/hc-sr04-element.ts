@@ -5,10 +5,10 @@ import { ElementPin } from './pin';
 @customElement('wokwi-hc-sr04')
 export class HCSR04Element extends LitElement {
   readonly pinInfo: ElementPin[] = [
-    { name: 'VCC', x: 71.78, y: 94.5, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
-    { name: 'TRIG', x: 79.67, y: 94.5, signals: [] },
-    { name: 'ECHO', x: 87.56, y: 94.5, signals: [] },
-    { name: 'GND', x: 95.45, y: 94.5, signals: [{ type: 'power', signal: 'GND' }] },
+    { name: 'VCC', x: 71.3, y: 94.5, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
+    { name: 'TRIG', x: 81.3, y: 94.5, signals: [] },
+    { name: 'ECHO', x: 91.3, y: 94.5, signals: [] },
+    { name: 'GND', x: 101.3, y: 94.5, signals: [{ type: 'power', signal: 'GND' }] },
   ];
 
   render() {
@@ -68,18 +68,18 @@ export class HCSR04Element extends LitElement {
         />
         <g fill="black">
           <rect x="17.87" y="18" ry=".568" width="2.25" height="2.271" />
-          <rect x="19.95" y="18" ry=".568" width="2.25" height="2.271" />
-          <rect x="22.04" y="18" ry=".568" width="2.25" height="2.271" />
-          <rect x="24.12" y="18" ry=".568" width="2.25" height="2.271" />
+          <rect x="20.41" y="18" ry=".568" width="2.25" height="2.271" />
+          <rect x="22.95" y="18" ry=".568" width="2.25" height="2.271" />
+          <rect x="25.49" y="18" ry=".568" width="2.25" height="2.271" />
         </g>
         <g fill="#ccc" stroke-linecap="round" stroke-width=".21">
-          <rect x="18.616" y="19" width=".75" height="7" rx=".2" />
-          <rect x="20.702" y="19" width=".75" height="7" rx=".2" />
-          <rect x="22.789" y="19" width=".75" height="7" rx=".2" />
-          <rect x="24.875" y="19" width=".75" height="7" rx=".2" />
+          <rect x="18.61" y="19" width=".75" height="7" rx=".2" />
+          <rect x="21.15" y="19" width=".75" height="7" rx=".2" />
+          <rect x="23.69" y="19" width=".75" height="7" rx=".2" />
+          <rect x="26.23" y="19" width=".75" height="7" rx=".2" />
         </g>
         <text font-weight="400" font-size="2.2" fill="#e6e6e6" stroke-width=".055">
-          <tspan y="8" x="18">HC-SR04</tspan>
+          <tspan y="8" x="17.6">HC-SR04</tspan>
         </text>
         <text
           transform="rotate(-90)"
@@ -88,10 +88,10 @@ export class HCSR04Element extends LitElement {
           fill="#e6e6e6"
           stroke-width=".039"
         >
-          <tspan x="-17.591" y="19.561">Vcc</tspan>
-          <tspan x="-17.591" y="21.654">Trig</tspan>
-          <tspan x="-17.591" y="23.747">Echo</tspan>
-          <tspan x="-17.591" y="25.84">Gnd</tspan>
+          <tspan x="-17.591" y="19.561">VCC</tspan>
+          <tspan x="-17.591" y="22.101">TRIG</tspan>
+          <tspan x="-17.591" y="24.641">ECHO</tspan>
+          <tspan x="-17.591" y="27.181">GND</tspan>
         </text>
       </svg>
     `;
