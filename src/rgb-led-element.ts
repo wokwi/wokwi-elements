@@ -10,9 +10,9 @@ export class RGBLedElement extends LitElement {
 
   readonly pinInfo: ElementPin[] = [
     { name: 'R', x: 8.5, y: 44, signals: [] },
-    { name: 'COM', x: 17.5, y: 54, signals: [] },
-    { name: 'G', x: 26.4, y: 48, signals: [] },
-    { name: 'B', x: 35.7, y: 43, signals: [] },
+    { name: 'COM', x: 18, y: 54, signals: [] },
+    { name: 'G', x: 26.4, y: 44, signals: [] },
+    { name: 'B', x: 35.7, y: 44, signals: [] },
   ];
 
   render() {
@@ -30,11 +30,11 @@ export class RGBLedElement extends LitElement {
         xmlns="http://www.w3.org/2000/svg"
       >
         <!-- LED Legs -->
-        <g fill="none" stroke="#9D9999" stroke-linecap="round" stroke-width=".89px">
-          <path d="m3.3863 15.334 3.0611 13.971" />
-          <path d="m7.2753 13.972 5.9987 4.0518 1.1777 6.5679" stroke-linejoin="round" />
-          <path d="m-4.3793 14.184-5.0755 5.6592-0.10206 6.1694" stroke-linejoin="round" />
-          <path d="m-1.1952 15.607-0.33725 19.49" />
+        <g fill="none" stroke="#9D9999" stroke-linecap="round" stroke-width="1.5px">
+          <path d="m4.1 15.334 3.0611 9.971" />
+          <path d="m8 14.4 5.9987 4.0518 1.1777 6.5679" stroke-linejoin="round" />
+          <path d="m-4.3 14.184-5.0755 5.6592-0.10206 6.1694" stroke-linejoin="round" />
+          <path d="m-1.1 15.607-0.33725 18.4" />
         </g>
 
         <!-- LED Body -->

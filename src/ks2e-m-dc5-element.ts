@@ -4,10 +4,10 @@ import { ElementPin } from './pin';
 
 const y1Pos = 5.1;
 const y2Pos = 32.7;
-const x1Pos = 7.6;
-const x2Pos = 25.75;
-const x3Pos = 44;
-const x4Pos = 71.8;
+const x1Pos = 5.5;
+const x2Pos = 25;
+const x3Pos = 45;
+const x4Pos = 74;
 
 @customElement('wokwi-ks2e-m-dc5')
 export class KS2EMDC5Element extends LitElement {
@@ -36,16 +36,16 @@ export class KS2EMDC5Element extends LitElement {
           <rect x="20.2" y="4.5" width=".40" height="1" fill="#dda137" />
         </g>
         <g fill="none" stroke="#dda137" stroke-width=".47">
-          <ellipse cx="2" cy="1.35" rx=".76" ry=".76" />
-          <ellipse cx="6.8244" cy="1.35" rx=".76" ry=".76" />
-          <ellipse cx="11.649" cy="1.35" rx=".76" ry=".76" />
-          <ellipse cx="19" cy="1.35" rx=".76" ry=".76" />
-          <ellipse cx="2" cy="8.65" rx=".76" ry=".76" />
-          <ellipse cx="6.8244" cy="8.65" rx=".76" ry=".76" />
-          <ellipse cx="11.649" cy="8.65" rx=".76" ry=".76" />
-          <ellipse cx="19" cy="8.65" rx=".76" ry=".76" />
+          <ellipse cx="1.6" cy="1.35" rx=".76" ry=".76" />
+          <ellipse cx="6.68" cy="1.35" rx=".76" ry=".76" />
+          <ellipse cx="11.76" cy="1.35" rx=".76" ry=".76" />
+          <ellipse cx="19.38" cy="1.35" rx=".76" ry=".76" />
+          <ellipse cx="1.6" cy="8.65" rx=".76" ry=".76" />
+          <ellipse cx="6.68" cy="8.65" rx=".76" ry=".76" />
+          <ellipse cx="11.76" cy="8.65" rx=".76" ry=".76" />
+          <ellipse cx="19.38" cy="8.65" rx=".76" ry=".76" />
         </g>
-        <text fill="#000" font-family="sans-serif" font-size="2.8222px">
+        <text fill="#4a3510" font-family="sans-serif" font-size="2.8222px">
           <tspan x="1.07" y="6.03">KS2E-M-DC5</tspan>
         </text>
       </svg>

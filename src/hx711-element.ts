@@ -7,10 +7,10 @@ export class HX711Element extends LitElement {
   @property() type: '5kg' | '50kg' | 'gauge' | undefined;
 
   readonly pinInfo: ElementPin[] = [
-    { name: 'VCC', y: 53, x: 7, number: 1, signals: [VCC()] },
-    { name: 'DT', y: 35, x: 7, number: 2, signals: [] },
-    { name: 'SCK', y: 44, x: 7, number: 3, signals: [] },
-    { name: 'GND', y: 25.5, x: 7, number: 4, signals: [GND()] },
+    { name: 'VCC', y: 55, x: 7, number: 1, signals: [VCC()] },
+    { name: 'DT', y: 36.3, x: 7, number: 2, signals: [] },
+    { name: 'SCK', y: 46.2, x: 7, number: 3, signals: [] },
+    { name: 'GND', y: 26.5, x: 7, number: 4, signals: [GND()] },
   ];
 
   get dimension() {
