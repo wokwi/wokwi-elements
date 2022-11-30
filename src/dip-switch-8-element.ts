@@ -7,23 +7,23 @@ export class DipSwitch8Element extends LitElement {
   @property({ type: Array }) values = [0, 0, 0, 0, 0, 0, 0, 0];
 
   readonly pinInfo: ElementPin[] = [
-    { name: '1a', number: 1, y: 55, x: 7.5, signals: [] },
-    { name: '2a', number: 2, y: 55, x: 17.2, signals: [] },
-    { name: '3a', number: 3, y: 55, x: 26.7, signals: [] },
-    { name: '4a', number: 4, y: 55, x: 36.5, signals: [] },
-    { name: '5a', number: 5, y: 55, x: 45.9, signals: [] },
-    { name: '6a', number: 6, y: 55, x: 55.6, signals: [] },
-    { name: '7a', number: 7, y: 55, x: 65.2, signals: [] },
-    { name: '8a', number: 8, y: 55, x: 74.8, signals: [] },
+    { name: '1a', number: 1, y: 51.3, x: 7.5, signals: [] },
+    { name: '2a', number: 2, y: 51.3, x: 17.2, signals: [] },
+    { name: '3a', number: 3, y: 51.3, x: 26.7, signals: [] },
+    { name: '4a', number: 4, y: 51.3, x: 36.5, signals: [] },
+    { name: '5a', number: 5, y: 51.3, x: 45.9, signals: [] },
+    { name: '6a', number: 6, y: 51.3, x: 55.6, signals: [] },
+    { name: '7a', number: 7, y: 51.3, x: 65.2, signals: [] },
+    { name: '8a', number: 8, y: 51.3, x: 74.8, signals: [] },
 
-    { name: '8b', number: 9, y: 0.8, x: 74.8, signals: [] },
-    { name: '7b', number: 10, y: 0.8, x: 65.2, signals: [] },
-    { name: '6b', number: 11, y: 0.8, x: 55.6, signals: [] },
-    { name: '5b', number: 12, y: 0.8, x: 45.9, signals: [] },
-    { name: '4b', number: 13, y: 0.8, x: 36.5, signals: [] },
-    { name: '3b', number: 14, y: 0.8, x: 26.7, signals: [] },
-    { name: '2b', number: 15, y: 0.8, x: 17.2, signals: [] },
-    { name: '1b', number: 16, y: 0.8, x: 7.5, signals: [] },
+    { name: '8b', number: 9, y: 1.7, x: 74.8, signals: [] },
+    { name: '7b', number: 10, y: 1.7, x: 65.2, signals: [] },
+    { name: '6b', number: 11, y: 1.7, x: 55.6, signals: [] },
+    { name: '5b', number: 12, y: 1.7, x: 45.9, signals: [] },
+    { name: '4b', number: 13, y: 1.7, x: 36.5, signals: [] },
+    { name: '3b', number: 14, y: 1.7, x: 26.7, signals: [] },
+    { name: '2b', number: 15, y: 1.7, x: 17.2, signals: [] },
+    { name: '1b', number: 16, y: 1.7, x: 7.5, signals: [] },
   ];
 
   /**
@@ -103,38 +103,22 @@ export class DipSwitch8Element extends LitElement {
           stroke-linejoin="round"
           stroke-width=".76744"
         >
-          <rect x="73.181" y="87.634" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="83.135" y="87.455" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="92.424" y="87.639" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="102.45" y="87.639" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect
-            transform="scale(1,-1)"
-            x="111.55"
-            y="-96.722"
-            width="1.4382"
-            height="9.0831"
-            rx=".7206"
-            ry=".7206"
-          />
-          <rect x="121.12" y="87.639" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="130.78" y="87.547" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="140.62" y="87.547" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="73.516" y="41.546" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="83.469" y="41.367" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="92.758" y="41.551" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="102.78" y="41.551" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect
-            transform="scale(1,-1)"
-            x="111.89"
-            y="-50.634"
-            width="1.4382"
-            height="9.0831"
-            rx=".7206"
-            ry=".7206"
-          />
-          <rect x="121.45" y="41.551" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="131.11" y="41.459" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
-          <rect x="140.95" y="41.459" width="1.4382" height="9.0831" rx=".7206" ry=".7206" />
+          <rect x="73.181" y="87" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="83.135" y="87" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="92.424" y="87" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="102.45" y="87" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="111.55" y="87" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="121.12" y="87" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="130.78" y="87" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="140.62" y="87" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="73.516" y="44.4" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="83.469" y="44.4" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="92.758" y="44.4" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="102.78" y="44.4" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="111.89" y="44.4" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="121.45" y="44.4" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="131.11" y="44.4" width="2" height="6.5" rx=".7" ry=".7" />
+          <rect x="140.95" y="44.4" width="2" height="6.5" rx=".7" ry=".7" />
         </g>
 
         <!-- Board -->
