@@ -54,6 +54,11 @@ export interface ElementPin {
    * Optional pin description
    */
   description?: string;
+
+  /**
+   * Pin who cannot be connected to breadboard
+   */
+  noBreadboard?: boolean;
 }
 
 /** Helper function for creating PinSignalInfo objects */

@@ -43,12 +43,31 @@ export class ArduinoNanoElement extends LitElement {
     { name: 'RESET', x: 134.9, y: 62.4, signals: [] },
     { name: 'GND.1', x: 144.5, y: 62.4, signals: [{ type: 'power', signal: 'GND' }] },
     { name: 'VIN', x: 154.1, y: 62.4, signals: [{ type: 'power', signal: 'VCC' }] },
-    { name: '12.2', x: 163.7, y: 43.2, signals: [spi('MISO')] },
-    { name: '5V.2', x: 154.1, y: 43.2, signals: [{ type: 'power', signal: 'VCC', voltage: 5 }] },
-    { name: '13.2', x: 163.7, y: 33.6, signals: [spi('SCK')] },
-    { name: '11.2', x: 154.1, y: 33.6, signals: [spi('MOSI'), { type: 'pwm' }] },
-    { name: 'RESET.3', x: 163.7, y: 24, signals: [] },
-    { name: 'GND.3', x: 154.1, y: 24, signals: [{ type: 'power', signal: 'GND' }] },
+
+    { name: '12.2', x: 163.7, y: 43.2, signals: [spi('MISO')], noBreadboard: true },
+    {
+      name: '5V.2',
+      x: 154.1,
+      y: 43.2,
+      signals: [{ type: 'power', signal: 'VCC', voltage: 5 }],
+      noBreadboard: true,
+    },
+    { name: '13.2', x: 163.7, y: 33.6, signals: [spi('SCK')], noBreadboard: true },
+    {
+      name: '11.2',
+      x: 154.1,
+      y: 33.6,
+      signals: [spi('MOSI'), { type: 'pwm' }],
+      noBreadboard: true,
+    },
+    { name: 'RESET.3', x: 163.7, y: 24, signals: [], noBreadboard: true },
+    {
+      name: 'GND.3',
+      x: 154.1,
+      y: 24,
+      signals: [{ type: 'power', signal: 'GND' }],
+      noBreadboard: true,
+    },
   ];
 
   static get styles() {
