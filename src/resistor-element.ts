@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from './pin';
 
@@ -29,9 +29,17 @@ export class ResistorElement extends LitElement {
   @property() value = '1000';
 
   readonly pinInfo: ElementPin[] = [
-    { name: '1', x: 0, y: 10, signals: [] },
-    { name: '2', x: 58.8, y: 10, signals: [] },
+    { name: '1', x: 0, y: 5.65, signals: [] },
+    { name: '2', x: 58.8, y: 5.65, signals: [] },
   ];
+
+  static get styles() {
+    return css`
+      :host {
+        display: flex;
+      }
+    `;
+  }
 
   private breakValue(value: number) {
     const exponent =
