@@ -13,6 +13,7 @@
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/runtime": "^7.15.3",
+    "@node-projects/add-js-to-esm-modules": "^1.3.0",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-google-analytics": "^6.3.0-next.1",
@@ -46,7 +47,7 @@
     "lit": "^2.0.0"
   },
   "scripts": {
-    "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.js && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",
+    "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.js && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js && node ./node_modules/@node-projects/add-js-to-esm-modules/add-js-to-esm-modules.mjs ./dist/esm",
     "test": "npm run lint",
     "lint": "eslint src/**/*.ts",
     "prepare": "husky install && npm run build",
