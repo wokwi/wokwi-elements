@@ -26,8 +26,8 @@ export class ArduinoNanoElement extends LitElement {
     { name: '2', x: 115.7, y: 4.8, signals: [] },
     { name: 'GND.2', x: 125.3, y: 4.8, signals: [{ type: 'power', signal: 'GND' }] },
     { name: 'RESET.2', x: 134.9, y: 4.8, signals: [] },
-    { name: '1', x: 144.5, y: 4.8, signals: [usart('TX')] },
-    { name: '0', x: 154.1, y: 4.8, signals: [usart('RX')] },
+    { name: '0', x: 144.5, y: 4.8, signals: [usart('TX')] },
+    { name: '1', x: 154.1, y: 4.8, signals: [usart('RX')] },
     { name: '13', x: 19.7, y: 62.4, signals: [spi('SCK')] },
     { name: '3.3V', x: 29.3, y: 62.4, signals: [{ type: 'power', signal: 'VCC', voltage: 3.3 }] },
     { name: 'AREF', x: 38.9, y: 62.4, signals: [] },
@@ -169,10 +169,10 @@ export class ArduinoNanoElement extends LitElement {
             <text x="27.94">D2</text>
             <text x="30.48" fill="#1b7e84">GND</text>
             <text x="33.02">RST</text>
-            <text x="35.56" y=".65" font-size="200%">↓</text>
-            <text x="35.56" y="1.5">RX0</text>
-            <text x="38.1" y=".65" font-size="200%">↑</text>
-            <text x="38.1" y="1.5">TX0</text>
+            <text x="35.56" font-size="200%">↓</text>
+            <text x="35.56" y="1">RX0</text>
+            <text x="38.1" font-size="200%">↑</text>
+            <text x="38.1" y="1">TX1</text>
           </g>
           <g transform="translate(1.27 15.5)">
             <text x="2.54">D13</text>
