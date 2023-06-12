@@ -143,16 +143,16 @@ export class PhotoresistorSensorElement extends LitElement {
         />
 
         <!-- Text -->
-        <g fill="#fffefe" font-size="4.4px" font-family="sans-serif">
-          <text x="117.46" y="13.90">PWR</text>
-          <text x="117.46" y="18.41">LED</text>
-          <text x="133.16" y="17.37">VCC</text>
-          <text x="133.16" y="26.87">GND</text>
-          <text x="135.42" y="36.55">DO</text>
-          <text x="135.42" y="46.359">AO</text>
-          <text x="117.44" y="45.53">DO</text>
-          <text x="117.44" y="50.036">LED</text>
-        </g>
+        <text fill="#fffefe" font-size="4.4px" font-family="sans-serif">
+          <tspan x="117.46" y="13.90">PWR</tspan>
+          <tspan x="117.46" y="18.41">LED</tspan>
+          <tspan x="133.16" y="17.37">VCC</tspan>
+          <tspan x="133.16" y="26.87">GND</tspan>
+          <tspan x="135.42" y="36.55">DO</tspan>
+          <tspan x="135.42" y="46.359">AO</tspan>
+          <tspan x="117.44" y="45.53">DO</tspan>
+          <tspan x="117.44" y="50.036">LED</tspan>
+        </text>
 
         <!-- Board pins -->
         <path
