@@ -9,12 +9,20 @@ export class PushbuttonElement extends LitElement {
   @property() pressed = false;
   @property() label = '';
 
+  private static pushbuttonCounter = 0;
+  private uniqueId;
+
   readonly pinInfo: ElementPin[] = [
     { name: '1.l', x: 0, y: 13, signals: [] },
     { name: '2.l', x: 0, y: 32, signals: [] },
     { name: '1.r', x: 67, y: 13, signals: [] },
     { name: '2.r', x: 67, y: 32, signals: [] },
   ];
+
+  constructor() {
+    super();
+    this.uniqueId = 'pushbutton' + PushbuttonElement.pushbuttonCounter++;
+  }
 
   static get styles() {
     return css`
@@ -31,6 +39,14 @@ export class PushbuttonElement extends LitElement {
         text-decoration: none;
         -webkit-appearance: none;
         -moz-appearance: none;
+      }
+
+      .button-active-circle {
+        opacity: 0;
+      }
+
+      button:active .button-active-circle {
+        opacity: 1;
       }
 
       .clickable-element {
@@ -51,8 +67,8 @@ export class PushbuttonElement extends LitElement {
   }
 
   render() {
-    const { color, label } = this;
-    const buttonFill = this.pressed ? `url(#grad-down-${color})` : `url(#grad-up-${color})`;
+    const { color, label, uniqueId } = this;
+    const buttonFill = this.pressed ? `url(#grad-down-${uniqueId})` : `url(#grad-up-${uniqueId})`;
 
     return html`
       <button
@@ -72,19 +88,14 @@ export class PushbuttonElement extends LitElement {
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
         >
-          <style>
-            button:active .button-circle {
-              fill: url(#grad-down-${color});
-            }
-          </style>
           <defs>
-            <linearGradient id="grad-up-${color}" x1="0" x2="1" y1="0" y2="1">
+            <linearGradient id="grad-up-${uniqueId}" x1="0" x2="1" y1="0" y2="1">
               <stop stop-color="#ffffff" offset="0" />
               <stop stop-color="${color}" offset="0.3" />
               <stop stop-color="${color}" offset="0.5" />
               <stop offset="1" />
             </linearGradient>
-            <linearGradient id="grad-down-${color}" x1="1" x2="0" y1="1" y2="0">
+            <linearGradient id="grad-down-${uniqueId}" x1="1" x2="0" y1="1" y2="0">
               <stop stop-color="#ffffff" offset="0" />
               <stop stop-color="${color}" offset="0.3" />
               <stop stop-color="${color}" offset="0.5" />
@@ -114,7 +125,14 @@ export class PushbuttonElement extends LitElement {
             />
           </g>
           <g class="clickable-element">
-            <circle class="button-circle" cx="6" cy="6" r="3.822" fill="${buttonFill}" />
+            <circle cx="6" cy="6" r="3.822" fill="${buttonFill}" />
+            <circle
+              class="button-active-circle"
+              cx="6"
+              cy="6"
+              r="3.822"
+              fill="url(#grad-down-${uniqueId})"
+            />
             <circle
               cx="6"
               cy="6"
