@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from './pin';
-import { SPACE_KEYS } from './utils/keys';
+import { ctrlCmdPressed, SPACE_KEYS } from './utils/keys';
 
 @customElement('wokwi-pushbutton')
 export class PushbuttonElement extends LitElement {
@@ -74,11 +74,12 @@ export class PushbuttonElement extends LitElement {
       <button
         aria-label="${label} ${color} pushbutton"
         @mousedown=${this.down}
-        @mouseup=${(e: MouseEvent) => !e.ctrlKey && this.up()}
+        @mouseup=${this.up}
         @touchstart=${this.down}
         @touchend=${this.up}
+        @pointerleave=${this.up}
         @keydown=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.down()}
-        @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && !e.ctrlKey && this.up()}
+        @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.up(e)}
       >
         <svg
           width="17.802mm"
@@ -156,8 +157,8 @@ export class PushbuttonElement extends LitElement {
     }
   }
 
-  private up() {
-    if (this.pressed) {
+  private up(e: KeyboardEvent | MouseEvent) {
+    if (this.pressed && !ctrlCmdPressed(e)) {
       this.pressed = false;
       this.dispatchEvent(new Event('button-release'));
     }
