@@ -22,7 +22,7 @@
     "@storybook/addon-knobs": "^6.4.0",
     "@storybook/builder-webpack5": "^6.5.13",
     "@storybook/manager-webpack5": "^6.5.13",
-    "@storybook/web-components": "^6.5.13",
+    "@storybook/web-components": "^7.4.6",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "babel-loader": "^9.1.0",
