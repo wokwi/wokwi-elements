@@ -11,6 +11,7 @@ export class PushbuttonElement extends LitElement {
 
   private static pushbuttonCounter = 0;
   private uniqueId;
+  private sticky = false;
 
   readonly pinInfo: ElementPin[] = [
     { name: '1.l', x: 0, y: 13, signals: [] },
@@ -77,7 +78,7 @@ export class PushbuttonElement extends LitElement {
         @mouseup=${this.up}
         @touchstart=${this.down}
         @touchend=${this.up}
-        @pointerleave=${this.up}
+        @pointerleave=${this.leave}
         @keydown=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.down()}
         @keyup=${(e: KeyboardEvent) => SPACE_KEYS.includes(e.key) && this.up(e)}
       >
@@ -158,9 +159,21 @@ export class PushbuttonElement extends LitElement {
   }
 
   private up(e: KeyboardEvent | MouseEvent) {
-    if (this.pressed && !ctrlCmdPressed(e)) {
+    if (!this.pressed) {
+      return;
+    }
+    if (ctrlCmdPressed(e)) {
+      this.sticky = true;
+    } else {
+      this.sticky = false;
       this.pressed = false;
       this.dispatchEvent(new Event('button-release'));
+    }
+  }
+
+  private leave(e: MouseEvent) {
+    if (!this.sticky) {
+      this.up(e);
     }
   }
 }
