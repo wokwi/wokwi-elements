@@ -1,4 +1,4 @@
-import { html, LitElement, svg } from 'lit';
+import { html, LitElement, PropertyPart, svg } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ElementPin } from '../pin';
 
@@ -28,6 +28,9 @@ export interface ElementWithPinInfo extends Element {
 @customElement('wokwi-show-pins')
 export class ShowPinsElement extends LitElement {
   @property() pinColor = 'black';
+  // need to add properties that are functions that do something with the pins (like a callback), mouseover, click, etc.
+  // the plan is to use this in another project where im going to write a function that sets to the state that the pin is clicked
+
   @query('#content') elementSlot!: HTMLSlotElement;
 
   activePinIndex = -1;
@@ -51,15 +54,20 @@ export class ShowPinsElement extends LitElement {
     this.requestUpdate();
   }
 
-  handleMouseOver(index: number) {
-    if (index !== this.activePinIndex) {
-      this.activePinIndex = index;
+  handleMouseOver({ pin, idx }: { pin: ElementPin; idx: number }) {
+    if (idx !== this.activePinIndex) {
+      this.dispatchEvent(new CustomEvent('pin-mouseover', { detail: { pin, idx } }));
+      this.activePinIndex = idx;
       this.requestUpdate();
     }
   }
-  handleMouseOut() {
-    this.activePinIndex = -1; // Reset active pin to none
+  handleMouseOut({ pin, idx }: { pin: ElementPin; idx: number }) {
+    this.activePinIndex = -1;
+    this.dispatchEvent(new CustomEvent('pin-mouseout', { detail: { pin, index: idx } }));
     this.requestUpdate();
+  }
+  handlePinClick({ pin, idx }: { pin: ElementPin; idx: number }) {
+    this.dispatchEvent(new CustomEvent('pin-click', { detail: { pin, index: idx } }));
   }
 
   render() {
@@ -73,13 +81,14 @@ export class ShowPinsElement extends LitElement {
             svg`<rect 
         x="${pin.x - 2.5}"
         y="${pin.y - 2.5}"
+        cursor="pointer"
         fill=${this.activePinIndex === idx ? 'green' : pinColor}
         width="5" 
         height="5"
         style="transition: fill 0.3s;"  
-        @mouseover=${this.handleMouseOver.bind(this, idx)}
-        @mouseout=${this.handleMouseOut}
-        @click=${() => console.log(pin)}
+        @mouseover=${this.handleMouseOver.bind(this, { pin, idx })}
+        @mouseout=${this.handleMouseOut.bind(this, { pin, idx })}
+        @click=${this.handlePinClick.bind(this, { pin, idx })}
       ><title>${pin.name}</title></rect>`
         )}
       </svg>
