@@ -51,6 +51,7 @@ import { HX711Element } from './hx711-element';
 import { KS2EMDC5Element } from './ks2e-m-dc5-element';
 import { BiaxialStepperElement } from './biaxial-stepper-element';
 import type React from 'react';
+import { BreadboardElement } from './breadboard-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -106,6 +107,7 @@ declare global {
       'wokwi-hx711': WokwiElement<HX711Element>;
       'wokwi-ks2e-m-dc5': WokwiElement<KS2EMDC5Element>;
       'wokwi-biaxial-stepper': WokwiElement<BiaxialStepperElement>;
+      'wokwi-breadboard': WokwiElement<BreadboardElement>;
     }
   }
 }

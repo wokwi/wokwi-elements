@@ -11,9 +11,10 @@ export class ArduinoMegaElement extends LitElement {
   @property() ledTX = false;
   @property() ledPower = false;
   @property() resetPressed = false;
+  // i need to watch for element pin changes
   @query('#reset-button') resetButton!: SVGCircleElement;
 
-  readonly pinInfo: ElementPin[] = [
+  pinInfo: ElementPin[] = [
     { name: 'SCL', x: 90, y: 9, signals: [i2c('SCL')] },
     { name: 'SDA', x: 100, y: 9, signals: [i2c('SDA')] },
     { name: 'AREF', x: 109, y: 9, signals: [] },
