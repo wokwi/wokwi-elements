@@ -8,12 +8,12 @@ export default {
     type: {
       control: {
         type: 'select',
-        options: ['mini', 'full'],
+        options: ['small', 'normal'],
       },
     },
   },
   args: {
-    type: 'full',
+    type: 'normal',
   },
 };
 
@@ -21,8 +21,8 @@ const Template = ({ type }) => html` <wokwi-show-pins>
   <wokwi-breadboard type=${type}></wokwi-breadboard>
 </wokwi-show-pins>`;
 
-export const Default = Template.bind({});
-Default.args = { value: 5 };
+export const Small = Template.bind({});
+Small.args = { type: 'small' };
 
-export const Large = Template.bind({});
-Large.args = { value: 10 };
+export const Normal = Template.bind({});
+Normal.args = { type: 'normal' };
