@@ -67,6 +67,7 @@ export class ShowPinsElement extends LitElement {
     this.requestUpdate();
   }
   handlePinClick({ pin, idx }: { pin: ElementPin; idx: number }) {
+    console.log('pin clicked', pin, idx);
     this.dispatchEvent(new CustomEvent('pin-click', { detail: { pin, index: idx } }));
   }
 
