@@ -52,9 +52,9 @@ import { KS2EMDC5Element } from './ks2e-m-dc5-element';
 import { BiaxialStepperElement } from './biaxial-stepper-element';
 import type React from 'react';
 import { BreadboardElement } from './breadboard-element';
+import { ShowPinsElement } from './utils/show-pins-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -108,6 +108,7 @@ declare global {
       'wokwi-ks2e-m-dc5': WokwiElement<KS2EMDC5Element>;
       'wokwi-biaxial-stepper': WokwiElement<BiaxialStepperElement>;
       'wokwi-breadboard': WokwiElement<BreadboardElement>;
+      'wokwi-show-pins': WokwiElement<ShowPinsElement>;
     }
   }
 }

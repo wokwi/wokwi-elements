@@ -52,3 +52,4 @@ export { HX711Element } from './hx711-element';
 export { KS2EMDC5Element } from './ks2e-m-dc5-element';
 export { BiaxialStepperElement } from './biaxial-stepper-element';
 export { BreadboardElement } from './breadboard-element';
+export { ShowPinsElement } from './utils/show-pins-element';
