@@ -11,7 +11,7 @@ storiesOf('Arduino Mega', module)
   .add(
     'Mega',
     () => html`
-      <wokwi-show-pins>
+      <wokwi-show-pins pinType="rect">
         <wokwi-arduino-mega
           .led13=${boolean('LED 13', false)}
           .ledTX=${boolean('TX LED', false)}

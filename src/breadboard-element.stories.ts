@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = ({ type }) => html` <wokwi-show-pins>
+const Template = ({ type }) => html` <wokwi-show-pins pinType="circle" pinRadius="6">
   <wokwi-breadboard type=${type}></wokwi-breadboard>
 </wokwi-show-pins>`;
 
