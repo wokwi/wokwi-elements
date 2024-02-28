@@ -52,7 +52,7 @@ import { KS2EMDC5Element } from './ks2e-m-dc5-element';
 import { BiaxialStepperElement } from './biaxial-stepper-element';
 import type React from 'react';
 import { BreadboardElement } from './breadboard-element';
-import { ShowPinsElement } from './utils/show-pins-element';
+import { ShowPinsElement } from './show-pins-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 declare global {

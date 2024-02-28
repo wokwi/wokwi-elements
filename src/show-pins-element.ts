@@ -1,6 +1,6 @@
 import { html, LitElement, PropertyPart, svg } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { ElementPin } from '../pin';
+import { ElementPin } from './pin';
 
 export interface ElementWithPinInfo extends Element {
   pinInfo?: ElementPin[];
@@ -30,6 +30,7 @@ enum PinType {
   Circle = 'circle',
   Rect = 'rect',
 }
+
 @customElement('wokwi-show-pins')
 export class ShowPinsElement extends LitElement {
   @property() pinColor = 'black';

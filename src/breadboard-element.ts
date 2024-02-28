@@ -1,7 +1,6 @@
 import { html, LitElement, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from './pin';
-import './utils/show-pins-element';
 @customElement('wokwi-breadboard')
 export class BreadboardElement extends LitElement {
   @property() type: 'small' | 'normal' = 'small';
