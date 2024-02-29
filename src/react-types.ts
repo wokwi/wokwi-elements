@@ -11,6 +11,7 @@ import { NeoPixelElement } from './neopixel-element';
 import { NeopixelMatrixElement } from './neopixel-matrix-element';
 import { PotentiometerElement } from './potentiometer-element';
 import { PushbuttonElement } from './pushbutton-element';
+import { Pushbutton6mmElement } from './pushbutton-6mm-element';
 import { ResistorElement } from './resistor-element';
 import { RotaryDialerElement } from './rotary-dialer-element';
 import { SSD1306Element } from './ssd1306-element';
@@ -63,6 +64,7 @@ declare global {
       'wokwi-led': WokwiElement<LEDElement>;
       'wokwi-neopixel': WokwiElement<NeoPixelElement>;
       'wokwi-pushbutton': WokwiElement<PushbuttonElement>;
+      'wokwi-pushbutton-6mm': WokwiElement<Pushbutton6mmElement>;
       'wokwi-resistor': WokwiElement<ResistorElement>;
       'wokwi-membrane-keypad': WokwiElement<MembraneKeypadElement>;
       'wokwi-potentiometer': WokwiElement<PotentiometerElement>;

@@ -8,6 +8,7 @@ export { fontA02 } from './lcd1602-font-a02';
 export { LEDElement } from './led-element';
 export { NeoPixelElement } from './neopixel-element';
 export { PushbuttonElement } from './pushbutton-element';
+export { Pushbutton6mmElement } from './pushbutton-6mm-element';
 export { ResistorElement } from './resistor-element';
 export { MembraneKeypadElement } from './membrane-keypad-element';
 export { PotentiometerElement } from './potentiometer-element';
