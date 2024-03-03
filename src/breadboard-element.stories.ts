@@ -17,7 +17,11 @@ export default {
   },
 };
 
-const Template = ({ type }) => html` <wokwi-breadboard type=${type}></wokwi-breadboard>`;
+const Template = ({ type }) => html`
+  <wokwi-show-pins pinRadius="5" pinType="circle">
+    <wokwi-breadboard type=${type}></wokwi-breadboard>
+  </wokwi-show-pins>
+`;
 
 export const Small = Template.bind({});
 Small.args = { type: 'small' };

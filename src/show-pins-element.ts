@@ -38,6 +38,7 @@ export class ShowPinsElement extends LitElement {
   @property() pinWidth = 5;
   @property() pinHeight = 5;
   @property() pinRadius = 2.5;
+
   // need to add properties that are functions that do something with the pins (like a callback), mouseover, click, etc.
   // the plan is to use this in another project where im going to write a function that sets to the state that the pin is clicked
 
@@ -66,19 +67,19 @@ export class ShowPinsElement extends LitElement {
 
   handleMouseOver({ pin, idx }: { pin: ElementPin; idx: number }) {
     if (idx !== this.activePinIndex) {
-      this.dispatchEvent(new CustomEvent('pin-mouseover', { detail: { pin, idx } }));
+      document.dispatchEvent(new CustomEvent('pin-mouseover', { detail: { pin, idx } }));
       this.activePinIndex = idx;
       this.requestUpdate();
     }
   }
   handleMouseOut({ pin, idx }: { pin: ElementPin; idx: number }) {
     this.activePinIndex = -1;
-    this.dispatchEvent(new CustomEvent('pin-mouseout', { detail: { pin, index: idx } }));
+    document.dispatchEvent(new CustomEvent('pin-mouseout', { detail: { pin, index: idx } }));
     this.requestUpdate();
   }
   handlePinClick({ pin, idx }: { pin: ElementPin; idx: number }) {
     console.log('pin clicked', pin, idx);
-    this.dispatchEvent(new CustomEvent('pin-click', { detail: { pin, index: idx } }));
+    document.dispatchEvent(new CustomEvent('pin-click', { detail: { pin, index: idx } }));
   }
 
   render() {
