@@ -31,57 +31,23 @@ export class BreadboardElement extends LitElement {
   }
 
   constructNormalPins() {
-    // 2 colums of 25 rows with vertical gap between each 5 rows
-    // then A-E and rows 0-29; padding; then F-J and rows 0-29
-    // 2 colums of 25 rows with vertical gap between each 5 rows
-
-    for (let col = 0; col < 2; col++) {
-      let startY = 38;
-      for (let gaps = 0; gaps < 5; gaps++) {
-        for (let row = 0; row < 5; row++) {
-          this.pinInfo.push({
-            name: `${String.fromCharCode(65 + col)}${row}`,
-            x: 26.6 + col * 18.2,
-            y: startY + row * 15.2,
-          } as ElementPin);
-        }
-        let addon = gaps === 2 ? 24.7 : gaps === 3 ? 21.7 : 15.5;
-        startY += 5 * 15.2 + addon;
-      }
-    }
-
-    for (let col = 0; col < 5; col++) {
-      for (let row = 0; row < 30; row++) {
+    for (let col = 0; col < 4; col++) {
+      for (let row = 0; row < 12; row++) {
         this.pinInfo.push({
           name: `${String.fromCharCode(70 + col)}${row}`,
-          x: 72.3 + col * 15.3,
-          y: 38 + row * 15.25,
+          x: 10.3 + col * 17.15,
+          y: 26 + row * 17.15,
         } as ElementPin);
       }
     }
 
-    for (let col = 0; col < 5; col++) {
-      for (let row = 0; row < 30; row++) {
+    for (let col = 0; col < 4; col++) {
+      for (let row = 0; row < 12; row++) {
         this.pinInfo.push({
           name: `${String.fromCharCode(70 + col)}${row}`,
-          x: 179 + col * 15.3,
-          y: 38 + row * 15.25,
+          x: 113 + col * 17.15,
+          y: 26 + row * 17.15,
         } as ElementPin);
-      }
-    }
-
-    for (let col = 0; col < 2; col++) {
-      let startY = 38;
-      for (let gaps = 0; gaps < 5; gaps++) {
-        for (let row = 0; row < 5; row++) {
-          this.pinInfo.push({
-            name: `${String.fromCharCode(65 + col)}${row}`,
-            x: 273.5 + col * 18.2,
-            y: startY + row * 15.2,
-          } as ElementPin);
-        }
-        let addon = gaps === 2 ? 24.7 : gaps === 3 ? 21.7 : 15.5;
-        startY += 5 * 15.2 + addon;
       }
     }
   }
