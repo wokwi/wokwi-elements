@@ -22,7 +22,7 @@ export class BreadboardElement extends LitElement {
     for (let col = 0; col < 4; col++) {
       for (let row = 0; row < 4; row++) {
         this.pinInfo.push({
-          name: `${String.fromCharCode(70 + col)}${row}`,
+          name: `${String.fromCharCode(69 + col)}${row}`,
           x: 112.7 + col * 17,
           y: 26 + row * 17,
         } as ElementPin);
@@ -34,7 +34,7 @@ export class BreadboardElement extends LitElement {
     for (let col = 0; col < 4; col++) {
       for (let row = 0; row < 12; row++) {
         this.pinInfo.push({
-          name: `${String.fromCharCode(70 + col)}${row}`,
+          name: `${String.fromCharCode(65 + col)}${row}`,
           x: 10.3 + col * 17.15,
           y: 26 + row * 17.15,
         } as ElementPin);
@@ -44,7 +44,7 @@ export class BreadboardElement extends LitElement {
     for (let col = 0; col < 4; col++) {
       for (let row = 0; row < 12; row++) {
         this.pinInfo.push({
-          name: `${String.fromCharCode(70 + col)}${row}`,
+          name: `${String.fromCharCode(69 + col)}${row}`,
           x: 113 + col * 17.15,
           y: 26 + row * 17.15,
         } as ElementPin);
