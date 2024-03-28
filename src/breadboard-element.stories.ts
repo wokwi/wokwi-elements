@@ -3,7 +3,7 @@ import './breadboard-element';
 
 export default {
   title: 'Breadboard',
-  component: 'wokwi-breadboard',
+  component: 'BreaboardElement',
   argTypes: {
     type: {
       control: {
@@ -19,7 +19,7 @@ export default {
 
 const Template = ({ type }) => html`
   <wokwi-show-pins pinRadius="5" pinType="circle">
-    <wokwi-breadboard type=${type}></wokwi-breadboard>
+    <BreadboardElement type=${type}></BreadboardElement>
   </wokwi-show-pins>
 `;
 

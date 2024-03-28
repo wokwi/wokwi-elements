@@ -5,7 +5,7 @@ import { html } from 'lit';
 import './arduino-uno-element';
 
 storiesOf('Arduino Uno', module)
-  .addParameters({ component: 'wokwi-arduino-uno' })
+  .addParameters({ component: 'ArduinoUnoElement' })
   .addDecorator(withKnobs)
   .add(
     'Uno R3',

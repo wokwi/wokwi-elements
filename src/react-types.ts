@@ -50,9 +50,9 @@ import { StepperMotorElement } from './stepper-motor-element';
 import { HX711Element } from './hx711-element';
 import { KS2EMDC5Element } from './ks2e-m-dc5-element';
 import { BiaxialStepperElement } from './biaxial-stepper-element';
-import type React from 'react';
 import { BreadboardElement } from './breadboard-element';
-import { ShowPinsElement } from './show-pins-element';
+
+import type React from 'react';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -109,7 +109,6 @@ declare global {
       KS2EMDC5: WokwiElement<KS2EMDC5Element>;
       BiaxialStepper: WokwiElement<BiaxialStepperElement>;
       Breadboard: WokwiElement<BreadboardElement>;
-      ShowPins: WokwiElement<ShowPinsElement>;
     }
   }
 }
