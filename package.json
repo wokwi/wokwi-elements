@@ -1,6 +1,10 @@
 {
   "name": "@b.borisov/cu-elements",
+<<<<<<< HEAD
   "version": "1.4.17",
+=======
+  "version": "1.4.15",
+>>>>>>> parent of 4b5c86f (update version)
   "main": "dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
