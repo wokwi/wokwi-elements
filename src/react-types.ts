@@ -51,10 +51,11 @@ import { HX711Element } from './hx711-element';
 import { KS2EMDC5Element } from './ks2e-m-dc5-element';
 import { BiaxialStepperElement } from './biaxial-stepper-element';
 import { BreadboardElement } from './breadboard-element';
-
-import type React from 'react';
+import { ShowPinsElement } from './show-pins-element';
 import { MainBreadboardElement } from './main-breadboard-element';
 import { McuBreadboardElement } from './mcu-breadboard-element';
+
+import type React from 'react';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
