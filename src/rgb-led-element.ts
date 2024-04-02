@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from '.';
 
-@customElement('RgbLed')
+@customElement('wokwi-rgb-led')
 export class RGBLedElement extends LitElement {
   @property() ledRed = 0;
   @property() ledGreen = 0;
