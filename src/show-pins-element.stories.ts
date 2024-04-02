@@ -27,7 +27,7 @@ const Template = ({ pinColor, pinType, pinWidth, pinHeight, pinRadius }) => html
   pinHeight=${pinHeight}
   pinRadius=${pinRadius}
 >
-  <wokwi-arduino-mega />
+  <wokwi-main-breadboard></wokwi-main-breadboard>
 </wokwi-show-pins>`;
 
 export const Default = Template.bind({});

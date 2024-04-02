@@ -1,6 +1,7 @@
 import { html, LitElement, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from './pin';
+
 @customElement('wokwi-breadboard')
 export class BreadboardElement extends LitElement {
   @property() type: 'small' | 'normal' = 'small';
@@ -63,7 +64,7 @@ export class BreadboardElement extends LitElement {
   }
 
   render() {
-    const { type, pinInfo } = this;
+    const { type } = this;
     // svg is coming from assets folder
     return type === 'normal'
       ? html`

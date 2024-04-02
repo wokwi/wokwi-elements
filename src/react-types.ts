@@ -53,6 +53,8 @@ import { BiaxialStepperElement } from './biaxial-stepper-element';
 import type React from 'react';
 import { BreadboardElement } from './breadboard-element';
 import { ShowPinsElement } from './show-pins-element';
+import { MainBreadboardElement } from './main-breadboard-element';
+import { McuBreadboardElement } from './mcu-breadboard-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -110,6 +112,8 @@ declare global {
       BiaxialStepper: WokwiElement<BiaxialStepperElement>;
       Breadboard: WokwiElement<BreadboardElement>;
       ShowPins: WokwiElement<ShowPinsElement>;
+      MainBreadboard: WokwiElement<MainBreadboardElement>;
+      MCUBreadboard: WokwiElement<McuBreadboardElement>;
     }
   }
 }

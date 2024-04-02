@@ -77,13 +77,38 @@ export class ShowPinsElement extends LitElement {
     document.dispatchEvent(new CustomEvent('pin-mouseout', { detail: { pin, index: idx } }));
     this.requestUpdate();
   }
-  handlePinClick({ pin, idx }: { pin: ElementPin; idx: number }) {
+  handlePinClick({
+    pin,
+    idx,
+  }: {
+    pin: {
+      elementName: string;
+      pinName: string;
+      x: number;
+      y: number;
+    };
+    idx: number;
+  }) {
     console.log('pin clicked', pin, idx);
-    document.dispatchEvent(new CustomEvent('pin-click', { detail: { pin, index: idx } }));
+    document.dispatchEvent(
+      new CustomEvent('pin-click', {
+        detail: {
+          // if clicked on main breadboard, this will be the pin name --> MAINA11
+          pin: {
+            pinName: pin.elementName,
+            elementName: pin.pinName,
+            x: pin.x,
+            y: pin.y,
+          },
+          index: idx,
+        },
+      })
+    );
   }
 
   render() {
     const pinInfo = this.slotChild?.pinInfo ?? [];
+    const elementName = this.slotChild?.localName;
     const { pinColor, pinType, pinWidth, pinHeight, pinRadius } = this;
     return html`<div style="position: relative">
       <slot id="content" @slotchange=${() => this.handleSlotChange()}></slot>
@@ -100,7 +125,15 @@ export class ShowPinsElement extends LitElement {
         style="transition: fill 0.3s;"  
         @mouseover=${this.handleMouseOver.bind(this, { pin, idx })}
         @mouseout=${this.handleMouseOut.bind(this, { pin, idx })}
-        @click=${this.handlePinClick.bind(this, { pin, idx })}
+        @click=${this.handlePinClick.bind(this, {
+          pin: {
+            elementName: elementName ?? '',
+            pinName: pin.name,
+            x: pin.x,
+            y: pin.y,
+          },
+          idx,
+        })}
       ><title>${pin.name}</title></rect>
       `
             : svg`
@@ -113,7 +146,15 @@ export class ShowPinsElement extends LitElement {
         style="transition: fill 0.3s;"
         @mouseover=${this.handleMouseOver.bind(this, { pin, idx })}
         @mouseout=${this.handleMouseOut.bind(this, { pin, idx })}
-        @click=${this.handlePinClick.bind(this, { pin, idx })}
+        @click=${this.handlePinClick.bind(this, {
+          pin: {
+            elementName: elementName || '',
+            pinName: pin.name,
+            x: pin.x,
+            y: pin.y,
+          },
+          idx,
+        })}
       ><title>${pin.name}</title></circle>
       `
         )}

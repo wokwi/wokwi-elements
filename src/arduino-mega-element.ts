@@ -3,6 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import { pinsFemalePattern } from './patterns/pins-female';
 import { analog, ElementPin, i2c, spi, usart } from './pin';
 import { SPACE_KEYS } from './utils/keys';
+
 @customElement('wokwi-arduino-mega')
 export class ArduinoMegaElement extends LitElement {
   @property() led13 = false;
