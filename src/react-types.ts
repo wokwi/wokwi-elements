@@ -50,9 +50,9 @@ import { StepperMotorElement } from './stepper-motor-element';
 import { HX711Element } from './hx711-element';
 import { KS2EMDC5Element } from './ks2e-m-dc5-element';
 import { BiaxialStepperElement } from './biaxial-stepper-element';
-import type React from 'react';
 import { BreadboardElement } from './breadboard-element';
-import { ShowPinsElement } from './show-pins-element';
+
+import type React from 'react';
 import { MainBreadboardElement } from './main-breadboard-element';
 import { McuBreadboardElement } from './mcu-breadboard-element';
 

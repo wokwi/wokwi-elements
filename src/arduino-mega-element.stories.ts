@@ -5,7 +5,7 @@ import './arduino-mega-element';
 import { action } from '@storybook/addon-actions';
 
 storiesOf('Arduino Mega', module)
-  .addParameters({ component: 'wokwi-arduino-mega' })
+  .addParameters({ component: 'ArduinoMegaElement' })
   .addDecorator(withKnobs)
   .add(
     'Mega',
