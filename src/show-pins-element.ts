@@ -110,7 +110,7 @@ export class ShowPinsElement extends LitElement {
     const pinInfo = this.slotChild?.pinInfo ?? [];
     const elementName = this.slotChild?.localName;
     const { pinColor, pinType, pinWidth, pinHeight, pinRadius } = this;
-    return html`<div style="position: relative">
+    return html`<div style="position: relative" class="nodrag">
       <slot id="content" @slotchange=${() => this.handleSlotChange()}></slot>
       <svg style="position: absolute; top: 0; left: 0;" width="100%" height="100%">
         ${pinInfo.map((pin, idx) =>
