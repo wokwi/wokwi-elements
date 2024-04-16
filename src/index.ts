@@ -55,3 +55,4 @@ export { BreadboardElement } from './breadboard-element';
 export { ShowPinsElement } from './show-pins-element';
 export { MainBreadboardElement } from './main-breadboard-element';
 export { McuBreadboardElement } from './mcu-breadboard-element';
+export { Attiny85Element } from './attiny85-element';

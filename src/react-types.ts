@@ -56,6 +56,7 @@ import { MainBreadboardElement } from './main-breadboard-element';
 import { McuBreadboardElement } from './mcu-breadboard-element';
 
 import type React from 'react';
+import { Attiny85Element } from './attiny85-element';
 
 type WokwiElement<T> = Partial<T> & React.ClassAttributes<T>;
 
@@ -115,6 +116,7 @@ declare global {
       ShowPins: WokwiElement<ShowPinsElement>;
       MainBreadboard: WokwiElement<MainBreadboardElement>;
       MCUBreadboard: WokwiElement<McuBreadboardElement>;
+      Attiny85: WokwiElement<Attiny85Element>;
     }
   }
 }

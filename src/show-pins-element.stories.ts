@@ -14,9 +14,9 @@ export default {
   args: {
     pinColor: 'transparent',
     pinType: 'circle',
-    pinWidth: 5,
-    pinHeight: 5,
-    pinRadius: 2.5,
+    pinWidth: 10,
+    pinHeight: 10,
+    pinRadius: 10,
   },
 };
 
@@ -27,7 +27,6 @@ const Template = ({ pinColor, pinType, pinWidth, pinHeight, pinRadius }) => html
   pinHeight=${pinHeight}
   pinRadius=${pinRadius}
 >
-  <wokwi-main-breadboard></wokwi-main-breadboard>
 </wokwi-show-pins>`;
 
 export const Default = Template.bind({});
