@@ -74,7 +74,7 @@ export class ArduinoMegaElement extends LitElement {
     { name: '50', x: 361, y: 152, signals: [spi('MISO')] },
     { name: '51', x: 371, y: 152, signals: [spi('MOSI')] },
     { name: '52', x: 361, y: 161.5, signals: [spi('SCK')] },
-    { name: '53', x: 371, y: 161.5, signals: [spi('SS')] },
+    { name: '53', x: 371, y: 161.5, signals: [] },
     { name: 'GND.4', x: 361, y: 171.25, signals: [{ type: 'power', signal: 'GND' }] },
     { name: 'GND.5', x: 371, y: 171.25, signals: [{ type: 'power', signal: 'GND' }] },
 
