@@ -37,7 +37,7 @@
     "prettier": "^2.3.2",
     "react-is": "^16.13.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.23.0",
+    "rollup": "^2.79.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "terser": "^4.8.0",
