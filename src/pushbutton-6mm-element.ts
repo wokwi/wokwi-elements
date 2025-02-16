@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from './pin';
 import { ctrlCmdPressed, SPACE_KEYS } from './utils/keys';
@@ -8,7 +8,7 @@ export class Pushbutton6mmElement extends LitElement {
   @property() color = 'red';
   @property() pressed = false;
   @property() label = '';
-
+  @property({ type: Boolean, attribute: 'xray' }) xray = false;
   private static pushbuttonCounter = 0;
   private uniqueId;
 
@@ -67,7 +67,7 @@ export class Pushbutton6mmElement extends LitElement {
   }
 
   render() {
-    const { color, label, uniqueId } = this;
+    const { color, label, uniqueId, xray } = this;
     const buttonFill = this.pressed ? `url(#grad-down-${uniqueId})` : `url(#grad-up-${uniqueId})`;
 
     return html`
@@ -191,6 +191,27 @@ export class Pushbutton6mmElement extends LitElement {
               y="0.59993488"
               rx="0.014974313"
             />
+            ${xray
+              ? svg`
+             <rect
+       style="opacity:0.3;fill:#b3b3b3;stroke-width:3.86235;paint-order:stroke markers fill"
+       id="rect18-7"
+       width="12.124171"
+       height="0.51113945"
+       x="-0.047361366"
+       y="0.90351838"
+       rx="0.12476496" />
+    <rect
+       style="opacity:0.3;fill:#b3b3b3;stroke-width:3.86235;paint-order:stroke markers fill"
+       id="rect18-7-4"
+                width="12.124171"
+                height="0.51113945"
+                x="-0.098103404"
+                y="10.614529"
+                rx="0.12476496"
+              />
+            `
+              : ''}
             <rect
               style="fill:#b3b3b3;stroke-width:1.69238;paint-order:stroke markers fill"
               id="rect18-5"

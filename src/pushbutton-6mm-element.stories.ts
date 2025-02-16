@@ -68,3 +68,6 @@ export const FourButtons = () =>
       @button-release=${action('white button-release')}
     ></wokwi-pushbutton-6mm>
   `;
+
+export const RedWithXray = () =>
+  html` <wokwi-pushbutton-6mm color="red" xray=${true}></wokwi-pushbutton-6mm> `;

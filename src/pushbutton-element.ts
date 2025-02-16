@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from './pin';
 import { ctrlCmdPressed, SPACE_KEYS } from './utils/keys';
@@ -8,6 +8,7 @@ export class PushbuttonElement extends LitElement {
   @property() color = 'red';
   @property() pressed = false;
   @property() label = '';
+  @property({ type: Boolean, attribute: 'xray' }) xray = false;
 
   private static pushbuttonCounter = 0;
   private uniqueId;
@@ -68,7 +69,7 @@ export class PushbuttonElement extends LitElement {
   }
 
   render() {
-    const { color, label, uniqueId } = this;
+    const { color, label, uniqueId, xray } = this;
     const buttonFill = this.pressed ? `url(#grad-down-${uniqueId})` : `url(#grad-up-${uniqueId})`;
 
     return html`
@@ -106,6 +107,26 @@ export class PushbuttonElement extends LitElement {
           </defs>
           <rect x="0" y="0" width="12" height="12" rx=".44" ry=".44" fill="#464646" />
           <rect x=".75" y=".75" width="10.5" height="10.5" rx=".211" ry=".211" fill="#eaeaea" />
+          ${xray
+            ? svg`
+                <rect
+                  style="opacity:0.3;fill:#999999;stroke-width:0.563001;paint-order:stroke markers fill"
+                  id="rect17"
+                  width="12.087865"
+                  height="1.0371729"
+                  x="-0.00075517414"
+                  y="2.9106798"
+                />
+                <rect
+                  style="opacity:0.3;fill:#999999;stroke-width:0.534365;paint-order:stroke markers fill"
+                  id="rect17-3"
+                  width="12.087865"
+                  height="0.93434691"
+                  x="-0.071111664"
+                  y="8.0458994"
+                />
+              `
+            : ''}
           <g fill="#1b1b1">
             <circle cx="1.767" cy="1.7916" r=".37" />
             <circle cx="10.161" cy="1.7916" r=".37" />

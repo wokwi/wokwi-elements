@@ -25,6 +25,9 @@ export const Green = () =>
     ></wokwi-pushbutton>
   `;
 
+export const RedWithXray = () =>
+  html` <wokwi-pushbutton color="red" xray=${true}></wokwi-pushbutton> `;
+
 export const RedWithLabel = () =>
   html`
     <wokwi-pushbutton
