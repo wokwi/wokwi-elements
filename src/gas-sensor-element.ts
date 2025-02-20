@@ -1,10 +1,13 @@
-import { html, LitElement } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { html, LitElement, svg } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { ElementPin } from '.';
 import { GND, VCC } from './pin';
 
 @customElement('wokwi-gas-sensor')
 export class GasSensorElement extends LitElement {
+  @property() ledPower = false;
+  @property() ledD0 = false;
+
   readonly pinInfo: ElementPin[] = [
     { name: 'AOUT', y: 16.5, x: 137, number: 1, signals: [] },
     { name: 'DOUT', y: 26.4, x: 137, number: 2, signals: [] },
@@ -13,6 +16,7 @@ export class GasSensorElement extends LitElement {
   ];
 
   render() {
+    const { ledPower, ledD0 } = this;
     return html`
       <svg
         width="36.232mm"
@@ -62,6 +66,48 @@ export class GasSensorElement extends LitElement {
           <tspan x="94.656" y="26.098">DOUT</tspan>
           <tspan x="94.656" y="35.911">GND</tspan>
           <tspan x="94.656" y="45.696">VCC</tspan>
+        </text>
+
+        <!-- LEDs -->
+
+        <rect
+          style="opacity:1;fill:#999999;stroke-width:1.5747;paint-order:stroke markers fill"
+          id="rect17"
+          width="8.5262499"
+          height="3.8281121"
+          x="81.321793"
+          y="5.8179226"
+        />
+        <rect
+          style="opacity:1;fill:#e6e6e6;stroke-width:2.05589;paint-order:stroke markers fill"
+          id="rect18"
+          width="4.8444595"
+          height="3.8281121"
+          x="83.162689"
+          y="5.8179226"
+        />
+        ${ledPower &&
+        svg`<circle cx="85.5" cy="8" r="1.8" fill="#03f704" filter="url(#ledFilter)" />`}
+        <rect
+          style="fill:#999999;stroke-width:1.5747;paint-order:stroke markers fill"
+          id="rect17-9"
+          width="8.5262499"
+          height="3.8281121"
+          x="81.018036"
+          y="48.700188"
+        />
+        <rect
+          style="fill:#e6e6e6;stroke-width:2.05589;paint-order:stroke markers fill"
+          id="rect18-0"
+          width="4.8444595"
+          height="3.8281121"
+          x="82.858932"
+          y="48.700188"
+        />
+        ${ledD0 && svg`<circle cx="85" cy="50" r="1.8" fill="#03f704" filter="url(#ledFilter)" />`}
+        <text fill="#ffffff" font-family="sans-serif" font-size="3px">
+          <tspan x="80.213432" y="4.7265162">PWR LED</tspan>
+          <tspan x="80.463821" y="55.852409">D0 LED</tspan>
         </text>
       </svg>
     `;
