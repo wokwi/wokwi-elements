@@ -14,10 +14,8 @@ export default {
   },
 };
 
-const Template = ({ led1, ledPower }) => html`<wokwi-esp32-devkit-v1
-  .led1=${led1}
-  .ledPower=${ledPower}
-></wokwi-esp32-devkit-v1>`;
+const Template = ({ led1, ledPower }) =>
+  html`<wokwi-esp32-devkit-v1 .led1=${led1} .ledPower=${ledPower}></wokwi-esp32-devkit-v1>`;
 
 export const Default = Template.bind({});
 

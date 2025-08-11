@@ -225,7 +225,7 @@ export class SlidePotentiometerElement extends LitElement {
       this.pageToLocalTransformationMatrix = getScreenCTM(
         element,
         firefoxWorkaround,
-        new DOMRect(0, 14, 1, 1)
+        new DOMRect(0, 14, 1, 1),
       );
     }
 

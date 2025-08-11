@@ -3,7 +3,7 @@ import { calculateBoundingRect } from './geometry';
 export function getScreenCTM(
   target: SVGGraphicsElement,
   workaroundElement: SVGGraphicsElement,
-  workaroundRect: DOMRectReadOnly
+  workaroundRect: DOMRectReadOnly,
 ) {
   const { userAgent } = navigator;
   const workaroundNeeded =

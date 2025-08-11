@@ -46,26 +46,26 @@ export class ResistorElement extends LitElement {
       value >= 1e10
         ? 9
         : value >= 1e9
-        ? 8
-        : value >= 1e8
-        ? 7
-        : value >= 1e7
-        ? 6
-        : value >= 1e6
-        ? 5
-        : value >= 1e5
-        ? 4
-        : value >= 1e4
-        ? 3
-        : value >= 1e3
-        ? 2
-        : value >= 1e2
-        ? 1
-        : value >= 1e1
-        ? 0
-        : value >= 1
-        ? -1
-        : -2;
+          ? 8
+          : value >= 1e8
+            ? 7
+            : value >= 1e7
+              ? 6
+              : value >= 1e6
+                ? 5
+                : value >= 1e5
+                  ? 4
+                  : value >= 1e4
+                    ? 3
+                    : value >= 1e3
+                      ? 2
+                      : value >= 1e2
+                        ? 1
+                        : value >= 1e1
+                          ? 0
+                          : value >= 1
+                            ? -1
+                            : -2;
     const base = Math.round(value / 10 ** exponent);
     if (value === 0) {
       return [0, 0];

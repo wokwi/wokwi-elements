@@ -11,6 +11,7 @@
     "sourceMap": true,
     "declaration": true,
     "noEmitOnError": true,
+    "skipLibCheck": true,
     "strict": true,
     "rootDir": "src",
     "outDir": "dist/cjs",

@@ -76,8 +76,8 @@ export class LedBarGraphElement extends LitElement {
         ${segments.map(
           (index) =>
             svg`<rect x="2.5" y="${0.4 + index * 2.54}" width="5" height="1.74" fill="${
-              values[index] ? palette?.[index] ?? color : offColor
-            }"/>`
+              values[index] ? (palette?.[index] ?? color) : offColor
+            }"/>`,
         )}
       </svg>
     `;

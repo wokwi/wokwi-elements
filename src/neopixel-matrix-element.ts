@@ -95,8 +95,8 @@ export class NeopixelMatrixElement extends LitElement {
             SVGElement,
             SVGElement,
             SVGElement,
-            SVGElement
-          ]
+            SVGElement,
+          ],
       );
     }
     return this.pixelElements;

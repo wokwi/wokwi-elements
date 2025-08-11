@@ -14,9 +14,7 @@ export default {
   },
 };
 
-const Template = ({ led1, led2 }) => html`<wokwi-big-sound-sensor
-  .led1=${led1}
-  .led2=${led2}
-></wokwi-big-sound-sensor>`;
+const Template = ({ led1, led2 }) =>
+  html`<wokwi-big-sound-sensor .led1=${led1} .led2=${led2}></wokwi-big-sound-sensor>`;
 
 export const Default = Template.bind({});

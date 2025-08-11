@@ -138,7 +138,7 @@ export class LEDRingElement extends LitElement {
           fill="white"
           stroke="black"
           stroke-width="0.25"
-          transform="rotate(${angle} ${radius} ${radius})"/>`
+          transform="rotate(${angle} ${radius} ${radius})"/>`,
       );
     }
     this.pixelElements = null; // Invalidate element cache

@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import './potentiometer-element';
 
 export default {

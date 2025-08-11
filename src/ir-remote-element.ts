@@ -93,7 +93,7 @@ export class IRRemoteElement extends LitElement {
         this.dispatchEvent(
           new CustomEvent('button-release', {
             detail: { key: buttonId, irCode },
-          })
+          }),
         );
         break;
       case 'down':
@@ -101,7 +101,7 @@ export class IRRemoteElement extends LitElement {
         this.dispatchEvent(
           new CustomEvent('button-press', {
             detail: { key: buttonId, irCode },
-          })
+          }),
         );
         break;
     }

@@ -1,57 +1,73 @@
-import { action } from '@storybook/addon-actions';
-import { storiesOf } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
+import { action } from 'storybook/actions';
 import './membrane-keypad-element';
 
-storiesOf('Membrane Keypad', module)
-  .addParameters({ component: 'wokwi-membrane-keypad' })
-  .add(
-    'Default',
-    () => html`
-      <wokwi-membrane-keypad
-        @button-press=${action('button-press')}
-        @button-release=${action('button-release')}
-      ></wokwi-membrane-keypad>
-    `
-  )
-  .add(
-    'With connector',
-    () => html`
-      <wokwi-membrane-keypad
-        @button-press=${action('button-press')}
-        @button-release=${action('button-release')}
-        .connector=${true}
-      ></wokwi-membrane-keypad>
-    `
-  )
-  .add(
-    'Custom keys',
-    () => html`
-      <wokwi-membrane-keypad
-        @button-press=${action('button-press')}
-        @button-release=${action('button-release')}
-        .keys=${['1', '2', '3', '4', 'Q', 'W', 'E', 'R', 'A', 'S', 'D', 'F', '!', '@', '#', '$']}
-      ></wokwi-membrane-keypad>
-    `
-  )
-  .add(
-    'Three columns',
-    () => html`
-      <wokwi-membrane-keypad
-        columns="3"
-        @button-press=${action('button-press')}
-        @button-release=${action('button-release')}
-      ></wokwi-membrane-keypad>
-    `
-  )
-  .add(
-    'Three columns + connector',
-    () => html`
-      <wokwi-membrane-keypad
-        columns="3"
-        @button-press=${action('button-press')}
-        @button-release=${action('button-release')}
-        .connector=${true}
-      ></wokwi-membrane-keypad>
-    `
-  );
+interface MembraneKeypadArgs {
+  columns: 3 | 4;
+  connector: boolean;
+}
+
+const meta = {
+  title: 'Membrane Keypad',
+  component: 'wokwi-membrane-keypad',
+  args: {
+    columns: 4,
+    connector: false,
+  },
+  argTypes: {
+    connector: { control: { type: 'boolean' } },
+    columns: { control: { type: 'range', min: 3, max: 4, step: 1 } },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: 'A membrane keypad component with configurable layout and keys',
+      },
+    },
+  },
+  render: ({ columns, connector }) => html`
+    <wokwi-membrane-keypad
+      @button-press=${action('button-press')}
+      @button-release=${action('button-release')}
+      columns=${columns}
+      .connector=${connector}
+    ></wokwi-membrane-keypad>
+  `,
+} satisfies Meta<MembraneKeypadArgs>;
+
+export default meta;
+type Story = StoryObj<MembraneKeypadArgs>;
+
+export const Default: Story = {};
+
+export const WithConnector: Story = {
+  args: {
+    connector: true,
+  },
+};
+
+export const CustomKeys: Story = {
+  render: ({ columns, connector }) => html`
+    <wokwi-membrane-keypad
+      @button-press=${action('button-press')}
+      @button-release=${action('button-release')}
+      columns=${columns}
+      .connector=${connector}
+      .keys=${['1', '2', '3', '4', 'Q', 'W', 'E', 'R', 'A', 'S', 'D', 'F', '!', '@', '#', '$']}
+    ></wokwi-membrane-keypad>
+  `,
+};
+
+export const ThreeColumns: Story = {
+  args: {
+    columns: 3,
+  },
+};
+
+export const ThreeColumnsWithConnector: Story = {
+  args: {
+    columns: 3,
+    connector: true,
+  },
+};

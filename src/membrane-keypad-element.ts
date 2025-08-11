@@ -257,7 +257,7 @@ export class MembraneKeypadElement extends LitElement {
       this.dispatchEvent(
         new CustomEvent('button-press', {
           detail: { key, ...this.keyIndex(key) },
-        })
+        }),
       );
     }
   }
@@ -271,7 +271,7 @@ export class MembraneKeypadElement extends LitElement {
       this.dispatchEvent(
         new CustomEvent('button-release', {
           detail: { key, ...this.keyIndex(key) },
-        })
+        }),
       );
     }
   }

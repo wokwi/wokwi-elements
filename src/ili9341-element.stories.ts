@@ -20,6 +20,8 @@ function drawLogo(canvas: HTMLCanvasElement) {
   if (!ctx) {
     return;
   }
+  drawWokwiW(ctx, 6, 120 * Math.random(), 220 * Math.random());
+
   setInterval(() => {
     ctx.fillStyle = '#ddd';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -27,13 +29,12 @@ function drawLogo(canvas: HTMLCanvasElement) {
   }, 1000);
 }
 
-export const Default = () => html` <wokwi-ili9341></wokwi-ili9341> `;
+export const Default = () => html`<wokwi-ili9341></wokwi-ili9341> `;
 
-export const Logo = ({ flipHorizontal, flipVertical }) =>
-  html`
-    <wokwi-ili9341
-      @canvas-ready=${(e) => drawLogo(e.target.canvas)}
-      .flipHorizontal=${flipHorizontal}
-      .flipVertical=${flipVertical}
-    ></wokwi-ili9341>
-  `;
+export const Logo = ({ flipHorizontal, flipVertical }) => html`
+  <wokwi-ili9341
+    @canvas-ready=${(e) => drawLogo(e.target.canvas)}
+    .flipHorizontal=${flipHorizontal}
+    .flipVertical=${flipVertical}
+  ></wokwi-ili9341>
+`;

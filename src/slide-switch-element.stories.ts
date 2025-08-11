@@ -1,6 +1,6 @@
 import { html } from 'lit';
+import { action } from 'storybook/actions';
 import './slide-switch-element';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Slide Switch',

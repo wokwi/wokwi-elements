@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import './franzininho-element';
 
 export default {
@@ -20,7 +20,7 @@ const Template = ({ ledPower, led1 }) =>
     .ledPower=${ledPower}
     .led1=${led1}
     @button-press=${action('button-press')}
-    @button-release=${action('button-press')}
+    @button-release=${action('button-release')}
   >
   </wokwi-franzininho>`;
 

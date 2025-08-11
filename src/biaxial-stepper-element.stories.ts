@@ -35,16 +35,17 @@ const Template = ({
   outerHandColor,
   outerHandShape,
   outerHandAngle,
-}) => html`<wokwi-biaxial-stepper
-  .innerHandLength=${innerHandLength}
-  .innerHandAngle=${innerHandAngle}
-  .innerHandColor=${innerHandColor}
-  .innerHandShape=${innerHandShape}
-  .outerHandLength=${outerHandLength}
-  .outerHandAngle=${outerHandAngle}
-  .outerHandColor=${outerHandColor}
-  .outerHandShape=${outerHandShape}
-></wokwi-biaxial-stepper>`;
+}) =>
+  html`<wokwi-biaxial-stepper
+    .innerHandLength=${innerHandLength}
+    .innerHandAngle=${innerHandAngle}
+    .innerHandColor=${innerHandColor}
+    .innerHandShape=${innerHandShape}
+    .outerHandLength=${outerHandLength}
+    .outerHandAngle=${outerHandAngle}
+    .outerHandColor=${outerHandColor}
+    .outerHandShape=${outerHandShape}
+  ></wokwi-biaxial-stepper>`;
 
 export const Default = Template.bind({});
 Default.args = {

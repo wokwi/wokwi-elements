@@ -58,7 +58,7 @@ export class ShowPinsElement extends LitElement {
 
       <svg style="position: absolute; top: 0; left: 0" width="100%" height="100%" fill=${pinColor}>
         ${pinInfo.map(
-          (pin) => svg`<circle cx=${pin.x} cy=${pin.y} r=2><title>${pin.name}</title></circle>`
+          (pin) => svg`<circle cx=${pin.x} cy=${pin.y} r=2><title>${pin.name}</title></circle>`,
         )}
       </svg>
     </div>`;

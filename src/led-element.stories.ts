@@ -19,10 +19,11 @@ export default {
   },
 };
 
-const Template = ({ color, flip, label, lightColor, value }) =>
+const Template = ({ color, flip, label, lightColor, value, brightness }) =>
   html`<wokwi-led
     color=${color}
     .flip=${flip}
+    .brightness=${brightness}
     label=${label}
     lightColor=${lightColor}
     .value=${value}
@@ -52,13 +53,12 @@ Orange.args = { color: 'orange' };
 export const White = Template.bind({});
 White.args = { color: 'white' };
 
-export const BrightnessLevels = () =>
-  html`
-    <wokwi-led color="red" label="0" .value=${true} brightness="0"></wokwi-led>
-    <wokwi-led color="red" label="1%" .value=${true} brightness="0.01"></wokwi-led>
-    <wokwi-led color="red" label="10%" .value=${true} brightness="0.1"></wokwi-led>
-    <wokwi-led color="red" label="25%" .value=${true} brightness="0.25"></wokwi-led>
-    <wokwi-led color="red" label="50%" .value=${true} brightness="0.5"></wokwi-led>
-    <wokwi-led color="red" label="75%" .value=${true} brightness="0.75"></wokwi-led>
-    <wokwi-led color="red" label="100%" .value=${true}></wokwi-led>
-  `;
+export const BrightnessLevels = () => html`
+  <wokwi-led color="red" label="0" .value=${true} brightness="0"></wokwi-led>
+  <wokwi-led color="red" label="1%" .value=${true} brightness="0.01"></wokwi-led>
+  <wokwi-led color="red" label="10%" .value=${true} brightness="0.1"></wokwi-led>
+  <wokwi-led color="red" label="25%" .value=${true} brightness="0.25"></wokwi-led>
+  <wokwi-led color="red" label="50%" .value=${true} brightness="0.5"></wokwi-led>
+  <wokwi-led color="red" label="75%" .value=${true} brightness="0.75"></wokwi-led>
+  <wokwi-led color="red" label="100%" .value=${true}></wokwi-led>
+`;

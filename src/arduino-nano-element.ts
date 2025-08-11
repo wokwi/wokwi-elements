@@ -306,7 +306,7 @@ export class ArduinoNanoElement extends LitElement {
     this.dispatchEvent(
       new CustomEvent('button-press', {
         detail: 'reset',
-      })
+      }),
     );
   }
 
@@ -319,7 +319,7 @@ export class ArduinoNanoElement extends LitElement {
     this.dispatchEvent(
       new CustomEvent('button-release', {
         detail: 'reset',
-      })
+      }),
     );
   }
 

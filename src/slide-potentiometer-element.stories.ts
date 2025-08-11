@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import './slide-potentiometer-element';
 
 export default {
@@ -7,15 +7,21 @@ export default {
   component: 'wokwi-slide-potentiometer',
   argTypes: {
     travelLength: { control: { type: 'range', min: 15, max: 100 } },
+    value: { control: { type: 'range', min: 0, max: 100 } },
   },
   args: {
     travelLength: 30,
+    value: 0,
   },
 };
 
-const Template = ({ travelLength, degrees = 0 }) => html`
+const Template = ({ travelLength, value, degrees = 0 }) => html`
   <div style="transform: rotate(${degrees}deg) translate(50%, 50%); width: 500px; height: 400px;">
-    <wokwi-slide-potentiometer .travelLength=${travelLength} @input=${action('input')} />
+    <wokwi-slide-potentiometer
+      .travelLength=${travelLength}
+      @input=${action('input')}
+      .value=${value}
+    />
   </div>
 `;
 

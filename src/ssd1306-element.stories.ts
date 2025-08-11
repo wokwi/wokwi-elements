@@ -1,5 +1,4 @@
-import { withKnobs } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/web-components';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import './ssd1306-element';
 
@@ -70,11 +69,27 @@ function toImageData(bitmap: Uint8Array, width: number, height: number) {
   return result;
 }
 
-storiesOf('SSD1306', module)
-  .addParameters({ component: 'wokwi-ssd1306' })
-  .addDecorator(withKnobs)
-  .add('Default', () => html`<wokwi-ssd1306></wokwi-ssd1306>`)
-  .add(
-    'Wokwi logo',
-    () => html`<wokwi-ssd1306 .imageData=${toImageData(logoBitmap, 128, 64)}></wokwi-ssd1306>`
-  );
+const meta: Meta = {
+  title: 'SSD1306',
+  component: 'wokwi-ssd1306',
+  parameters: {
+    docs: {
+      description: {
+        component: 'An SSD1306 OLED display component for showing images and graphics',
+      },
+    },
+  },
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  render: () => html`<wokwi-ssd1306></wokwi-ssd1306>`,
+};
+
+export const WokwiLogo: Story = {
+  render: () => html`
+    <wokwi-ssd1306 .imageData=${toImageData(logoBitmap, 128, 64)}></wokwi-ssd1306>
+  `,
+};

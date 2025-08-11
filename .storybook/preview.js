@@ -2,7 +2,7 @@ export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 };
 
-import { setCustomElements } from '@storybook/web-components';
+import { setCustomElements } from '@storybook/web-components-vite';
 import customElements from '../custom-elements.json';
 
 import '../src/utils/show-pins-element';
