@@ -17,7 +17,6 @@
     "@babel/core": "^7.15.0",
     "@babel/runtime": "^7.15.3",
     "@storybook/addon-docs": "9.1.1",
-    "@storybook/addon-google-analytics": "^6.3.0-next.1",
     "@storybook/web-components": "^9.1.1",
     "@storybook/web-components-vite": "^9.1.1",
     "@typescript-eslint/eslint-plugin": "^8.39.0",
