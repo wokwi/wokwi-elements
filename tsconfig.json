@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "ES2022",
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "removeComments": false,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": false,
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": true,
@@ -15,7 +16,7 @@
     "strict": true,
     "rootDir": "src",
     "outDir": "dist/cjs",
-    "lib": ["es2017", "dom"]
+    "lib": ["ES2022", "DOM"]
   },
   "exclude": ["src/**/*.stories.ts"],
   "include": ["src/**/*.ts"]

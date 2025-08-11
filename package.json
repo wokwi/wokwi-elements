@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@types/react": ">=16",
-    "lit": "^2.0.0"
+    "lit": "^3.0.0"
   },
   "scripts": {
     "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.mjs && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",
