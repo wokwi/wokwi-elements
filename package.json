@@ -16,6 +16,8 @@
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/runtime": "^7.15.3",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "@storybook/addon-docs": "9.1.1",
     "@storybook/web-components": "^9.1.1",
     "@storybook/web-components-vite": "^9.1.1",
@@ -33,9 +35,7 @@
     "prettier": "^3.5.3",
     "react-is": "^16.13.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.79.2",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup": "^4.46.2",
     "terser": "^5.43.1",
     "typescript": "^5.9.0",
     "web-component-analyzer": "^2.0.0"
@@ -45,7 +45,7 @@
     "lit": "^2.0.0"
   },
   "scripts": {
-    "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.js && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",
+    "build": "rimraf dist && tsc --sourceMap false && tsc -m esnext --outDir dist/esm --sourceMap false && rollup -c rollup.config.mjs && terser -c -m -o dist/wokwi-elements.bundle.min.js dist/wokwi-elements.bundle.js",
     "test": "npm run lint",
     "lint": "eslint src/**/*.ts",
     "prepare": "husky install && npm run build",
