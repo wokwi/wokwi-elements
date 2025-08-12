@@ -1,4 +1,4 @@
-import { html, LitElement, svg } from 'lit';
+import { css, html, LitElement, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ElementPin, GND, VCC } from './pin';
 
@@ -24,6 +24,14 @@ export class HX711Element extends LitElement {
       default:
         return { width: 580, height: 430 };
     }
+  }
+
+  static get styles() {
+    return css`
+      text {
+        user-select: none;
+      }
+    `;
   }
 
   renderSensor() {
@@ -227,11 +235,6 @@ export class HX711Element extends LitElement {
   render() {
     const { width, height } = this.dimension;
     return html`
-      <style>
-        text {
-          user-select: none;
-        }
-      </style>
       <svg
         width="${+width / 10}mm"
         height="${+height / 10}mm"

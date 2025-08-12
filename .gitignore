@@ -8,3 +8,4 @@ build
 storybook-static
 custom-elements.json
 .DS_Store
+renders/*.png

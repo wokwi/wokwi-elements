@@ -1,4 +1,4 @@
-import { html, LitElement, svg } from 'lit';
+import { css, html, LitElement, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { pinsFemalePattern } from './patterns/pins-female';
 import { ElementPin } from './pin';
@@ -61,6 +61,51 @@ export class MembraneKeypadElement extends LitElement {
     }
   }
 
+  static get styles() {
+    return css`
+      text {
+        fill: #dfe2e5;
+        user-select: none;
+      }
+
+      g[tabindex] {
+        cursor: pointer;
+      }
+
+      g[tabindex]:focus,
+      g[tabindex]:active {
+        stroke: white;
+        outline: none;
+      }
+
+      .blue-key:focus,
+      .red-key:focus {
+        filter: url(#shadow);
+      }
+
+      .blue-key:active,
+      .blue-key.pressed {
+        fill: #4e50d7;
+      }
+
+      .red-key:active,
+      .red-key.pressed {
+        fill: #ab040b;
+      }
+
+      g[tabindex]:focus text {
+        stroke: none;
+      }
+
+      g[tabindex]:active text,
+      .blue-key.pressed text,
+      .red-key.pressed text {
+        fill: white;
+        stroke: none;
+      }
+    `;
+  }
+
   update(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('columns')) {
       this.dispatchEvent(new CustomEvent('pininfo-change'));
@@ -92,7 +137,7 @@ export class MembraneKeypadElement extends LitElement {
       @keyup=${(e: KeyboardEvent) =>
         SPACE_KEYS.includes(e.key) && this.up(text, e.currentTarget as SVGElement)}
     >
-      <use xlink:href="#key" />
+      <rect width="11.2" height="11" rx="1.4" ry="1.4" stroke="#b1b5b9" stroke-width=".75" />
       <text x="5.6" y="8.1">${text}</text>
     </g>`;
   }
@@ -107,49 +152,6 @@ export class MembraneKeypadElement extends LitElement {
     const height = 76 + (connector ? 15 : 0);
 
     return html`
-      <style>
-        text {
-          fill: #dfe2e5;
-          user-select: none;
-        }
-
-        g[tabindex] {
-          cursor: pointer;
-        }
-
-        g[tabindex]:focus,
-        g[tabindex]:active {
-          stroke: white;
-          outline: none;
-        }
-
-        .blue-key:focus,
-        .red-key:focus {
-          filter: url(#shadow);
-        }
-
-        .blue-key:active,
-        .blue-key.pressed {
-          fill: #4e50d7;
-        }
-
-        .red-key:active,
-        .red-key.pressed {
-          fill: #ab040b;
-        }
-
-        g[tabindex]:focus text {
-          stroke: none;
-        }
-
-        g[tabindex]:active text,
-        .blue-key.pressed text,
-        .red-key.pressed text {
-          fill: white;
-          stroke: none;
-        }
-      </style>
-
       <svg
         width="${width}mm"
         height="${height}mm"
@@ -164,15 +166,6 @@ export class MembraneKeypadElement extends LitElement {
         @keyup=${(e: KeyboardEvent) => this.keyStrokeUp(e.key)}
       >
         <defs>
-          <rect
-            id="key"
-            width="11.2"
-            height="11"
-            rx="1.4"
-            ry="1.4"
-            stroke="#b1b5b9"
-            stroke-width=".75"
-          />
           <pattern id="wires" width="2.54" height="8" patternUnits="userSpaceOnUse">
             <rect width="2.54" height="8" fill="#eee" />
             <rect x="0.77" width="1" height="6" fill="#d9d5bc" />

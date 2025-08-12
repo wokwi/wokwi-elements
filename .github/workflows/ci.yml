@@ -2,42 +2,54 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   lint-and-build:
     runs-on: ubuntu-24.04
-    
+
     strategy:
       matrix:
         node-version: [20, 22, 24]
-    
+
+    env:
+      SAVE_PNG_PATH: ${{ github.workspace }}/renders
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run ESLint
-      run: npm run lint
-      
-    - name: Build Storybook
-      run: npm run storybook:build
-      
-    - name: Upload Storybook build artifacts
-      uses: actions/upload-artifact@v4
-      if: matrix.node-version == 20
-      with:
-        name: storybook-build
-        path: storybook-static/
-        retention-days: 30
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build Storybook
+        run: npm run storybook:build
+
+      - name: Upload Storybook build artifacts
+        uses: actions/upload-artifact@v4
+        if: matrix.node-version == 20
+        with:
+          name: storybook-build
+          path: storybook-static/
+
+      - name: Upload element renders
+        uses: actions/upload-artifact@v4
+        if: matrix.node-version == 20
+        with:
+          name: element-renders
+          path: renders/

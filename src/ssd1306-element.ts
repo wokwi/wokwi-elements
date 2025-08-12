@@ -80,60 +80,65 @@ export class SSD1306Element extends LitElement {
     }
   }
 
-  render() {
+  renderSVG() {
     const { width, height, screenWidth, screenHeight } = this;
+    return html`<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+      <rect stroke="#BE9B72" fill="#025CAF" x=".5" y=".5" width="148" height="114" rx="13" />
+
+      <g transform="translate(6 6)" fill="#59340A" stroke="#BE9B72" stroke-width="0.6px">
+        <circle cx="130" cy="6" r="5.5" />
+        <circle cx="6" cy="6" r="5.5" />
+        <circle cx="130" cy="96" r="5.5" />
+        <circle cx="6" cy="96" r="5.5" />
+      </g>
+
+      <!-- 128 x 64 screen -->
+      <rect x="11.4" y="26" fill="#1A1A1A" width="${screenWidth}" height="${screenHeight}" />
+
+      <!-- All texts -->
+      <text
+        fill="#FFF"
+        text-anchor="middle"
+        font-size="5"
+        font-weight="300"
+        font-family="monospace"
+      >
+        <tspan x="37" y="8">Data</tspan>
+        <tspan x="56" y="8">SA0</tspan>
+        <tspan x="78" y="8">CS</tspan>
+        <tspan x="97" y="8">Vin</tspan>
+        <tspan x="41" y="23">C1k</tspan>
+        <tspan x="53" y="23">DC</tspan>
+        <tspan x="64" y="23">Rst</tspan>
+        <tspan x="80" y="23">3v3</tspan>
+        <tspan x="99" y="23">Gnd</tspan>
+      </text>
+
+      <!-- Star -->
+      <path
+        fill="#FFF"
+        d="M115.5 10.06l-1.59 2.974-3.453.464 2.495 2.245-.6 3.229 3.148-1.528 3.148 1.528-.6-3.23 2.495-2.244-3.453-.464-1.59-2.974z"
+        stroke="#FFF"
+      />
+
+      <!-- PINS -->
+      <g transform="translate(33 9)" fill="#9D9D9A" stroke-width="0.4">
+        <circle stroke="#262626" cx="70.5" cy="3.5" r="3.5" />
+        <circle stroke="#007ADB" cx="60.5" cy="3.5" r="3.5" />
+        <circle stroke="#9D5B96" cx="50.5" cy="3.5" r="3.5" />
+        <circle stroke="#009E9B" cx="41.5" cy="3.5" r="3.5" />
+        <circle stroke="#E8D977" cx="31.5" cy="3.5" r="3.5" />
+        <circle stroke="#C08540" cx="21.5" cy="3.5" r="3.5" />
+        <circle stroke="#B4AEAB" cx="12.5" cy="3.5" r="3.5" />
+        <circle stroke="#E7DBDB" cx="3.5" cy="3.5" r="3.5" />
+      </g>
+    </svg>`;
+  }
+
+  render() {
+    const { screenWidth, screenHeight } = this;
     return html` <div class="container">
-      <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-        <rect stroke="#BE9B72" fill="#025CAF" x=".5" y=".5" width="148" height="114" rx="13" />
-
-        <g transform="translate(6 6)" fill="#59340A" stroke="#BE9B72" stroke-width="0.6px">
-          <circle cx="130" cy="6" r="5.5" />
-          <circle cx="6" cy="6" r="5.5" />
-          <circle cx="130" cy="96" r="5.5" />
-          <circle cx="6" cy="96" r="5.5" />
-        </g>
-
-        <!-- 128 x 64 screen -->
-        <rect x="11.4" y="26" fill="#1A1A1A" width="${screenWidth}" height="${screenHeight}" />
-
-        <!-- All texts -->
-        <text
-          fill="#FFF"
-          text-anchor="middle"
-          font-size="5"
-          font-weight="300"
-          font-family="monospace"
-        >
-          <tspan x="37" y="8">Data</tspan>
-          <tspan x="56" y="8">SA0</tspan>
-          <tspan x="78" y="8">CS</tspan>
-          <tspan x="97" y="8">Vin</tspan>
-          <tspan x="41" y="23">C1k</tspan>
-          <tspan x="53" y="23">DC</tspan>
-          <tspan x="64" y="23">Rst</tspan>
-          <tspan x="80" y="23">3v3</tspan>
-          <tspan x="99" y="23">Gnd</tspan>
-        </text>
-
-        <!-- Star -->
-        <path
-          fill="#FFF"
-          d="M115.5 10.06l-1.59 2.974-3.453.464 2.495 2.245-.6 3.229 3.148-1.528 3.148 1.528-.6-3.23 2.495-2.244-3.453-.464-1.59-2.974z"
-          stroke="#FFF"
-        />
-
-        <!-- PINS -->
-        <g transform="translate(33 9)" fill="#9D9D9A" stroke-width="0.4">
-          <circle stroke="#262626" cx="70.5" cy="3.5" r="3.5" />
-          <circle stroke="#007ADB" cx="60.5" cy="3.5" r="3.5" />
-          <circle stroke="#9D5B96" cx="50.5" cy="3.5" r="3.5" />
-          <circle stroke="#009E9B" cx="41.5" cy="3.5" r="3.5" />
-          <circle stroke="#E8D977" cx="31.5" cy="3.5" r="3.5" />
-          <circle stroke="#C08540" cx="21.5" cy="3.5" r="3.5" />
-          <circle stroke="#B4AEAB" cx="12.5" cy="3.5" r="3.5" />
-          <circle stroke="#E7DBDB" cx="3.5" cy="3.5" r="3.5" />
-        </g>
-      </svg>
+      ${this.renderSVG()}
       <canvas width="${screenWidth}" height="${screenHeight}" class="pixelated"></canvas>
     </div>`;
   }
