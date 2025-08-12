@@ -25,6 +25,7 @@ export class GasSensorElement extends LitElement {
         version="1.1"
         viewBox="0 0 137 59.5"
         xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <defs>
           <pattern id="a" width="4.1" height="4.1" patternUnits="userSpaceOnUse">

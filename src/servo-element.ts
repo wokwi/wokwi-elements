@@ -40,6 +40,7 @@ export class ServoElement extends LitElement {
     return html`
       <svg
         xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
         width="45mm"
         height="31.63mm"
         version="1.1"

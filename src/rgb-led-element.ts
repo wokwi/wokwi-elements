@@ -21,7 +21,6 @@ export class RGBLedElement extends LitElement {
     const opacity = brightness ? 0.2 + brightness * 0.6 : 0;
 
     return html`
-      <?xml version="1.0" encoding="UTF-8"?>
       <svg
         width="42.129"
         height="72.582"

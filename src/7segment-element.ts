@@ -208,7 +208,7 @@ export class SevenSegmentElement extends LitElement {
           <pattern id="pin-pattern" height="2" width="2.54" patternUnits="userSpaceOnUse">
             ${pins === 'extend'
               ? svg`<rect x="1.02" y="0" height="2" width="0.5" fill="#aaa" />`
-              : svg`<circle cx="1.27" cy="1" r=0.5 fill="#aaa" />`}
+              : svg`<circle cx="1.27" cy="1" r="0.5" fill="#aaa" />`}
           </pattern>
         </defs>
         <rect x="0" y="${yOffset}" width="${width}" height="20.5" />

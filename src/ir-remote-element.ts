@@ -137,7 +137,6 @@ export class IRRemoteElement extends LitElement {
 
   render() {
     return html`
-      <?xml version="1.0" encoding="UTF-8"?>
       <svg
         version="1.1"
         viewBox="0 0 151 316"
@@ -145,6 +144,7 @@ export class IRRemoteElement extends LitElement {
         height="83.653mm"
         font-family="sans-serif"
         xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
         @mousedown=${(e: MouseEvent) => this.buttonEvent(e, 'down')}
         @mouseup=${(e: MouseEvent) => this.buttonEvent(e, 'up')}
         @touchstart=${(e: TouchEvent) => this.buttonEvent(e, 'down')}

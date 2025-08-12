@@ -72,6 +72,7 @@ export class ArduinoUnoElement extends LitElement {
         version="1.1"
         viewBox="-4 0 72.58 53.34"
         xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <defs>
           <g id="led-body" fill="#eee">
@@ -268,7 +269,7 @@ export class ArduinoUnoElement extends LitElement {
           <tspan x="26.5" y="13">L</tspan>
           <tspan x="26.5" y="17.5">TX</tspan>
           <tspan x="26.5" y="19.8">RX</tspan>
-          <tspan x="26.5" y="20">&nbsp;</tspan>
+          <tspan x="26.5" y="20">&#160;</tspan>
         </text>
 
         <!-- Pin Labels -->
@@ -297,7 +298,7 @@ export class ArduinoUnoElement extends LitElement {
           <tspan x="0" dy="2.54">2</tspan>
           <tspan x="0" dy="2.54">TX→1</tspan>
           <tspan x="0" dy="2.54">RX←0</tspan>
-          <tspan x="0" dy="2.54">&nbsp;</tspan>
+          <tspan x="0" dy="2.54">&#160;</tspan>
         </text>
 
         <rect x="33.90" y="42.76" width="12.84" height="0.16" fill="#fff"></rect>
@@ -320,7 +321,6 @@ export class ArduinoUnoElement extends LitElement {
           <tspan x="0" dy="2.54">A3</tspan>
           <tspan x="0" dy="2.54">A4</tspan>
           <tspan x="0" dy="2.54">A5</tspan>
-          <tspan x="0" dy="2.54">&nbsp;</tspan>
         </text>
 
         <!-- Logo -->

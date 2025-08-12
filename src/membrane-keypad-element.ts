@@ -159,6 +159,7 @@ export class MembraneKeypadElement extends LitElement {
         font-size="8.2px"
         text-anchor="middle"
         xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
         @keydown=${(e: KeyboardEvent) => this.keyStrokeDown(e.key)}
         @keyup=${(e: KeyboardEvent) => this.keyStrokeUp(e.key)}
       >
