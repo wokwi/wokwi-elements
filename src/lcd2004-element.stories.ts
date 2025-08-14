@@ -20,3 +20,6 @@ export const BlueBackground = () =>
 export const I2cPins = () =>
   html`<wokwi-lcd2004 pins="i2c" text="I²C Pins" .font=${fontA02}></wokwi-lcd2004>`;
 I2cPins.storyName = 'I2C Pins';
+
+export const ScreenOnly = () =>
+  html`<wokwi-lcd2004 .screenOnly=${true} text="Screen Only"></wokwi-lcd2004>`;

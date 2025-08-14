@@ -24,6 +24,7 @@ export class LCD1602Element extends LitElement {
   @property() cursorY = 0;
   @property() backlight = true;
   @property() pins: 'full' | 'i2c' | 'none' = 'full';
+  @property() screenOnly = false;
 
   protected numCols = 16;
   protected numRows = 2;
@@ -221,8 +222,14 @@ export class LCD1602Element extends LitElement {
       background in backgroundColors ? backgroundColors[background] : backgroundColors;
 
     const panelWidth = cols * 3.5125;
-    const width = panelWidth + 23.8;
-    const height = panelHeight + 24.5;
+    const width = this.screenOnly ? panelWidth : panelWidth + 23.8;
+    const height = this.screenOnly ? panelHeight : panelHeight + 24.5;
+
+    const panelX = 12.45;
+    const panelY = 12.55;
+    const viewBox = this.screenOnly
+      ? `${panelX} ${panelY} ${panelWidth} ${panelHeight}`
+      : `0 0 ${width} ${height}`;
 
     // Dimensions according to:
     // https://www.winstar.com.tw/products/character-lcd-display-module/16x2-lcd.html
@@ -231,7 +238,7 @@ export class LCD1602Element extends LitElement {
         width="${width}mm"
         height="${height}mm"
         version="1.1"
-        viewBox="0 0 ${width} ${height}"
+        viewBox="${viewBox}"
         style="font-size: 1.5px; font-family: monospace"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -277,13 +284,17 @@ export class LCD1602Element extends LitElement {
         ${pins === 'i2c' ? this.renderI2CPins() : null}
         ${pins === 'full' ? this.renderPins(panelHeight) : null}
         <rect
-          x="12.45"
-          y="12.55"
+          x="${panelX}"
+          y="${panelY}"
           width="${panelWidth}"
           height="${panelHeight}"
           fill="url(#characters)"
         />
-        <path d="${this.path(characters)}" transform="translate(12.45, 12.55)" fill="${color}" />
+        <path
+          d="${this.path(characters)}"
+          transform="translate(${panelX}, ${panelY})"
+          fill="${color}"
+        />
         ${this.renderCursor()}
       </svg>
     `;

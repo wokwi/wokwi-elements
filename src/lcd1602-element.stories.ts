@@ -16,6 +16,7 @@ interface LCD1602Args {
   cursorY: number;
   pins: string;
   text: string;
+  screenOnly: boolean;
 }
 
 const meta: Meta<LCD1602Args> = {
@@ -31,6 +32,7 @@ const meta: Meta<LCD1602Args> = {
     color: 'black',
     cursor: false,
     pins: 'full',
+    screenOnly: false,
   } satisfies LCD1602Args,
   parameters: {
     docs: {
@@ -55,6 +57,7 @@ const Template = (args: LCD1602Args) => html`
     .color=${args.color}
     .background=${args.background}
     .pins=${args.pins}
+    .screenOnly=${args.screenOnly}
   ></wokwi-lcd1602>
 `;
 
@@ -118,4 +121,10 @@ export const NoPins: Story = Template.bind({});
 NoPins.args = {
   text: 'Look ma!           I got no pins',
   pins: 'none',
+};
+
+export const ScreenOnly: Story = Template.bind({});
+ScreenOnly.args = {
+  text: 'Screen Only',
+  screenOnly: true,
 };
