@@ -6,13 +6,11 @@ export function getScreenCTM(
   workaroundRect: DOMRectReadOnly,
 ) {
   const { userAgent } = navigator;
-  const workaroundNeeded =
-    userAgent.indexOf('Firefox') >= 0 ||
-    userAgent.indexOf('Epiphany') >= 0 ||
-    userAgent.indexOf('Safari') >= 0;
+  const workaroundNeeded = userAgent.indexOf('Epiphany') >= 0 || userAgent.indexOf('Safari') >= 0;
 
   if (workaroundNeeded) {
-    // Firefox's getScreenCTM() is broken: https://bugzilla.mozilla.org/show_bug.cgi?id=1610093
+    // In some browsers, getScreenCTM() is broken.
+    // It happened on FireFox, but they have fixed the issue since: https://bugzilla.mozilla.org/show_bug.cgi?id=1610093
     const targetCTM = target.getCTM();
     const workaroundCTM = workaroundElement?.getCTM();
     const boundingRect = workaroundElement?.getBoundingClientRect();
