@@ -20,7 +20,7 @@ export class FlameSensorElement extends LitElement {
     return html`
       <svg
         width="52.904mm"
-        heigth="16.267mm"
+        height="16.267mm"
         version="1.1"
         viewBox="0 0 200 61.5"
         xmlns="http://www.w3.org/2000/svg"
