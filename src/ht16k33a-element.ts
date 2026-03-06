@@ -1,13 +1,12 @@
 import { html, LitElement, svg, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { ElementPin, i2c, GND, VCC  } from './pin';
+import { ElementPin, i2c, GND, VCC } from './pin';
 
 @customElement('wokwi-ht16k33a')
 export class Ht16k33aElement extends LitElement {
-
   get pinInfo(): readonly ElementPin[] {
     const pinXY = (isLeft: boolean, y: number) => {
-      return { x: isLeft ? 5.75 : 71.75, y: (6.85 + y * 9.45) };
+      return { x: isLeft ? 5.75 : 71.75, y: 6.85 + y * 9.45 };
     };
 
     return [
@@ -39,67 +38,75 @@ export class Ht16k33aElement extends LitElement {
       { name: 'A7', ...pinXY(false, 10), signals: [] },
       { name: 'A8', ...pinXY(false, 11), signals: [] },
       { name: 'A9', ...pinXY(false, 12), signals: [] },
-      { name: 'A10', ...pinXY(false, 13), signals: [] }
+      { name: 'A10', ...pinXY(false, 13), signals: [] },
     ];
   }
 
   static get styles() {
-      return css`
-        text {
-          font-size: 1.75px;
-          font-family: monospace;
-          user-select: none;
-          fill: #ffffff;
-        }
-        .brand {
-          font-size: 2.5px;
-          fill: #cccccc;
-        }
-        .model {
-          font-size: 2.25px;
-          fill: #cccccc;
-        }
-      `;
-    }
+    return css`
+      text {
+        font-size: 1.75px;
+        font-family: monospace;
+        user-select: none;
+        fill: #ffffff;
+      }
+      .brand {
+        font-size: 2.5px;
+        fill: #cccccc;
+      }
+      .model {
+        font-size: 2.25px;
+        fill: #cccccc;
+      }
+    `;
+  }
 
   render() {
     return html`
-      <svg 
-        width="20.4mm" 
-        height="35.8mm" 
-        version="1.1" 
-        viewBox="0 0 20.4 35.8" 
+      <svg
+        width="20.4mm"
+        height="35.8mm"
+        version="1.1"
+        viewBox="0 0 20.4 35.8"
         xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink>
+      >
         <defs>
-          <rect id="lead" width="2.3" height=".7"/>
-          <circle id="pad" r=".85"/>
+          <rect id="lead" width="2.3" height=".7" />
+          <circle id="pad" r=".85" />
           <g id="debug">
-            <rect x="0" y="0" width="3.275" height="1.9" fill="#333"/>
-            <rect x=".125" y=".15" width="1.2" height="1.6" fill="#fc0"/>
-            <rect x="1.925" y=".15" width="1.2" height="1.6" fill="#fc0"/>
+            <rect x="0" y="0" width="3.275" height="1.9" fill="#333" />
+            <rect x=".125" y=".15" width="1.2" height="1.6" fill="#fc0" />
+            <rect x="1.925" y=".15" width="1.2" height="1.6" fill="#fc0" />
           </g>
         </defs>
-        <rect x="0" y="0" width="20.4" height="35.8" fill="#0078d0"/>
+        <rect x="0" y="0" width="20.4" height="35.8" fill="#0078d0" />
         <g fill="#ccc">
           <g transform="translate(19, 0)">
-            ${Array.from({ length: 14 }).map((_, i) => svg`<use xlink:href="#pad" y=${1.8 + i * 2.5}/>`)}
+            ${Array.from({ length: 14 }).map(
+              (_, i) => svg`<use xlink:href="#pad" y="${1.8 + i * 2.5}" />`,
+            )}
           </g>
           <g transform="translate(1.5, 0)">
-            ${Array.from({ length: 14 }).map((_, i) => svg`<use xlink:href="#pad" y=${1.8 + i * 2.5}/>`)}
+            ${Array.from({ length: 14 }).map(
+              (_, i) => svg`<use xlink:href="#pad" y="${1.8 + i * 2.5}" />`,
+            )}
           </g>
-          <circle cx="10.25" cy="2.7" r="2"/>
-          <circle cx="10.25" cy="33.2" r="2"/>
+          <circle cx="10.25" cy="2.7" r="2" />
+          <circle cx="10.25" cy="33.2" r="2" />
         </g>
         <g stroke-width=".25">
-          <rect x="6.45" y="6.1" width="7.55" height="17.6" fill="#333"/>
+          <rect x="6.45" y="6.1" width="7.55" height="17.6" fill="#333" />
           <g fill="#ccc" transform="translate(4.2, 0)">
-            ${Array.from({ length: 14 }).map((_, i) => svg`<use xlink:href="#lead" y=${6.4 + i * 1.25}/>`)}
+            ${Array.from({ length: 14 }).map(
+              (_, i) => svg`<use xlink:href="#lead" y="${6.4 + i * 1.25}" />`,
+            )}
           </g>
           <g fill="#ccc" transform="translate(13.975, 0)">
-            ${Array.from({ length: 14 }).map((_, i) => svg`<use xlink:href="#lead" y=${6.4 + i * 1.25}/>`)}
+            ${Array.from({ length: 14 }).map(
+              (_, i) => svg`<use xlink:href="#lead" y="${6.4 + i * 1.25}" />`,
+            )}
           </g>
-          <circle cx="8" cy="7.5" r=".75"/>
+          <circle cx="8" cy="7.5" r=".75" />
         </g>
         <g>
           <text x="2.5" y="2.4">GND</text>
@@ -108,10 +115,14 @@ export class Ht16k33aElement extends LitElement {
             <text x="18" y="4.9">SDA</text>
           </g>
           <g transform="translate(2.6, 24.875)">
-            ${['A15', 'A14', 'A13', 'A12', 'A11'].map((label, i) => svg`<text y=${i * 2.5}>${label}</text>`)}
+            ${['A15', 'A14', 'A13', 'A12', 'A11'].map(
+              (label, i) => svg`<text y=${i * 2.5}>${label}</text>`,
+            )}
           </g>
           <g transform="translate(17.85, 24.875)" text-anchor="end">
-            ${['A6', 'A7', 'A8', 'A9', 'A10'].map((label, i) => svg`<text y=${i * 2.5}>${label}</text>`)}
+            ${['A6', 'A7', 'A8', 'A9', 'A10'].map(
+              (label, i) => svg`<text y=${i * 2.5}>${label}</text>`,
+            )}
           </g>
           <g transform="translate(4, 5.5) rotate(-90)">
             ${['C0', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7'].map(
@@ -124,13 +135,14 @@ export class Ht16k33aElement extends LitElement {
             )}
           </g>
         </g>
-        <rect x="10" y="24.5" width="3.5" height="6.2" fill="#ececec"/>
+        <rect x="10" y="24.5" width="3.5" height="6.2" fill="#ececec" />
         <g transform="translate(10.125, 24.5)">
-          ${Array.from({ length: 3 }).map((_, i) => svg`<use xlink:href="#debug" y=${0.125 + i * 2.025}/>`)}
+          ${Array.from({ length: 3 }).map(
+            (_, i) => svg`<use xlink:href="#debug" y="${0.125 + i * 2.025}" />`,
+          )}
         </g>
         <text transform="rotate(90)" x="9.5" y="-11" class="brand">Holtek</text>
         <text transform="rotate(90)" x="9.5" y="-9" class="model">HT16K33A</text>
-        
       </svg>
     `;
   }
