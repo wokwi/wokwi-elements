@@ -1,33 +1,53 @@
+/// <reference types="storybook/test" />
+
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
 import './led-bar-graph-element';
 
-export default {
+interface LedBarGraphArgs {
+  color: string;
+  offColor: string;
+  values: number[];
+}
+
+const meta: Meta = {
   title: 'Led Bar Graph',
   component: 'wokwi-led-bar-graph',
-  argTypes: {
-    color: { control: { type: 'color' } },
-    values: 'string',
+  parameters: {
+    docs: {
+      description: {
+        component: 'A rezisable LED bar graph component with configurable colors and values',
+      },
+    },
   },
   args: {
-    values: '[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]',
     color: 'red',
+    offColor: '#444',
+    values: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  } satisfies LedBarGraphArgs,
+  argTypes: {
+    color: {
+      control: 'select',
+      options: ['red', 'lime', 'blue', 'yellow', 'BRG', 'RYG', 'GYR', 'BCYR', 'BGYR'],
+      description: 'The color of a lit segment.',
+    },
+    offColor: { control: 'color', description: 'The color of an unlit segment.' },
+    values: {
+      control: 'object',
+      description:
+        'The values for the individual segments: 1 for a lit segment, and 0 for an unlit segment.',
+    },
   },
 };
 
-const Template = ({ color, values }) =>
-  html`<wokwi-led-bar-graph values=${values} color=${color}></wokwi-led-bar-graph>`;
+export default meta;
+type Story = StoryObj<LedBarGraphArgs>;
 
-export const Red = Template.bind({});
-Red.args = { color: 'red' };
-
-export const Green = Template.bind({});
-Green.args = { color: 'lime' };
-
-export const Off = Template.bind({});
-Off.args = { color: 'lime', values: '[]' };
-
-export const SpecialGYR = Template.bind({});
-SpecialGYR.args = { color: 'GYR', values: '[1,1,1,1,1,1,1,1,1,1]' };
-
-export const SpecialBCYR = Template.bind({});
-SpecialBCYR.args = { color: 'BCYR', values: '[1,1,1,1,1,1,1,1,1,1]' };
+export const Default: Story = {
+  render: (args) =>
+    html`<wokwi-led-bar-graph
+      .color=${args.color}
+      .offColor=${args.offColor}
+      .values=${args.values}
+    ></wokwi-led-bar-graph>`,
+};
